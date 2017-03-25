@@ -16,6 +16,8 @@ doc/
 .idea
 .secret
 .rspec
+.powrc
+.powenv
 public/
 vendor/bundle
 # Ignore application configuration

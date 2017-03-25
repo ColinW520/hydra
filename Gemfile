@@ -31,6 +31,7 @@ gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 # gem 'redis', '~> 3.0'
 
 # Third Party Stuff
+gem "twilio-ruby"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

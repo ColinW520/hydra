@@ -1,0 +1,19 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %title Hydra
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body{id: "#{controller_name}_#{action_name}", class: "#{controller_name}"}
+    = render 'shared/header'
+    .container
+      .row
+        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+          = render 'shared/messages'
+          = yield

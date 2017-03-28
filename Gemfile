@@ -10,6 +10,10 @@ git_source(:github) do |repo_name|
 end
 
 # Font End Stuff
+gem 'bootstrap', '~> 4.0.0.alpha3'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3'
+end
 gem 'turbolinks', '~> 5'
 gem 'puma', '~> 3.0'
 gem 'haml-rails'

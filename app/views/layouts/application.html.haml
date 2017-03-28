@@ -12,7 +12,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body{id: "#{controller_name}_#{action_name}", class: "#{controller_name}"}
     = render 'shared/header'
-    .container
+    .container{style: "padding-top: 30px"}
       .row
         .col-xs-12.col-sm-12.col-md-12.col-lg-12
           = render 'shared/messages'

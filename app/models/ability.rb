@@ -10,6 +10,8 @@ class Ability
     end
     if user.supervisor_role?
       can :manage, User
+      can :manage, Organization
+      can :manage, Employee
     end
 
   end

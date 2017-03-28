@@ -28,10 +28,16 @@ gem 'smart_listing', github: 'ColinW520/smart_listing'
 gem 'gon'
 gem 'toastr-rails'
 gem 'simple_form'
+gem 'local_time'
+gem 'remotipart', '~> 1.2'
+gem 'wysiwyg-rails'
 
 # Database Stuff
 gem 'pg', '~> 0.18'
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+gem 'cancancan'
+gem 'friendly_id'
+gem 'acts-as-taggable-on'
 
 # Background Stuff
 # gem 'redis', '~> 3.0'

@@ -1,6 +1,14 @@
-#flash
-  - flash.each do |key, value|
-    %div{class: "alert alert-dismissable alert-warning"}
-      %button.close{"data-dismiss" => "alert", :type => "button"} ×
-      %ul
-        %li= value
+-# #flash
+-#   - flash.each do |key, value|
+-#     %div{class: "alert alert-dismissable alert-warning"}
+-#       %button.close{"data-dismiss" => "alert", :type => "button"} ×
+-#       %ul
+-#         %li= value
+-#
+
+- unless flash.empty?
+  :javascript
+    <haml_silent>           flash.each do |f|
+    </haml_silent><haml_block><haml_silent>	       type = f[0].to_s.gsub(&#39;alert&#39;, &#39;error&#39;).gsub(&#39;notice&#39;, &#39;info&#39;)
+    </haml_silent>	     	 toastr['#{type}']('#{f[1]}');
+    </haml_block>

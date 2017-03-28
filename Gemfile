@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Core Stuff
 ruby '2.3.2'
 gem 'rails', '~> 5.0.2'
+gem 'devise'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -11,9 +12,8 @@ end
 
 # Font End Stuff
 gem 'bootstrap', '~> 4.0.0.alpha3'
-source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.3.3'
-end
+gem 'tether-rails'
+gem 'font-awesome-rails', github: 'bokmann/font-awesome-rails'
 gem 'turbolinks', '~> 5'
 gem 'puma', '~> 3.0'
 gem 'haml-rails'
@@ -26,6 +26,7 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'smart_listing', github: 'ColinW520/smart_listing'
 gem 'gon'
+gem 'toastr-rails'
 
 # Database Stuff
 gem 'pg', '~> 0.18'

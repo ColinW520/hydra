@@ -9,6 +9,13 @@ GIT
       rails (>= 3.2)
 
 GIT
+  remote: https://github.com/bokmann/font-awesome-rails.git
+  revision: 71b18c43f10e08568ea5986f1a3baa2eabf09c02
+  specs:
+    font-awesome-rails (4.7.0.1)
+      railties (>= 3.2, < 5.1)
+
+GIT
   remote: https://github.com/rails/activerecord-session_store.git
   revision: 177936e5207603a94a4deeabf6936363693ab96e
   specs:
@@ -21,7 +28,6 @@ GIT
 
 GEM
   remote: https://rubygems.org/
-  remote: https://rails-assets.org/
   specs:
     actioncable (5.0.2)
       actionpack (= 5.0.2)
@@ -63,6 +69,7 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (6.7.7.1)
       execjs
+    bcrypt (3.1.11)
     bootstrap (4.0.0.alpha6)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
@@ -79,6 +86,12 @@ GEM
     concurrent-ruby (1.0.5)
     daemons (1.2.4)
     debug_inspector (0.0.2)
+    devise (4.2.1)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0, < 5.1)
+      responders
+      warden (~> 1.2.3)
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
@@ -156,6 +169,7 @@ GEM
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
+    orm_adapter (0.5.0)
     pg (0.20.0)
     puma (3.8.2)
     rack (2.0.1)
@@ -173,7 +187,6 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.0.2)
       sprockets-rails (>= 2.0.0)
-    rails-assets-tether (1.4.0)
     rails-dom-testing (2.0.2)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6)
@@ -190,6 +203,8 @@ GEM
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
     request_store (1.3.2)
+    responders (2.3.0)
+      railties (>= 4.2.0, < 5.1)
     ruby_parser (3.8.4)
       sexp_processor (~> 4.1)
     sass (3.4.23)
@@ -220,6 +235,8 @@ GEM
     sqlite3 (1.3.13)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
+    tether-rails (1.4.0)
+      rails (>= 3.1)
     thin (1.6.2)
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
@@ -227,6 +244,8 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
+    toastr-rails (1.0.3)
+      railties (>= 3.1.0)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
@@ -238,6 +257,8 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.1.9)
       execjs (>= 0.3.0, < 3)
+    warden (1.2.7)
+      rack (>= 1.0)
     web-console (3.4.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -256,7 +277,9 @@ DEPENDENCIES
   byebug
   chartkick
   coffee-rails (~> 4.2)
+  devise
   erb2haml
+  font-awesome-rails!
   gon
   groupdate
   haml-rails
@@ -268,11 +291,12 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.2)
-  rails-assets-tether (>= 1.3.3)!
   sass-rails (~> 5.0)
   smart_listing!
   spring
   spring-watcher-listen (~> 2.0.0)
+  tether-rails
+  toastr-rails
   turbolinks (~> 5)
   twilio-ruby
   uglifier (>= 1.3.0)

@@ -27,6 +27,7 @@ gem 'groupdate'
 gem 'smart_listing', github: 'ColinW520/smart_listing'
 gem 'gon'
 gem 'toastr-rails'
+gem 'simple_form'
 
 # Database Stuff
 gem 'pg', '~> 0.18'

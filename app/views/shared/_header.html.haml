@@ -14,4 +14,9 @@
         %a.nav-link{:href => "#"} Pricing
       %li.nav-item
         %a.nav-link{:href => "#"} About
-  %button.btn.btn-secondary.my-2.my-sm-0{:type => "submit"} Search
+  - if current_user.nil?
+    = link_to new_user_session_path, class: 'btn btn-success my-2 my-sm-0' do
+      Sign in
+  - else
+    = link_to contact_path, class: 'btn btn-secondary my-2 my-sm-0' do
+      Profile

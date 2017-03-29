@@ -1,0 +1,17 @@
+%tr{id: "employee_#{employee.id}"}
+  %td= employee.id
+  %td= employee.first_name
+  %td= employee.last_name
+  %td= employee.email
+  %td= employee.mobile_phone
+  %td= employee.title
+  %td= employee.address_city
+  %td= local_time employee.created_at, format: '%b %y'
+  %td.actions
+    .btn-group
+      = link_to edit_employee_path(employee), remote: true, class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-edit
+      = link_to employee_path(employee), class: 'btn btn-sm btn-info' do
+        %i.fa.fa-eye
+      = link_to employee_path(employee), method: :delete, remote: true, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash

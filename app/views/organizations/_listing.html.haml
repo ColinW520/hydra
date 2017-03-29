@@ -1,19 +1,20 @@
 - unless smart_listing.empty?
   .table-responsive
-    %table.table.table-hover.table-bordered
+    %table.table.table-hover
       %thead.thead-inverse
         %th
-        %th= smart_listing.sortable "Name", :name
-        %th= smart_listing.sortable "Email", :email_domain
-        %th= smart_listing.sortable "City", :city
-        %th= smart_listing.sortable "State", :state
-        %th= smart_listing.sortable "State", :zip
+        %th= smart_listing.sortable 'Name', :name
+        %th= smart_listing.sortable 'Domain', :email_domain
+        %th= smart_listing.sortable 'Phone', :phone
+        %th= smart_listing.sortable 'City', :city
+        %th= smart_listing.sortable 'State', :state
+        %th= smart_listing.sortable 'Zip', :zip
         %th
-      %tbody#users
-        - smart_listing.collection.each do |user|
-          = render user
+      %tbody#organizations
+        - smart_listing.collection.each do |organization|
+          = render organization
   = smart_listing.paginate
-  .text-warning
+  .text-info
     = smart_listing.pagination_per_page_links
 - else
   .alert.alert-danger

@@ -1,0 +1,24 @@
+- unless smart_listing.empty?
+  .table-responsive
+    %table.table.table-hover
+      %thead.thead-inverse
+        %th
+        %th= smart_listing.sortable 'First Name', :first_name
+        %th= smart_listing.sortable 'Last Name', :last_name
+        %th= smart_listing.sortable 'Email', :email
+        %th= smart_listing.sortable 'Mobile', :mobile_phone
+        %th= smart_listing.sortable 'Title', :title
+        %th= smart_listing.sortable 'City', :city
+        %th= smart_listing.sortable 'Added', :created_at
+        %th
+      %tbody#employees
+        - smart_listing.collection.each do |employee|
+          = render employee
+  = smart_listing.paginate
+  .text-info
+    = smart_listing.pagination_per_page_links
+- else
+  .alert.alert-danger
+    %p
+      No Employees yet...
+      = link_to 'add some!', new_employee_path, class: 'text-primary'

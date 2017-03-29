@@ -1,0 +1,8 @@
+// Render the new form
+$('.modal-body').html('<%= j render("employees/form") %>');
+
+// Show the dynamic dialog
+$('#employee_dialog').modal("show");
+
+// Set focus to the first element
+$('#employee_dialog').on('shown.bs.modal', function () {$('#InputFirstName').focus()})

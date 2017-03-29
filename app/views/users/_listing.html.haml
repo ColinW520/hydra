@@ -1,6 +1,6 @@
 - unless smart_listing.empty?
   .table-responsive
-    %table.table.table-hover.table-bordered
+    %table.table.table-hover
       %thead.thead-inverse
         %th
         %th= smart_listing.sortable "First", :first_name
@@ -12,7 +12,7 @@
         - smart_listing.collection.each do |user|
           = render user
   = smart_listing.paginate
-  .text-warning
+  .text-info
     = smart_listing.pagination_per_page_links
 - else
   .alert.alert-danger

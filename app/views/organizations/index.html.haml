@@ -7,10 +7,11 @@
         Organizations
     .col-sm-3
       .pull-right
-        = link_to new_organization_path, class: 'btn btn-md btn-success' do
+        = link_to new_organization_path, remote: true, class: 'btn btn-md btn-success' do
           %i.fa.fa-plus
           New
   %br
 .row
   .col-sm-12
     = smart_listing_render :organizations
+= render "organizations/dialog"

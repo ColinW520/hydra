@@ -1,2 +1,17 @@
-%h1 Employees#index
-%p Find me in app/views/employees/index.html.haml
+- unless @xhr
+  - provide(:title, 'Employees')
+  .row
+    .col-sm-9
+      %h1
+        %i.fa.fa-institution
+        Employees
+    .col-sm-3
+      .pull-right
+        = link_to new_employee_path, remote: true, class: 'btn btn-md btn-success' do
+          %i.fa.fa-plus
+          New
+  %br
+.row
+  .col-sm-12
+    = smart_listing_render :employees
+= render "employees/dialog"

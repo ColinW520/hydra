@@ -1,0 +1,16 @@
+%tr{id: "organization_#{organization.id}"}
+  %td= organization.id
+  %td= organization.name
+  %td= organization.email_domain
+  %td= organization.city
+  %td= organization.state
+  %td= organization.zip
+  %td= local_time organization.created_at
+  %td.actions
+    .btn-group
+      = link_to edit_organization_path(organization), remote: true, class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-edit
+      = link_to organization_path(organization), class: 'btn btn-sm btn-info' do
+        %i.fa.fa-eye
+      = link_to organization_path(organization), method: :delete, remote: true, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash

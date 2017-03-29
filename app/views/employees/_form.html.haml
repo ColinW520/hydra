@@ -1,0 +1,20 @@
+= simple_form_for [@employee], remote: true, authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
+  .form-group
+    = f.input :first_name, id: 'InputFirstName'
+  .form-group
+    = f.input :last_name
+  .form-group
+    = f.input :email
+  .form-group
+    = f.input :mobile_phone
+  .form-group
+    = f.input :title
+  .form-group
+    = f.input :address_city
+  .form-group
+    = f.input :address_state
+  .form-group
+    = f.input :address_zip
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-md btn-success'

@@ -36,7 +36,6 @@ class UsersController < ApplicationController
 
   def destroy
     @user.soft_delete!
-    sign_out_and_redirect(@user)
     respond_to do |format|
       format.js { flash[:success] = 'User removed and can no longer access account.' }
       format.html { redirect_to users_path, notice: 'User removed.' }
@@ -51,7 +50,11 @@ class UsersController < ApplicationController
   private
 
   def find_user
-    @user = User.find(params[:id])
+    if params[:id] == 'sign_out'
+      sign_out_and_redirect(current_user)
+    else
+      @user = User.find(params[:id])
+    end
   end
 
   def user_params

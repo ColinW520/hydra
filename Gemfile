@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 ruby '2.3.2'
 gem 'rails', '~> 5.0.2'
 gem 'devise'
+gem 'devise_invitable'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -15,6 +16,7 @@ gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'tether-rails'
 gem 'font-awesome-rails', github: 'bokmann/font-awesome-rails'
 gem 'turbolinks', '~> 5'
+gem 'jquery-turbolinks'
 gem 'puma', '~> 3.0'
 gem 'haml-rails'
 gem 'sass-rails', '~> 5.0'

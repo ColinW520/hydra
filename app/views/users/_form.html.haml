@@ -1,9 +1,0 @@
-%h2#form-title form
-%td{colspan: 6}
-  = simple_form_for object, url: object.new_record? ? users_path : user_path(object),
-                     remote: true, html: {class: "form-horizontal"} do |f|
-
-    = f.input :email, required: true, autofocus: true
-
-    = f.submit "Save", class: "btn btn-primary"
-    %button.btn.btn-link.cancel Cancel

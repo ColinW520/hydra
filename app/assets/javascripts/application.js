@@ -13,8 +13,10 @@
 //= require jquery
 //= require tether
 //= require bootstrap
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require toastr
 //= require local_time
+//= require smart_listing
 //= require_tree .

@@ -11,27 +11,8 @@ class UsersController < ApplicationController
                          default_sort: { created_at: "desc" }
   end
 
-  def new
-    @user = User.new
-  end
-
-  def create
-    @user = User.create(user_params)
-  end
-
-  def edit
-  end
-
-  def update
-    @user.update_attributes(user_params)
-  end
-
   def destroy
     @user.destroy
-  end
-
-  def credit_card_switch
-    @user.toggle :credit_card
   end
 
   private

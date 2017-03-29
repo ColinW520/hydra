@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   match '/contact' => "static_pages#contact", via: [:get]
 
   devise_for :users
-  resources :users, only: [:index]
+  resources :users
   resources :employees
   resources :organizations
 

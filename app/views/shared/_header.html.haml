@@ -10,11 +10,11 @@
             Home
             %span.sr-only (current)
         %li.nav-item
-          %a.nav-link{:href => "#"} Features
+          %a.nav-link{:href => users_path} Users
         %li.nav-item
-          %a.nav-link{:href => "#"} Pricing
+          %a.nav-link{:href => employees_path} Employees
         %li.nav-item
-          %a.nav-link{:href => "#"} About
+          %a.nav-link{:href => organizations_path} Organizations
     - if current_user.nil?
       = link_to new_user_session_path, class: 'btn btn-success my-2 my-sm-0' do
         Sign in

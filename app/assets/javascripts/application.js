@@ -16,4 +16,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require toastr
+//= require local_time
 //= require_tree .

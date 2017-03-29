@@ -1,5 +1,6 @@
 class EmployeesController < ApplicationController
   def index
+    @employees = Employee.accessible_by(current_ability)
   end
 
   def new

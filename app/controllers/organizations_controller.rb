@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   def index
+    @organizations = Organization.accessible_by(current_ability)
   end
 
   def new

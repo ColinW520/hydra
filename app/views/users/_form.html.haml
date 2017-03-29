@@ -1,0 +1,12 @@
+= simple_form_for [@user], remote: true, authenticity_token: true, html: { id: 'UsersForm' } do |f|
+  .form-group
+    = f.input :first_name, id: 'InputFirstName'
+  .form-group
+    = f.input :last_name
+  %p Limited to Super Admins
+  .form-group
+    = f.input :admin_role
+  .form-group
+    = f.input :supervisor_role
+  .form-actions
+    = f.button :submit, class: 'btn btn-md btn-success'

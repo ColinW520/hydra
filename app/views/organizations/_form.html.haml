@@ -1,0 +1,5 @@
+= simple_form_for [@organization], remote: true, authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
+  .form-group
+    = f.input :name, id: 'InputName'
+  .form-actions
+    = f.button :submit, class: 'btn btn-md btn-success'

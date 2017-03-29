@@ -3,10 +3,11 @@
     %table.table.table-hover.table-bordered
       %thead.thead-inverse
         %th
-        %th= smart_listing.sortable "First", :first_name
-        %th= smart_listing.sortable "Last", :last_name
-        %th= smart_listing.sortable "Email", :email
-        %th= smart_listing.sortable "Created", :created_at
+        %th= smart_listing.sortable "Name", :name
+        %th= smart_listing.sortable "Email", :email_domain
+        %th= smart_listing.sortable "City", :city
+        %th= smart_listing.sortable "State", :state
+        %th= smart_listing.sortable "State", :zip
         %th
       %tbody#users
         - smart_listing.collection.each do |user|
@@ -16,4 +17,4 @@
     = smart_listing.pagination_per_page_links
 - else
   .alert.alert-danger
-    %p No Users!
+    %p No Organizations!

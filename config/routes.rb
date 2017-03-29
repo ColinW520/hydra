@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   match '/home' => "static_pages#home", via: [:get]
   match '/contact' => "static_pages#contact", via: [:get]
 
-  devise_for :users
-  resources :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+
+  resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :employees
   resources :organizations
 

@@ -1,0 +1,8 @@
+// Render the form
+$('.modal-body').html('<%= j render "users/form" %>');
+
+// Show the dynamic dialog
+$('#user_dialog').modal("show");
+
+// Set focus to the first element
+$('#user_dialog').on('shown.bs.modal', function () {$('#InputFirstName').focus()})

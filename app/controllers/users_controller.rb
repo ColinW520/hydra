@@ -11,8 +11,41 @@ class UsersController < ApplicationController
                          default_sort: { created_at: "desc" }
   end
 
+  def show
+
+  end
+
+  def edit
+
+  end
+
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html {
+          flash[:sucess] = 'User has been updated!'
+          redirect_to users_path
+        }
+        format.json { head :no_content }
+        format.js { flash.now[:success] = 'User has been updated.' }
+      else
+        format.json { render json: @user.errors.full_messages, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def destroy
-    @user.destroy
+    @user.soft_delete!
+    sign_out_and_redirect(@user)
+    respond_to do |format|
+      format.js { flash.now[:success] = 'User removed and can no longer access account.' }
+      format.html { redirect_to users_path, notice: 'User removed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def restore
+
   end
 
   private

@@ -1,2 +1,16 @@
-%h1 Organizations#index
-%p Find me in app/views/organizations/index.html.haml
+- unless @xhr
+  - provide(:title, 'Organizations')
+  .row
+    .col-sm-9
+      %h1
+        %i.fa.fa-institution
+        Organizations
+    .col-sm-3
+      .pull-right
+        = link_to new_organization_path, class: 'btn btn-md btn-success' do
+          %i.fa.fa-plus
+          New
+  %br
+.row
+  .col-sm-12
+    = smart_listing_render :organizations

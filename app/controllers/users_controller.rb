@@ -27,7 +27,7 @@ class UsersController < ApplicationController
           redirect_to users_path
         }
         format.json { head :no_content }
-        format.js { flash.now[:success] = 'User has been updated.' }
+        format.js { flash[:success] = 'User has been updated.' }
       else
         format.json { render json: @user.errors.full_messages, status: :unprocessable_entity }
       end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     @user.soft_delete!
     sign_out_and_redirect(@user)
     respond_to do |format|
-      format.js { flash.now[:success] = 'User removed and can no longer access account.' }
+      format.js { flash[:success] = 'User removed and can no longer access account.' }
       format.html { redirect_to users_path, notice: 'User removed.' }
       format.json { head :no_content }
     end

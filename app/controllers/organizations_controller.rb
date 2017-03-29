@@ -21,7 +21,7 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.save
         format.json { head :no_content }
-        format.js { flash.now[:success] = 'Organization has been created.' }
+        format.js { flash[:success] = 'Organization has been created.' }
       else
         format.json { render json: @solution.errors.full_messages, status: :unprocessable_entity }
       end
@@ -45,7 +45,7 @@ class OrganizationsController < ApplicationController
           redirect_to organizations_path
         }
         format.json { head :no_content }
-        format.js { flash.now[:success] = 'Organization has been updated.' }
+        format.js { flash[:success] = 'Organization has been updated.' }
       else
         format.json { render json: @organization.errors.full_messages, status: :unprocessable_entity }
       end
@@ -56,7 +56,7 @@ class OrganizationsController < ApplicationController
     @organization.soft_delete!
     sign_out_and_redirect(@organization)
     respond_to do |format|
-      format.js { flash.now[:success] = 'Organization removed and can no longer access account.' }
+      format.js { flash[:success] = 'Organization removed and can no longer access account.' }
       format.html { redirect_to organizations_path, notice: 'Organization removed.' }
       format.json { head :no_content }
     end

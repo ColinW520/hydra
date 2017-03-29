@@ -16,7 +16,8 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
-//= require toastr
 //= require local_time
 //= require smart_listing
+//= require unobtrusive_flash
+//= require unobtrusive_flash_bootstrap
 //= require_tree .

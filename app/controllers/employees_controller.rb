@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
   def index
     employees_scope = Employee.accessible_by(current_ability)
     employees_scope = employees_scope.where(organization_id: params[:organization_id])
-    
+
     smart_listing_create :employees,
                          employees_scope,
                          partial: "employees/listing",
@@ -24,7 +24,11 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       if @employee.save
         format.json { head :no_content }
-        format.js { flash.now[:success] = 'Employee has been created.' }
+        format.js { flash[:success] = 'Employee has been created.' }
+        format.html {
+          flash[:success] = 'Employee has been created.'
+          redirect_to employees_path
+        }
       else
         format.json { render json: @solution.errors.full_messages, status: :unprocessable_entity }
       end
@@ -48,7 +52,7 @@ class EmployeesController < ApplicationController
           redirect_to employees_path
         }
         format.json { head :no_content }
-        format.js { flash.now[:success] = 'Employee has been updated.' }
+        format.js { flash[:success] = 'Employee has been updated.' }
       else
         format.json { render json: @employee.errors.full_messages, status: :unprocessable_entity }
       end
@@ -56,10 +60,9 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    @employee.soft_delete!
-    sign_out_and_redirect(@employee)
+    @employee.destroy
     respond_to do |format|
-      format.js { flash.now[:success] = 'Employee removed.' }
+      format.js { flash[:success] = 'Employee removed.' }
       format.html { redirect_to employees_path, notice: 'Employee removed.' }
       format.json { head :no_content }
     end

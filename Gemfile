@@ -28,11 +28,12 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'smart_listing', github: 'ColinW520/smart_listing'
 gem 'gon'
-gem 'toastr-rails'
 gem 'simple_form'
 gem 'local_time'
 gem 'remotipart', '~> 1.2'
 gem 'wysiwyg-rails'
+gem 'unobtrusive_flash', '>=3'
+
 
 # Database Stuff
 gem 'pg', '~> 0.18'

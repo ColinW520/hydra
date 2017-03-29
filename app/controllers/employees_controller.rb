@@ -5,8 +5,11 @@ class EmployeesController < ApplicationController
   before_filter :find_employee, except: [:index, :new, :create]
 
   def index
+    employees_scope = Employee.accessible_by(current_ability)
+    employees_scope = employees_scope.where(organization_id: params[:organization_id])
+    
     smart_listing_create :employees,
-                         Employee.accessible_by(current_ability),
+                         employees_scope,
                          partial: "employees/listing",
                          default_sort: { created_at: "desc" }
   end

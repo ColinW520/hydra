@@ -8,6 +8,8 @@
   %td= local_time organization.created_at
   %td.actions
     .btn-group
+      = link_to employees_path(organization_id: organization.id), class: 'btn btn-sm btn-primary' do
+        %i.fa.fa-users
       = link_to edit_organization_path(organization), remote: true, class: 'btn btn-sm btn-warning' do
         %i.fa.fa-edit
       = link_to organization_path(organization), class: 'btn btn-sm btn-info' do

@@ -41,6 +41,7 @@ gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'cancancan'
 gem 'friendly_id'
 gem 'acts-as-taggable-on'
+gem 'ahoy_email'
 
 # Background Stuff
 # gem 'redis', '~> 3.0'

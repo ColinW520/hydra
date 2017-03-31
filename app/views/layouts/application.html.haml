@@ -20,9 +20,3 @@
         .container-fluid
           = render 'shared/messages'
           = yield
-
-:javascript
-  $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-  });

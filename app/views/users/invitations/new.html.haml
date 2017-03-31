@@ -1,10 +1,17 @@
-%br
 .row
-  .col-sm-12.col-md-6.col-centered
-    %h2 Invite a User
-    %br
-    = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f|
-      = devise_error_messages!
-      - resource.class.invite_key_fields.each do |field|
-        = f.input field
-      = f.button :submit, 'Send Invitation', class: 'btn btn-block btn-success'
+  .col-sm-12.col-md-6.col-lg-5.col-centered
+    .card.card-outline-primary.mt-4
+      .card-block
+        .row
+          .col-sm-12
+            %h2 Invite a User
+        %br
+        .row
+          .col-sm-12
+            = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f|
+              = devise_error_messages!
+              - resource.class.invite_key_fields.each do |field|
+                .form-group
+                  = f.input field
+              %br
+              = f.button :submit, 'Send Invitation', class: 'btn btn-block btn-success'

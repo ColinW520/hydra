@@ -1,3 +1,73 @@
+.nav-side-menu
+  .brand Brand Logo
+  %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
+  .menu-list
+    %ul#menu-content.menu-content.collapse.out
+      %li
+        %a{:href => "#"}
+          %i.fa.fa-dashboard.fa-lg
+          Dashboard
+      %li.collapsed.active{"data-target" => "#products", "data-toggle" => "collapse"}
+        %a{:href => "#"}
+          %i.fa.fa-gift.fa-lg
+          UI Elements
+          %span.arrow
+      %ul#products.sub-menu.collapse
+        %li.active
+          %a{:href => "#"} CSS3 Animation
+        %li
+          %a{:href => "#"} General
+        %li
+          %a{:href => "#"} Buttons
+        %li
+          %a{:href => "#"} Tabs &amp; Accordions
+        %li
+          %a{:href => "#"} Typography
+        %li
+          %a{:href => "#"} FontAwesome
+        %li
+          %a{:href => "#"} Slider
+        %li
+          %a{:href => "#"} Panels
+        %li
+          %a{:href => "#"} Widgets
+        %li
+          %a{:href => "#"} Bootstrap Model
+      %li.collapsed{"data-target" => "#service", "data-toggle" => "collapse"}
+        %a{:href => "#"}
+          %i.fa.fa-globe.fa-lg
+          Services
+          %span.arrow
+      %ul#service.sub-menu.collapse
+        %li New Service 1
+        %li New Service 2
+        %li New Service 3
+      %li.collapsed{"data-target" => "#new", "data-toggle" => "collapse"}
+        %a{:href => "#"}
+          %i.fa.fa-car.fa-lg
+          New
+          %span.arrow
+      %ul#new.sub-menu.collapse
+        %li New New 1
+        %li New New 2
+        %li New New 3
+      %li
+        %a{:href => "#"}
+          %i.fa.fa-user.fa-lg
+          Profile
+      %li
+        %a{:href => "#"}
+          %i.fa.fa-users.fa-lg
+          Users
+#main.container
+  .row
+    .col-md-12
+      %h4 This is suppose to be in the main content
+
+
+
+
+
 .jumbotron
   .text-center
     %h1.display-3 Text Your Team

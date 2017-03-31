@@ -1,13 +1,23 @@
-%h2 Change your password
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
-  = f.input :reset_password_token, as: :hidden
-  = f.full_error :reset_password_token
-  .form-inputs
-    .form-group
-      = f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
-    .form-group
-      = f.input :password_confirmation, label: "Confirm your new password", required: true
-  .form-actions
-    = f.button :submit, "Change my password"
-= render "users/shared/links"
+.row
+  .col-sm-12.col-md-6.col-lg-5.col-centered
+    .card.card-outline-primary.mt-4
+      .card-block
+        .row
+          .col-sm-12
+            %h2 Forgetting Something?
+            %p.text-primary No worries. We'll send you some instructions for resetting your password and getting back in.
+        %br
+        .row
+          .col-sm-12
+            = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+              = f.error_notification
+              = f.input :reset_password_token, as: :hidden
+              = f.full_error :reset_password_token
+              .form-inputs
+                .form-group
+                  = f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+                .form-group
+                  = f.input :password_confirmation, label: "Confirm your new password", required: true
+              .form-actions
+                = f.button :submit, "Change my password"
+            = render "users/shared/links"

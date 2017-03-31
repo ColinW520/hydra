@@ -1,9 +1,8 @@
+@import "bootswatch/variables";
 @import "bootstrap";
 @import "bootswatch/materia";
-@import "bootswatch/variables";
 @import "tools/turbo_progress_bar";
-
 @import "global";
-@import "layout/header";
+@import "layout/sidebar";
 @import "layout/footer";
 @import "static_pages/home";

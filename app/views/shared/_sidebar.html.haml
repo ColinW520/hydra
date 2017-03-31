@@ -1,15 +1,62 @@
-%ul.sidebar-nav
-  %li
-    %a{:href => "#"} Messages
-  %li
-    %a{:href => employees_path} Employees
-  %li
-    %a{:href => organizations_path} Organizations
-  %li
-    %a{:href => users_path} Users
-  %li
-    %a{:href => "#"} About
-  %li
-    %a{:href => "#"} Services
-  %li
-    %a{:href => "#"} Contact
+#sidebar
+  .nav-side-menu
+    .brand HYDRA
+    %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
+    .menu-list
+      %ul#menu-content.menu-content.collapse.out
+        %li.active
+          %a{href: dashboard_path}
+            %i.fa.fa-dashboard.fa-lg
+            Dashboard
+        %li.collapsed{"data-target" => "#products", "data-toggle" => "collapse"}
+          %a{href: "#"}
+            %i.fa.fa-envelope-o.fa-lg
+            Messages
+            %span.arrow
+        %ul#products.sub-menu.collapse
+          %li.active
+            %a{href: "#"}
+              %i.fa.fa-pencil
+              Compose
+          %li
+            %a{href: "#"}
+              %i.fa.fa-external-link-square
+              Sent
+          %li
+            %a{href: "#"}
+              %i.fa.fa-reply
+              Received
+          %li
+            %a{href: "#"}
+              %i.fa.fa-clock-o
+              Scheduled
+        %li.collapsed{"data-target" => "#products", "data-toggle" => "collapse"}
+          %a{href: "#"}
+            %i.fa.fa-gears.fa-lg
+            Settings
+            %span.arrow
+        %ul#products.sub-menu.collapse
+          %li
+            %a{href: "#"}
+              %i.fa.fa-institution
+              Organization
+          %li
+            %a{href: "#"}
+              %i.fa.fa-hashtag
+              Numbers
+          %li
+            %a{href: "#"}
+              %i.fa.fa-users
+              Users
+          %li
+            %a{href: "#"}
+              %i.fa.fa-credit-card
+              Billing
+        %li
+          %a{href: edit_user_registration_path}
+            %i.fa.fa-user.fa-lg
+            Profile
+        %li
+          %a{href: destroy_user_session_path, method: :delete}
+            %i.fa.fa-sign-out.fa-lg
+            Sign Out

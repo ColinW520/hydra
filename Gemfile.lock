@@ -308,7 +308,7 @@ DEPENDENCIES
   activerecord-session_store!
   acts-as-taggable-on
   ahoy_email
-  bootstrap (~> 4.0.0.alpha3)
+  bootstrap (~> 4.0.0.alpha6)
   byebug
   cancancan
   chartkick

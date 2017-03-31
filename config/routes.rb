@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   match '/contact' => "static_pages#contact", via: [:get]
 
   devise_for :users, controllers: {
+    sessions: 'users/sessions',
     registrations: 'users/registrations',
     invitations: 'users/invitations'
   }

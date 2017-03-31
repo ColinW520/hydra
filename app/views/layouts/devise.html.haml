@@ -12,7 +12,9 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body{id: "#{controller_name}_#{action_name}", class: "#{controller_name}"}
-    = render 'shared/sidebar'
-    #main.container
+    .container
+      %br
+      %br
+      %br
       .unobtrusive-flash-container
       = yield

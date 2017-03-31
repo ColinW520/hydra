@@ -6,6 +6,12 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :invitable
 
+  belongs_to :organization
+
+  def setup?
+    false
+  end
+
   def soft_delete!
     update_attribute(:deleted_at, Time.current)
   end

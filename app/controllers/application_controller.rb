@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :set_xhr_flag
   after_filter :prepare_unobtrusive_flash
 
+  def after_sign_in_path_for(resource)
+    dashboard_path
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    root_path
+  end
+
   protected
 
   def set_xhr_flag

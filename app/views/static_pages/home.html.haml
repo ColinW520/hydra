@@ -1,80 +1,42 @@
-.nav-side-menu
-  .brand Brand Logo
-  %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
-  .menu-list
-    %ul#menu-content.menu-content.collapse.out
-      %li
-        %a{:href => "#"}
-          %i.fa.fa-dashboard.fa-lg
-          Dashboard
-      %li.collapsed.active{"data-target" => "#products", "data-toggle" => "collapse"}
-        %a{:href => "#"}
-          %i.fa.fa-gift.fa-lg
-          UI Elements
-          %span.arrow
-      %ul#products.sub-menu.collapse
-        %li.active
-          %a{:href => "#"} CSS3 Animation
-        %li
-          %a{:href => "#"} General
-        %li
-          %a{:href => "#"} Buttons
-        %li
-          %a{:href => "#"} Tabs &amp; Accordions
-        %li
-          %a{:href => "#"} Typography
-        %li
-          %a{:href => "#"} FontAwesome
-        %li
-          %a{:href => "#"} Slider
-        %li
-          %a{:href => "#"} Panels
-        %li
-          %a{:href => "#"} Widgets
-        %li
-          %a{:href => "#"} Bootstrap Model
-      %li.collapsed{"data-target" => "#service", "data-toggle" => "collapse"}
-        %a{:href => "#"}
-          %i.fa.fa-globe.fa-lg
-          Services
-          %span.arrow
-      %ul#service.sub-menu.collapse
-        %li New Service 1
-        %li New Service 2
-        %li New Service 3
-      %li.collapsed{"data-target" => "#new", "data-toggle" => "collapse"}
-        %a{:href => "#"}
-          %i.fa.fa-car.fa-lg
-          New
-          %span.arrow
-      %ul#new.sub-menu.collapse
-        %li New New 1
-        %li New New 2
-        %li New New 3
-      %li
-        %a{:href => "#"}
-          %i.fa.fa-user.fa-lg
-          Profile
-      %li
-        %a{:href => "#"}
-          %i.fa.fa-users.fa-lg
-          Users
-#main.container
-  .row
-    .col-md-12
-      %h4 This is suppose to be in the main content
-
-
-
-
-
-.jumbotron
-  .text-center
-    %h1.display-3 Text Your Team
-    %br
-    %p.lead This is a simple tool designed to help you text your employees and team members.
-    %br
-    %a.btn.btn-success.btn-lg{:href => new_user_registration_path} Sign Up
-
-
-%button.btn.btn-outline-success{:type => "button"} Main button
+%br
+%br
+.row
+  .col-sm-12
+    .jumbotron
+      .row
+        .col-sm-12
+          .text-center
+            %h1.display-1 Text Your Team
+            %br
+            %p.lead This is a simple tool designed to help you text your employees and team members.
+            %br
+            %a.btn.btn-success.btn-lg{:href => new_user_registration_path} Sign Up
+      %br
+      %br
+      .row
+        .col-sm-12
+          .text-center
+            %h2.display-3 Pricing
+      %br
+      %br
+      .row
+        .col-sm-12.col-md-6.col-lg-3.offset-lg-2
+          .card.card-inverse.card-danger.text-xs-center
+            .card-block
+              %blockquote.card-blockquote
+                .text-center
+                  %p.lead SMS Pricing.
+                  %h1.display-1.pricing-cent 2
+                  %br
+                  %p.lead Per Text Message Sent.
+                  %em Billed Monthly.
+        .col-sm-12.col-md-6.col-lg-3.offset-lg-2
+          .card.card-inverse.card-danger.text-xs-center
+            .card-block
+              %blockquote.card-blockquote
+                .text-center
+                  %p.lead MMS Pricing.
+                  %h1.display-1.pricing-cent 4
+                  %br
+                  %p.lead Per Text Message Sent.
+                  %em Billed Monthly.

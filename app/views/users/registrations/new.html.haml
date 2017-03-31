@@ -15,8 +15,9 @@
                   = f.input :email, required: true, autofocus: true
                 .form-group
                   = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum, please." if @minimum_password_length)
-                .form-group
-                  = f.input :password_confirmation, required: true
+                / we do not require password confirmation at this time.
+                -# .form-group
+                -#   = f.input :password_confirmation, required: true
               .form-actions
                 = f.button :submit, "Sign up", class: 'btn btn-success pull-right'
             = render "users/shared/links"

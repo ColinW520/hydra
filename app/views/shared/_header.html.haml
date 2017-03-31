@@ -2,23 +2,21 @@
   %nav.navbar.navbar-toggleable-md.navbar-inverse.bg-primary
     %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
-    %a.navbar-brand{:href => "#"} Hydra
-    #navbarNavDropdown.navbar-collapse.collapse
-      %ul.navbar-nav.ml-auto
-        - if current_user.present?
-          %li.nav-item
-            %a#menu-toggle{href: "#menu-toggle", class: 'nav-link'}
-              %i.fa.fa-bars
-          %li.nav-item
-            %a.nav-link{:href => user_path(current_user)}
-              %i.fa.fa-user
-              Profile
-          %li.nav-item
-            %a.nav-link{:href => destroy_user_session_path, method: :delete}
-              %i.fa.fa-sign-out
-              Sign Out
-        - else
-          %li.nav-item
-            %a.nav-link{:href => new_user_session_path}
-              %i.fa.fa-sign-in
-              Sign In
+    .container
+      %a.navbar-brand{href: "#"} Hydra
+      #navbarNavDropdown.navbar-collapse.collapse
+        %ul.navbar-nav.ml-auto
+          - if current_user.present?
+            %li.nav-item
+              %a.nav-link{href: dashboard_path}
+                %i.fa.fa-dashboard
+                Dashboard
+            %li.nav-item
+              %a.nav-link{href: destroy_user_session_path, method: :delete}
+                %i.fa.fa-sign-out
+                Sign Out
+          - else
+            %li.nav-item
+              %a.nav-link{href: new_user_session_path}
+                %i.fa.fa-sign-in
+                Sign In

@@ -1,25 +1,36 @@
-%nav.navbar.navbar-toggleable-md.navbar-inverse.bg-primary
-  .container
-    %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarColor01", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarColor01", "data-toggle" => "collapse", :type => "button"}
+-# %nav.navbar.navbar-toggleable-md.navbar-inverse.bg-primary
+-#   %a#menu-toggle{:href => "#menu-toggle"}
+-#     %span.navbar-toggler-icon{style: 'color: #fff'}
+-#   %a.navbar-brand{:href => root_path} Hydra
+-#   %ul.nav.navbar-nav.navbar-right
+-#     - if current_user.present?
+-#       %li
+-#         %a{:href => user_path(current_user)} Right
+-#     - else
+-#       %li
+-#         %a{:href => new_user_session_path} Sign In
+
+%header.header
+  %nav.navbar.navbar-toggleable-md.navbar-inverse.bg-primary
+    %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
-    %a.navbar-brand{:href => root_path} Hydra
-    .collapse.navbar-collapse
-      %ul.navbar-nav.mr-auto
-        %li.nav-item.active
-          %a.nav-link{:href => "#"}
-            Home
-            %span.sr-only (current)
-        %li.nav-item
-          %a.nav-link{:href => users_path} Users
-        %li.nav-item
-          %a.nav-link{:href => employees_path} Employees
-        %li.nav-item
-          %a.nav-link{:href => organizations_path} Organizations
-        %li.nav-item
-          %a.nav-link{href: destroy_user_session_path} Sign Out
-    - if current_user.nil?
-      = link_to new_user_session_path, class: 'btn btn-success my-2 my-sm-0' do
-        Sign in
-    - else
-      = link_to contact_path, class: 'btn btn-secondary my-2 my-sm-0' do
-        Profile
+    %a.navbar-brand{:href => "#"} Hydra
+    #navbarNavDropdown.navbar-collapse.collapse
+      %ul.navbar-nav.ml-auto
+        - if current_user.present?
+          %li.nav-item
+            %a#menu-toggle{href: "#menu-toggle", class: 'nav-link'}
+              %i.fa.fa-bars
+          %li.nav-item
+            %a.nav-link{:href => user_path(current_user)}
+              %i.fa.fa-user
+              Profile
+          %li.nav-item
+            %a.nav-link{:href => destroy_user_session_path, method: :delete}
+              %i.fa.fa-sign-out
+              Sign Out
+        - else
+          %li.nav-item
+            %a.nav-link{:href => new_user_session_path}
+              %i.fa.fa-sign-in
+              Sign In

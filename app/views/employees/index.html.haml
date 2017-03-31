@@ -2,14 +2,11 @@
   - provide(:title, 'Employees')
   .row
     .col-sm-9
-      %h1
+      %h2
         %i.fa.fa-institution
         Employees
-    .col-sm-3
-      .pull-right
-        = link_to new_employee_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-md btn-success' do
+        = link_to new_employee_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success' do
           %i.fa.fa-plus
-          New
   %br
 .row
   .col-sm-12

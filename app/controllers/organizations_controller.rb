@@ -22,6 +22,10 @@ class OrganizationsController < ApplicationController
       if @organization.save
         format.json { head :no_content }
         format.js { flash[:success] = 'Organization has been created.' }
+        format.html {
+          flash[:success] = 'Your organization has been created! Now you can set your billing preferences.'
+          render :show
+        }
       else
         format.json { render json: @solution.errors.full_messages, status: :unprocessable_entity }
       end

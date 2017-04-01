@@ -8,6 +8,7 @@
           %a{href: dashboard_path}
             %i.fa.fa-dashboard.fa-lg
             Dashboard
+      - if current_user.setup?
         %li.collapsed{"data-target" => "#products", "data-toggle" => "collapse"}
           %a{href: "#"}
             %i.fa.fa-envelope-o.fa-lg
@@ -30,12 +31,12 @@
             %a{href: "#"}
               %i.fa.fa-clock-o
               Scheduled
-        %li.collapsed{"data-target" => "#products", "data-toggle" => "collapse"}
-          %a{href: "#"}
+        %li.collapsed{"data-target" => "#settings", "data-toggle" => "collapse"}
+          %a.link-disabled{href: "#", disabled: true}
             %i.fa.fa-gears.fa-lg
             Settings
             %span.arrow
-        %ul#products.sub-menu.collapse
+        %ul#settings.sub-menu.collapse
           %li
             %a{href: "#"}
               %i.fa.fa-institution
@@ -52,11 +53,11 @@
             %a{href: "#"}
               %i.fa.fa-credit-card
               Billing
-        %li
-          %a{href: edit_user_registration_path}
-            %i.fa.fa-user.fa-lg
-            Profile
-        %li
-          %a{href: destroy_user_session_path, method: :delete}
-            %i.fa.fa-sign-out.fa-lg
-            Sign Out
+      %li
+        = link_to user_path(current_user) do
+          %i.fa.fa-user.fa-lg
+          My Profile
+      %li
+        %a{href: destroy_user_session_path, method: :delete}
+          %i.fa.fa-sign-out.fa-lg
+          Sign Out

@@ -19,24 +19,42 @@
       %h2.display-3 Pricing
 %br
 %br
-.row
-  .col-sm-12.col-md-6.col-lg-3.offset-lg-2
-    .card.card-inverse.card-danger.text-xs-center
-      .card-block
-        %blockquote.card-blockquote
-          .text-center
-            %p.lead SMS Pricing.
-            %h1.display-1.pricing-cent 2
-            %br
-            %p.lead Per Text Message Sent.
-            %em Billed Monthly.
-  .col-sm-12.col-md-6.col-lg-3.offset-lg-2
-    .card.card-inverse.card-danger.text-xs-center
-      .card-block
-        %blockquote.card-blockquote
-          .text-center
-            %p.lead MMS Pricing.
-            %h1.display-1.pricing-cent 4
-            %br
-            %p.lead Per Text Message Sent.
-            %em Billed Monthly.
+%br
+.row.middle-xs.center-xs
+  .col-xs-12.col-sm-6.col-md-6.col-lg-6
+    .card.card-outline-primary
+      %h2 Pay As You Go
+      .Plan-cardPricing
+        .Plan-cardRate
+          .Plan-cardRate-percent
+            4¢
+          .Plan-cardRate-plus +
+          .Plan-cardRate-fixed
+            30¢
+        .Plan-cardRate-description
+          per successful card charge
+      %ul.Plan-list
+        %li.Plan-listItem
+          %img{:alt => "fees icon", :height => "26", :src => "/img/v3/pricing/header/plan-star.svg", :width => "26"}/
+          No setup, monthly, or hidden fees
+        %li.Plan-listItem
+          %img{:alt => "pay icon", :height => "26", :src => "/img/v3/pricing/header/plan-receive.svg", :width => "26"}/
+          Pay only for what you use
+        %li.Plan-listItem
+          %img{:alt => "reporting icon", :height => "26", :src => "/img/v3/pricing/header/plan-measure.svg", :width => "26"}/
+          Real-time fee reporting
+      %a.Plan-button.common-Uppercase.common-Link--arrow{:href => "https://dashboard.stripe.com/register"} Create account
+  .col-xs-11.col-sm-6.col-md-6.col-lg-6
+    .card.card-outline-info
+      %h2.Plan-title.Plan-title--enterprise.common-Uppercase Enterprise
+      .Plan-description Stripe offers everything needed to run an online business at scale. Get in touch for details.
+      .Plan-tableContainer
+        %table.Plan-table
+          %tbody
+            %tr.Plan-table-row
+              %td.Plan-table-cell.Plan-table-cell--alternating Account management
+              %td.Plan-table-cell Volume discounts
+            %tr
+              %td.Plan-table-cell Migration assistance
+              %td.Plan-table-cell.Plan-table-cell--alternating Dedicated support
+      %a.Plan-button.Plan-Button--enterprise.common-Uppercase.common-Link--arrow{:href => "/contact/sales"} Contact sales

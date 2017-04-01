@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331205138) do
+ActiveRecord::Schema.define(version: 20170401174842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 20170331205138) do
     t.datetime "removed_at"
     t.integer  "removed_by"
     t.integer  "created_by"
+    t.string   "slug"
+    t.index ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
   end
 
   create_table "sessions", force: :cascade do |t|

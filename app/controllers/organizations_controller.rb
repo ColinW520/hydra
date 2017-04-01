@@ -24,7 +24,7 @@ class OrganizationsController < ApplicationController
         format.js { flash[:success] = 'Organization has been created.' }
         format.html {
           flash[:success] = 'Your organization has been created! Now you can set your billing preferences.'
-          render :show
+          redirect_to organization_path(@organization)
         }
       else
         format.json { render json: @solution.errors.full_messages, status: :unprocessable_entity }
@@ -73,7 +73,7 @@ class OrganizationsController < ApplicationController
   private
 
   def find_organization
-    @organization = Organization.find(params[:id])
+    @organization = Organization.friendly.find(params[:id])
   end
 
   def organization_params

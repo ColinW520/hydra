@@ -1,7 +1,6 @@
 #sidebar {
   .nav-side-menu {
     overflow: auto;
-    font-size: 12px;
     background-color: #333;
     position: fixed;
     top: 0px;
@@ -15,7 +14,6 @@
     line-height: 50px;
     display: block;
     text-align: center;
-    font-size: 14px;
   }
 
   .nav-side-menu .toggle-btn {
@@ -130,7 +128,7 @@
 
     .brand {
       text-align: left !important;
-      font-size: 22px;
+      font-size: 32px;
       padding-left: 20px;
       line-height: 50px !important;
     }

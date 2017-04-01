@@ -2,18 +2,9 @@
   - provide(:title, 'Organizations')
   .row
     .col-sm-12
-      %ol.breadcrumb
-        %li.breadcrumb-item.active Organizations
-  .row
-    .col-sm-9
-      %h1
-        %i.fa.fa-institution
-        Organizations
-    .col-sm-3
-      .pull-right
-        = link_to new_organization_path, remote: true, class: 'btn btn-md btn-success' do
-          %i.fa.fa-plus
-          New
+      %h1 Organizations
+      = link_to new_organization_path, remote: true, class: 'btn btn-sm btn-success' do
+        %i.fa.fa-plus
   %br
 .row
   .col-sm-12

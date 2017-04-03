@@ -2,11 +2,9 @@
   .table-responsive.card.card-outline-primary.table-card
     %table.table.table-hover
       %thead.thead-inverse
-        %th
         %th= smart_listing.sortable "First", :first_name
         %th= smart_listing.sortable "Last", :last_name
         %th= smart_listing.sortable "Email", :email
-        %th= smart_listing.sortable "Created", :created_at
         %th
       %tbody#users
         - smart_listing.collection.each do |user|

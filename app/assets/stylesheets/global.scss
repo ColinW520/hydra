@@ -7,16 +7,16 @@
   opacity: 1;
 }
 
-.flex-grow {
-  flex: 1;
-}
-
 .pricing-cent::after {
   content:"\00a2";
   width: 0.1em;
   height: 0.1em;
   -webkit-transform: translateY(-35px) rotate(45deg) scale(0.2);
   -moz-transform: translateY(-35px) rotate(45deg) scale(0.2);
+}
+
+#main {
+  min-height: 100vh;
 }
 
 @media (min-width: 767px) {

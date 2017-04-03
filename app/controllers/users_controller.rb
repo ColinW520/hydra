@@ -5,14 +5,16 @@ class UsersController < ApplicationController
   before_filter :find_user, except: [:index, :new, :create]
 
   def index
+    users_scope = User.accessible_by(current_ability)
+    users_scope = users_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
     smart_listing_create :users,
-                         User.accessible_by(current_ability),
+                         users_scope,
                          partial: "users/listing",
                          default_sort: { created_at: "desc" }
   end
 
   def show
-
+    gon.organization_id = current_user.organization_id
   end
 
   def edit

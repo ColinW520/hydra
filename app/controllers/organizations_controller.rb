@@ -74,6 +74,7 @@ class OrganizationsController < ApplicationController
 
   def find_organization
     @organization = Organization.friendly.find(params[:id])
+    gon.organization_id = @organization.id if @organization
   end
 
   def organization_params

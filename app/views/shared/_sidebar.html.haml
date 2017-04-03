@@ -31,28 +31,28 @@
               %a{href: "#"}
                 %i.fa.fa-clock-o
                 Scheduled
-          %li.collapsed{"data-target" => "#settings", "data-toggle" => "collapse"}
-            %a.link-disabled{href: "#", disabled: true}
-              %i.fa.fa-gears.fa-lg
-              Settings
-              %span.arrow
-          %ul#settings.sub-menu.collapse
-            %li
-              %a{href: "#"}
-                %i.fa.fa-institution
-                Organization
-            %li
-              %a{href: "#"}
-                %i.fa.fa-hashtag
-                Numbers
-            %li
-              %a{href: "#"}
-                %i.fa.fa-users
-                Users
-            %li
-              %a{href: "#"}
-                %i.fa.fa-credit-card
-                Billing
+        %li.collapsed{"data-target" => "#settings", "data-toggle" => "collapse"}
+          %a.link-disabled{href: "#", disabled: true}
+            %i.fa.fa-gears.fa-lg
+            Settings
+            %span.arrow
+        %ul#settings.sub-menu.collapse
+          %li
+            %a{href: "#"}
+              %i.fa.fa-institution
+              Organization
+          %li
+            %a{href: "#"}
+              %i.fa.fa-hashtag
+              Lines
+          %li
+            %a{href: "#"}
+              %i.fa.fa-users
+              Users
+          %li
+            %a{href: "#"}
+              %i.fa.fa-credit-card
+              Billing
         %li
           = link_to user_path(current_user) do
             %i.fa.fa-user.fa-lg

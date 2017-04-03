@@ -1,18 +1,59 @@
-
+%br
+%br
 .row
   .col-sm-12
     %h1 Settings
-
+    .table-responsive.card.card-outline-primary.table-card
+      %table.table
+        %thead.thead-inverse
+          %th Name
+          %th Domain
+          %th City
+          %th State
+          %th Zip
+          %th Primary Phone
+          %th Created
+          %th Updated
+          %th
+        %tbody#organizations
+          = render @organization
+%br
+%br
 .row
   .col-sm-12.col-md-12.col-lg-6
     %h1 Users
+    #users_placeholder
+      %br
+      %br
+      .text-center
+        %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
 
   .col-sm-12.col-md-12.col-lg-6
     %h1 Lines
-
+    #users_placeholder
+      %br
+      %br
+      .text-center
+        %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+%br
+%br
 .row
   .col-sm-12.col-md-12.col-lg-6
     %h1 Billing
+    #users_placeholder
+      %br
+      %br
+      .text-center
+        %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
 
   .col-sm-12.col-md-12.col-lg-6
     %h1 Invoices
+    #users_placeholder
+      %br
+      %br
+      .text-center
+        %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+
+
+
+= render "organizations/dialog"

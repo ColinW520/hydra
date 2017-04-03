@@ -1,15 +1,17 @@
-= simple_form_for [@organization], remote: @xhr, authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
+= simple_form_for [@organization], remote: true, authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
   = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
   .form-group
     = f.input :name, id: 'InputName'
   .form-group
-    = f.input :email_domain, id: 'InputEmailDomain'
+    = f.input :email_domain
   .form-group
-    = f.input :city, id: 'City'
+    = f.input :city
   .form-group
-    = f.input :state, id: 'State'
+    = f.input :state
   .form-group
-    = f.input :zip, id: 'Zip'
+    = f.input :zip
+  .form-group
+    = f.input :phone
   .form-actions
     .text-center
       = f.button :submit, class: 'btn btn-md btn-success'

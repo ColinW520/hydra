@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   #load_and_authorize_resource
   before_action :authenticate_user!, :set_xhr_flag
   after_filter :prepare_unobtrusive_flash
+  layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
   def after_sign_in_path_for(resource)
     dashboard_path

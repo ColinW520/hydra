@@ -1,6 +1,7 @@
 !!!
 %html{:lang => "en"}
   %head
+    = include_gon(:init => true)
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
@@ -12,8 +13,9 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     %title
       = full_title('HYDRA', yield(:title))
-  %body{id: "#{controller_name}_#{action_name}", class: "#{controller_name}"}
+  %body{id: "#{controller_name}_#{action_name}", class: "hydra-body #{controller_name}"}
     = render 'shared/sidebar'
     #main.container
       .unobtrusive-flash-container
       = yield
+      = render 'shared/footer'

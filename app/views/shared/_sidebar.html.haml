@@ -8,51 +8,44 @@
           %a{href: dashboard_path}
             %i.fa.fa-dashboard.fa-lg
             Dashboard
-        - if current_user.setup?
-          %li.collapsed{"data-target" => "#products", "data-toggle" => "collapse"}
+        %li
+          %a{href: '#'}
+            %i.fa.fa-address-book-o.fa-lg
+            Team
+        %li
+          %a{href: '#'}
+            %i.fa.fa-hashtag.fa-lg
+            Lines
+        %li
+          %a{href: "#"}
+            %i.fa.fa-users
+            Users
+        %li.collapsed{"data-target" => "#products", "data-toggle" => "collapse"}
+          %a{href: "#"}
+            %i.fa.fa-envelope.fa-lg
+            Messages
+            %span.arrow
+        %ul#products.sub-menu.collapse
+          %li.active
             %a{href: "#"}
-              %i.fa.fa-envelope-o.fa-lg
-              Messages
-              %span.arrow
-          %ul#products.sub-menu.collapse
-            %li.active
-              %a{href: "#"}
-                %i.fa.fa-pencil
-                Compose
-            %li
-              %a{href: "#"}
-                %i.fa.fa-external-link-square
-                Sent
-            %li
-              %a{href: "#"}
-                %i.fa.fa-reply
-                Received
-            %li
-              %a{href: "#"}
-                %i.fa.fa-clock-o
-                Scheduled
-        %li.collapsed{"data-target" => "#settings", "data-toggle" => "collapse"}
-          %a.link-disabled{href: "#", disabled: true}
+              %i.fa.fa-pencil
+              Compose
+          %li
+            %a{href: "#"}
+              %i.fa.fa-external-link-square
+              Sent
+          %li
+            %a{href: "#"}
+              %i.fa.fa-reply
+              Received
+          %li
+            %a{href: "#"}
+              %i.fa.fa-clock-o
+              Scheduled
+        %li
+          %a{href: organization_path(current_user.organization)}
             %i.fa.fa-gears.fa-lg
             Settings
-            %span.arrow
-        %ul#settings.sub-menu.collapse
-          %li
-            %a{href: "#"}
-              %i.fa.fa-institution
-              Organization
-          %li
-            %a{href: "#"}
-              %i.fa.fa-hashtag
-              Lines
-          %li
-            %a{href: "#"}
-              %i.fa.fa-users
-              Users
-          %li
-            %a{href: "#"}
-              %i.fa.fa-credit-card
-              Billing
         %li
           = link_to user_path(current_user) do
             %i.fa.fa-user.fa-lg

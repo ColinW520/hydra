@@ -1,7 +1,4 @@
 class OrganizationsController < ApplicationController
-  include SmartListing::Helper::ControllerExtensions
-  helper  SmartListing::Helper
-
   before_filter :find_organization, except: [:index, :new, :create]
 
   def index
@@ -21,7 +18,7 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.save
         format.json { head :no_content }
-        format.js { flash[:success] = 'Organization has been created.' }
+        format.js { flash[:success] = 'Organization has been created!' }
         format.html {
           flash[:success] = 'Your organization has been created! Now you can set your billing preferences.'
           redirect_to organization_path(@organization)
@@ -45,11 +42,11 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.update(organization_params)
         format.html {
-          flash[:sucess] = 'Organization has been updated!'
-          redirect_to organizations_path
+          flash[:success] = 'Organization has been updated!'
+          redirect_to organization_path(@organization)
         }
         format.json { head :no_content }
-        format.js { flash[:success] = 'Organization has been updated.' }
+        format.js { flash[:success] = 'Organization has been updated!' }
       else
         format.json { render json: @organization.errors.full_messages, status: :unprocessable_entity }
       end
@@ -66,6 +63,14 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def remove_card
+    @organization.stripe_token_id = nil
+    @organization.save!
+    respond_to do |format|
+      format.html { redirect_to organization_path(@organization), success: 'Billing Method removed. This does not cancel your account, but, further usage will be disabled until a billing method is placed on file.' }
+    end
+  end
+
   def restore
 
   end
@@ -73,7 +78,8 @@ class OrganizationsController < ApplicationController
   private
 
   def find_organization
-    @organization = Organization.friendly.find(params[:id])
+    @organization = Organization.friendly.find(params[:id]) if params[:id]
+    @organization = Organization.friendly.find(params[:organization_id]) if params[:organization_id]
     gon.organization_id = @organization.id if @organization
   end
 

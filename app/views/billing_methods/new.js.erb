@@ -1,0 +1,8 @@
+// Render the new form
+$('.modal-body').html('<%= j render("billing_methods/form") %>');
+
+// Show the dynamic dialog
+$('#billing_method_dialog').modal("show");
+
+// Set focus to the first element
+$('#billing_method_dialog').on('shown.bs.modal', function () {$('#InputNickname').focus()})

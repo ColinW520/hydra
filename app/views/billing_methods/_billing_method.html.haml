@@ -1,0 +1,6 @@
+%tr{id: "billing_method_#{billing_method.id}"}
+  %td= billing_method.nickname
+  %td= local_time_ago billing_method.created_at
+  %td.actions
+    -# = link_to edit_organization_billing_method_path(billing_method.organization, billing_method), remote: true, class: 'btn btn-sm btn-warning' do
+    -#   %i.fa.fa-edit

@@ -3,57 +3,48 @@
 .row
   .col-sm-12
     %h1 Settings
-    .table-responsive.card.card-outline-primary.table-card
-      %table.table
-        %thead.thead-inverse
-          %th Name
-          %th Domain
-          %th City
-          %th State
-          %th Zip
-          %th Primary Phone
-          %th Created
-          %th Updated
-          %th
-        %tbody#organizations
-          = render @organization
+%br
+%br
+= simple_form_for [@organization], authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
+  .row
+    .col-sm-3
+      %h3 Profile
+    .col-sm-9
+      .pull-right
+        = f.button :submit, class: 'btn btn-md btn-success', id: 'submit-button' do
+          %i.fa.fa-floppy-o
+          Submit
+  = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
+  %fieldset
+    .row
+      .col-sm-12.col-md-6
+        .form-group
+          = f.input :name, id: 'InputName'
+        .form-group
+          = f.input :email_domain
+        .form-group
+          = f.input :phone
+      .col-sm-12.col-md-6
+        .form-group
+          = f.input :city
+        .form-group
+          = f.input :state
+        .form-group
+          = f.input :zip
+
 %br
 %br
 .row
-  .col-sm-12.col-md-12.col-lg-6
-    %h1 Users
-    #users_placeholder
-      %br
-      %br
-      .text-center
-        %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+  .col-sm-3
+    %h3 Billing Methods
+  .col-sm-9
+    .pull-right
+      = link_to new_organization_billing_method_path(@organization), remote: true, class: 'btn btn-success btn-md', id: 'NewMethodButton' do
+        %i.fa.fa-plus
+        Add
 
-  .col-sm-12.col-md-12.col-lg-6
-    %h1 Lines
-    #users_placeholder
-      %br
-      %br
-      .text-center
-        %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
 %br
 %br
 .row
-  .col-sm-12.col-md-12.col-lg-6
-    %h1 Billing
-    #users_placeholder
-      %br
-      %br
-      .text-center
-        %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
-
-  .col-sm-12.col-md-12.col-lg-6
-    %h1 Invoices
-    #users_placeholder
-      %br
-      %br
-      .text-center
-        %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
-
-
-
-= render "organizations/dialog"
+  .col-sm-12
+    #billing_placeholder

@@ -8,7 +8,11 @@
           .text-center
             %h1.display-1 Text Your Team
             %br
-            %p.lead This is a simple tool designed to help you text your employees and team members.
+            %p.lead This is a simple tool designed to help you text your employees and team members. It's built with an internal, organizational focus and is not designed to be a marketing tool.
+            %p
+              Hydra is an extemely simple service built on top of three super stable, trustworthy platforms: Twilio, Stripe, and Heroku.
+              We personally can't wait until Mailchimp adds SMS/MMS to its feature suite, because it is a truly awesome list-based communication service at its core, but, that is probably some time in the unpredictable future. In the meantime, there's us.
+              Any company with a junior Ruby/Rails developer on staff could probably recreate this service for themselves and pay only cost. If you want the source, code, it's available to you here: link. Otherwise, check out our pricing and sign up.
             %br
             %a.btn.btn-success.btn-lg{:href => new_user_registration_path} Sign Up
 %br
@@ -17,44 +21,36 @@
   .col-sm-12
     .text-center
       %h2.display-3 Pricing
-%br
-%br
-%br
-.row.middle-xs.center-xs
-  .col-xs-12.col-sm-6.col-md-6.col-lg-6
-    .card.card-outline-primary
-      %h2 Pay As You Go
-      .Plan-cardPricing
-        .Plan-cardRate
-          .Plan-cardRate-percent
-            4¢
-          .Plan-cardRate-plus +
-          .Plan-cardRate-fixed
-            30¢
-        .Plan-cardRate-description
-          per successful card charge
-      %ul.Plan-list
-        %li.Plan-listItem
-          %img{:alt => "fees icon", :height => "26", :src => "/img/v3/pricing/header/plan-star.svg", :width => "26"}/
-          No setup, monthly, or hidden fees
-        %li.Plan-listItem
-          %img{:alt => "pay icon", :height => "26", :src => "/img/v3/pricing/header/plan-receive.svg", :width => "26"}/
-          Pay only for what you use
-        %li.Plan-listItem
-          %img{:alt => "reporting icon", :height => "26", :src => "/img/v3/pricing/header/plan-measure.svg", :width => "26"}/
-          Real-time fee reporting
-      %a.Plan-button.common-Uppercase.common-Link--arrow{:href => "https://dashboard.stripe.com/register"} Create account
-  .col-xs-11.col-sm-6.col-md-6.col-lg-6
-    .card.card-outline-info
-      %h2.Plan-title.Plan-title--enterprise.common-Uppercase Enterprise
-      .Plan-description Stripe offers everything needed to run an online business at scale. Get in touch for details.
-      .Plan-tableContainer
-        %table.Plan-table
-          %tbody
-            %tr.Plan-table-row
-              %td.Plan-table-cell.Plan-table-cell--alternating Account management
-              %td.Plan-table-cell Volume discounts
-            %tr
-              %td.Plan-table-cell Migration assistance
-              %td.Plan-table-cell.Plan-table-cell--alternating Dedicated support
-      %a.Plan-button.Plan-Button--enterprise.common-Uppercase.common-Link--arrow{:href => "/contact/sales"} Contact sales
+      %p.lead At the end of the month, we will calculate your usage, charge the card you put on file, and send you a receipt.<br /> It's that easy (for all of us).
+    %br
+    .table-responsive
+      %table.table.table-bordered
+        %thead
+          %th.text-center Local Numbers
+          %th.text-center{colspan: 2} SMS
+          %th.text-center{colspan: 2} MMS
+          %th.text-center Team Members
+          %th.text-center Users
+        %tbody
+          %tr
+            %td.text-center
+              %h4 $5
+              %span per line/month
+            %td.text-center
+              %h4 5¢/message
+              %span to send
+            %td.text-center
+              %h4 5¢/message
+              %span to receive
+            %td.text-center
+              %h4 5¢/message
+              %span to send
+            %td.text-center
+              %h4 5¢/message
+              %span to receive
+            %td.text-center
+              %h4 ∞
+              %span always
+            %td.text-center
+              %h4 ∞
+              %span always

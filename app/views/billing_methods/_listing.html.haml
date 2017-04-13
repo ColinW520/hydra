@@ -1,0 +1,13 @@
+- unless smart_listing.empty?
+  .table-responsive.card.card-outline-primary.table-card
+    %table.table.table-hover
+      %thead.thead-inverse
+        %th= smart_listing.sortable 'Name', :nickname
+        %th= smart_listing.sortable 'Created', :created_at
+        %th
+      %tbody#billing_methods
+        - smart_listing.collection.each do |billing_method|
+          = render billing_method
+- else
+  .alert.alert-danger
+    %p No Billing Methods on File. Add one!

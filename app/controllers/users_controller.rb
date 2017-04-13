@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-  include SmartListing::Helper::ControllerExtensions
-  helper  SmartListing::Helper
-
   before_filter :find_user, except: [:index, :new, :create]
 
   def index

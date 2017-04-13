@@ -1,0 +1,13 @@
+- unless @xhr
+  - provide(:title, 'Billing Methods')
+  .row
+    .col-sm-12
+      %h1
+        Billing Methods
+        = link_to new_organization_billing_method_path(@organization), remote: true, class: 'btn btn-sm btn-success' do
+          %i.fa.fa-plus
+  %br
+.row
+  .col-sm-12
+    = smart_listing_render :billing_methods
+= render "billing_methods/dialog"

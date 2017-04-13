@@ -9,6 +9,8 @@
         %th= smart_listing.sortable 'City', :city
         %th= smart_listing.sortable 'State', :state
         %th= smart_listing.sortable 'Zip', :zip
+        %th= smart_listing.sortable 'Created', :created_at
+        %th= smart_listing.sortable 'Updated', :updated_at
         %th
       %tbody#organizations
         - smart_listing.collection.each do |organization|

@@ -47,7 +47,8 @@ gem 'ahoy_email'
 # gem 'redis', '~> 3.0'
 
 # Third Party Stuff
-gem "twilio-ruby"
+gem 'twilio-ruby'
+gem 'stripe'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

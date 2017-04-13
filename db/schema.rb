@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401204702) do
+ActiveRecord::Schema.define(version: 20170412001249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 20170401204702) do
     t.datetime "clicked_at"
     t.index ["token"], name: "index_ahoy_messages_on_token", using: :btree
     t.index ["user_id", "user_type"], name: "index_ahoy_messages_on_user_id_and_user_type", using: :btree
+  end
+
+  create_table "billing_methods", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.string   "nickname"
+    t.string   "stripe_token_id"
+    t.integer  "created_by"
+    t.datetime "removed_at"
+    t.datetime "last_succeeded_at"
+    t.datetime "last_failed_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["organization_id"], name: "index_billing_methods_on_organization_id", using: :btree
   end
 
   create_table "employees", force: :cascade do |t|
@@ -56,14 +69,16 @@ ActiveRecord::Schema.define(version: 20170401204702) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "email_domain"
     t.datetime "removed_at"
     t.integer  "removed_by"
     t.integer  "created_by"
     t.string   "slug"
     t.integer  "updated_by"
+    t.string   "stripe_token_id"
+    t.string   "stripe_customer_id"
     t.index ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
   end
 
@@ -135,6 +150,7 @@ ActiveRecord::Schema.define(version: 20170401204702) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "billing_methods", "organizations"
   add_foreign_key "employees", "organizations"
   add_foreign_key "users", "organizations"
 end

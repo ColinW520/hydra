@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
   protect_from_forgery with: :exception
   #load_and_authorize_resource
-  before_action :authenticate_user!, :set_xhr_flag
-  after_filter :prepare_unobtrusive_flash
+  before_action :authenticate_user!, :set_xhr_flag, :gon_setup
+  after_action :prepare_unobtrusive_flash
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
   def after_sign_in_path_for(resource)
@@ -17,6 +19,12 @@ class ApplicationController < ActionController::Base
 
   def set_xhr_flag
     @xhr = request.xhr?
+  end
+
+  def gon_setup
+    gon.organization_id = current_user.try(:organization_id)
+    gon.organization_slug = current_user.try(:organization).try(:slug)
+    gon.stripe_publishable_key = Rails.application.secrets.stripe_publishable_key
   end
 
   def configure_permitted_parameters

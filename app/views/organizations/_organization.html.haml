@@ -1,10 +1,11 @@
 %tr{id: "organization_#{organization.id}"}
+  %td= organization.id
   %td= organization.name
   %td= organization.email_domain
+  %td= number_to_phone organization.phone, area_code: true
   %td= organization.city
   %td= organization.state
   %td= organization.zip
-  %td= number_to_phone @organization.phone, area_code: true
   %td= local_time organization.created_at
   %td= local_time organization.updated_at
   %td.actions

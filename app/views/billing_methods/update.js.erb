@@ -1,0 +1,3 @@
+$('#billing_method_dialog').modal('toggle');
+$('#billing_method_<%= @billing_method.id %>').replaceWith('<%= j render (@billing_method) %>');
+$("#billing_methods").smart_listing().fadeLoaded();

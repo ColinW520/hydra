@@ -1,7 +1,4 @@
 class EmployeesController < ApplicationController
-  include SmartListing::Helper::ControllerExtensions
-  helper  SmartListing::Helper
-
   before_filter :find_employee, except: [:index, :new, :create]
 
   def index

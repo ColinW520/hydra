@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.remotipart
 //= require tether
 //= require bootstrap
 //= require jquery.turbolinks

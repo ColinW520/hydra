@@ -14,7 +14,7 @@ class SubscriptionsController < ApplicationController
 
   def new
     @organization = Organization.friendly.find(params[:organization_id]) if params[:organization_id]
-    @subscription = Subscription.new(organization_id: @organization.id)
+    @subscription = Subscription.new()
   end
 
   def create
@@ -23,12 +23,16 @@ class SubscriptionsController < ApplicationController
     respond_to do |format|
       if @subscription.save
         format.json { head :no_content }
-        format.js { flash[:success] = 'Billing Method has been created.' }
-        format.html {
-          flash[:success] = 'Your Billing Method has been created!'
+        format.js { flash[:success] = 'Subscription has been created.' }
+        format.html do
+          flash[:success] = 'Your Subscription has been created!'
           redirect_to organization_path(@subscription.organization)
-        }
+        end
       else
+        format.html do
+          flash[:error] = @subscription.errors.full_messages
+          redirect_to organization_path(params[:organization_id])
+        end
         format.json { render json: @subscription.errors.full_messages, status: :unprocessable_entity }
       end
 
@@ -47,11 +51,11 @@ class SubscriptionsController < ApplicationController
     respond_to do |format|
       if @subscription.update(subscription_params)
         format.html {
-          flash[:sucess] = 'Billing Method has been updated!'
+          flash[:sucess] = 'Subscription has been updated!'
           redirect_to organization_path(@organization)
         }
         format.json { head :no_content }
-        format.js { flash[:success] = 'Billing Method has been updated.' }
+        format.js { flash[:success] = 'Subscription has been updated.' }
       else
         format.json { render json: @subscription.errors.full_messages, status: :unprocessable_entity }
       end

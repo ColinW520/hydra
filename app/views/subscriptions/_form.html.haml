@@ -1,67 +1,14 @@
+.row
+  .col-sm-12
+    %h1.text-success.text-center $100/month
+%br
 = simple_form_for [@organization, @subscription], authenticity_token: true, html: { id: 'SubscriptionForm' } do |f|
   = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
+  = f.input :stripe_customer_id, as: :hidden, input_html: { value: @organization.stripe_customer_id }
   = f.input :organization_id, as: :hidden, input_html: { value: @organization.id }
   .form-group
+    %label Have a Coupon?
     = f.input :coupon_code
   .form-actions
     .text-center
-      = f.button :submit, class: 'btn btn-md btn-success', id: 'submit-button' do
-        %i.fa.fa-cc-stripe
-        Submit
-
-:coffeescript
-  stripeTokenHandler = (token) ->
-    # Insert the token ID into the form so it gets submitted to the server
-    form = document.getElementById('BillingMethodForm')
-    tokenHiddenInput = document.createElement('input')
-    tokenHiddenInput.setAttribute 'type', 'hidden'
-    tokenHiddenInput.setAttribute 'name', 'billing_method[stripe_token_id]'
-    tokenHiddenInput.setAttribute 'value', token.id
-    form.appendChild tokenHiddenInput
-    # Submit the form. This is the one that will have the token on it.
-    form.submit()
-    return
-  # Create a Stripe client
-  stripe = Stripe(gon.stripe_publishable_key)
-  # Create an instance of Elements
-  elements = stripe.elements()
-  # Custom styling can be passed to options when creating an Element.
-  # (Note that this demo uses a wider set of styles than the guide below.)
-  style =
-    base:
-      color: '#32325d'
-      lineHeight: '24px'
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif'
-      fontSmoothing: 'antialiased'
-      fontSize: '16px'
-      '::placeholder': color: '#aab7c4'
-    invalid:
-      color: '#fa755a'
-      iconColor: '#fa755a'
-  # Create an instance of the card Element
-  card = elements.create('card', style: style)
-  # Add an instance of the card Element into the `card-element` <div>
-  card.mount '#card-element'
-  # Handle real-time validation errors from the card Element.
-  card.addEventListener 'change', (event) ->
-    displayError = document.getElementById('card-errors')
-    if event.error
-      displayError.textContent = event.error.message
-    else
-      displayError.textContent = ''
-    return
-  # Handle form submission
-  form = document.getElementById('BillingMethodForm')
-  form.addEventListener 'submit', (event) ->
-    event.preventDefault()
-    # PREVENT DOUBLE CLICKING
-    stripe.createToken(card).then (result) ->
-      if result.error
-        # Inform the user if there was an error
-        errorElement = document.getElementById('card-errors')
-        errorElement.textContent = result.error.message
-      else
-        # Send the token to your server
-        stripeTokenHandler result.token
-      return
-    return
+      = f.button :submit, class: 'btn btn-lg btn-success'

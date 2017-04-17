@@ -1,6 +1,6 @@
 $ ->
-  UnobtrusiveFlash.flashOptions['timeout'] = 2000
-  console.log(gon)
+  UnobtrusiveFlash.flashOptions['timeout'] = 5000
+
   $('#menu-toggle').click (e) ->
     e.preventDefault()
     $('#wrapper').toggleClass 'toggled'

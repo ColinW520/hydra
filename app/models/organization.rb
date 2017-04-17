@@ -9,6 +9,8 @@ class Organization < ApplicationRecord
   has_one :primary_billing_method, ->(organization) { where(stripe_token_id: organization.stripe_token_id) }, class_name: 'BillingMethod'
   has_one :subscription
 
+  validates :stripe_customer_id, presence: true
+
 
   def stripe_customer
     return nil unless self.stripe_customer_id
@@ -18,7 +20,7 @@ class Organization < ApplicationRecord
   def default_card
     return nil unless self.stripe_customer_id
     customer = Stripe::Customer.retrieve self.stripe_customer_id
-    card = customer.sources.retrieve(customer.default_source)
+    card = customer.default_source.present? ? customer.sources.retrieve(customer.default_source) : nil
     return card
   end
 

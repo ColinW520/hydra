@@ -4,7 +4,7 @@
     %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
     .menu-list
       %ul#menu-content.menu-content.collapse.out
-        %li.active
+        %li
           %a{href: dashboard_path}
             %i.fa.fa-dashboard.fa-lg
             Dashboard
@@ -42,7 +42,7 @@
             %a{href: "#"}
               %i.fa.fa-clock-o
               Scheduled
-        %li
+        %li{class: @subnav == 'organizations' ? 'active' : nil}
           %a{href: current_user.organization_id.present? ? organization_path(current_user.organization) : new_organization_path}
             %i.fa.fa-gears.fa-lg
             Settings

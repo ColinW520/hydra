@@ -9,7 +9,7 @@ class User < ApplicationRecord
   belongs_to :organization
 
   def setup?
-    false
+    self.organization.present?
   end
 
   def soft_delete!

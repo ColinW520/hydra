@@ -20,7 +20,7 @@ class OrganizationsController < ApplicationController
         format.json { head :no_content }
         format.js { flash[:success] = 'Organization has been created!' }
         format.html {
-          flash[:success] = 'Your organization has been created! Now you can set your billing preferences.'
+          flash[:success] = 'Your organization has been created! Now you can set up your billing and subscribe.'
           redirect_to organization_path(@organization)
         }
       else

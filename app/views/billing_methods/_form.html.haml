@@ -1,18 +1,20 @@
-= simple_form_for [@organization, @billing_method], authenticity_token: true, html: { id: 'BillingMethodForm', multipart: true } do |f|
-  = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
-  = f.input :organization_id, as: :hidden, input_html: { value: @organization.id }
-  .form-group
-    = f.input :nickname, id: 'inputNickname'
-  .form-group
-    %label{:for => "card-element"}
-      Input Your Card Details
-    #card-element
-    #card-errors
-  .form-actions
-    .text-center
-      = f.button :submit, class: 'btn btn-md btn-success', id: 'submit-button' do
-        %i.fa.fa-cc-stripe
-        Submit
+.row
+  .col-sm-12
+    %p This adds a new billing method to your organization and sets it as the default billing method for your company. This replaces any other payment method you may have previously added.
+.row
+  .col-sm-12
+    = simple_form_for [@organization, @billing_method], authenticity_token: true, html: { id: 'BillingMethodForm' } do |f|
+      = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
+      = f.input :organization_id, as: :hidden, input_html: { value: @organization.id }
+      .form-group
+        %label{:for => "card-element"}
+          Input Your Card Details
+        #card-element
+        #card-errors
+      %br
+      .form-actions
+        .text-center
+          = f.button :submit, class: 'btn btn-md btn-success', id: 'submit-button'
 
 :coffeescript
   stripeTokenHandler = (token) ->

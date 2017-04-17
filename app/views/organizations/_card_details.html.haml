@@ -20,6 +20,6 @@
               %i.fa.fa-cc-alt.fa-2x
           %span{style: 'font-size: 20px;'}=@card.funding.titleize
         %td
-          %p.lead=@card.last4
+          %span{style: 'font-size: 20px;'}=@card.last4
         %td
-          %p.lead=@card.exp_month.to_s + ' / ' + @card.exp_year.to_s
+          %span{style: 'font-size: 20px;'}=@card.exp_month.to_s + ' / ' + @card.exp_year.to_s

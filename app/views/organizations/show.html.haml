@@ -30,7 +30,7 @@
           - else
             = link_to new_organization_billing_method_path(@organization), remote: true, class: 'btn btn-success btn-sm', id: 'NewMethodButton' do
               %i.fa.fa-plus
-              Add
+
     .row
       .col-sm-12
         - if @card.present?
@@ -47,7 +47,7 @@
           - if @subscription
             = link_to organization_subscription_path(@organization), method: :delete, class: 'btn btn-warning btn-sm' do
               %i.fa.fa-cancel
-          - else
+          - elsif @subscription.nil? && @card.present?
             = link_to new_organization_subscription_path(@organization), remote: true, class: 'btn btn-warning btn-sm' do
               %i.fa.fa-plus
     - if @subscription.present?
@@ -57,11 +57,11 @@
     - elsif @card.present?
       = render 'organizations/no_subscription'
     - else
-      = render 'organizations/no_card_info'
+      %div.alert.alert-warning
+        %h4 First, add a billing method!
+        %p Before you subscribe, we need an active billing method on file.
 
 
 = render 'organizations/dialog'
-- unless @card.present?
-  = render 'billing_methods/dialog'
-- unless @subscription.present?
-  = render 'subscriptions/dialog'
+= render 'billing_methods/dialog'
+-# = render 'subscriptions/dialog'

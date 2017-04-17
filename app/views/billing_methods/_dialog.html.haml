@@ -1,12 +1,11 @@
+%script{:src => "https://js.stripe.com/v3/"}
 #billing_method_dialog.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "billing_method_dialog", "data-backdrop" => "static", "data-keyboard" => "true", :role => "dialog"}
   .modal-dialog
     .modal-content
       .modal-header
-        %h4.modal-title.orange
+        %h4.modal-title
           %i.fa.fa-plus
           Add Billing Method
-        %p
-          This adds a new billing method to your organization and sets it as the default billing method for your company. This replaces any other payment method you may have previously added.
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
-      .modal-body
+      .modal-body#billing-modal-body

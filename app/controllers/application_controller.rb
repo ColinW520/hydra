@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper  SmartListing::Helper
   protect_from_forgery with: :exception
   #load_and_authorize_resource
-  before_action :authenticate_user!, :set_xhr_flag, :gon_setup
+  before_action :authenticate_user!, :set_xhr_flag, :gon_setup, :set_subnav
   after_action :prepare_unobtrusive_flash
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
     gon.organization_id = current_user.try(:organization_id)
     gon.organization_slug = current_user.try(:organization).try(:slug)
     gon.stripe_publishable_key = ENV['STRIPE_PUBLISHABLE_KEY']
+  end
+
+  def set_subnav
+    @subnav = controller_name
   end
 
   def configure_permitted_parameters

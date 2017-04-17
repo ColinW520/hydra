@@ -2,18 +2,20 @@ class BillingMethod < ApplicationRecord
   default_scope -> { where(removed_at: nil) }
   belongs_to :organization
 
-  scope :valid, -> { where.not(id: nil) }
-
   def stripe_card
     token = Stripe::Card.retrieve self.stripe_token_id
     return token.card
   end
 
-  after_create :update_organization
-  def update_organization
+  before_create :update_stripe_customer
+  def update_stripe_customer
     customer = Stripe::Customer.retrieve self.organization.stripe_customer_id
     customer.source = self.stripe_token_id
     customer.save
+  end
+
+  after_create :update_organization
+  def update_organization
     self.organization.stripe_token_id = self.stripe_token_id
     self.organization.save!
   end

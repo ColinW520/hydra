@@ -24,6 +24,11 @@ class Organization < ApplicationRecord
     return card
   end
 
+  def stripe_subscription
+    return nil unless self.subscription.present?
+    Stripe::Subscription.retrieve self.subscription.stripe_id
+  end
+
   # hooks
   after_create :update_primary_user
   def update_primary_user

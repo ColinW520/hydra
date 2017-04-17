@@ -63,10 +63,11 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    @subscription.soft_delete!(current_user.id)
+    @subscription.cancel_on_stripe!
+    @subscription.update_attributes(canceled_at: Time.now, canceled_by: current_user.id)
     respond_to do |format|
       format.js { flash[:success] = 'Subscription removed.' }
-      format.html { redirect_to organization_path(@organization), notice: 'Subscription removed.' }
+      format.html { redirect_to organization_path(@organization), notice: 'Subscription cancelled. You may continue to use Hydra until the present biling period ends.' }
       format.json { head :no_content }
     end
   end

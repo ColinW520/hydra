@@ -1,11 +1,7 @@
 class Subscription < ApplicationRecord
   belongs_to :organization
 
-  validates :stripe_id, presence: true
-  validates :stripe_customer_id, presence: true
-  validates :stripe_plan_id, presence: true
-
-  before_validation :create_on_stripe
+  before_create :create_on_stripe
   def create_on_stripe
     sub_details = {}
     sub_details[:customer] = self.stripe_customer_id
@@ -17,7 +13,7 @@ class Subscription < ApplicationRecord
     self.stripe_customer_id = stripe_subscription.customer
   end
 
-  def cancel_on_stripe!
+  def cancel_on_stripe!(user_id)
     sub = Stripe::Subscription.retrieve(self.stripe_id)
     sub.at_period_end = true
     sub.save

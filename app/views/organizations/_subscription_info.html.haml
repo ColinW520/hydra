@@ -4,5 +4,21 @@
     %tbody
       %tr
         %td
-          %strong Name
+          %strong Status
         %td
+          - if @subscription.status == 'active'
+            .text-success
+              = @subscription.status
+          - else
+            .text-danger
+              = @subscription.status
+      %tr
+        %td
+          %strong Started
+        %td
+          = local_time Time.at(@subscription.created)
+      %tr
+        %td
+          %strong Renews
+        %td
+          = local_time Time.at(@subscription.current_period_end)

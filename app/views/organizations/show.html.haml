@@ -5,46 +5,63 @@
     %h1 Settings
 %br
 %br
-= simple_form_for [@organization], authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
-  .row
-    .col-sm-3
-      %h3 Profile
-    .col-sm-9
-      .pull-right
-        = f.button :submit, class: 'btn btn-md btn-success', id: 'submit-button' do
-          %i.fa.fa-floppy-o
-          Submit
-  = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
-  %fieldset
+.row
+  .col-sm-4
     .row
-      .col-sm-12.col-md-6
-        .form-group
-          = f.input :name, id: 'InputName'
-        .form-group
-          = f.input :email_domain
-        .form-group
-          = f.input :phone
-      .col-sm-12.col-md-6
-        .form-group
-          = f.input :city
-        .form-group
-          = f.input :state
-        .form-group
-          = f.input :zip
+      .col-sm-6
+        %h3 Profile
+      .col-sm-6
+        .pull-right
+          = link_to edit_organization_path, remote: true, class: 'btn btn-warning btn-sm' do
+            %i.fa.fa-edit
+    .row
+      .col-sm-12
+        = render 'organizations/profile'
 
-%br
-%br
-.row
-  .col-sm-3
-    %h3 Billing Methods
-  .col-sm-9
-    .pull-right
-      = link_to new_organization_billing_method_path(@organization), remote: true, class: 'btn btn-success btn-md', id: 'NewMethodButton' do
-        %i.fa.fa-plus
-        Add
+  .col-sm-4
+    .row
+      .col-sm-8
+        %h3 Billing Method
+      .col-sm-4
+        .pull-right
+          - if @organization.stripe_token_id.present?
+            = link_to organization_billing_method_path(@organization), method: :delete, class: 'btn btn-danger btn-sm' do
+              %i.fa.fa-trash
+          - else
+            = link_to new_organization_billing_method_path(@organization), remote: true, class: 'btn btn-success btn-sm', id: 'NewMethodButton' do
+              %i.fa.fa-plus
+              Add
+    .row
+      .col-sm-12
+        - if @card.present?
+          = render 'organizations/card_details'
+        - else
+          = render 'organizations/no_card_info'
 
-%br
-%br
-.row
-  .col-sm-12
-    #billing_placeholder
+  .col-sm-4
+    .row
+      .col-sm-6
+        %h3 Subscription
+      .col-sm-6
+        .pull-right
+          - if @subscription
+            = link_to organization_subscription_path(@organization), method: :delete, class: 'btn btn-warning btn-sm' do
+              %i.fa.fa-cancel
+          - else
+            = link_to new_organization_subscription_path(@organization), remote: true, class: 'btn btn-warning btn-sm' do
+              %i.fa.fa-plus
+    - if @subscription.present?
+      .row
+        .col-sm-12
+          = render 'organizations/subscription_info'
+    - elsif @card.present?
+      = render 'organizations/no_subscription'
+    - else
+      = render 'organizations/no_card_info'
+
+
+= render 'organizations/dialog'
+- unless @card.present?
+  = render 'billing_methods/dialog'
+- unless @subscription.present?
+  = render 'subscriptions/dialog'

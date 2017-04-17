@@ -1,0 +1,3 @@
+$('#subscription_dialog').modal('toggle');
+$('#subscription_<%= @subscription.id %>').replaceWith('<%= j render (@subscription) %>');
+$("#subscriptions").smart_listing().fadeLoaded();

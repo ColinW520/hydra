@@ -1,0 +1,5 @@
+%tr{id: "subscription_#{subscription.id}"}
+  %td= local_time_ago subscription.created_at
+  %td.actions
+    = link_to organization_subscription_path(subscription.organization, subscription), remote: true, method: :delete, class: 'btn btn-sm btn-danger' do
+      %i.fa.fa-trash

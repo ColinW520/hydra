@@ -31,7 +31,8 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-
+    @card = @organization.default_card
+    @subscription = @organization.subscription
   end
 
   def edit

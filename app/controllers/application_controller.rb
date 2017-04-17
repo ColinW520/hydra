@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   def gon_setup
     gon.organization_id = current_user.try(:organization_id)
     gon.organization_slug = current_user.try(:organization).try(:slug)
-    gon.stripe_publishable_key = Rails.application.secrets.stripe_publishable_key
+    gon.stripe_publishable_key = ENV['STRIPE_PUBLISHABLE_KEY']
   end
 
   def configure_permitted_parameters

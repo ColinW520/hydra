@@ -1,0 +1,25 @@
+.table-responsive.card.card-outline-default.table-card
+  %table.table
+    %thead
+      %th Type
+      %th Last4
+      %th Expires
+    %tbody
+      %tr
+        %td
+          -case @card.brand
+            -when 'Visa'
+              %i.fa.fa-cc-visa.fa-2x
+            -when 'American Express'
+              %i.fa.fa-cc-amex.fa-2x
+            -when 'MasterCard'
+              %i.fa.fa-cc-mastercard.fa-2x
+            -when 'Discover'
+              %i.fa.fa-cc-discover.fa-2x
+            -else
+              %i.fa.fa-cc-alt.fa-2x
+          %span{style: 'font-size: 20px;'}=@card.funding.titleize
+        %td
+          %p.lead=@card.last4
+        %td
+          %p.lead=@card.exp_month.to_s + ' / ' + @card.exp_year.to_s

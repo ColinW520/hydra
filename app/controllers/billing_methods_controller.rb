@@ -59,11 +59,10 @@ class BillingMethodsController < ApplicationController
   end
 
   def destroy
-    @billing_method.soft_delete!
-    sign_out_and_redirect(@billing_method)
+    @billing_method.soft_delete!(current_user.id)
     respond_to do |format|
-      format.js { flash[:success] = 'BillingMethod removed and can no longer access account.' }
-      format.html { redirect_to billing_methods_path, notice: 'BillingMethod removed.' }
+      format.js { flash[:success] = 'BillingMethod removed.' }
+      format.html { redirect_to organization_path(@organization), notice: 'BillingMethod removed.' }
       format.json { head :no_content }
     end
   end
@@ -72,7 +71,7 @@ class BillingMethodsController < ApplicationController
 
   def find_billing_method
     @organization = Organization.friendly.find(params[:organization_id]) if params[:organization_id]
-    @billing_method = BillingMethod.friendly.find(params[:id]) if params[:id]
+    @billing_method = BillingMethod.find(params[:id]) if params[:id]
     gon.billing_method_id = @billing_method.id if @billing_method.present?
     gon.organization_id = @organization.id if @organization.present?
   end

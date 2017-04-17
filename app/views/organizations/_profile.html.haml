@@ -1,0 +1,28 @@
+.table-responsive.card.card-outline-default.table-card
+  %table.table
+    %thead.thead-inverse
+    %tbody
+      %tr
+        %td
+          %strong Name
+        %td=@organization.name
+      %tr
+        %td
+          %strong Primary Billing Contact
+        %td=@organization.email_domain
+      %tr
+        %td
+          %strong Phone
+        %td= number_to_phone @organization.phone
+      %tr
+        %td
+          %strong City
+        %td=@organization.city
+      %tr
+        %td
+          %strong State
+        %td=@organization.state
+      %tr
+        %td
+          %strong Zip
+        %td=@organization.zip

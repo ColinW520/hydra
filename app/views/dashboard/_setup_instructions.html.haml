@@ -1,4 +1,4 @@
-.row{style: 'margin-top: 30vh'}
+.row{style: 'margin-top: 25vh'}
   .col-sm-12.col-md-6.col-lg-4.col-centered
     .card.card-outline-success.text-xs-center
       .card-block
@@ -6,11 +6,11 @@
           .text-center
             %p.lead Thank you for signing up! To get started, please set up your organization and billing information.
             - if current_user.organization_id.present?
-              = link_to organization_path(current_user.organization_id), class: 'btn btn-lg btn-success' do
+              = link_to organization_path(current_user.organization), class: 'btn btn-lg btn-success' do
                 Configure Billing
               .text-center
                 %br
-                Powered by Stripe
+                Securely Powered by Stripe
             - else
               = link_to new_organization_path, class: 'btn btn-lg btn-success' do
                 Set Up My Company

@@ -2,12 +2,12 @@
   .table-responsive.card.card-outline-primary.table-card
     %table.table.table-hover
       %thead.thead-inverse
-        %th= smart_listing.sortable 'Name', :nickname
+        %th Organization
         %th= smart_listing.sortable 'Created', :created_at
         %th
-      %tbody#billing_methods
-        - smart_listing.collection.each do |billing_method|
-          = render billing_method
+      %tbody#subscriptions
+        - smart_listing.collection.each do |subscription|
+          = render subscription
 - else
   .alert.alert-danger
-    %p No Billing Method on File. Add one!
+    %p No subscriptions.

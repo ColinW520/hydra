@@ -1,0 +1,6 @@
+- unless @xhr
+  - provide(:title, 'Subscriptions')
+.row
+  .col-sm-12
+    = smart_listing_render :subscriptions
+= render "subscriptions/dialog"

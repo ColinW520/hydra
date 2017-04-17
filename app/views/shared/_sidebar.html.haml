@@ -43,7 +43,7 @@
               %i.fa.fa-clock-o
               Scheduled
         %li
-          %a{href: organization_path(current_user.organization)}
+          %a{href: current_user.organization_id.present? ? organization_path(current_user.organization) : new_organization_path}
             %i.fa.fa-gears.fa-lg
             Settings
         %li

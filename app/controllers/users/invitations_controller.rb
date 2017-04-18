@@ -1,4 +1,5 @@
 class Users::InvitationsController < Devise::InvitationsController
+  before_filter :set_sanitized_params, only: :create
   before_filter :update_sanitized_params, only: :update
 
   # PUT /resource/invitation
@@ -18,8 +19,12 @@ class Users::InvitationsController < Devise::InvitationsController
 
   protected
 
+  def set_sanitized_params
+    devise_parameter_sanitizer.permit(:invite, keys: [:email, :first_name, :last_name, :mobile_phone, :organization_id])
+  end
+
   def update_sanitized_params
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :password, :password_confirmation, :invitation_token, :mobile_phone])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :password, :password_confirmation, :invitation_token, :mobile_phone, :organization_id])
   end
 
   def after_invite_path_for(resource)

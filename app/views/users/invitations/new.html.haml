@@ -10,8 +10,10 @@
           .col-sm-12
             = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f|
               = devise_error_messages!
-              - resource.class.invite_key_fields.each do |field|
-                .form-group
-                  = f.input field
+              = f.hidden_field :organization_id, value: current_user.organization_id
+              = f.input :first_name
+              = f.input :last_name
+              = f.input :email, as: :email
+              = f.input :mobile_phone
               %br
               = f.button :submit, 'Send Invitation', class: 'btn btn-block btn-success'

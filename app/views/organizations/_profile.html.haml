@@ -26,3 +26,15 @@
         %td
           %strong Zip
         %td=@organization.zip
+      %tr
+        %td
+          %strong
+            Twilio Account
+            %i.fa.fa-info-circle
+        %td
+          - if @organization.twilio_auth_id.present?
+            .text-success
+              %i.fa.fa-check-circle
+              Connected!
+          - else
+            = link_to 'Connect Your Account', "https://www.twilio.com/authorize/CN29760c1484efcafb62cf661a40e70338?state=#{@organization.id}"

@@ -11,6 +11,10 @@ class Organization < ApplicationRecord
 
   validates :stripe_customer_id, presence: true
 
+  def twilio_account
+    client = Twilio::REST::Client.new self.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN']
+    account = client.account
+  end
 
   def stripe_customer
     return nil unless self.stripe_customer_id

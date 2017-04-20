@@ -20,7 +20,7 @@ class Imports::ImportStartingWorker
     open(the_import.datafile.url, 'r:utf-8') do |f|   # don't forget to specify the UTF-8 encoding!!
       SmarterCSV.process(f, default_options).each do |chunk|
         chunk.each do |row|
-          Imports::ImportEmployeeRowWorker.delay(row, the_import.id)
+          Imports::ImportEmployeeRowWorker.new.perform(row, the_import.id)
         end
       end
     end

@@ -1,4 +1,30 @@
+- provide(:title, 'Dashboard')
 - if current_user.setup?
-  %h1 Yay, you can see charts and lists now.
+  .row
+    .col-sm-12.col-md-12
+      .card.card-primary
+        .card-title
+          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
+            Messages
+            %i.fa.fa-question-circle
+        = column_chart list_growth_dashboard_path
+
+  %br
+  .row
+    .col-sm-12.col-md-6
+      .card.card-primary
+        .card-title
+          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
+            Directory Size
+            %i.fa.fa-question-circle
+        = line_chart list_growth_dashboard_path
+
+    .col-sm-12.col-md-6
+      .card.card-primary
+        .card-title
+          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
+            Usage Cost
+            %i.fa.fa-question-circle
+        = line_chart list_growth_dashboard_path
 - else
   = render 'dashboard/setup_instructions'

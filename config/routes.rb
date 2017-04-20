@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   match '/twilio/authorize' => 'twilio/authorizations#authorize', via: [:get]
   match '/twilio/deauthorize' => 'twilio/authorizations#deauthorize', via: [:get]
 
-  resource :dashboard, controller: 'dashboard'
+  resource :dashboard, controller: 'dashboard' do
+    collection do
+      get :list_growth
+    end
+  end
 
   resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :employees, path: :members

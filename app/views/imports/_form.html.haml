@@ -1,0 +1,37 @@
+.row
+  .col-sm-12
+    %p.lead
+      Please be sure to include
+      %strong at least
+      the following headers in your CSV file (as the first row!):
+    %ul
+      %li first_name
+      %li last_name
+      %li email
+      %li phone**
+    %p.text-danger ** We will use this to identify your team members!
+    %p.lead You can also use these headers:
+    %ul
+      %li title
+      %li city
+      %li birthday: Please format as MM/DD
+      %li tags: Please separate multiple tags with the `|` symbol. Example: (Is Cool|San Antonio Region|High Performer)
+      %li started_at: Please format as MM/DD/YYYY
+.row
+  .col-sm-12
+    = simple_form_for [@import], authenticity_token: true, :html => { id: 'ImportForm' } do |f|
+      .error_explanation.text-danger
+      .form-group
+        %label{:for => "exampleInputFile"} Select Your CSV
+        = f.input :datafile, as: :file, class: 'form-control-file', id: 'exampleInputFile', required: true
+        %small#fileHelp.form-text.text-muted This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.
+      .form-actions
+        .text-center
+          = f.hidden_field :type, value: 'employee'
+          = f.hidden_field :organization_id, value: current_user.organization_id
+          = f.submit 'Import this File', class: 'btn btn-success btn-md', id: 'ImportSubmit'
+:coffeescript
+  # because this form has uploads...
+  # $('#ImportSubmit').on 'click', (e) ->
+  #   e.preventDefault()
+  #   $('#ImportForm').submit()

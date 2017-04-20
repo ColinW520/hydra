@@ -1,14 +1,17 @@
 - unless @xhr
-  - provide(:title, 'Employees')
+  - provide(:title, 'Members')
   .row
     .col-sm-9
       %h2
         %i.fa.fa-institution
-        Employees
+        Members
         = link_to new_employee_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success' do
           %i.fa.fa-plus
+        = link_to new_import_path, remote: true, class: 'btn btn-sm btn-primary' do
+          %i.fa.fa-upload
   %br
 .row
   .col-sm-12
     = smart_listing_render :employees
 = render "employees/dialog"
+= render "imports/dialog"

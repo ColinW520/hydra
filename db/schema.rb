@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418025711) do
+ActiveRecord::Schema.define(version: 20170419161908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,23 @@ ActiveRecord::Schema.define(version: 20170418025711) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.index ["organization_id"], name: "index_employees_on_organization_id", using: :btree
+  end
+
+  create_table "imports", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.string   "type"
+    t.string   "status"
+    t.string   "message"
+    t.integer  "created_by"
+    t.datetime "completed_at"
+    t.boolean  "is_enqueued"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "datafile_file_name"
+    t.string   "datafile_content_type"
+    t.integer  "datafile_file_size"
+    t.datetime "datafile_updated_at"
+    t.index ["organization_id"], name: "index_imports_on_organization_id", using: :btree
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -177,6 +194,7 @@ ActiveRecord::Schema.define(version: 20170418025711) do
 
   add_foreign_key "billing_methods", "organizations"
   add_foreign_key "employees", "organizations"
+  add_foreign_key "imports", "organizations"
   add_foreign_key "subscriptions", "organizations"
   add_foreign_key "users", "organizations"
 end

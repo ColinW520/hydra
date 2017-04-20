@@ -3,16 +3,13 @@ class EmployeesController < ApplicationController
 
   def index
     employees_scope = Employee.accessible_by(current_ability)
-    employees_scope = employees_scope.where(organization_id: params[:organization_id])
+    # employees_scope = employees_scope.where(organization_id: current_user.organization_id)
 
-    smart_listing_create :employees,
-                         employees_scope,
-                         partial: "employees/listing",
-                         default_sort: { created_at: "desc" }
+    smart_listing_create :employees, employees_scope, partial: "employees/listing", default_sort: { created_at: "desc" }
   end
 
   def new
-    @employee = Employee.new()
+    @employee = Employee.new(organization_id: current_user.organization_id)
   end
 
   def create

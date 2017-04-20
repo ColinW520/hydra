@@ -1,0 +1,11 @@
+%tr{id: "import_#{import.id}"}
+  %td= import.datafile_file_name
+  %td= import.type
+  %td= import.user.full_name
+  %td= import.status
+  %td= local_time_ago import.created_at rescue ''
+  %td= local_time_ago import.completed_at rescue ''
+  %td= import.message
+  %td
+    = link_to import.datafile.url, target: '_blank', class: 'btn btn-info btn-sm' do
+      %i.fa.fa-file-excel-o

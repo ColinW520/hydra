@@ -1,0 +1,8 @@
+// Render the new form
+$('.modal-body').html('<%= j render("imports/form") %>');
+
+// Show the dynamic dialog
+$('#import_dialog').modal("show");
+
+// Set focus to the first element
+$('#import_dialog').on('shown.bs.modal', function () {$('#importtype').focus()})

@@ -1,0 +1,28 @@
+- provide(:title, 'Imports')
+%br
+%br
+.row
+  .col-sm-12
+    %h1
+      %i.fa.fa-upload
+      Imports
+      = link_to new_import_path, remote: true, class: 'btn btn-success btn-sm' do
+        %i.fa.fa-plus
+.row
+  .col-sm-12
+    .table-responsive.card.card-outline-primary.table-card
+      %table.table.table-hover{id: "ImportsTable"}
+        %thead.thead-inverse
+          %tr
+            %th File
+            %th Type
+            %th Uploader
+            %th Status
+            %th Started
+            %th Completed
+            %th Results
+            %th
+        %tbody#imports
+          = render @imports
+
+= render "imports/dialog"

@@ -16,10 +16,18 @@ Rails.application.routes.draw do
   resource :dashboard, controller: 'dashboard'
 
   resources :users, only: [:index, :show, :edit, :update, :destroy]
-  resources :employees
+  resources :employees, path: :members
+  resources :imports
   resources :organizations do
     resources :billing_methods
     resources :subscriptions
+  end
+
+  namespace :admin do
+    authenticate :user, -> (user) { user.admin_role? } do
+      require 'sidekiq/web'
+      mount Sidekiq::Web => '/sidekiq'
+    end
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -20,5 +20,5 @@
 - else
   .alert.alert-danger
     %p
-      No Employees yet...
-      = link_to 'add some!', new_employee_path, class: 'text-primary'
+      No Members yet...
+      = link_to 'add some!', new_employee_path, remote: true, class: 'text-primary'

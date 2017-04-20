@@ -5,6 +5,10 @@ ruby '2.3.2'
 gem 'rails', '~> 5.0.2'
 gem 'devise'
 gem 'devise_invitable'
+gem 'puma', '~> 3.0'
+gem 'sidekiq'
+gem 'figaro'
+gem 'smarter_csv'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -17,7 +21,6 @@ gem 'tether-rails'
 gem 'font-awesome-rails', github: 'bokmann/font-awesome-rails'
 gem 'turbolinks', '~> 5'
 gem 'jquery-turbolinks'
-gem 'puma', '~> 3.0'
 gem 'haml-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -25,12 +28,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'chartkick'
-gem 'groupdate'
 gem 'smart_listing', github: 'ColinW520/smart_listing'
 gem 'gon'
 gem 'simple_form'
 gem 'local_time'
-gem 'remotipart', '~> 1.2'
 gem 'wysiwyg-rails'
 gem 'unobtrusive_flash', '>=3'
 
@@ -42,14 +43,13 @@ gem 'cancancan'
 gem 'friendly_id'
 gem 'acts-as-taggable-on'
 gem 'ahoy_email'
-
-# Background Stuff
-# gem 'redis', '~> 3.0'
+gem "paperclip", "~> 5.0.0" # stores images & files to AWS
+gem 'aws-sdk'
+gem 'groupdate'
 
 # Third Party Stuff
 gem 'twilio-ruby'
 gem 'stripe'
-gem 'figaro'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

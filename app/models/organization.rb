@@ -6,6 +6,7 @@ class Organization < ApplicationRecord
   has_many :users
   has_many :employees
   has_many :billing_methods
+  has_many :imports
   has_one :primary_billing_method, ->(organization) { where(stripe_token_id: organization.stripe_token_id) }, class_name: 'BillingMethod'
   has_one :subscription
 

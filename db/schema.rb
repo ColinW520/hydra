@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419161908) do
+ActiveRecord::Schema.define(version: 20170423184646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,14 @@ ActiveRecord::Schema.define(version: 20170419161908) do
     t.integer  "datafile_file_size"
     t.datetime "datafile_updated_at"
     t.index ["organization_id"], name: "index_imports_on_organization_id", using: :btree
+  end
+
+  create_table "legal_docs", force: :cascade do |t|
+    t.string   "type"
+    t.text     "content"
+    t.boolean  "is_default"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "organizations", force: :cascade do |t|

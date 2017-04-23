@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
+  get 'legal_docs/new'
+
+  get 'legal_docs/create'
+
+  get 'legal_docs/index'
+
   root 'static_pages#home'
   match '/home' => "static_pages#home", via: [:get]
   match '/contact' => "static_pages#contact", via: [:get]
-  match '/terms' => "static_pages#terms", via: [:get]
+
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -19,6 +25,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :legal_docs
   resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :employees, path: :members
   resources :imports

@@ -16,10 +16,10 @@ class Employee < ApplicationRecord
 
 
   scope :name_like, ->(term) {
-    where('first_name ILIKE ? OR last_name ILIKE ?', "#{term}", "#{term}")
+    where('first_name ILIKE ? OR last_name ILIKE ?', "%#{term}%", "%#{term}%")
   }
 
   scope :title_like, ->(term) {
-    where('first_name ILIKE ? OR last_name ILIKE ?', "#{term}", "#{term}")
+    where('title ILIKE ?', "%#{term}%")
   }
 end

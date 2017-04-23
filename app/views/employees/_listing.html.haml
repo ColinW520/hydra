@@ -1,40 +1,48 @@
-
-.card.card-outline-default
-  = smart_listing_controls_for(:employees, { class: 'form-control' }) do
-    .row
-      .col-sm-12.col-md-4
-        .form-group.has-feedback.filter.input-append
-          %label.control-label{for: 'inputQuery'} Name Like ?
-          = text_field_tag :name_filter, '', class: "search form-control", placeholder: "Search.", autocomplete: :off
-      .col-sm-12.col-md-4
-        .form-group.has-feedback.filter.input-append
-          %label.control-label{for: 'inputQuery'} Title Like ?
-          = text_field_tag :title_filter, '', class: "search form-control", placeholder: "Search.", autocomplete: :off
-      .col-sm-12.col-md-4
-        .form-group.has-feedback.filter.input-append
-          %label.control-label{for: 'inputQuery'} Tagged With ?
-          = text_field_tag :tags_filter, '', class: "search form-control", placeholder: "Search.", autocomplete: :off
+.row
+  .col-sm-12
+    .card.card-outline-default
+      = smart_listing_controls_for(:employees, { class: 'form-control' }) do
+        .row
+          .col-sm-12.col-md-4
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputQuery'} Name Like ?
+              = text_field_tag :name, params[:name], class: "search form-control"
+          .col-sm-12.col-md-4
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputQuery'} Title Like ?
+              = text_field_tag :title, params[:title], class: "search form-control"
+          .col-sm-12.col-md-4
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputQuery'} Tagged With ?
+              = text_field_tag :tags, params[:tags], class: "search form-control"
+        .row
+          .col-sm-12
+            .pull-right
+              = submit_tag 'Search'
 %br
-.card.card-outline-primary.table-card
-  .table-responsive
-    %table.table.table-hover
-      %thead.thead-inverse
-        %th= smart_listing.sortable 'First', :first_name
-        %th= smart_listing.sortable 'Last', :last_name
-        %th= smart_listing.sortable 'Title', :title
-        %th= smart_listing.sortable 'Mobile', :mobile_phone
-        %th= smart_listing.sortable 'Email', :email
-        %th= smart_listing.sortable 'Added', :created_at
-        %th Tags
-        %th
-      %tbody#employees
-        - smart_listing.collection.each do |employee|
-          = render employee
+.row
+  .col-sm-12
+    .card.card-outline-primary.table-card
+      .table-responsive
+        %table.table.table-hover
+          %thead.thead-inverse
+            %th= smart_listing.sortable 'First', :first_name
+            %th= smart_listing.sortable 'Last', :last_name
+            %th= smart_listing.sortable 'Title', :title
+            %th= smart_listing.sortable 'Mobile', :mobile_phone
+            %th= smart_listing.sortable 'Email', :email
+            %th= smart_listing.sortable 'Added', :created_at
+            %th Tags
+            %th
+          %tbody#employees
+            - smart_listing.collection.each do |employee|
+              = render employee
 
-%br
-.pull-right
-  = smart_listing.paginate
-  = smart_listing.pagination_per_page_links
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links
 
 %br
 %br

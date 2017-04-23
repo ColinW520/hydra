@@ -17,6 +17,10 @@ module Hydra
 
     config.autoload_paths << Rails.root.join('lib')
 
+    # ActsAsTaggableOn.force_binary_collation = true
+    ActsAsTaggableOn.remove_unused_tags = true
+    ActsAsTaggableOn.force_lowercase = true
+
     config.active_job.queue_adapter = :sidekiq
 
     config.paperclip_defaults = {

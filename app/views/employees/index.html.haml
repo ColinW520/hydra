@@ -1,15 +1,13 @@
-- unless @xhr
-  - provide(:title, 'Members')
-  .row
-    .col-sm-9
-      %h2
-        %i.fa.fa-institution
-        Members
-        = link_to new_employee_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success' do
-          %i.fa.fa-plus
-        = link_to new_import_path, remote: true, class: 'btn btn-sm btn-primary' do
-          %i.fa.fa-upload
-  %br
+- provide(:title, 'Members')
+.row
+  .col-sm-9
+    %h2
+      %i.fa.fa-address-book
+      Directory
+      = link_to new_employee_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success' do
+        %i.fa.fa-plus
+      = link_to new_import_path, remote: true, class: 'btn btn-sm btn-primary' do
+        %i.fa.fa-upload
 .row
   .col-sm-12
     = smart_listing_render :employees

@@ -13,7 +13,9 @@ class Import < ApplicationRecord
     hash_secret: 'a92342be23ad9827634654a5617646'
   validates_attachment :datafile, content_type: { content_type: 'text/csv' }
 
+  after_create :start_processing
   def start_processing
-    ImportStartingWorker.perform_async(self.id) unless self.is_enqueued? # prevent double q
+    Imports::ImportStartingWorker.new.perform(self.id) if Rails.env.development?
+    Imports::ImportStartingWorker.perform_async(self.id) if Rails.env.production?
   end
 end

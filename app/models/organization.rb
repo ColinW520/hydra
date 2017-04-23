@@ -1,4 +1,5 @@
 class Organization < ApplicationRecord
+  acts_as_tagger
   extend FriendlyId
   friendly_id :name, use: :slugged
 

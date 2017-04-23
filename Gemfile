@@ -41,11 +41,11 @@ gem 'pg', '~> 0.18'
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'cancancan'
 gem 'friendly_id'
-gem 'acts-as-taggable-on'
 gem 'ahoy_email'
 gem "paperclip", "~> 5.0.0" # stores images & files to AWS
 gem 'aws-sdk'
 gem 'groupdate'
+gem 'acts-as-taggable-on', '~> 4.0'
 
 # Third Party Stuff
 gem 'twilio-ruby'

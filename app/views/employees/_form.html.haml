@@ -1,12 +1,12 @@
 = simple_form_for [@employee], remote: true, authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
   .form-group
-    = f.input :first_name, id: 'InputFirstName'
+    = f.input :first_name, id: 'InputFirstName', required: true
   .form-group
     = f.input :last_name
   .form-group
     = f.input :email
   .form-group
-    = f.input :mobile_phone
+    = f.input :mobile_phone, required: true
   .form-group
     = f.input :title
   .form-group

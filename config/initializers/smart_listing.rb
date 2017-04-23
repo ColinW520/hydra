@@ -11,7 +11,7 @@ SmartListing.configure do |config|
     #:paginate                       => true,                        # allow pagination
     #:memorize_per_page              => false,                       # save per page settings in the cookie
     #:page_sizes                     => DEFAULT_PAGE_SIZES,          # set available page sizes array
-    #:kaminari_options               => {:theme => "smart_listing"}, # Kaminari's paginate helper options
+    :kaminari_options               => {:theme => "bootstrap4"}, # Kaminari's paginate helper options
     #:sort_dirs                      => [nil, "asc", "desc"],        # Default sorting directions cycle of sortables
   })
 
@@ -30,7 +30,7 @@ SmartListing.configure do |config|
     :callback              => "callback",
     :pagination_wrapper    => "text-center",
     :pagination_container  => "pagination",
-    :pagination_per_page   => "pagination-per-page text-center",
+    :pagination_per_page   => "pagination-per-page",
     :inline_editing        => "info",
     :no_records            => "no-records",
     :limit                 => "smart-listing-limit",

@@ -23,6 +23,7 @@ vendor/bundle
 # Ignore application configuration
 /config/application.yml
 /config/secrets.yml
+.byebug_history
 
 # Let heroku compile this
 public/assets/**

@@ -14,13 +14,15 @@ class Imports::ImportStartingWorker
     # this worker expects an import object, then it hands off to the right row processor
     # Do something
     the_import = Import.find import_id
-    the_import.update_attribute(:is_enqueued, true)
     return if the_import.is_enqueued?
+    the_import.update_attribute(:is_enqueued, true)
 
     open(the_import.datafile.url, 'r:utf-8') do |f|   # don't forget to specify the UTF-8 encoding!!
       SmarterCSV.process(f, default_options).each do |chunk|
+        # check this first chunk row to make sure it has the requisite keys. don't enqueue row workers if keys aren't present.
         chunk.each do |row|
-          Imports::ImportEmployeeRowWorker.new.perform(row, the_import.id)
+          Imports::ImportEmployeeRowWorker.new.perform(row, the_import.id) if Rails.env.development?
+          Imports::ImportEmployeeRowWorker.perform_async(row, the_import.id) if Rails.env.production?
         end
       end
     end

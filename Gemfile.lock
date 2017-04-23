@@ -341,7 +341,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store!
-  acts-as-taggable-on
+  acts-as-taggable-on (~> 4.0)
   ahoy_email
   aws-sdk
   bootstrap (~> 4.0.0.alpha6)

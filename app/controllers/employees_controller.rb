@@ -5,7 +5,11 @@ class EmployeesController < ApplicationController
     employees_scope = Employee.accessible_by(current_ability)
     # employees_scope = employees_scope.where(organization_id: current_user.organization_id)
 
-    smart_listing_create :employees, employees_scope, partial: "employees/listing", default_sort: { created_at: "desc" }
+    employees_scope = employees_scope.name_like(params[:name_filter]) if params[:name_filter].present?
+    employees_scope = employees_scope.name_like(params[:title_filter]) if params[:title_filter].present?
+    employees_scope = employees_scope.name_like(params[:tags_filter]) if params[:tags_filter].present?
+
+    smart_listing_create :employees, employees_scope, partial: 'employees/listing', default_sort: { first_name: :asc }, page_sizes: [50, 100, 150, 200]
   end
 
   def new

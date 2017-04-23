@@ -1,24 +1,46 @@
-- unless smart_listing.empty?
-  .table-responsive.card.card-outline-primary.table-card
+
+.card.card-outline-default
+  = smart_listing_controls_for(:employees, { class: 'form-control' }) do
+    .row
+      .col-sm-12.col-md-4
+        .form-group.has-feedback.filter.input-append
+          %label.control-label{for: 'inputQuery'} Name Like ?
+          = text_field_tag :name_filter, '', class: "search form-control", placeholder: "Search.", autocomplete: :off
+      .col-sm-12.col-md-4
+        .form-group.has-feedback.filter.input-append
+          %label.control-label{for: 'inputQuery'} Title Like ?
+          = text_field_tag :title_filter, '', class: "search form-control", placeholder: "Search.", autocomplete: :off
+      .col-sm-12.col-md-4
+        .form-group.has-feedback.filter.input-append
+          %label.control-label{for: 'inputQuery'} Tagged With ?
+          = text_field_tag :tags_filter, '', class: "search form-control", placeholder: "Search.", autocomplete: :off
+%br
+.card.card-outline-primary.table-card
+  .table-responsive
     %table.table.table-hover
       %thead.thead-inverse
-        %th
-        %th= smart_listing.sortable 'First Name', :first_name
-        %th= smart_listing.sortable 'Last Name', :last_name
-        %th= smart_listing.sortable 'Email', :email
-        %th= smart_listing.sortable 'Mobile', :mobile_phone
+        %th= smart_listing.sortable 'First', :first_name
+        %th= smart_listing.sortable 'Last', :last_name
         %th= smart_listing.sortable 'Title', :title
-        %th= smart_listing.sortable 'City', :city
+        %th= smart_listing.sortable 'Mobile', :mobile_phone
+        %th= smart_listing.sortable 'Email', :email
         %th= smart_listing.sortable 'Added', :created_at
+        %th Tags
         %th
       %tbody#employees
         - smart_listing.collection.each do |employee|
           = render employee
+
+%br
+.pull-right
   = smart_listing.paginate
-  .text-info
-    = smart_listing.pagination_per_page_links
-- else
-  .alert.alert-danger
-    %p
-      No Members yet...
-      = link_to 'add some!', new_employee_path, remote: true, class: 'text-primary'
+  = smart_listing.pagination_per_page_links
+
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br

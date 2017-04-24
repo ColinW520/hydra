@@ -1,3 +1,25 @@
-%h1= @legal_doc.id
+%h1= @legal_doc.type
+%p= @legal_doc.content
 %p Find me in app/views/legal_docs/show.html.haml
 
+%br
+%br
+%section#contact
+  .section-content
+    .row
+      .col-sm-12.col-md-6.col-lg-5.col-centered.jumbotron
+        %h1.text-center.upcase Legal Terms Update
+        %p.lead.text-center Update the Terms or Privacy here
+        %br
+        = form_for LegalDoc.new, method: 'post' do |f|
+          .form-group
+            %label.control-label{:for => "type"} Type
+            = f.text_field :type, class: 'form-control'
+          .form-group
+            %label{:for => "content"} Content
+            = f.text_field :content, class: 'form-control'
+          .form-group
+            %label{:for => "is_default"} Is this the default?
+            = f.text_field :is_default, class: 'form-control'
+          .text-center
+            = f.submit 'Update', class: 'btn btn-success btn-lg'

@@ -14,7 +14,7 @@ class LegalDocsController < ApplicationController
         format.js { flash[:success] = 'Legal Doc has been created.' }
         format.html {
           flash[:success] = 'Legal Doc has been created.'
-          redirect_to legal_doc_path
+          redirect_to legal_docs_path
         }
       else
         format.json { render json: @solution.errors.full_messages, status: :unprocessable_entity }
@@ -33,5 +33,9 @@ class LegalDocsController < ApplicationController
 
   def find_legal_doc
     @legal_doc = LegalDoc.find(params[:id])
+  end
+  
+  def legal_doc_params
+    params.require(:legal_doc).permit(:type, :content, :is_default)
   end
 end

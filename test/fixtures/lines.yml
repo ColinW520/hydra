@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  user: one
+  twilio_id: MyString
+  number: MyString
+  name: MyString
+  forwarding_enabled: false
+  forwarding_number: MyString
+
+two:
+  organization: two
+  user: two
+  twilio_id: MyString
+  number: MyString
+  name: MyString
+  forwarding_enabled: false
+  forwarding_number: MyString

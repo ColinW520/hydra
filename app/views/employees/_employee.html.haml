@@ -1,4 +1,5 @@
 %tr{id: "employee_#{employee.id}"}
+  %td= check_box_tag "employee_ids[]", employee.id
   %td= employee.first_name.titleize
   %td= employee.last_name.titleize
   %td= employee.title
@@ -6,16 +7,16 @@
   %td= employee.email
   %td= local_time employee.created_at, format: "%m/%d/%Y"
   %td
-    - employee.owner_tags_on(employee.organization, :tags).pluck(:name).each do |tag|
+    - employee.tags.pluck(:name).each do |tag|
       %span.badge.badge-primary=tag
 
   %td.actions
     .btn-group
-      = link_to edit_employee_path(employee), remote: true, class: 'btn btn-sm btn-warning' do
-        %i.fa.fa-edit
+      = link_to edit_employee_path(employee), remote: true, class: 'btn btn-sm btn-default' do
+        %i.fa.fa-send-o.text-success
       = link_to employee_path(employee), class: 'btn btn-sm btn-info' do
         %i.fa.fa-eye
-      = link_to employee_path(employee), method: :delete, remote: true, class: 'btn btn-sm btn-danger' do
-        %i.fa.fa-trash
+      = link_to edit_employee_path(employee), remote: true, class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-pencil
 
 / ['First Name', 'Last Name', 'Title', 'Mobile', 'City', 'State', 'Zip', 'Added']

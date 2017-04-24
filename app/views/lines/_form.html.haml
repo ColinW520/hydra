@@ -1,0 +1,14 @@
+= simple_form_for(@line) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :organization
+    = f.association :user
+    = f.input :twilio_id
+    = f.input :number
+    = f.input :name
+    = f.input :forwarding_enabled
+    = f.input :forwarding_number
+
+  .form-actions
+    = f.button :submit

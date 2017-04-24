@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Organization:
+  = @line.organization
+%p
+  %b User:
+  = @line.user
+%p
+  %b Twilio:
+  = @line.twilio_id
+%p
+  %b Number:
+  = @line.number
+%p
+  %b Name:
+  = @line.name
+%p
+  %b Forwarding enabled:
+  = @line.forwarding_enabled
+%p
+  %b Forwarding number:
+  = @line.forwarding_number
+
+= link_to 'Edit', edit_line_path(@line)
+\|
+= link_to 'Back', lines_path

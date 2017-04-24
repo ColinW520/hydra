@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  organization: one
+  body: MyString
+  recipients_count: 1
+  processed_at: 2017-04-23 21:24:04
+
+two:
+  user: two
+  organization: two
+  body: MyString
+  recipients_count: 1
+  processed_at: 2017-04-23 21:24:04

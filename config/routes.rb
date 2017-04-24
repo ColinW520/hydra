@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :lines
+  resources :messages
+  resources :employees
   root 'static_pages#home'
   match '/home' => "static_pages#home", via: [:get]
   match '/contact' => "static_pages#contact", via: [:get]

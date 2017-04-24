@@ -1,7 +1,9 @@
 - provide(:title, 'Members')
+%br
+%br
 .row
   .col-sm-9
-    %h2
+    %h3
       %i.fa.fa-address-book
       Directory
       = link_to new_employee_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success' do

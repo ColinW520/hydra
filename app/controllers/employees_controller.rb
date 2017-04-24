@@ -2,12 +2,12 @@ class EmployeesController < ApplicationController
   before_filter :find_employee, except: [:index, :new, :create]
 
   def index
-    employees_scope = Employee.accessible_by(current_ability)
+    employees_scope = Employee.accessible_by(current_ability).includes(:tags)
     # employees_scope = employees_scope.where(organization_id: current_user.organization_id)
 
     employees_scope = employees_scope.name_like(params[:name]) if params[:name].present?
     employees_scope = employees_scope.title_like(params[:title]) if params[:title].present?
-    employees_scope = employees_scope.tagged_with if params[:tags].present?
+    employees_scope = employees_scope.tagged_with(params[:tags]) if params[:tags].present?
 
     smart_listing_create :employees, employees_scope, partial: 'employees/listing', default_sort: { first_name: :asc }, page_sizes: [50, 100, 150, 200]
   end

@@ -20,4 +20,5 @@
 //= require smart_listing
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
+//= require chartkick
 //= require_tree .

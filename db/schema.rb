@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419161908) do
+ActiveRecord::Schema.define(version: 20170424183133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,35 @@ ActiveRecord::Schema.define(version: 20170419161908) do
     t.integer  "datafile_file_size"
     t.datetime "datafile_updated_at"
     t.index ["organization_id"], name: "index_imports_on_organization_id", using: :btree
+  end
+
+  create_table "lines", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.integer  "user_id"
+    t.string   "twilio_id"
+    t.string   "number"
+    t.string   "name"
+    t.boolean  "forwarding_enabled"
+    t.string   "forwarding_number"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["organization_id"], name: "index_lines_on_organization_id", using: :btree
+    t.index ["user_id"], name: "index_lines_on_user_id", using: :btree
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.string   "body"
+    t.integer  "recipients_count"
+    t.datetime "processed_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "line_id"
+    t.text     "filter_query"
+    t.index ["line_id"], name: "index_messages_on_line_id", using: :btree
+    t.index ["organization_id"], name: "index_messages_on_organization_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -195,6 +224,11 @@ ActiveRecord::Schema.define(version: 20170419161908) do
   add_foreign_key "billing_methods", "organizations"
   add_foreign_key "employees", "organizations"
   add_foreign_key "imports", "organizations"
+  add_foreign_key "lines", "organizations"
+  add_foreign_key "lines", "users"
+  add_foreign_key "messages", "lines"
+  add_foreign_key "messages", "organizations"
+  add_foreign_key "messages", "users"
   add_foreign_key "subscriptions", "organizations"
   add_foreign_key "users", "organizations"
 end

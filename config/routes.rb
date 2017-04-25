@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'legal_docs/new'
+#  get 'legal_docs/new'
 
-  get 'legal_docs/create'
+#  get 'legal_docs/create'
 
-  get 'legal_docs/index'
+#  get 'legal_docs/index'
 
   root 'static_pages#home'
   match '/home' => "static_pages#home", via: [:get]

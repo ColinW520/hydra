@@ -1,0 +1,19 @@
+.row
+  .col-sm-12
+    .card.card-outline-primary.table-card
+      .table-responsive
+        %table.table.table-hover
+          %thead.thead-inverse
+            %th.sortable= smart_listing.sortable 'Name', :name
+            %th.sortable= smart_listing.sortable 'Number', :number
+            %th.sortable= smart_listing.sortable 'Added', :created_at
+            %th
+          %tbody#lines
+            - smart_listing.collection.each do |line|
+              = render line
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

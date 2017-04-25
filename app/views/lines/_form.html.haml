@@ -1,14 +1,38 @@
-= simple_form_for(@line) do |f|
-  = f.error_notification
+.row
+  .col-sm-12
+    = simple_form_for [@line], authenticity_token: true, html: { id: 'LineForm', class: 'form-control' } do |f|
+      %legend Number Settings
+      .form-group
+        = f.input :name, label: 'Reference Name', id: 'InputName', required: true, placeholder: 'What do you want to call this line?'
+      .form-group
+        - if @line.persisted?
+          %br
+          %p.text-muted
+            Number:
+            = @line.number
+            %i.fa.fa-info-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "You cannot edit this number once it has been reserved. You may, however, remove this number from your account and purchase a new one if you no longer want to use this one."}
+          %br
+        - else
+          = f.input :number, as: :select, label: 'Select a Twilio™ number', collection: @numbers, label_method: :phone_number, value_method: :phone_number, include_blank: false
+      %legend
+        Forwarding Settings
+        %i.fa.fa-exclamation-circle.text-danger{"data-placement" => "right", "data-toggle" => "tooltip", :title => "Important! Forwarding text messages to a Users' valid mobile number will incurr additional charges."}
+      .form-group
+        = f.input :forwarding_enabled, label: 'Forwarding Enabled?', as: :boolean, inline_label: true
+      .form-group
+        = f.input :forwarding_number, label: 'Forward To', as: :select, collection: current_user.organization.users.forwarding_capable, label_method: :forward_to_dropdown_name, value_method: :mobile_phone
+      %br
+      .form-actions
+        .text-center
+          = f.hidden_field :organization_id, value: @line.organization_id
+          = f.button :submit, 'Purchase This Line', class: 'btn btn-md btn-success'
+          %br
+          %br
+          %small.text-danger
+            By clicking this button you ackowledge that you are purchasing a number on Twilio and by doing so you are willing to incur any applicable charges related to this line. For information about potential charges, visit Twilio's
+            %a{href: 'https://www.twilio.com/sms/pricing', target: '_blank'} SMS pricing page.
 
-  .form-inputs
-    = f.association :organization
-    = f.association :user
-    = f.input :twilio_id
-    = f.input :number
-    = f.input :name
-    = f.input :forwarding_enabled
-    = f.input :forwarding_number
 
-  .form-actions
-    = f.button :submit
+:coffeescript
+  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="popover"]').popover()

@@ -1,0 +1,3 @@
+$('#message_dialog').modal('toggle');
+$('#message_<%= @message.id %>').replaceWith('<%= j render (@message) %>');
+$("#messages").smart_listing().fadeLoaded();

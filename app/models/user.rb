@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   belongs_to :organization
 
+  scope :forwarding_capable, -> { where(mobile_phone_validated: true) }
+
   def setup?
     self.organization.present?
   end
@@ -23,5 +25,9 @@ class User < ApplicationRecord
 
   def inactive_message
     !deleted_at ? super : :deleted_account
+  end
+
+  def forward_to_dropdown_name
+    "#{self.first_name} - #{self.mobile_phone}"
   end
 end

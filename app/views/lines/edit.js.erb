@@ -1,0 +1,10 @@
+// Render the form
+$('.modal-body').html('<%= j render "lines/form" %>');
+
+// Show the dynamic dialog
+$('#line_dialog').modal("show");
+
+// Set focus to the first element
+$('#line_dialog').on('shown.bs.modal', function () {$('#InputName').focus()})
+
+$("#lines").smart_listing().fadeLoaded();

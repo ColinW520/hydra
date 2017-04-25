@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  before_filter :find_employee, except: [:index, :new, :create]
+  before_filter :find_employee, except: [:index, :new, :create, :download]
 
   def index
     employees_scope = Employee.accessible_by(current_ability).includes(:tags)
@@ -9,7 +9,17 @@ class EmployeesController < ApplicationController
     employees_scope = employees_scope.title_like(params[:title]) if params[:title].present?
     employees_scope = employees_scope.tagged_with(params[:tags]) if params[:tags].present?
 
-    smart_listing_create :employees, employees_scope, partial: 'employees/listing', default_sort: { first_name: :asc }, page_sizes: [50, 100, 150, 200]
+    respond_to do |format|
+      format.html { smart_listing_create :employees, employees_scope, partial: 'employees/listing', default_sort: { first_name: :asc }, page_sizes: [25, 50, 100, 150, 200] }
+      format.js { smart_listing_create :employees, employees_scope, partial: 'employees/listing', default_sort: { first_name: :asc }, page_sizes: [25, 50, 100, 150, 200] }
+      # format.csv { employees_scope.to_csv, filename: "employees_as_of-#{Time.now}.csv" }
+    end
+  end
+
+  def download
+    respond_to do |format|
+      format.csv { send_data Employee.where(organization_id: current_user.organization_id).to_csv, filename: "employees_as_of-#{Time.now}.csv" }
+    end
   end
 
   def new
@@ -28,7 +38,7 @@ class EmployeesController < ApplicationController
           redirect_to employees_path
         }
       else
-        format.json { render json: @solution.errors.full_messages, status: :unprocessable_entity }
+        format.json { render json: @employee.errors.full_messages, status: :unprocessable_entity }
       end
 
     end

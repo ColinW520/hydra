@@ -1,4 +1,4 @@
-class Twilio::AuthorizationsController < ApplicationController
+class Twilio::AuthorizationsController
   layout false
 
   def authorize

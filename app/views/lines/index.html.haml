@@ -1,33 +1,14 @@
-%h1 Listing lines
-
-%table
-  %thead
-    %tr
-      %th Organization
-      %th User
-      %th Twilio
-      %th Number
-      %th Name
-      %th Forwarding enabled
-      %th Forwarding number
-      %th
-      %th
-      %th
-
-  %tbody
-    - @lines.each do |line|
-      %tr
-        %td= line.organization
-        %td= line.user
-        %td= line.twilio_id
-        %td= line.number
-        %td= line.name
-        %td= line.forwarding_enabled
-        %td= line.forwarding_number
-        %td= link_to 'Show', line
-        %td= link_to 'Edit', edit_line_path(line)
-        %td= link_to 'Destroy', line, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+- provide(:title, 'Lines')
 %br
-
-= link_to 'New Line', new_line_path
+%br
+.row
+  .col-sm-9
+    %h3
+      %i.fa.fa-hashtag
+      Lines
+      = link_to new_line_path, class: 'btn btn-success btn-sm' do
+        %i.fa.fa-plus
+.row
+  .col-sm-12
+    = smart_listing_render :lines
+= render "lines/dialog"

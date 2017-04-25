@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424183133) do
+ActiveRecord::Schema.define(version: 20170425060725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,8 +67,9 @@ ActiveRecord::Schema.define(version: 20170424183133) do
     t.datetime "started_at"
     t.datetime "ended_at"
     t.datetime "last_messaged_at"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.boolean  "phone_is_valid_for_sms"
     t.index ["organization_id"], name: "index_employees_on_organization_id", using: :btree
   end
 
@@ -103,6 +104,20 @@ ActiveRecord::Schema.define(version: 20170424183133) do
     t.index ["user_id"], name: "index_lines_on_user_id", using: :btree
   end
 
+  create_table "message_recipients", force: :cascade do |t|
+    t.integer  "message_id"
+    t.integer  "employee_id"
+    t.string   "to_number"
+    t.string   "from_number"
+    t.string   "twilio_id"
+    t.datetime "sent_at"
+    t.string   "error_message"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["employee_id"], name: "index_message_recipients_on_employee_id", using: :btree
+    t.index ["message_id"], name: "index_message_recipients_on_message_id", using: :btree
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
@@ -113,6 +128,7 @@ ActiveRecord::Schema.define(version: 20170424183133) do
     t.datetime "updated_at",       null: false
     t.integer  "line_id"
     t.text     "filter_query"
+    t.datetime "send_at"
     t.index ["line_id"], name: "index_messages_on_line_id", using: :btree
     t.index ["organization_id"], name: "index_messages_on_organization_id", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
@@ -124,8 +140,8 @@ ActiveRecord::Schema.define(version: 20170424183133) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "email_domain"
     t.datetime "removed_at"
     t.integer  "removed_by"
@@ -135,6 +151,7 @@ ActiveRecord::Schema.define(version: 20170424183133) do
     t.string   "stripe_token_id"
     t.string   "stripe_customer_id"
     t.string   "twilio_auth_id"
+    t.string   "preferred_area_code"
     t.index ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
   end
 
@@ -215,6 +232,8 @@ ActiveRecord::Schema.define(version: 20170424183133) do
     t.string   "invited_by_type"
     t.datetime "deleted_at"
     t.string   "mobile_phone"
+    t.string   "timezone"
+    t.boolean  "mobile_phone_validated"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
     t.index ["organization_id"], name: "index_users_on_organization_id", using: :btree
@@ -226,6 +245,8 @@ ActiveRecord::Schema.define(version: 20170424183133) do
   add_foreign_key "imports", "organizations"
   add_foreign_key "lines", "organizations"
   add_foreign_key "lines", "users"
+  add_foreign_key "message_recipients", "employees"
+  add_foreign_key "message_recipients", "messages"
   add_foreign_key "messages", "lines"
   add_foreign_key "messages", "organizations"
   add_foreign_key "messages", "users"

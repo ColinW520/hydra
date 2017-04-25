@@ -1,19 +1,11 @@
-%h1 Listing messages
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @messages.each do |message|
-      %tr
-        %td= link_to 'Show', message
-        %td= link_to 'Edit', edit_message_path(message)
-        %td= link_to 'Destroy', message, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+- provide(:title, 'Members')
 %br
-
-= link_to 'New Message', new_message_path
+%br
+.row
+  .col-sm-9
+    %h3
+      %i.fa.fa-clock-o
+      Message History
+.row
+  .col-sm-12
+    = smart_listing_render :messages

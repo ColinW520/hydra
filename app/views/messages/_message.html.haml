@@ -1,0 +1,8 @@
+%tr{id: "message_#{message.id}"}
+  %td= message.id
+  %td= message.body
+  %td= local_time message.created_at, format: "%m/%d/%Y"
+  %td.actions
+    .btn-group
+      = link_to message_path(message), class: 'btn btn-sm btn-default' do
+        %i.fa.fa-users

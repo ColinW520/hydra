@@ -8,5 +8,7 @@
     = f.input :admin_role
   .form-group
     = f.input :supervisor_role
+  .form-group
+    = f.input :timezone, priority: /US/, as: :time_zone
   .form-actions.col-centered
     = f.button :submit, class: 'btn btn-md btn-success'

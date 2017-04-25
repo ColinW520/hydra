@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  message: one
+  employee: one
+  to_number: MyString
+  from_number: MyString
+  twilio_id: MyString
+  sent_at: 2017-04-25 01:07:25
+  error_message: MyString
+
+two:
+  message: two
+  employee: two
+  to_number: MyString
+  from_number: MyString
+  twilio_id: MyString
+  sent_at: 2017-04-25 01:07:25
+  error_message: MyString

@@ -4,7 +4,13 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    messages_scope = Message.includes(:organization, :message_recipients)
+
+    respond_to do |format|
+      format.html { smart_listing_create :messages, messages_scope, partial: 'messages/listing', default_sort: { created_at: :desc }, page_sizes: [25, 50, 100, 150, 200] }
+      format.js { smart_listing_create :messages, messages_scope, partial: 'messages/listing', default_sort: { created_at: :desc }, page_sizes: [25, 50, 100, 150, 200] }
+      # format.csv { messages_scope.to_csv, filename: "messages_as_of-#{Time.now}.csv" }
+    end
   end
 
   # GET /messages/1
@@ -14,9 +20,10 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
+    @expected_count = params[:count]
     query = params[:query] if params[:query].present?
     query = {id: params[:employee_ids]} if params[:employee_ids].present?
-    @message = Message.new(organization_id: current_user.organization_id, user_id: current_user.id)
+    @message = Message.new(organization_id: current_user.organization_id, user_id: current_user.id, filter_query: query)
   end
 
   # GET /messages/1/edit
@@ -26,16 +33,20 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    @message = Message.create(employee_params)
 
     respond_to do |format|
-      if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render :show, status: :created, location: @message }
+      if @employee.save
+        format.json { head :no_content }
+        format.js { flash[:success] = 'Message has been queued for sending! It will go out ASAP.' }
+        format.html {
+          flash[:success] = 'Message has been created.'
+          redirect_to messages_path
+        }
       else
-        format.html { render :new }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
+        format.json { render json: @message.errors.full_messages, status: :unprocessable_entity }
       end
+
     end
   end
 
@@ -44,11 +55,14 @@ class MessagesController < ApplicationController
   def update
     respond_to do |format|
       if @message.update(message_params)
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
-        format.json { render :show, status: :ok, location: @message }
+        format.html {
+          flash[:sucess] = 'Message has been updated!'
+          redirect_to messages_path
+        }
+        format.json { head :no_content }
+        format.js { flash[:success] = 'Message has been updated.' }
       else
-        format.html { render :edit }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
+        format.json { render json: @message.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -71,6 +85,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.fetch(:message, {})
+      params.require(:message).permit!
     end
 end

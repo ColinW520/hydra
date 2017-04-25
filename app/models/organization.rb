@@ -10,6 +10,8 @@ class Organization < ApplicationRecord
   has_many :imports
   has_one :primary_billing_method, ->(organization) { where(stripe_token_id: organization.stripe_token_id) }, class_name: 'BillingMethod'
   has_one :subscription
+  has_many :messages
+  has_many :lines
 
   validates :stripe_customer_id, presence: true
 

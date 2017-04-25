@@ -4,7 +4,7 @@
   %td= employee.last_name.titleize
   %td= employee.title
   %td= number_to_phone employee.mobile_phone
-  %td= employee.email
+  %td= mail_to employee.email
   %td= local_time employee.created_at, format: "%m/%d/%Y"
   %td
     - employee.tags.pluck(:name).each do |tag|
@@ -12,11 +12,11 @@
 
   %td.actions
     .btn-group
-      = link_to edit_employee_path(employee), remote: true, class: 'btn btn-sm btn-default' do
-        %i.fa.fa-send-o.text-success
-      = link_to employee_path(employee), class: 'btn btn-sm btn-info' do
+      = link_to new_message_path(employee_ids: [employee.id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+        %i.fa.fa-send-o
+      = link_to employee_path(employee), class: 'btn btn-sm btn-info', title: "See this members' Messaging History", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-eye
-      = link_to edit_employee_path(employee), remote: true, class: 'btn btn-sm btn-warning' do
+      = link_to edit_employee_path(employee), remote: true, class: 'btn btn-sm btn-warning', title: "Edit this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-pencil
 
 / ['First Name', 'Last Name', 'Title', 'Mobile', 'City', 'State', 'Zip', 'Added']

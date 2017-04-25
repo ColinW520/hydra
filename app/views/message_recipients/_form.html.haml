@@ -1,0 +1,14 @@
+= simple_form_for(@message_recipient) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :message
+    = f.association :employee
+    = f.input :to_number
+    = f.input :from_number
+    = f.input :twilio_id
+    = f.input :sent_at
+    = f.input :error_message
+
+  .form-actions
+    = f.button :submit

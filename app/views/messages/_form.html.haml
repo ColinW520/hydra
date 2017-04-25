@@ -1,7 +1,14 @@
-= simple_form_for(@message) do |f|
-  = f.error_notification
-
-  .form-inputs
-
+%p.lead= "You're about to send a message to #{@expected_count} employees."
+= simple_form_for [@message], remote: true, authenticity_token: true, html: { id: 'MessageForm' } do |f|
+  .form-group
+    = f.input :body, label: 'Message Text', required: true, id: 'InputBody'
+  .form-group
+    = f.input :line_id, label: 'From Line', as: :select, collection: current_user.organization.lines, label_method: :dropdown_name, value_method: :id, include_blank: false
+  .form-group
+    = f.input :send_at, label: 'Send At', as: :datetime
   .form-actions
-    = f.button :submit
+    .text-center
+      = f.input :send_at, as: :hidden, value: Time.now
+      = f.button :submit, 'Send Message', class: 'btn btn-md btn-success'
+      %br
+      %small.text-danger By clicking this button, you are accepting any applicable charges from Twilio.

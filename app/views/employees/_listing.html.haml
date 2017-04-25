@@ -1,29 +1,4 @@
-.row
-  .col-sm-12
-    .card.card-outline-primary
-      = smart_listing_controls_for(:employees, { class: 'form-control' }) do
-        .row
-          .col-sm-12.col-md-4
-            .form-group.has-feedback.filter.input-append
-              %label.control-label{for: 'inputQuery'} Name Like ?
-              = text_field_tag :name, params[:name], class: "search form-control"
-          .col-sm-12.col-md-4
-            .form-group.has-feedback.filter.input-append
-              %label.control-label{for: 'inputQuery'} Title Like ?
-              = text_field_tag :title, params[:title], class: "search form-control"
-          .col-sm-12.col-md-4
-            .form-group.has-feedback.filter.input-append
-              %label.control-label{for: 'inputQuery'} Tagged With ?
-              = text_field_tag :tags, params[:tags], class: "search form-control"
-        .row
-          .col-sm-12.col-md-6
-            .small= "Matches: #{smart_listing.count}"
-          .col-sm-12.col-md-6
-            .pull-right
-              = button_tag type: "submit", class: "btn btn-sm btn-outline-info", title: "Update filter results.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
-                %i.fa.fa-filter
-              = link_to '#', class: 'btn btn-outline-primary btn-sm', title: "Download these #{smart_listing.count} members matching these filters to a CSV.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
-                %i.fa.fa-download
+= render partial: 'filter_fields', locals: { smart_listing: smart_listing }
 %br
 .row
   .col-sm-12
@@ -33,25 +8,27 @@
           %table.table.table-hover
             %thead.thead-inverse
               %th
-                = link_to new_message_path(query: {name: params[:name], title: params[:title], tags: params[:tags]}), class: 'btn btn-success btn-sm', title: "Message all #{smart_listing.count} members matching these filters.", 'data-toggle' => 'tooltip', 'data-placement' => 'top' do
+                = link_to new_message_path(count: smart_listing.count, query: {name: params[:name],title: params[:title],tags: params[:tags]}), remote: true, class: 'btn btn-success btn-sm', title: "Message all #{smart_listing.count} members matching these filters.", 'data-toggle' => 'tooltip', 'data-placement' => 'top' do
                   %i.fa.fa-send
-              %th= smart_listing.sortable 'First', :first_name
-              %th= smart_listing.sortable 'Last', :last_name
-              %th= smart_listing.sortable 'Title', :title
-              %th= smart_listing.sortable 'Mobile', :mobile_phone
-              %th= smart_listing.sortable 'Email', :email
-              %th= smart_listing.sortable 'Added', :created_at
+              %th.sortable= smart_listing.sortable 'Name', :first_name
+              %th.sortable= smart_listing.sortable 'Last', :last_name
+              %th.sortable= smart_listing.sortable 'Title', :title
+              %th.sortable= smart_listing.sortable 'Mobile', :mobile_phone
+              %th.sortable= smart_listing.sortable 'Email', :email
+              %th.sortable= smart_listing.sortable 'Added', :created_at
               %th Tags
               %th
             %tbody#employees
               - smart_listing.collection.each do |employee|
                 = render employee
-          %br
-          .text-center
-            = button_tag type: "submit", class: "btn btn-sm btn-outline-success" do
-              %i.fa.fa-send
-              Message Selected Members
-          %br
+
+          - unless smart_listing.count.zero?
+            %br
+            .text-center
+              = button_tag type: "submit", class: "btn btn-sm btn-outline-success" do
+                %i.fa.fa-send
+                Message Selected Members
+            %br
 %br
 .row
   .col-sm-12

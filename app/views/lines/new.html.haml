@@ -1,5 +1,11 @@
-%h1 New line
-
-= render 'form'
-
-= link_to 'Back', lines_path
+%br
+%br
+.row
+  .col-sm-12
+    .text-center
+      %h1 Buy A Line
+      %p.lead.text-danger This will initiate a purchase of a new Twilio Number you select. You can then use that number to send & receive messages.
+.row
+  .col-sm-12.col-md-6.col-centered
+    .card.card-outline-primary
+      = render 'form'

@@ -1,74 +1,74 @@
 class LinesController < ApplicationController
-  before_action :set_line, only: [:show, :edit, :update, :destroy]
+  before_filter :find_line, except: [:index, :new, :create, :download]
 
-  # GET /lines
-  # GET /lines.json
   def index
-    @lines = Line.all
+    lines_scope = Line.where(organization_id: current_user.organization_id).includes(:organization)
+    smart_listing_create :lines, lines_scope, partial: 'lines/listing', default_sort: { name: :asc }, page_sizes: [10, 20, 30]
   end
 
-  # GET /lines/1
-  # GET /lines/1.json
-  def show
-  end
-
-  # GET /lines/new
   def new
-    @line = Line.new
+    twilio_client = Twilio::REST::Client.new(current_user.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+    @numbers = twilio_client.available_phone_numbers.get("US").local.list(area_code: current_user.organization.preferred_area_code, capabilities: { voice: true, sms: true })
+    @line = Line.new(organization_id: current_user.organization_id)
   end
 
-  # GET /lines/1/edit
-  def edit
-  end
-
-  # POST /lines
-  # POST /lines.json
   def create
-    @line = Line.new(line_params)
+    @line = Line.create(line_params)
 
     respond_to do |format|
       if @line.save
-        format.html { redirect_to @line, notice: 'Line was successfully created.' }
-        format.json { render :show, status: :created, location: @line }
+        format.json { head :no_content }
+        format.js { flash[:success] = 'Line has been created.' }
+        format.html {
+          flash[:success] = 'Line has been created.'
+          redirect_to lines_path
+        }
       else
-        format.html { render :new }
-        format.json { render json: @line.errors, status: :unprocessable_entity }
+        format.json { render json: @line.errors.full_messages, status: :unprocessable_entity }
       end
+
     end
   end
 
-  # PATCH/PUT /lines/1
-  # PATCH/PUT /lines/1.json
+  def show
+
+  end
+
+  def edit
+
+  end
+
   def update
     respond_to do |format|
       if @line.update(line_params)
-        format.html { redirect_to @line, notice: 'Line was successfully updated.' }
-        format.json { render :show, status: :ok, location: @line }
+        format.html {
+          flash[:sucess] = 'Line has been updated!'
+          redirect_to lines_path
+        }
+        format.json { head :no_content }
+        format.js { flash[:success] = 'Line has been updated.' }
       else
-        format.html { render :edit }
-        format.json { render json: @line.errors, status: :unprocessable_entity }
+        format.json { render json: @line.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /lines/1
-  # DELETE /lines/1.json
-  def destroy
-    @line.destroy
+  def release
+    @line.release!(current_user.id)
     respond_to do |format|
-      format.html { redirect_to lines_url, notice: 'Line was successfully destroyed.' }
+      format.js { flash[:success] = 'Line released. It will remain in this list for historical purposes.' }
+      format.html { redirect_to lines_path, success: 'Line released. It will remain in this list for historical purposes.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_line
-      @line = Line.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def line_params
-      params.require(:line).permit(:organization_id, :user_id, :twilio_id, :number, :name, :forwarding_enabled, :forwarding_number)
-    end
+  def find_line
+    @line = Line.find(params[:id])
+  end
+
+  def line_params
+    params.require(:line).permit!
+  end
 end

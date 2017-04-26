@@ -1,6 +1,7 @@
 = simple_form_for [@employee], remote: true, authenticity_token: true, html: { id: 'EmployeeForm' } do |f|
+  %ul#errors
   .form-group
-    = f.input :first_name, id: 'InputFirstName', required: true
+    = f.input :first_name, autofocus: true, required: true
   .form-group
     = f.input :last_name
   .form-group

@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.html { smart_listing_create :messages, messages_scope, partial: 'messages/listing', default_sort: { created_at: :desc }, page_sizes: [25, 50, 100, 150, 200] }
       format.js { smart_listing_create :messages, messages_scope, partial: 'messages/listing', default_sort: { created_at: :desc }, page_sizes: [25, 50, 100, 150, 200] }
-      # format.csv { messages_scope.to_csv, filename: "messages_as_of-#{Time.now}.csv" }
+      #format.csv { messages_scope.to_csv, filename: "messages_as_of-#{Time.now}.csv" }
     end
   end
 
@@ -51,8 +51,8 @@ class MessagesController < ApplicationController
           flash[:success] = 'There were some errors with your message...'
           redirect_to messages_path
         }
-        format.json { render json: @message.errors.full_messages, status: :unprocessable_entity }
-        format.js { render json: @message.errors.full_messages, status: :unprocessable_entity }
+        format.json { render json: { error_messages:  @message.errors.full_messages }, status: :unprocessable_entity }
+        format.js { render json: { error_messages:  @message.errors.full_messages }, status: :unprocessable_entity }
       end
 
     end

@@ -11,7 +11,7 @@
             = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f|
               = devise_error_messages!
               = f.hidden_field :organization_id, value: current_user.organization_id
-              = f.input :first_name
+              = f.input :first_name, autofocus: true
               = f.input :last_name
               = f.input :email, as: :email
               = f.input :mobile_phone

@@ -23,7 +23,7 @@
       .error_explanation.text-danger
       .form-group
         %label{:for => "exampleInputFile"} Select Your CSV
-        = f.input :datafile, as: :file, class: 'form-control-file', id: 'exampleInputFile', required: true
+        = f.input :datafile, as: :file, class: 'form-control-file', id: 'exampleInputFile', required: true, autofocus: true
         %small#fileHelp.form-text.text-muted This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.
       .form-actions
         .text-center

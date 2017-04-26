@@ -1,7 +1,7 @@
 = simple_form_for [@organization], authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
   = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
   .form-group
-    = f.input :name, id: 'InputName'
+    = f.input :name, autofocus: true
   .form-group
     = f.input :email_domain, as: :email
   .form-group

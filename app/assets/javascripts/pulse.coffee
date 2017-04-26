@@ -7,12 +7,7 @@ $ ->
     e.preventDefault()
     $('#wrapper').toggleClass 'toggled'
 
-  $('a[disabled=disabled]').click (event) ->
-    event.preventDefault()
-
-
-$(document).on 'ajax:error', 'form', (e, data, xhr) ->
-  console.log data.responseText
-  errors = data.responseText
+$(document).on 'ajax:error', 'form', (evt, xhr, status) ->
+  errors = jQuery.parseJSON(xhr.responseText)
   for message of errors
-    $('ul#errors').append '<li>' + errors[message] + '</li>'
+    $('ul#errors').after '''<p style="padding-bottom: 10px; text-decoration: none;" class="text-danger"><i class="fa fa-exclamation-triangle text-danger" style="padding-right: 5px;"></i>''' + errors[message] + '</p><br />'

@@ -30,11 +30,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'chartkick'
 gem 'smart_listing', github: 'ColinW520/smart_listing'
 gem 'gon'
-gem 'simple_form'
 gem 'local_time'
 gem 'wysiwyg-rails'
 gem 'unobtrusive_flash', '>=3'
-
+gem 'simple_form'
 
 # Database Stuff
 gem 'pg', '~> 0.18'

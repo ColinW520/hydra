@@ -3,7 +3,7 @@
     = simple_form_for [@line], authenticity_token: true, html: { id: 'LineForm', class: 'form-control' } do |f|
       %legend Number Settings
       .form-group
-        = f.input :name, label: 'Reference Name', id: 'InputName', required: true, placeholder: 'What do you want to call this line?'
+        = f.input :name, label: 'Reference Name', id: 'InputName', required: true, placeholder: 'What do you want to call this line?', autofocus: true
       .form-group
         - if @line.persisted?
           %br

@@ -8,7 +8,7 @@
           %table.table.table-hover
             %thead.thead-inverse
               %th
-                = link_to new_message_path(count: smart_listing.count, query: {name: params[:name],title: params[:title],tags: params[:tags]}), remote: true, class: 'btn btn-success btn-sm', title: "Message all #{smart_listing.count} members matching these filters.", 'data-toggle' => 'tooltip', 'data-placement' => 'top' do
+                = link_to new_message_path(count: smart_listing.count, query: {name: params[:name],title: params[:title],tags: params[:tags]}), id: 'NewMessageButton', remote: true, class: 'btn btn-success btn-sm', title: "Message all #{smart_listing.count} members matching these filters.", 'data-toggle' => 'tooltip', 'data-placement' => 'top' do
                   %i.fa.fa-send
               %th.sortable= smart_listing.sortable 'Name', :first_name
               %th.sortable= smart_listing.sortable 'Last', :last_name

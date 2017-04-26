@@ -1,6 +1,6 @@
 = simple_form_for [@user], remote: true, authenticity_token: true, html: { id: 'UsersForm' } do |f|
   .form-group
-    = f.input :first_name, id: 'InputFirstName'
+    = f.input :first_name, autofocus: true
   .form-group
     = f.input :last_name
   %p Limited to Super Admins

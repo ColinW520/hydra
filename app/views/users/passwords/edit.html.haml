@@ -15,7 +15,7 @@
               = f.full_error :reset_password_token
               .form-inputs
                 .form-group
-                  = f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+                  = f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), autofocus: true
                 .form-group
                   = f.input :password_confirmation, label: "Confirm your new password", required: true
               .form-actions

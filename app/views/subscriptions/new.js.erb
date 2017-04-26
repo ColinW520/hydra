@@ -3,6 +3,3 @@ $('.modal-body').html('<%= j render("subscriptions/form") %>');
 
 // Show the dynamic dialog
 $('#subscription_dialog').modal("show");
-
-// Set focus to the first element
-$('#billing_method_dialog').on('shown.bs.modal', function () {$('#subscription_coupon_code').focus()})

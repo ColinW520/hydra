@@ -20,7 +20,9 @@
 .row
   .col-sm-12
     = simple_form_for [@import], authenticity_token: true, :html => { id: 'ImportForm' } do |f|
-      .error_explanation.text-danger
+      #error_holder
+        %ul#errors
+      = f.error_notification
       .form-group
         %label{:for => "exampleInputFile"} Select Your CSV
         = f.input :datafile, as: :file, class: 'form-control-file', id: 'exampleInputFile', required: true, autofocus: true

@@ -1,4 +1,7 @@
 = simple_form_for [@organization], authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
   = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
   .form-group
     = f.input :name, autofocus: true

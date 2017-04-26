@@ -1,6 +1,8 @@
 %p.lead= "You're about to send a message to #{@expected_count} employees."
 = simple_form_for [@message], remote: true, authenticity_token: true, html: { id: 'MessageForm' } do |f|
-  %ul#errors
+  #error_holder
+    %ul#errors
+  = f.error_notification
   .form-group
     = f.input :body, label: 'Message Text', required: true, autofocus: true, input_html: { maxlength: 140 }, required: true
   .form-group

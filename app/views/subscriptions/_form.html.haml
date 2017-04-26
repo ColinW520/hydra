@@ -6,6 +6,9 @@
 
 %br
 = simple_form_for [@organization, @subscription], authenticity_token: true, html: { id: 'SubscriptionForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
   = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
   = f.input :stripe_customer_id, as: :hidden, input_html: { value: @organization.stripe_customer_id }
   = f.input :organization_id, as: :hidden, input_html: { value: @organization.id }

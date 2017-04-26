@@ -4,7 +4,7 @@
   .col-sm-12
     .card.card-outline-primary.table-card
       .table-responsive
-        = form_tag new_message_path, method: :get do
+        = form_tag new_message_path, remote: true, method: :get do
           %table.table.table-hover
             %thead.thead-inverse
               %th

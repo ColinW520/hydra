@@ -5,6 +5,5 @@ class Message < ApplicationRecord
   has_many :message_recipients
   serialize :filter_query
 
-
   validates :body, presence: true, length: { minimum: 2, maximum: 140 }
 end

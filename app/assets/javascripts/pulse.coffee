@@ -9,3 +9,10 @@ $ ->
 
   $('a[disabled=disabled]').click (event) ->
     event.preventDefault()
+
+
+$(document).on 'ajax:error', 'form', (e, data, xhr) ->
+  console.log data.responseText
+  errors = data.responseText
+  for message of errors
+    $('ul#errors').append '<li>' + errors[message] + '</li>'

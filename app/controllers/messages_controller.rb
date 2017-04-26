@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @expected_count = params[:count]
+    @expected_count = params[:count] ||= params[:employee_ids].count
     query = params[:query] if params[:query].present?
     query = {id: params[:employee_ids]} if params[:employee_ids].present?
     @message = Message.new(organization_id: current_user.organization_id, user_id: current_user.id, filter_query: query)
@@ -33,18 +33,26 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.create(employee_params)
+    @message = Message.create(message_params)
 
     respond_to do |format|
-      if @employee.save
+      if @message.save
         format.json { head :no_content }
-        format.js { flash[:success] = 'Message has been queued for sending! It will go out ASAP.' }
+        format.js {
+          flash[:success] = 'Message has been queued for sending! It will go out ASAP.'
+          redirect_to messages_path
+        }
         format.html {
           flash[:success] = 'Message has been created.'
           redirect_to messages_path
         }
       else
+        format.html {
+          flash[:success] = 'There were some errors with your message...'
+          redirect_to messages_path
+        }
         format.json { render json: @message.errors.full_messages, status: :unprocessable_entity }
+        format.js { render json: @message.errors.full_messages, status: :unprocessable_entity }
       end
 
     end

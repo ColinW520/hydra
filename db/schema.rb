@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425060725) do
+ActiveRecord::Schema.define(version: 20170425200248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,20 @@ ActiveRecord::Schema.define(version: 20170425060725) do
     t.index ["organization_id"], name: "index_imports_on_organization_id", using: :btree
   end
 
+  create_table "inbound_messages", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.integer  "line_id"
+    t.string   "to"
+    t.string   "from"
+    t.text     "body"
+    t.string   "twilio_message_sid"
+    t.integer  "inbound_message_media_count"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["line_id"], name: "index_inbound_messages_on_line_id", using: :btree
+    t.index ["organization_id"], name: "index_inbound_messages_on_organization_id", using: :btree
+  end
+
   create_table "lines", force: :cascade do |t|
     t.integer  "organization_id"
     t.integer  "user_id"
@@ -98,8 +112,12 @@ ActiveRecord::Schema.define(version: 20170425060725) do
     t.string   "name"
     t.boolean  "forwarding_enabled"
     t.string   "forwarding_number"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.datetime "released_at"
+    t.string   "released_by"
+    t.integer  "errors_count"
+    t.string   "latest_error_message"
     t.index ["organization_id"], name: "index_lines_on_organization_id", using: :btree
     t.index ["user_id"], name: "index_lines_on_user_id", using: :btree
   end
@@ -243,6 +261,8 @@ ActiveRecord::Schema.define(version: 20170425060725) do
   add_foreign_key "billing_methods", "organizations"
   add_foreign_key "employees", "organizations"
   add_foreign_key "imports", "organizations"
+  add_foreign_key "inbound_messages", "lines"
+  add_foreign_key "inbound_messages", "organizations"
   add_foreign_key "lines", "organizations"
   add_foreign_key "lines", "users"
   add_foreign_key "message_recipients", "employees"

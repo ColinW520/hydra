@@ -34,6 +34,10 @@ gem 'local_time'
 gem 'wysiwyg-rails'
 gem 'unobtrusive_flash', '>=3'
 gem 'simple_form'
+gem 'bootstrap-tagsinput-rails'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
+gem 'select2-rails'
 
 # Database Stuff
 gem 'pg', '~> 0.18'

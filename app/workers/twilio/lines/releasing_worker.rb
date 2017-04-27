@@ -1,4 +1,4 @@
-class Twilio::LineBuyingWorker < Twilio::BaseWorker
+class Twilio::Lines::ReleasingWorker < Twilio::BaseWorker
   include Sidekiq::Worker
 
   def perform(id, user_id)

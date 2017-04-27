@@ -18,6 +18,8 @@
     = f.input :address_state
   .form-group
     = f.input :address_zip
+  .form-group
+    = f.text_field :tag_list, input_html: { value: @employee.tags.pluck(:name).to_s, class: 'tag-list-select' }
   .form-actions
     .text-center
       = f.hidden_field :organization_id, value: @employee.organization_id

@@ -1,7 +1,16 @@
 $ ->
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
+
   UnobtrusiveFlash.flashOptions['timeout'] = 5000
+
+  $('.tag-list-select').each ->
+    $(this).select2
+      theme: "bootstrap",
+      tags: true
+      tokenSeparators: [',']
+      allow_clear: true
+
 
   $('#menu-toggle').click (e) ->
     e.preventDefault()

@@ -20,5 +20,8 @@
 //= require smart_listing
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
+//= require moment
+//= require bootstrap-datetimepicker
+//= require bootstrap-tagsinput
 //= require chartkick
 //= require_tree .

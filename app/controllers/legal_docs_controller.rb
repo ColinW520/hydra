@@ -23,11 +23,15 @@ class LegalDocsController < ApplicationController
   end
 
   def index
-   redirect_to legal_doc_path(LegalDoc.where(type: params[:type], is_default: true).last)
+    smart_listing_create :legal_docs, 
+                        LegalDoc.accessible_by(current_ability), 
+                        partial: "legal_docs/listing", 
+                        default_sort: { created_at: "desc" }
+    
+#    redirect_to legal_doc_path(LegalDoc.where(type: params[:type], is_default: true).last)
   end
   
   def show
-    @legal_doc = LegalDoc.last
   end
 
   private

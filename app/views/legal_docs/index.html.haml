@@ -1,1 +1,7 @@
-%h1 = "Index"
+- unless @xhr
+  - provide(:title, 'Legal Pages Index')
+
+.row
+  .col-sm-12
+    = smart_listing_render :legal_docs
+= render "legal_docs/listing"

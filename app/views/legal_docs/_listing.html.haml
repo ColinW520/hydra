@@ -1,0 +1,20 @@
+- unless smart_listing.empty?
+  .table-responsive.card.card-outline-primary.table-card
+    %table.table.table-hover
+      %thead.thead-inverse
+        %th
+        %th= smart_listing.sortable 'Type', :type
+        %th= smart_listing.sortable 'Content', :content
+        %th= smart_listing.sortable 'Added', :created_at
+        %th
+      %tbody#legal
+        - smart_listing.collection.each do |legal_docs|
+          = render legal
+  = smart_listing.paginate
+  .text-info
+    = smart_listing.pagination_per_page_links
+- else
+  .alert.alert-danger
+    %p
+      No Members yet...
+      = link_to 'add some!', new_employee_path, remote: true, class: 'text-primary'

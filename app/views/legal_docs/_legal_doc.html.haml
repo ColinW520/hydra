@@ -1,0 +1,6 @@
+%tr{id: "legal_doc_#{legal_doc}"}
+  %td= legal_doc
+  %td= local_time_ago legal_doc.created_at
+  %td.actions
+    = link_to legal_doc_path(legal_doc), remote: true, method: :delete, class: 'btn btn-sm btn-danger' do
+      %i.fa.fa-trash

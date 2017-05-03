@@ -21,6 +21,7 @@ class Imports::ImportEmployeeRowWorker
     employee.address_zip = row[:zip]
     employee.started_at = Date.strptime row[:started_at], '%m/%d/%Y'
     employee.birthday = Date.strptime row[:birthday], '%m/%d/%Y'
+    employee.active = row[:is_active]
 
     employee.save!
 

@@ -23,6 +23,10 @@ class Employee < ApplicationRecord
     where('title ILIKE ?', "%#{term}%")
   }
 
+  def tag_list_for_form
+    self.tags.pluck(:name).join(', ')
+  end
+
   def self.to_csv
     attributes = self.column_names
     attributes << 'tags'

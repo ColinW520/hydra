@@ -27,10 +27,12 @@ class EmployeesController < ApplicationController
   end
 
   def create
-    @employee = Employee.create(employee_params)
+    @tags = params[:employee][:tag_list_for_form]
+    @employee = Employee.create(employee_params.except(:tag_list_for_form))
 
     respond_to do |format|
       if @employee.save
+        current_user.organization.tag(@employee, with: @tags, on: :tags) if @tags.present?
         format.json { head :no_content }
         format.js { flash[:success] = 'Employee has been created.' }
         format.html {
@@ -53,8 +55,11 @@ class EmployeesController < ApplicationController
   end
 
   def update
+    @tags = params[:employee][:tag_list_for_form]
+    current_user.organization.tag(@employee, with: @tags, on: :tags) if @tags.present?
+
     respond_to do |format|
-      if @employee.update(employee_params)
+      if @employee.update(employee_params.except(:tag_list_for_form))
         format.html {
           flash[:sucess] = 'Employee has been updated!'
           redirect_to employees_path

@@ -15,6 +15,14 @@
   -moz-transform: translateY(-35px) rotate(45deg) scale(0.2);
 }
 
+.radio label, .radio-inline label, .checkbox label, .checkbox-inline label {
+  padding-left: 0px;
+}
+
+.radio input[type="radio"], .radio input[type="checkbox"], .radio-inline input[type="radio"], .radio-inline input[type="checkbox"], .checkbox input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="radio"], .checkbox-inline input[type="checkbox"] {
+  margin-left: 0px;
+}
+
 #main {
   min-height: 100vh;
 }

@@ -1,6 +1,4 @@
-%br
-%br
-.row
+.row{style: 'padding-top: 15vh;'}
   .col-sm-12
     .jumbotron
       .row
@@ -8,18 +6,11 @@
           .text-center
             %h1.display-1 Purple Hippo
             %br
-            %p.lead BYO Twilio Employee Texting Service
-            %p Purple Hippo makes it easy to send text messages to your team members at a predictable price. Simply connect your existing Twilio account, use us for the rest.
+            %p.lead
+              BYO
+              %a{href: 'https://twilio.com/'}
+                Twilio®
+              Texting Service
+            %p Purple Hippo makes it easy to send text messages to anyone you'd like at a simple, predictable price.
             %br
             %a.btn.btn-success.btn-lg{:href => new_user_registration_path} Sign Up
-%br
-%br
-.row
-  .col-sm-12
-    .text-center
-      %h2.display-3 Pricing
-      %p.lead One simple price.
-      %br
-      %h1 $100/mo
-      %ul
-        %li It's your Twilio account, so you get to keep it no matter what!

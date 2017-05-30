@@ -15,5 +15,6 @@
                 .form-group
                   = f.input :email, required: true, autofocus: true
               .form-actions
-                = f.button :submit, "Reset Me", class: 'btn btn-success pull-right'
-            = render "users/shared/links"
+                = f.button :submit, "Reset", class: 'btn btn-success btn-block'
+    %br
+    = render "users/shared/links"

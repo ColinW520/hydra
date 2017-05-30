@@ -15,9 +15,9 @@
                 .form-group
                   = f.input :password, required: false
                 .form-group
-                  = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+                  = f.input :remember_me, label: 'Stay In', as: :boolean, class: 'checkbox' if devise_mapping.rememberable?
               .form-actions
-                = f.button :submit, "Log in", class: 'btn btn-success pull-right btn-block'
+                = f.button :submit, "Log in", class: 'btn btn-success btn-block'
 
     %br
     = render "users/shared/links"

@@ -1,0 +1,10 @@
+// Render the form
+$('.modal-body').html('<%= j render "message_requests/form" %>');
+
+// Show the dynamic dialog
+$('#message_request_dialog').modal("show");
+
+// Set focus to the first element
+$('#message_request_dialog').on('shown.bs.modal', function () {$('#InputBody').focus()})
+
+$("#message_requests").smart_listing().fadeLoaded();

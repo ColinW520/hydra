@@ -1,0 +1,11 @@
+- provide(:title, 'Message Requests')
+%br
+%br
+.row
+  .col-sm-9
+    %h3
+      %i.fa.fa-clock-o
+      Message Request History
+.row
+  .col-sm-12
+    = smart_listing_render :message_requests

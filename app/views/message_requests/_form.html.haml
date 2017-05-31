@@ -1,0 +1,18 @@
+%p.lead= "You're about to send a message to #{@expected_count} contacts."
+= simple_form_for [@message_request], remote: true, authenticity_token: true, html: { id: 'MessageRequestForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  .form-group
+    = f.input :body, label: 'Message Text', required: true, autofocus: true, input_html: { maxlength: 140 }, required: true
+  .form-group
+    = f.input :line_id, label: 'From Line', as: :select, collection: current_user.organization.lines, label_method: :dropdown_name, value_method: :id, include_blank: false
+  .form-actions
+    .text-center
+      = f.hidden_field :user_id, value: current_user.id
+      = f.hidden_field :organization_id, value: current_user.organization_id
+      = f.hidden_field :filter_query, value: @query.to_json
+      = f.hidden_field :send_at, value: Time.now
+      = f.button :submit, 'Send Message', class: 'btn btn-md btn-success'
+      %br
+      %small.text-danger By clicking this button, you are accepting any applicable charges from Twilio.

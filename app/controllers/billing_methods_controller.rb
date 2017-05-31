@@ -3,7 +3,7 @@ class BillingMethodsController < ApplicationController
 
   def index
     @organization = Organization.friendly.find params[:organization_id]
-    billing_methods_scope = BillingMethod.accessible_by(current_ability)
+    billing_methods_scope = BillingMethod.includes(:organization)
     billing_methods_scope = billing_methods_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
 
     smart_listing_create :billing_methods,

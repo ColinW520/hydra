@@ -21,14 +21,14 @@ class ImportsController < ApplicationController
       if @import.save
         format.html {
           flash[:success] = 'Import enqueued for processing. We will let you know when its done.'
-          redirect_to employees_path
+          redirect_to contacts_path
         }
         format.json { head :no_content }
         format.js
       else
         format.html {
           flash[:danger] = "There were some problems with your import: #{@import.errors.full_messages}"
-          redirect_to employees_path
+          redirect_to contacts_path
         }
         format.json { render json: @import.errors.full_messages, status: :unprocessable_entity }
       end

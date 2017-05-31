@@ -8,8 +8,8 @@
           %a{href: dashboard_path}
             %i.fa.fa-dashboard.fa-lg
             Dashboard
-        %li{class: @subnav == 'employees' ? 'active' : nil}
-          %a{href: employees_path}
+        %li{class: @subnav == 'contacts' ? 'active' : nil}
+          %a{href: contacts_path}
             %i.fa.fa-address-book-o.fa-lg
             Directory
         %li{class: @subnav == 'lines' ? 'active' : nil}
@@ -27,7 +27,7 @@
             %span.arrow
         %ul#products.sub-menu{class: @subnav == 'messages' ? '' : 'collapse'}
           %li
-            %a{href: "#"}
+            %a{href: contacts_path(flash_instructions: true)}
               %i.fa.fa-pencil
               Compose
           %li{class: @subnav == 'messages' ? 'active' : nil}

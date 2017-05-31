@@ -17,7 +17,7 @@ class MessageRecipientsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create message_recipient" do
     assert_difference('MessageRecipient.count') do
-      post message_recipients_url, params: { message_recipient: { employee_id: @message_recipient.employee_id, error_message: @message_recipient.error_message, from_number: @message_recipient.from_number, message_id: @message_recipient.message_id, sent_at: @message_recipient.sent_at, to_number: @message_recipient.to_number, twilio_id: @message_recipient.twilio_id } }
+      post message_recipients_url, params: { message_recipient: { contact_id: @message_recipient.contact_id, error_message: @message_recipient.error_message, from_number: @message_recipient.from_number, message_id: @message_recipient.message_id, sent_at: @message_recipient.sent_at, to_number: @message_recipient.to_number, twilio_id: @message_recipient.twilio_id } }
     end
 
     assert_redirected_to message_recipient_url(MessageRecipient.last)
@@ -34,7 +34,7 @@ class MessageRecipientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update message_recipient" do
-    patch message_recipient_url(@message_recipient), params: { message_recipient: { employee_id: @message_recipient.employee_id, error_message: @message_recipient.error_message, from_number: @message_recipient.from_number, message_id: @message_recipient.message_id, sent_at: @message_recipient.sent_at, to_number: @message_recipient.to_number, twilio_id: @message_recipient.twilio_id } }
+    patch message_recipient_url(@message_recipient), params: { message_recipient: { contact_id: @message_recipient.contact_id, error_message: @message_recipient.error_message, from_number: @message_recipient.from_number, message_id: @message_recipient.message_id, sent_at: @message_recipient.sent_at, to_number: @message_recipient.to_number, twilio_id: @message_recipient.twilio_id } }
     assert_redirected_to message_recipient_url(@message_recipient)
   end
 

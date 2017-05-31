@@ -53,7 +53,7 @@ class LinesController < ApplicationController
     end
   end
 
-  def release
+  def destroy
     @line.release!(current_user.id)
     respond_to do |format|
       format.js { flash[:success] = 'Line released. It will remain in this list for historical purposes.' }

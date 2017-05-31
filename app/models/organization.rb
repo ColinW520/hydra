@@ -5,7 +5,7 @@ class Organization < ApplicationRecord
 
   # relationships
   has_many :users
-  has_many :employees
+  has_many :contacts
   has_many :billing_methods
   has_many :imports
   has_one :primary_billing_method, ->(organization) { where(stripe_token_id: organization.stripe_token_id) }, class_name: 'BillingMethod'
@@ -13,11 +13,11 @@ class Organization < ApplicationRecord
   has_many :messages
   has_many :lines
 
-  validates :stripe_customer_id, presence: true
+  validates :name, presence: true
 
   def twilio_account
     client = Twilio::REST::Client.new self.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN']
-    account = client.account
+    return client.try(:account)
   end
 
   def stripe_customer

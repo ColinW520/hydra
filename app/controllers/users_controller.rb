@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :find_user, except: [:index, :new, :create]
 
   def index
-    users_scope = User.accessible_by(current_ability)
+    users_scope = User.includes(:organization)
     users_scope = users_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
     smart_listing_create :users,
                          users_scope,

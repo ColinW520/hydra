@@ -42,7 +42,6 @@ gem 'select2-rails'
 # Database Stuff
 gem 'pg', '~> 0.18'
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
-gem 'cancancan'
 gem 'friendly_id'
 gem 'ahoy_email'
 gem "paperclip", "~> 5.0.0" # stores images & files to AWS

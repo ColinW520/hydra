@@ -1,5 +1,4 @@
 class Twilio::AuthorizationsController
-  layout false
 
   def authorize
     organization = Organization.find params['state']

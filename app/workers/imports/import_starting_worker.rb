@@ -21,8 +21,8 @@ class Imports::ImportStartingWorker
       SmarterCSV.process(f, default_options).each do |chunk|
         # check this first chunk row to make sure it has the requisite keys. don't enqueue row workers if keys aren't present.
         chunk.each do |row|
-          Imports::ImportEmployeeRowWorker.new.perform(row, the_import.id) if Rails.env.development?
-          Imports::ImportEmployeeRowWorker.perform_async(row, the_import.id) if Rails.env.production?
+          Imports::ImportcontactRowWorker.new.perform(row, the_import.id) if Rails.env.development?
+          Imports::ImportcontactRowWorker.perform_async(row, the_import.id) if Rails.env.production?
         end
       end
     end

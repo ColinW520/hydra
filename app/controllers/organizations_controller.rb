@@ -3,7 +3,7 @@ class OrganizationsController < ApplicationController
 
   def index
     smart_listing_create :organizations,
-                         Organization.accessible_by(current_ability),
+                         Organization.includes(:users),
                          partial: "organizations/listing",
                          default_sort: { created_at: "desc" }
   end

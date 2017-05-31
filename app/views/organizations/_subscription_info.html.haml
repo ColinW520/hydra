@@ -6,12 +6,14 @@
         %td
           %strong Status
         %td
-          - if @subscription.status == 'active'
+          - if @subscription.status == 'active' && @subscription.canceled_at.nil?
             .text-success
               = @subscription.status
           - else
-            .text-danger
+            %strong.text-danger
               = @subscription.status
+              - if @subscription.canceled_at.present?
+                for now
       %tr
         %td
           %strong Started
@@ -22,3 +24,16 @@
           %strong Renews
         %td
           = local_time Time.at(@subscription.current_period_end)
+      %tr
+        %td
+          %strong Canceled
+        %td
+          = local_time Time.at(@subscription.canceled_at) if @subscription.canceled_at.present?
+      %tr
+        %td
+          %strong Ends
+        %td
+          = local_time Time.at(@subscription.current_period_end) if @subscription.cancel_at_period_end
+      -# %tr
+      -#   %td{colspan: 2}
+      -#     = @subscription

@@ -1,2 +1,2 @@
 # hydra
-A simple application for texting your employees.
+A simple application for texting your contacts.

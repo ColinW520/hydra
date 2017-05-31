@@ -4,7 +4,7 @@
   %thead
     %tr
       %th Message
-      %th Employee
+      %th contact
       %th To number
       %th From number
       %th Twilio
@@ -18,7 +18,7 @@
     - @message_recipients.each do |message_recipient|
       %tr
         %td= message_recipient.message
-        %td= message_recipient.employee
+        %td= message_recipient.contact
         %td= message_recipient.to_number
         %td= message_recipient.from_number
         %td= message_recipient.twilio_id

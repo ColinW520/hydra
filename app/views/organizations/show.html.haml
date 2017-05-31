@@ -31,8 +31,8 @@
   .col-sm-4
     %h3
       Subscription
-      - if @subscription
-        = link_to organization_subscription_path(@organization), method: :delete, class: 'btn btn-warning btn-sm' do
+      - if @subscription && @subscription.canceled_at.nil?
+        = link_to organization_subscription_path(@organization, @subscription.id), method: :delete, class: 'btn btn-warning btn-sm' do
           %i.fa.fa-ban
       - elsif @subscription.nil? && @card.present?
         = link_to new_organization_subscription_path(@organization), remote: true, class: 'btn btn-warning btn-sm' do

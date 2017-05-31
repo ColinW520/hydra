@@ -15,7 +15,6 @@ class Subscription < ApplicationRecord
 
   def cancel_on_stripe!(user_id)
     sub = Stripe::Subscription.retrieve(self.stripe_id)
-    sub.at_period_end = true
-    sub.save
+    sub.delete(at_period_end: true)
   end
 end

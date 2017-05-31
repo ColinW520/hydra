@@ -3,8 +3,7 @@ class SubscriptionsController < ApplicationController
 
   def index
     @organization = Organization.friendly.find params[:organization_id]
-    subscriptions_scope = Subscription.accessible_by(current_ability)
-    subscriptions_scope = subscriptions_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
+    subscriptions_scope = @organization.subscriptions
 
     smart_listing_create :subscriptions,
                         subscriptions_scope,
@@ -63,7 +62,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    @subscription.cancel_on_stripe!
+    @subscription.cancel_on_stripe!(current_user.id)
     @subscription.update_attributes(canceled_at: Time.now, canceled_by: current_user.id)
     respond_to do |format|
       format.js { flash[:success] = 'Subscription removed.' }
@@ -76,7 +75,7 @@ class SubscriptionsController < ApplicationController
 
   def find_subscription
     @organization = Organization.friendly.find(params[:organization_id]) if params[:organization_id]
-    @subscription = Subscription.find(params[:id]) if params[:id]
+    @subscription = Subscription.find_by_stripe_id(params[:id]) if params[:id]
     gon.subscription_id = @subscription.id if @subscription.present?
     gon.organization_id = @organization.id if @organization.present?
   end

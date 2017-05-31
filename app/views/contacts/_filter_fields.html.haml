@@ -1,0 +1,26 @@
+.row
+  .col-sm-12
+    .card.card-outline-primary
+      = smart_listing_controls_for(:contacts, { class: 'form-control' }) do
+        .row
+          .col-sm-12.col-md-4
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputQuery'} Name Like ?
+              = text_field_tag :name, params[:name], class: "search form-control"
+          .col-sm-12.col-md-4
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputQuery'} Title Like ?
+              = text_field_tag :title, params[:title], class: "search form-control"
+          .col-sm-12.col-md-4
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputQuery'} Tagged With ?
+              = text_field_tag :tags, params[:tags], class: "search form-control"
+        .row
+          .col-sm-12.col-md-6
+            %p= "Matches: #{smart_listing.count}"
+          .col-sm-12.col-md-6
+            .pull-right
+              = button_tag type: "submit", class: "btn btn-sm btn-outline-info", title: "Update filter results.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+                %i.fa.fa-filter
+              = link_to contacts_path(format: :csv), class: 'btn btn-outline-primary btn-sm', title: "Download THESE members to a CSV.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+                %i.fa.fa-download

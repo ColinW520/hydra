@@ -1,0 +1,10 @@
+// Render the form
+$('.modal-body').html('<%= j render "contacts/form" %>');
+
+// Show the dynamic dialog
+$('#contact_dialog').modal("show");
+
+// Set focus to the first element
+$('#contact_dialog').on('shown.bs.modal', function () {$('#InputFirstName').focus()})
+
+$("#contacts").smart_listing().fadeLoaded();

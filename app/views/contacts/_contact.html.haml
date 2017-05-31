@@ -1,0 +1,20 @@
+%tr{id: "contact_#{contact.id}"}
+  %td= check_box_tag "contact_ids[]", contact.id
+  %td= contact.first_name.titleize
+  %td= contact.last_name.titleize
+  %td= contact.title
+  %td= number_to_phone contact.mobile_phone
+  %td= mail_to contact.email
+  %td= local_time contact.created_at, format: "%m/%d/%Y"
+  %td
+    - contact.tags.pluck(:name).each do |tag|
+      %span.badge.badge-primary=tag
+
+  %td.actions
+    .btn-group
+      = link_to new_message_path(contact_ids: [contact.id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+        %i.fa.fa-send-o
+      = link_to contact_path(contact), class: 'btn btn-sm btn-info', title: "See this members' Messaging History", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+        %i.fa.fa-eye
+      = link_to edit_contact_path(contact), remote: true, class: 'btn btn-sm btn-warning', title: "Edit this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+        %i.fa.fa-pencil

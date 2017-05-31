@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531185440) do
+ActiveRecord::Schema.define(version: 20170531220338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,21 +123,7 @@ ActiveRecord::Schema.define(version: 20170531185440) do
     t.index ["user_id"], name: "index_lines_on_user_id", using: :btree
   end
 
-  create_table "message_recipients", force: :cascade do |t|
-    t.integer  "message_id"
-    t.integer  "contact_id"
-    t.string   "to_number"
-    t.string   "from_number"
-    t.string   "twilio_id"
-    t.datetime "sent_at"
-    t.string   "error_message"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["contact_id"], name: "index_message_recipients_on_contact_id", using: :btree
-    t.index ["message_id"], name: "index_message_recipients_on_message_id", using: :btree
-  end
-
-  create_table "messages", force: :cascade do |t|
+  create_table "message_requests", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
     t.string   "body"
@@ -148,9 +134,27 @@ ActiveRecord::Schema.define(version: 20170531185440) do
     t.integer  "line_id"
     t.text     "filter_query"
     t.datetime "send_at"
-    t.index ["line_id"], name: "index_messages_on_line_id", using: :btree
-    t.index ["organization_id"], name: "index_messages_on_organization_id", using: :btree
-    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
+    t.index ["line_id"], name: "index_message_requests_on_line_id", using: :btree
+    t.index ["organization_id"], name: "index_message_requests_on_organization_id", using: :btree
+    t.index ["user_id"], name: "index_message_requests_on_user_id", using: :btree
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "twilio_sid"
+    t.string   "message_request_id"
+    t.string   "line_id"
+    t.string   "status"
+    t.string   "direction"
+    t.datetime "sent_at"
+    t.string   "to"
+    t.string   "from"
+    t.string   "body"
+    t.string   "error_message"
+    t.decimal  "price_in_cents",     precision: 8, scale: 5
+    t.integer  "account_sid"
+    t.string   "organization_id"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -266,11 +270,9 @@ ActiveRecord::Schema.define(version: 20170531185440) do
   add_foreign_key "inbound_messages", "organizations"
   add_foreign_key "lines", "organizations"
   add_foreign_key "lines", "users"
-  add_foreign_key "message_recipients", "contacts", column: "contact_id"
-  add_foreign_key "message_recipients", "messages"
-  add_foreign_key "messages", "lines"
-  add_foreign_key "messages", "organizations"
-  add_foreign_key "messages", "users"
+  add_foreign_key "message_requests", "lines"
+  add_foreign_key "message_requests", "organizations"
+  add_foreign_key "message_requests", "users"
   add_foreign_key "subscriptions", "organizations"
   add_foreign_key "users", "organizations"
 end

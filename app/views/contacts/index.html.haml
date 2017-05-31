@@ -6,12 +6,12 @@
       Directory
       = link_to new_contact_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success', title: "Add individual member.", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
         %i.fa.fa-plus
-      = link_to new_import_path, remote: true, class: 'btn btn-sm btn-primary', title: "Upload Members via CSV", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
+      = link_to new_import_path, remote: true, class: 'btn btn-sm btn-primary', title: "Upload Contacts via CSV", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
         %i.fa.fa-upload
 %br
 .row
   .col-sm-12
     = smart_listing_render :contacts
 = render "contacts/dialog"
-= render "messages/dialog"
+= render "message_requests/dialog"
 = render "imports/dialog"

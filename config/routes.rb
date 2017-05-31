@@ -13,9 +13,9 @@ Rails.application.routes.draw do
       get :list_growth
     end
   end
-  resources :message_recipients
   resources :lines
-  resources :messages, only: [:index, :new, :create, :show]
+  resources :messages, only: [:index, :show]
+  resources :message_requests
   resources :contacts, path: :members
   resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :imports
@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   # Twilio Endpoints
   match '/twilio/authorize' => 'twilio/authorizations#authorize', via: [:get]
   match '/twilio/deauthorize' => 'twilio/authorizations#deauthorize', via: [:get]
+  match '/twilio/callbacks/status' => 'twilio/callbacks#status', via: [:get]
 
   # Admin Space
   namespace :admin do

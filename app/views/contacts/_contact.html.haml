@@ -12,7 +12,7 @@
 
   %td.actions
     .btn-group
-      = link_to new_message_path(contact_ids: [contact.id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+      = link_to new_message_request_path(contact_ids: [contact.id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-send-o
       = link_to contact_path(contact), class: 'btn btn-sm btn-info', title: "See this members' Messaging History", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-eye

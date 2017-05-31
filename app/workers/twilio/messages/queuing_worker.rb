@@ -1,16 +1,16 @@
 class Twilio::Messages::QueuingWorker < Twilio::BaseWorker
-  include Sidekiq::Worker
-  include Sidetiq::Schedulable
-  sidekiq_options queue: :twilio
 
   def perform(message_id)
-    @message = Message.find message_id
-    @message.touch(:processed_at)
-    @recipients = contact.filter_by(JSON.parse(@message.filter_query).pluck(:id))
+    @message_request = MessageRequest.find message_id
+    @message_request.touch(:processed_at)
+    @recipients = Contact.filter_by JSON.parse @message_request.filter_query
+
+    return unless @recipients.present?
+
     if Rails.env.production?
-      @recipients.each do { |recipient| Twilio::Messages::SendingWorker.perform_async(@message.id, recipient)}
+      @recipients.pluck(:id).each { |recipient| Twilio::Messages::SendingWorker.perform_async(@message_request.id, recipient) }
     else
-      @recipients.each do { |recipient| Twilio::Messages::SendingWorker.perform_async(@message.id, recipient)}
+      @recipients.pluck(:id).each { |recipient| Twilio::Messages::SendingWorker.new.perform(@message_request.id, recipient) }
     end
   end
 end

@@ -1,15 +1,31 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: one
-  organization: one
+  twilio_sid: MyString
+  message_request_id: MyString
+  line_id: MyString
+  status: MyString
+  direction: MyString
+  sent_at: 2017-05-31 17:03:38
+  to: MyString
+  from: MyString
   body: MyString
-  recipients_count: 1
-  processed_at: 2017-04-23 21:24:04
+  error_message: MyString
+  price_in_cents: 1
+  account_sid: 1
+  organization_id: MyString
 
 two:
-  user: two
-  organization: two
+  twilio_sid: MyString
+  message_request_id: MyString
+  line_id: MyString
+  status: MyString
+  direction: MyString
+  sent_at: 2017-05-31 17:03:38
+  to: MyString
+  from: MyString
   body: MyString
-  recipients_count: 1
-  processed_at: 2017-04-23 21:24:04
+  error_message: MyString
+  price_in_cents: 1
+  account_sid: 1
+  organization_id: MyString

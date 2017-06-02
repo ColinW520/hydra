@@ -8,5 +8,5 @@
 :limits:
   twilio: 5
   imports: 1
-  default: 1
+  default: 2
   single_file: 1

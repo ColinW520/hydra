@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
   protect_from_forgery with: :exception, prepend: true
-  #load_and_authorize_resource
+
   before_action :authenticate_user!, :set_xhr_flag, :gon_setup, :set_subnav
   after_action :prepare_unobtrusive_flash
   layout -> (controller) { controller.request.xhr? ? false : 'application' }

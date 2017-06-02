@@ -1,4 +1,4 @@
-class Twilio::BaseController
+class Twilio::BaseController < ActionController::Base
   layout false
 
 end

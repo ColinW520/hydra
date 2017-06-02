@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :messages, only: [:index, :show]
   resources :message_requests
   resources :contacts
-  resources :users, only: [:index, :show, :edit, :update, :destroy]
+  # resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :imports
   resources :organizations do
     resources :billing_methods

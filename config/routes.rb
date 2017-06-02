@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   # Static Stuff
   root 'static_pages#home'
   match '/home' => "static_pages#home", via: [:get]
-  match '/contact' => "static_pages#contact", via: [:get]
   match '/terms' => "static_pages#terms", via: [:get]
 
   # The User-facing App
@@ -16,7 +15,7 @@ Rails.application.routes.draw do
   resources :lines
   resources :messages, only: [:index, :show]
   resources :message_requests
-  resources :contacts, path: :members
+  resources :contacts
   resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :imports
   resources :organizations do

@@ -1,30 +1,39 @@
-= simple_form_for [@contact], remote: true, authenticity_token: true, html: { id: 'contactForm' } do |f|
-  #error_holder
-    %ul#errors
-  = f.error_notification
-  -# .form-group
-  -#   = f.input :is_active, as: :boolean, label: 'Active?'
-  .form-group
-    = f.input :first_name, autofocus: true, required: true
-  .form-group
-    = f.input :last_name
-  .form-group
-    = f.input :email
-  .form-group
-    = f.input :mobile_phone, required: true
-  .form-group
-    = f.input :title
-  .form-group
-    = f.input :address_city
-  .form-group
-    = f.input :address_state
-  .form-group
-    = f.input :address_zip
-  .form-group
-    = f.input :tag_list_for_form, hint: 'Separate multiple tags with a comma and a space. IE: Super, Awesome'
-  .form-group
-    = f.input :started_at, label: 'Started On', as: :date
-  .form-actions
-    .text-center
-      = f.hidden_field :organization_id, value: @contact.organization_id
-      = f.button :submit, class: 'btn btn-md btn-success'
+.row
+  .col-sm-12
+    = simple_form_for [@contact], remote: true, authenticity_token: true, html: { id: 'contactForm' } do |f|
+      #error_holder
+        %ul#errors
+      = f.error_notification
+      .row
+        .col-sm-12.col-md-6
+          .form-group
+            = f.input :first_name, autofocus: true, required: true
+          .form-group
+            = f.input :last_name
+          .form-group
+            = f.input :email
+          .form-group
+            = f.input :mobile_phone, required: true
+          .form-group
+            = f.input :title
+        .col-sm-12.col-md-6
+          .form-group
+            = f.input :title
+          .form-group
+            = f.input :address_city
+          .form-group
+            = f.input :address_state
+          .form-group
+            = f.input :address_zip
+          .form-group
+            = f.input :started_at, label: 'Started On', as: :date
+      .row
+        .col-sm-12
+          .form-group
+            = f.input :tag_list_for_form, hint: 'Separate multiple tags with a comma and a space. IE: Super, Awesome'
+          .form-group
+            = f.input :is_active, as: :boolean, label: 'Active?'
+          .form-actions
+            .text-center
+              = f.hidden_field :organization_id, value: @contact.organization_id
+              = f.button :submit, class: 'btn btn-md btn-success'

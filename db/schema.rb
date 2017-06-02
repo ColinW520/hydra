@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531220338) do
+ActiveRecord::Schema.define(version: 20170601194932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,9 @@ ActiveRecord::Schema.define(version: 20170531220338) do
     t.string   "organization_id"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+    t.string   "in_response_to"
+    t.integer  "contact_id"
+    t.index ["contact_id"], name: "index_messages_on_contact_id", using: :btree
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -273,6 +276,7 @@ ActiveRecord::Schema.define(version: 20170531220338) do
   add_foreign_key "message_requests", "lines"
   add_foreign_key "message_requests", "organizations"
   add_foreign_key "message_requests", "users"
+  add_foreign_key "messages", "contacts"
   add_foreign_key "subscriptions", "organizations"
   add_foreign_key "users", "organizations"
 end

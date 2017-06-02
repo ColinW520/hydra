@@ -1,0 +1,24 @@
+= render partial: 'messages/filter_fields', locals: { smart_listing: smart_listing } unless @xhr
+.row
+  .col-sm-12
+    .card.card-outline-primary.table-card
+      .table-responsive.table-condensed
+        %table.table.table-hover
+          %thead.thead-inverse
+            %th= smart_listing.sortable 'Date', :sent_at
+            %th= smart_listing.sortable 'Direction', :direction
+            %th= smart_listing.sortable 'To', :to
+            %th= smart_listing.sortable 'From', :from
+            %th= smart_listing.sortable 'Name', :first_name
+            %th Message
+            %th= smart_listing.sortable 'Cost', :cost
+            %th
+          %tbody#messages
+            - smart_listing.collection.each do |message|
+              = render message
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

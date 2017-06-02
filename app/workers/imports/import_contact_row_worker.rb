@@ -1,4 +1,4 @@
-class Imports::ImportcontactRowWorker
+class Imports::ImportContactRowWorker
   include Sidekiq::Worker
 
   def perform(row, import_id)
@@ -21,12 +21,9 @@ class Imports::ImportcontactRowWorker
     contact.address_zip = row[:zip]
     contact.started_at = Date.strptime row[:started_at], '%m/%d/%Y'
     contact.birthday = Date.strptime row[:birthday], '%m/%d/%Y'
-    contact.active = row[:is_active]
-
+    contact.is_active = row[:is_active]
+    contact.tag_list = row[:tags].split('|').join(', ')
     contact.save!
-
-    tags = row[:tags].split('|').join(', ')
-    the_organization.tag(contact, with: tags, on: :tags)
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
     if (@retry_count += 1) <= 2
       retry

@@ -1,0 +1,18 @@
+.row
+  .col-sm-12
+    .card.card-outline-primary
+      = smart_listing_controls_for(:messages, { class: 'form-control' }) do
+        .row
+          .col-sm-12.col-md-2
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputName'} Name Like ?
+              = text_field_tag :name, params[:name], class: "search form-control"
+          .col-sm-12.col-md-2
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputTerm'} Message Like ?
+              = text_field_tag :term, params[:term], class: "search form-control"
+          .col-sm-12.col-md-2
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputDirection'} Direction
+              = select_tag :direction, options_for_select([['Outbound', 'outbound-api'], ['Inbound', 'inbound-api']]), { include_blank: true, class: 'search form-control', id: 'inputDirection' }
+%br

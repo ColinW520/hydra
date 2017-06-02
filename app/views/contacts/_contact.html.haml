@@ -5,7 +5,7 @@
   %td= contact.title
   %td= number_to_phone contact.mobile_phone
   %td= mail_to contact.email
-  %td= local_time contact.created_at, format: "%m/%d/%Y"
+  %td= local_time contact.last_messaged_at, format: "%m/%d/%Y" rescue ''
   %td
     - contact.tags.pluck(:name).each do |tag|
       %span.badge.badge-primary=tag

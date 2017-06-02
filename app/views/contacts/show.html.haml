@@ -1,1 +1,85 @@
-%h1= @contact.first_name
+- provide(:title, "#{@contact.first_name}")
+.row
+  .col-sm-12
+    %ol.breadcrumb
+      %li.breadcrumb-item
+        = link_to contacts_path do
+          %i.fa.fa-directory
+          Contacts
+      %li.breadcrumb-item.active= "#{@contact.try(:first_name)}'s Profile"
+
+.row
+  .col-sm-12.col-md-6.col-lg-4
+    .row
+      .col-sm-12.col-md-8
+        %h2 Profile
+      .col-sm-12.col-md-4
+        - @contact.tags.pluck(:name).each do |tag|
+          %span.badge.badge-primary=tag
+    .table-responsive.card.card-outline-default.table-card
+      %table.table
+        %thead.thead-inverse
+        %tbody
+          %tr
+            %td
+              %strong First Name
+            %td=@contact.first_name
+          %tr
+            %td
+              %strong Last Name
+            %td=@contact.last_name
+          %tr
+            %td
+              %strong Title
+            %td=@contact.title
+          %tr
+            %td
+              %strong Phone
+            %td
+              = number_to_phone @contact.mobile_phone
+              - if @contact.phone_is_valid_for_sms?
+                %i.fa.fa-check-circle.text-success
+              - else
+                %i.fa.fa-times.text-danger{"data-placement" => "right", "data-toggle" => "tooltip", :title => "We could not validate this phone number for SMS."}
+
+          %tr
+            %td
+              %strong Email
+            %td= mail_to @contact.email
+          %tr
+            %td
+              %strong Started
+            %td= local_time_ago @contact.started_at rescue ''
+          %tr
+            %td
+              %strong Added
+            %td= local_time_ago @contact.created_at
+          %tr
+            %td
+              %strong Updated
+            %td= local_time_ago @contact.updated_at
+          %tr
+            %td
+              %strong Birthday
+            %td= @contact.birthday
+          %tr
+            %td
+              %strong Address
+            %td
+              = @contact.address_line
+              = "#{@contact.address_city}, #{@contact.address_state} #{@contact.address_zip}"
+
+
+  .col-sm-12.col-md-6.col-lg-8
+    %h2 History
+    .card.card-outline-default
+      %div.alert.alert-success{style: 'margin: 15px;'}
+        .text-right
+          Test
+      %div.alert.alert-info{style: 'margin: 15px;'}
+        Test
+
+-# / ["id", "organization_id", "first_name", "last_name", "email", "mobile_phone",
+-# / "title", "preferred_language", "birthday", "address_line", "address_city",
+-# / "address_state", "address_zip", "started_at", "ended_at", "last_messaged_at",
+-# / "created_at", "updated_at", "phone_is_valid_for_sms", "is_active"]

@@ -15,4 +15,8 @@
       = f.hidden_field :send_at, value: Time.now
       = f.button :submit, 'Send Message', class: 'btn btn-md btn-success'
       %br
+      %br
       %small.text-danger By clicking this button, you are accepting any applicable charges from Twilio.
+      %p.lead.text-danger
+        Estimate:
+        = number_to_currency @expected_count.to_f * 0.0075, precision: 4

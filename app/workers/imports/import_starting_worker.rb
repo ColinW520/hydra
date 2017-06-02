@@ -14,8 +14,8 @@ class Imports::ImportStartingWorker
     # this worker expects an import object, then it hands off to the right row processor
     # Do something
     the_import = Import.find import_id
-    return if the_import.is_enqueued?
-    the_import.update_attribute(:is_enqueued, true)
+    # return if the_import.is_enqueued?
+    # the_import.update_attribute(:is_enqueued, true)
 
     open(the_import.datafile.url, 'r:utf-8') do |f|   # don't forget to specify the UTF-8 encoding!!
       SmarterCSV.process(f, default_options).each do |chunk|

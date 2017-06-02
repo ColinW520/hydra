@@ -1,0 +1,16 @@
+%tr{id: "message_#{message.id}"}
+  %td= local_time message.sent_at
+  %td
+    - if message.direction == 'outbound-api'
+      .text-success
+        Out
+        %i.fa.fa-share
+    - else
+      .text-priamry
+        In
+        %i.fa.fa-reply
+  %td= number_to_phone message.to
+  %td= number_to_phone message.from
+  %td= message.contact.first_name
+  %td= message.body
+  %td= number_to_currency message.price_in_cents, precision: 4

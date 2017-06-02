@@ -3,44 +3,27 @@
 .row
   .col-sm-12
     .card.card-outline-primary.table-card
-      .table-responsive
+      .table-responsive.table-condensed
         = form_tag new_message_request_path, remote: true, method: :get do
           %table.table.table-hover
             %thead.thead-inverse
               %th
-                = link_to new_message_request_path(count: smart_listing.count, query: {name: params[:name],title: params[:title],tags: params[:tags]}), id: 'NewMessageButton', remote: true, class: 'btn btn-success btn-sm', title: "Message all #{smart_listing.count} members matching these filters.", 'data-toggle' => 'tooltip', 'data-placement' => 'top' do
-                  %i.fa.fa-send
+                = button_tag type: "submit", class: "btn btn-sm btn-success" do
+                  %i.fa.fa-crosshairs{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This will message only the contacts you select."}
               %th.sortable= smart_listing.sortable 'Name', :first_name
               %th.sortable= smart_listing.sortable 'Last', :last_name
               %th.sortable= smart_listing.sortable 'Title', :title
               %th.sortable= smart_listing.sortable 'Mobile', :mobile_phone
               %th.sortable= smart_listing.sortable 'Email', :email
-              %th.sortable= smart_listing.sortable 'Added', :created_at
+              %th.sortable= smart_listing.sortable 'Messaged', :last_messaged_at
               %th Tags
               %th
             %tbody#contacts
               - smart_listing.collection.each do |contact|
                 = render contact
-
-          - unless smart_listing.count.zero?
-            %br
-            .text-center
-              = button_tag type: "submit", class: "btn btn-sm btn-outline-success" do
-                %i.fa.fa-send
-                Message Selected Members
-            %br
 %br
 .row
   .col-sm-12
     .pull-right
       = smart_listing.paginate
       = smart_listing.pagination_per_page_links
-
-%br
-%br
-%br
-%br
-%br
-%br
-%br
-%br

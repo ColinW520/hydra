@@ -5,11 +5,11 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     @organization = Organization.find @message_request.organization_id
     @line = Line.find @message_request.line_id
     @client = Twilio::REST::Client.new(@organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
-    @recipient = Contact.find contact_id
+    @contact = Contact.find contact_id
 
     # prep it
     recipient_hash = { from: @line.number, body: @message_request.body }
-    recipient_hash[:to] = Rails.env.production? ? @recipient.mobile_phone : "+18056363810"
+    recipient_hash[:to] = Rails.env.production? ? @contact.mobile_phone : "+13162588774"
     recipient_hash[:status_callback] = "https://hydra.aptx.cm/twilio/callbacks/status" if Rails.env.production?
 
     # send it
@@ -33,6 +33,7 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     @local_message.price_in_cents = @message.price.to_f.abs
     @local_message.account_sid = @message.sid
     @local_message.organization_id = @organization.id
+    @local_message.contact_id = @contact.id
     @local_message.save!
   end
 end

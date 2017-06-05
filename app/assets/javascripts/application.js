@@ -22,6 +22,5 @@
 //= require unobtrusive_flash_bootstrap
 //= require moment
 //= require bootstrap-datetimepicker
-//= require bootstrap-tagsinput
 //= require chartkick
 //= require_tree .

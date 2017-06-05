@@ -1,0 +1,19 @@
+.row
+  .col-sm-12
+    .table-responsive.card.card-outline-primary.table-card
+      %table.table.table-hover
+        %thead.thead-inverse
+          %th= smart_listing.sortable "First", :first_name
+          %th= smart_listing.sortable "Last", :last_name
+          %th= smart_listing.sortable "Email", :email
+          %th
+        %tbody#users
+          - smart_listing.collection.each do |user|
+            = render user
+
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

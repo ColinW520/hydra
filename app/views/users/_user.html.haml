@@ -5,9 +5,9 @@
   %td.actions
     .btn-group
       - if current_user.supervisor_role?
-        = link_to edit_user_path(user), class: 'btn btn-sm btn-warning' do
+        = link_to edit_organization_user_path(user.organization, user), class: 'btn btn-sm btn-warning' do
           %i.fa.fa-edit
-      = link_to user_path(user), class: 'btn btn-sm btn-info' do
+      = link_to organization_user_path(user.organization, user), class: 'btn btn-sm btn-info' do
         %i.fa.fa-eye
-      = link_to user_path(user), method: :delete, remote: true, class: 'btn btn-sm btn-danger' do
+      = link_to organization_user_path(user.organization, user), method: :delete, remote: true, class: 'btn btn-sm btn-danger' do
         %i.fa.fa-trash

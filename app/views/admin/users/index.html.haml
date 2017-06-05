@@ -1,0 +1,14 @@
+- unless @xhr
+  - provide(:title, 'Users')
+  .row
+    .col-sm-12
+      %h1
+        %i.fa.fa-street-view
+        Users
+        = link_to new_user_invitation_path, class: 'btn btn-sm btn-success' do
+          %i.fa.fa-plus
+  %br
+.row
+  .col-sm-12
+    = smart_listing_render :users
+= render "users/dialog"

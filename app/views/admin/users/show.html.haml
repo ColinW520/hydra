@@ -1,0 +1,10 @@
+- unless @xhr
+  - provide(:title, "#{@user.email}")
+.row
+  .col-sm-12
+    %ol.breadcrumb
+      %li.breadcrumb-item Users
+      %li.breadcrumb-item= "#{@user.email}"
+      %li.breadcrumb-item.active Profile
+%h1 Show this Users Details
+%p messages sent, other users invited, logins, lines purchased, etc

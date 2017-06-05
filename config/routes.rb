@@ -16,11 +16,11 @@ Rails.application.routes.draw do
   resources :messages, only: [:index, :show]
   resources :message_requests
   resources :contacts
-  # resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :imports
   resources :organizations do
     resources :billing_methods
     resources :subscriptions
+    resources :users
   end
 
   devise_for :users, controllers: {
@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   # Admin Space
   namespace :admin do
+    resources :users
     authenticate :user, -> (user) { user.admin_role? } do
       require 'sidekiq/web'
       mount Sidekiq::Web => '/sidekiq'

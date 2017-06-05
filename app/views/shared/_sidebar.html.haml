@@ -16,10 +16,11 @@
           %a{href: lines_path}
             %i.fa.fa-hashtag.fa-lg
             Lines
-        %li{class: @subnav == 'users' ? 'active' : nil}
-          %a{href: users_path}
-            %i.fa.fa-users
-            Users
+        - if current_user.organization_id.present?
+          %li{class: @subnav == 'users' ? 'active' : nil}
+            %a{href: organization_users_path(current_user.organization)}
+              %i.fa.fa-users
+              Users
         %li.collapsed{class: @subnav == 'messages' ? 'active' : nil, "data-target" => "#products", "data-toggle" => "collapse"}
           %a{href: messages_path}
             %i.fa.fa-envelope.fa-lg
@@ -47,7 +48,7 @@
             %i.fa.fa-gears.fa-lg
             Settings
         %li
-          = link_to user_path(current_user) do
+          = link_to edit_user_registration_path do
             %i.fa.fa-user.fa-lg
             My Profile
         %li

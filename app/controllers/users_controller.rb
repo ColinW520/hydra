@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   before_filter :find_user, except: [:index, :new, :create]
 
   def index
-    users_scope = User.includes(:organization)
-    users_scope = users_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
+    @organization = Organization.find_by_slug params[:organization_id]
+    users_scope = @organization.users
     smart_listing_create :users,
                          users_scope,
                          partial: "users/listing",
@@ -49,11 +49,7 @@ class UsersController < ApplicationController
   private
 
   def find_user
-    if params[:id] == 'sign_out'
-      sign_out_and_redirect(current_user)
-    else
-      @user = User.find(params[:id])
-    end
+    @user = User.find(params[:id])
   end
 
   def user_params

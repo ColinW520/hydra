@@ -1,0 +1,13 @@
+%tr{id: "user_#{user.id}"}
+  %td= user.first_name
+  %td= user.last_name
+  %td= user.email
+  %td.actions
+    .btn-group
+      - if current_user.supervisor_role?
+        = link_to edit_user_path(user, user), class: 'btn btn-sm btn-warning' do
+          %i.fa.fa-edit
+      = link_to user_path(user, user), class: 'btn btn-sm btn-info' do
+        %i.fa.fa-eye
+      = link_to user_path(user, user), method: :delete, remote: true, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash

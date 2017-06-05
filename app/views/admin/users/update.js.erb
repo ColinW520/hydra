@@ -1,0 +1,3 @@
+$('#user_dialog').modal('toggle');
+$('#user_<%= @user.id %>').replaceWith('<%= j render (@user) %>');
+$("#users").smart_listing().fadeLoaded();

@@ -7,16 +7,18 @@ class Twilio::Lines::BuyingWorker < Twilio::BaseWorker
     prepare_objects(@line.organization_id)
 
     # purchase the number from twilio
-    twilio_number = @twilio_client.incoming_phone_numbers.create(phone_number: @line.number)
+    twilio_number = @twilio_client.incoming_phone_numbers.create(
+      friendly_name: @line.name,
+      phone_number: @line.number,
+      sms_url: ,
+      voice_url: ,
+
+    )
 
     # udpate the line
     @line.twilio_id = twilio_number.sid
     @line.save! #save this ASAP.
 
-    # now, update the line with a few things.
-    twilio_number.update(
-      friendly_name: @line.name,
-    )
     puts twilio_number.voice_url
   end
 end

@@ -34,6 +34,12 @@ Rails.application.routes.draw do
   match '/twilio/deauthorize' => 'twilio/authorizations#deauthorize', via: [:get]
   match '/twilio/callbacks/status' => 'twilio/callbacks#status', via: [:get]
 
+  namespace :twilio do
+    resources :messages, only: [:create]
+    resources :voice_calls, only: [:create]
+  end
+
+
   # Admin Space
   namespace :admin do
     resources :users

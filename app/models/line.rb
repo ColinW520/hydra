@@ -15,12 +15,12 @@ class Line < ApplicationRecord
 
   after_create :buy_on_twilio
   def buy_on_twilio
-    Twilio::LineBuyingWorker.new.perform(self.id) if Rails.env.development?
-    Twilio::LineBuyingWorker.perform_async(self.id) if Rails.env.production?
+    Twilio::Lines::BuyingWorker.new.perform(self.id) if Rails.env.development?
+    Twilio::Lines::BuyingWorker.perform_async(self.id) if Rails.env.production?
   end
 
   def release!(user_id)
-    Twilio::LineReleasingWorker.new.perform(self.id, user_id) if Rails.env.development?
-    Twilio::LineReleasingWorker.perform_async(self.id, user_id) if Rails.env.production?
+    Twilio::Lines::ReleasingWorker.new.perform(self.id, user_id) if Rails.env.development?
+    Twilio::Lines::ReleasingWorker.perform_async(self.id, user_id) if Rails.env.production?
   end
 end

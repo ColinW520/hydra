@@ -15,6 +15,8 @@
     = f.input :zip
   .form-group
     = f.input :phone, as: :tel
+  .form-group
+    = f.input :preferred_area_code, as: :integer, placeholder: '210', max: 999
   .form-actions
     .text-center
       = f.button :submit, class: 'btn btn-md btn-success', id: 'submit-button' do

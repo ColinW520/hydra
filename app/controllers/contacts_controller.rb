@@ -2,11 +2,12 @@ class ContactsController < ApplicationController
   before_filter :find_contact, except: [:index, :new, :create, :download]
 
   def index
-    flash[:sucess] = "Please select the individuals you would like to receive your message." if params[:flash_instructions]
     contacts_scope = Contact.filter_by(params)
 
     respond_to do |format|
-      format.html { smart_listing_create :contacts, contacts_scope, partial: 'contacts/listing', default_sort: { first_name: :asc }, page_sizes: [25, 50, 100, 150, 200] }
+      format.html {
+        smart_listing_create :contacts, contacts_scope, partial: 'contacts/listing', default_sort: { first_name: :asc }, page_sizes: [25, 50, 100, 150, 200]
+      }
       format.js { smart_listing_create :contacts, contacts_scope, partial: 'contacts/listing', default_sort: { first_name: :asc }, page_sizes: [25, 50, 100, 150, 200] }
       format.csv { send_data contacts_scope.to_csv, filename: "contacts_as_of-#{Time.now}.csv" }
     end

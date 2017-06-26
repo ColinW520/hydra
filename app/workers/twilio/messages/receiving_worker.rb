@@ -2,7 +2,7 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
   def perform(params)
     # Regardless of all else, we store these params
     @message = Message.new(
-      direction: 'inbound-api',
+      direction: 'inbound',
       twilio_sid: params['SmsMessageSid'],
       sms_sid: params['SmsSid'],
       from: params['From'],

@@ -1,15 +1,14 @@
 %br
 %br
 .row
-  .col-sm-12
+  .col-sm-12.col-md-6.col-centered
     .text-center
       %h1 Buy A Line
-      %p.lead.text-danger This will initiate a purchase of a new Twilio Number you select. You can then use that number to send & receive messages.
+      %p.lead.text-danger
+        This will initiate the
+        %strong.text-danger purchase
+        of the Twilio Number you select, with the configuration options you specify.
 .row
   .col-sm-12.col-md-6.col-centered
     .card.card-outline-primary
       = render 'form'
-    .text-center
-      %small.text-danger
-        By clicking this button you ackowledge that you are purchasing a number on Twilio and by doing so you are willing to incur any applicable charges related to this line. For information about potential charges, visit Twilio's
-        %a{href: 'https://www.twilio.com/sms/pricing', target: '_blank'} SMS pricing page.

@@ -7,14 +7,15 @@
   %td
     - if message.direction == 'outbound-api'
       .text-success
-        %i.fa.fa-share
+        %i.fa.fa-arrow-up
         Out
     - else
       .text-primary
-        %i.fa.fa-reply
+        %i.fa.fa-arrow-down
         In
   %td= number_to_phone message.to
-  %td= number_to_phone message.from
-  %td= message.contact.try :first_name
+  %td
+    = message.contact.try :first_name
+    = number_to_phone message.from
   %td= message.body
   %td= number_to_currency message.price_in_cents, precision: 4

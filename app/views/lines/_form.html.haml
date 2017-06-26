@@ -5,33 +5,68 @@
         %ul#errors
       = f.error_notification
       %legend Number Settings
-      .form-group
-        = f.input :name, label: 'Reference Name', id: 'InputName', required: true, placeholder: 'What do you want to call this line?', autofocus: true
-      .form-group
-        - if @line.persisted?
-          %br
-          %p.text-muted
-            Number:
-            = @line.number
-            %i.fa.fa-info-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "You cannot edit this number once it has been reserved. You may, however, remove this number from your account and purchase a new one if you no longer want to use this one."}
-          %br
-        - else
-          = f.input :number, as: :select, label: 'Select a Twilio™ number', collection: @numbers, label_method: :phone_number, value_method: :phone_number, include_blank: false
-      %legend
-        Forwarding Settings
-        %i.fa.fa-exclamation-circle.text-danger{"data-placement" => "right", "data-toggle" => "tooltip", :title => "Important! Forwarding text messages to a Users' valid mobile number will incurr additional charges."}
-      .form-group
-        = f.input :forwarding_enabled, label: 'Forwarding Enabled?', as: :boolean, inline_label: true
-      .form-group
-        = f.input :forwarding_number, label: 'Forward To', as: :select, collection: current_user.organization.users.forwarding_capable, label_method: :forward_to_dropdown_name, value_method: :mobile_phone
       %br
+      .row
+        .col-sm-12.col-md-6
+          .form-group
+            = f.input :name, label: 'Reference Name', id: 'InputName', required: true, placeholder: 'Marketing Line', autofocus: true
+        .col-sm-12.col-md-6
+          .form-group
+            - if @line.persisted?
+              %br
+              %p.text-muted
+                Number:
+                = @line.number
+                %i.fa.fa-info-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "You cannot edit this number once it has been reserved. You may, however, remove this number from your account and purchase a new one if you no longer want to use this one."}
+              %br
+            - else
+              = f.input :number, as: :select, label: 'Select a Twilio™ number', collection: @numbers, label_method: :phone_number, value_method: :phone_number, include_blank: false
+      %hr{color: '#0275d8'}
+      %legend Voice Forwarding Settings
+      %p.text-danger
+        Use these settings to control what this phone number will do when it receives a phone call. If forwarding is not enabled, all phone calls made to this number will be
+        %strong rejected.
+        %br
+        %strong Twilio charges $0.0085/minute for Voice forwarding.
+        Learn more about call forwarding costs
+        %a{href: 'https://support.twilio.com/hc/en-us/articles/223132367-How-much-am-I-charged-for-call-forwarding'} here.
+      %br
+      .row
+        .col-sm-12.col-md-6
+          .form-group
+            = f.input :forwarding_enabled, label: 'Forwarding Enabled?', as: :boolean, inline_label: true
+        .col-sm-12.col-md-6
+          .form-group
+            = f.input :forwarding_number, label: 'Forward To:', as: :tel, placeholder: '+13162588774'
+      %hr{color: '#0275d8'}
+      %legend SMS Forwarding Settings
+      %p.text-danger At this time, inbound messages are simply stored, and we notify users when we receive a new message. More advanced SMS forwarding is under development and will be available soon.
+      %br
+      %br
+      - if current_user.admin_role?
+        %hr{color: '#0275d8'}
+        %legend Webhook Settings
+        %p.text-danger Configure Webhook Settings Here
+        .row
+          .col-sm-12.col-md-6
+            .form-group
+              = f.input :sms_url
+          .col-sm-12.col-md-6
+            .form-group
+              = f.input :voice_url
+        %br
+        %br
       .form-actions
-        .text-center
+        .text-center.text-danger
+          - unless @line.persisted?
+            By clicking this button you ackowledge that you are purchasing a number from Twilio™ and by doing so you accept any applicable charges related to the use of this line. For information about potential charges, visit Twilio's
+            %a{href: 'https://www.twilio.com/sms/pricing', target: '_blank'} Pricing Guide.
+            %br
+            %br
           = f.hidden_field :organization_id, value: @line.organization_id
-          = f.button :submit, 'Purchase This Line', class: 'btn btn-md btn-success'
+          = f.button :submit, f.object.persisted? ? 'Save Line Settings' : 'Purchase This Line for $1/month', class: 'btn btn-md btn-success'
           %br
           %br
-
 
 :coffeescript
   $('[data-toggle="tooltip"]').tooltip()

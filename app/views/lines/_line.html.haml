@@ -1,13 +1,23 @@
 %tr{id: "line_#{line.id}"}
   %td= line.name
   %td= number_to_phone line.number
+  %td
+    - if line.forwarding_enabled?
+      %i.fa.fa-times.text-danger
+    - else
+      %i.fa.fa-check.text-success
+      = line.forwarding_number
   %td= local_time line.created_at, format: "%m/%d/%Y"
+  %td
+    %i.fa.fa-arrow-down.text-primary
+    = line.messages.inbound.count
+    %i.fa.fa-arrow-up.text-success
+    = line.messages.outbound.count
+  %td= rand(0..1000)
 
   %td.actions
     .btn-group
       = link_to line_path(line), class: 'btn btn-sm btn-info' do
         %i.fa.fa-eye
-      = link_to edit_line_path(line), remote: true, class: 'btn btn-sm btn-warning' do
+      = link_to edit_line_path(line), class: 'btn btn-sm btn-warning' do
         %i.fa.fa-pencil
-
-/ ['First Name', 'Last Name', 'Title', 'Mobile', 'City', 'State', 'Zip', 'Added']

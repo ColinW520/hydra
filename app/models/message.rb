@@ -1,5 +1,7 @@
 class Message < ApplicationRecord
   belongs_to :contact
+  scope :inbound, -> { where(direction: 'inbound') }
+  scope :outbound, -> { where(direction: 'outbound') }
 
   def self.filter_by(params)
     messages_scope = Message.joins('LEFT JOIN contacts ON contacts.id = messages.contact_id')

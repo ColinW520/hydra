@@ -13,6 +13,12 @@ class Line < ApplicationRecord
     "#{self.name} - #{self.number}"
   end
 
+  def twilio_number
+    @organization = Organization.find organization_id
+    @twilio_client = Twilio::REST::Client.new(@organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+    return @twilio_client.incoming_phone_numbers.get(self.twilio_id)
+  end
+
   after_create :buy_on_twilio
   def buy_on_twilio
     Twilio::Lines::BuyingWorker.new.perform(self.id) if Rails.env.development?

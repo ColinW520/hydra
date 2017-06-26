@@ -3,7 +3,7 @@ class Twilio::Lines::ReleasingWorker < Twilio::BaseWorker
 
   def perform(id, user_id)
     # setup what we need
-    @line = Line.find line_id
+    @line = Line.find id
     prepare_objects(@line.organization_id)
 
     # release the number

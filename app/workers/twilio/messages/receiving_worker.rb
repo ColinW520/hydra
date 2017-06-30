@@ -16,7 +16,7 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
       num_media: params['NumMedia'],
       num_segments: params['NumSegments'],
       received_at: Time.now,
-      cost: 0.0075
+      price_in_cents: 0.0075
     )
 
     # Assign this to a line we manage.

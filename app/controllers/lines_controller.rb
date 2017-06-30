@@ -20,7 +20,7 @@ class LinesController < ApplicationController
         format.json { head :no_content }
         format.js { flash[:success] = 'Line has been created.' }
         format.html {
-          flash[:success] = 'Line has been created.'
+          flash[:success] = 'Line has been created. Enjoy!'
           redirect_to lines_path
         }
       else

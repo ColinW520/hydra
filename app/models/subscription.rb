@@ -5,7 +5,7 @@ class Subscription < ApplicationRecord
   def create_on_stripe
     sub_details = {}
     sub_details[:customer] = self.stripe_customer_id
-    sub_details[:plan] = Stripe::Plan.list.first.id
+    sub_details[:plan] = ENV['STRIPE_PLAN_ID']
     sub_details[:coupon] = self.coupon_code if self.coupon_code.present?
     stripe_subscription = Stripe::Subscription.create(sub_details)
     self.stripe_id = stripe_subscription.id

@@ -1,8 +1,8 @@
 .row
   .col-sm-12
     .text-center
-      %h1.text-success $100/month
-      %p.lead Clicking 'Create Subscription' with charge your card $100 today, and monthly unless you cancel. By clicking this, you agree to our privacy poliy and terms of service.
+      %h1.text-success $1/month
+      %p.lead Clicking 'Create Subscription' with charge your card $1 today, and monthly thereafter unless you cancel. By clicking this, you agree to our privacy poliy and terms of service.
 
 %br
 = simple_form_for [@organization, @subscription], authenticity_token: true, html: { id: 'SubscriptionForm' } do |f|

@@ -25,6 +25,11 @@ class LinesController < ApplicationController
         }
       else
         format.json { render json: @line.errors.full_messages, status: :unprocessable_entity }
+        format.js { flash[:error] = 'There has been an error... Is your account setup on Twilio and fully funded?' }
+        format.html {
+          flash[:success] = 'There has been an error. The line was not purchased on your Twilio acount... Is your account setup on Twilio and fully funded?'
+          redirect_to lines_path
+        }
       end
 
     end

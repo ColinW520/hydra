@@ -13,5 +13,3 @@ class Twilio::VoiceCallsController < Twilio::BaseController
   	render_twiml response
   end
 end
-
-# https://463b06db.ngrok.io/twilio/voice_calls

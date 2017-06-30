@@ -1,11 +1,11 @@
 %tr{id: "message_#{message.id}"}
   %td
-    - if message.direction == 'outbound-api'
+    - if message.direction == 'outbound'
       = local_time message.sent_at
     - else
       = local_time message.created_at
   %td
-    - if message.direction == 'outbound-api'
+    - if message.direction == 'outbound'
       .text-success
         %i.fa.fa-arrow-up
         Out

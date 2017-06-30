@@ -13,7 +13,7 @@ class Twilio::Lines::UpdatingWorker < Twilio::BaseWorker
     @twilio_number.update(
       friendly_name: @line.name,
       phone_number: @line.number,
-      sms_url: @line.sms,
+      sms_url: "https://aptexx-hydra.herokuapp.dev/twilio/messages",
       voice_url: "https://aptexx-hydra.herokuapp.dev/twilio/voice_calls",
     )
   end

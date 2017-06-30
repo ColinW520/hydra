@@ -63,6 +63,7 @@
             %a{href: 'https://www.twilio.com/sms/pricing', target: '_blank'} Pricing Guide.
             %br
             %br
+          = f.hidden_field :user_id, value: @current_user.id
           = f.hidden_field :organization_id, value: @line.organization_id
           = f.button :submit, f.object.persisted? ? 'Save Line Settings' : 'Purchase This Line for $1/month', class: 'btn btn-md btn-success'
           %br

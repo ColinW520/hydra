@@ -8,10 +8,8 @@ class MessageRequest < ApplicationRecord
 
   after_create :queue_message
   def queue_message
-    if Rails.env.production?
-      Twilio::Messages::QueuingWorker.perform_async(self.id)
-    else
-      Twilio::Messages::QueuingWorker.new.perform(self.id)
+      Twilio::Messages::QueuingWorker.perform_async(self.id) if Rails.env.production?
+      Twilio::Messages::QueuingWorker.new.perform(self.id) if Rails.env.development?
     end
   end
 end

@@ -2,7 +2,7 @@ class MessageRequestsController < ApplicationController
   before_action :set_message_request, only: [:show]
 
   def index
-    message_requests_scope = MessageRequest.includes(:organization)
+    message_requests_scope = current_user.organization.message_requests
 
     respond_to do |format|
       format.html { smart_listing_create :message_requests, message_requests_scope, partial: 'message_requests/listing', default_sort: { created_at: :desc }, page_sizes: [25, 50, 100, 150, 200] }

@@ -4,6 +4,10 @@ class Message < ApplicationRecord
   scope :inbound, -> { where(direction: 'inbound') }
   scope :outbound, -> { where(direction: 'outbound') }
 
+  validates :sms_id,
+            presence: true,
+            uniqueness: true
+
   def self.filter_by(params)
     messages_scope = Message.joins('LEFT JOIN contacts ON contacts.id = messages.contact_id')
     messages_scope = messages_scope.where(messages: { organization_id: params[:organization_id] }) if params[:organization_id]

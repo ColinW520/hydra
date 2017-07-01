@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630192204) do
+ActiveRecord::Schema.define(version: 20170701185446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 20170630192204) do
     t.string   "body"
     t.string   "error_message"
     t.decimal  "price_in_cents",     precision: 8, scale: 5
-    t.integer  "account_sid"
+    t.string   "account_sid"
     t.string   "organization_id"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false

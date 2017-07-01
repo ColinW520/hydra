@@ -25,9 +25,6 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
     if @line.present?
       @message.line_id = @line.id
       @message.organization_id = @line.organization_id
-    else
-      # sound the Alarm.
-      return
     end
 
     # Assign this Message to the appropriate organization's contact record

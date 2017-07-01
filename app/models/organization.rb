@@ -12,6 +12,7 @@ class Organization < ApplicationRecord
   has_one :subscription
   has_many :messages
   has_many :lines
+  has_many :call_logs
 
   validates :name, presence: true
 

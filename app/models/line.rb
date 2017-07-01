@@ -1,8 +1,9 @@
 class Line < ApplicationRecord
   belongs_to :organization
   belongs_to :user
+  has_many :message_requests
   has_many :messages
-  has_many :message_recipients, through: :messages
+  has_many :call_logs
 
   validates :name, presence: true
   validates :number, presence: true

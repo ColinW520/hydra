@@ -1,8 +1,7 @@
 class Twilio::MessagesController < Twilio::BaseController
   def create
-    twilio_params = params
-    Twilio::Messages::ReceivingWorker.new.perform(params) if Rails.env.development?
-    Twilio::Messages::ReceivingWorker.perform_async(params) if Rails.env.production?
+    Twilio::Messages::ReceivingWorker.new.perform(twilio_message_params) if Rails.env.development?
+    Twilio::Messages::ReceivingWorker.perform_async(twilio_message_params) if Rails.env.production?
   end
 
 private

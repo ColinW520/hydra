@@ -3,9 +3,9 @@
   %td= number_to_phone line.number
   %td
     - if line.forwarding_enabled?
-      %i.fa.fa-times.text-danger
-    - else
       %i.fa.fa-check.text-success
+    - else
+      %i.fa.fa-check.text-danger
       = line.forwarding_number
   %td= local_time line.created_at, format: "%m/%d/%Y"
   %td

@@ -12,10 +12,9 @@ class Twilio::VoiceCallsController < Twilio::BaseController
     end
 
     if @line.forwarding_enabled? && @line.forwarding_number.present?
-      response = Twilio::TwiML::VoiceResponse.new
-      dial = Twilio::TwiML::Dial.new
-      dial.number(@line.forwarding_number)
-      response.append(dial)
+      response = Twilio::TwiML::Response.new do |r|
+        r.Dial @line.forwarding_number
+      end
     else
       response = Twilio::TwiML::Response.new do |r|
     	  r.Say 'Hi there! We only use this number for text messaging at this time. Please give', :voice => 'alice'

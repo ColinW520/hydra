@@ -7,12 +7,8 @@ class Contact < ApplicationRecord
   validates :organization,
             presence: true
 
-  validates :first_name,
-            presence: true
-
   validates :mobile_phone,
             presence: true,
-            numericality: { only_integer: true },
             uniqueness: { scope: [:organization_id] }
 
 

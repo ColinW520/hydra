@@ -19,16 +19,18 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
       price_in_cents: 0.0075
     )
 
-    # Assign this to a line we manage.
+    # Assign this Message to a line we manage.
     # Sound the alarm if we don't have a line for this number.
     @line = Line.find_by_number params['To']
     if @line.present?
       @message.line_id = @line.id
+      @message.organization_id = @line.organization_id
     else
       # sound the Alarm.
       return
     end
 
+    # Assign this Message to the appropriate organization's contact record
     @contact = Contact.where(mobile_phone: params['From'], organization_id: @line.organization_id).first_or_create
     @message.contact_id = @contact.id
     @message.save!

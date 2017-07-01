@@ -5,7 +5,7 @@ class Message < ApplicationRecord
 
   def self.filter_by(params)
     messages_scope = Message.joins('LEFT JOIN contacts ON contacts.id = messages.contact_id')
-
+    messages_scope = messages_scope.where(messages: { organization_id: params[:organization_id] }) if params[:organization_id]
     messages_scope = messages_scope.where('messages.body ILIKE ?', "%#{params[:term]}%") if params[:term].present?
     messages_scope = messages_scope.where(messages: { from: params[:from_number] }) if params[:from_number].present?
     messages_scope = messages_scope.where(messages: { to: params[:to_number] }) if params[:to_number].present?

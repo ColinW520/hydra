@@ -4,7 +4,7 @@ class Message < ApplicationRecord
   scope :inbound, -> { where(direction: 'inbound') }
   scope :outbound, -> { where(direction: 'outbound') }
 
-  validates :sms_id,
+  validates :sms_sid,
             presence: true,
             uniqueness: true
 

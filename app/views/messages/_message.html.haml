@@ -2,18 +2,26 @@
   %td= local_time message.created_at
   %td
     - if message.direction == 'outbound'
-      .text-success
-        %i.fa.fa-arrow-up
-        Out
+      %i.fa.fa-arrow-up.text-success
+      Out
     - else
-      .text-primary
-        %i.fa.fa-arrow-down
-        In
+      %i.fa.fa-arrow-down.text-primary
+      In
   %td
-    = message.contact.try(:first_name)
-    = number_to_phone message.to
+    = link_to contact_path(message.contact) do
+      = message.contact.try(:first_name)
+      = number_to_phone message.to
   %td
     = message.try(:message_request).try(:user).try(:first_name)
     = number_to_phone message.from
   %td= message.body
-  %td= number_to_currency message.price_in_cents, precision: 4
+  %td
+    .btn-group
+      = link_to new_message_request_path(contact_ids: [message.contact_id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+        %i.fa.fa-reply
+      %button.btn.btn-sm.btn-secondary{"aria-describedby" => "popover", "data-html" => "true", "data-container" => "body", "data-content" => message.detail_table, "data-original-title" => "Message Details", "data-placement" => "left", "data-toggle" => "popover", :title => "Message Details", :type => "button"}
+        %i.fa.fa-info-circle
+
+
+= render "contacts/dialog"
+= render "message_requests/dialog"

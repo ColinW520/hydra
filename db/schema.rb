@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701185446) do
+ActiveRecord::Schema.define(version: 20170701212749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,41 @@ ActiveRecord::Schema.define(version: 20170701185446) do
     t.datetime "updated_at",        null: false
     t.integer  "removed_by"
     t.index ["organization_id"], name: "index_billing_methods_on_organization_id", using: :btree
+  end
+
+  create_table "call_logs", force: :cascade do |t|
+    t.string   "line_id"
+    t.string   "organization_id"
+    t.string   "contact_id"
+    t.boolean  "forwarded"
+    t.string   "forwarded_to"
+    t.string   "direction"
+    t.string   "account_sid"
+    t.string   "call_sid"
+    t.string   "call_status"
+    t.string   "called"
+    t.string   "called_state"
+    t.string   "called_zip"
+    t.string   "called_city"
+    t.string   "called_country"
+    t.string   "caller_country"
+    t.string   "caller_state"
+    t.string   "caller_zip"
+    t.string   "caller_city"
+    t.string   "caller"
+    t.string   "to"
+    t.string   "to_zip"
+    t.string   "to_state"
+    t.string   "to_city"
+    t.string   "to_country"
+    t.string   "from"
+    t.string   "from_country"
+    t.string   "from_city"
+    t.string   "from_zip"
+    t.string   "from_state"
+    t.string   "api_version"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "contacts", force: :cascade do |t|

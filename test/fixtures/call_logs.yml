@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  line_id: MyString
+  organization_id: MyString
+  forwarded: false
+  forwarded_to: MyString
+  direction: MyString
+  account_sid: MyString
+  call_sid: MyString
+  call_status: MyString
+  called: MyString
+  called_state: MyString
+  called_zip: MyString
+  called_city: MyString
+  called_country: MyString
+  caller_country: MyString
+  caller_state: MyString
+  caller_zip: MyString
+  caller_city: MyString
+  caller: MyString
+  direction: MyString
+  to: MyString
+  to_zip: MyString
+  to_state: MyString
+  to_city: MyString
+  to_country: MyString
+  from: MyString
+  from_country: MyString
+  from_city: MyString
+  from_zip: MyString
+  from_state: MyString
+  api_version: MyString
+
+two:
+  line_id: MyString
+  organization_id: MyString
+  forwarded: false
+  forwarded_to: MyString
+  direction: MyString
+  account_sid: MyString
+  call_sid: MyString
+  call_status: MyString
+  called: MyString
+  called_state: MyString
+  called_zip: MyString
+  called_city: MyString
+  called_country: MyString
+  caller_country: MyString
+  caller_state: MyString
+  caller_zip: MyString
+  caller_city: MyString
+  caller: MyString
+  direction: MyString
+  to: MyString
+  to_zip: MyString
+  to_state: MyString
+  to_city: MyString
+  to_country: MyString
+  from: MyString
+  from_country: MyString
+  from_city: MyString
+  from_zip: MyString
+  from_state: MyString
+  api_version: MyString

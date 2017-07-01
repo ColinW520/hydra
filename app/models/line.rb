@@ -25,6 +25,11 @@ class Line < ApplicationRecord
     Twilio::Lines::BuyingWorker.perform_async(self.id) if Rails.env.production?
   end
 
+  def update_on_twilio
+    Twilio::Lines::UpdatingWorker.new.perform(self.id) if Rails.env.development?
+    Twilio::Lines::UpdatingWorker.perform_async(self.id) if Rails.env.production?
+  end
+
   def release!(user_id)
     Twilio::Lines::ReleasingWorker.new.perform(self.id, user_id) if Rails.env.development?
     Twilio::Lines::ReleasingWorker.perform_async(self.id, user_id) if Rails.env.production?

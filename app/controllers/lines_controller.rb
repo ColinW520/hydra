@@ -46,6 +46,7 @@ class LinesController < ApplicationController
   def update
     respond_to do |format|
       if @line.update(line_params)
+        @line.update_on_twilio # triggering this here intentionally.
         format.html {
           flash[:sucess] = 'Line has been updated!'
           redirect_to lines_path

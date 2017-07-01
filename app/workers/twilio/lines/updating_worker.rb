@@ -12,7 +12,6 @@ class Twilio::Lines::UpdatingWorker < Twilio::BaseWorker
     # synchronize it with what we stored in our DB
     @twilio_number.update(
       friendly_name: @line.name,
-      phone_number: @line.number,
       sms_url: "https://aptexx-hydra.herokuapp.com/twilio/messages",
       voice_url: "https://aptexx-hydra.herokuapp.com/twilio/voice_calls",
     )

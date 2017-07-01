@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def index
-    messages_scope = Message.filter_by(params.merge(organization_id: current_user.organization_id))
+    messages_scope = current_user.organization.messages.filter_by(params)
 
     sort_columns = [
       [:date, 'messages.sent_at'],

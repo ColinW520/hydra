@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @organization = Organization.find_by_slug params[:organization_id]
-    users_scope = @organization.users
+    users_scope = current_user.organization.users
     smart_listing_create :users,
                          users_scope,
                          partial: "users/listing",

@@ -2,7 +2,7 @@ class LinesController < ApplicationController
   before_filter :find_line, except: [:index, :new, :create, :download]
 
   def index
-    lines_scope = Line.where(organization_id: current_user.organization_id).includes(:organization)
+    lines_scope = current_user.organization.lines
     smart_listing_create :lines, lines_scope, partial: 'lines/listing', default_sort: { name: :asc }, page_sizes: [10, 20, 30]
   end
 

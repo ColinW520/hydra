@@ -4,7 +4,7 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     @message_request = MessageRequest.find message_id
     @organization = Organization.find @message_request.organization_id
     @line = Line.find @message_request.line_id
-    @client = Twilio::REST::Client.new(@organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+    @twilio_client = Twilio::REST::Client.new(@organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
     @contact = Contact.find contact_id
 
     # prep it
@@ -13,7 +13,7 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     recipient_hash[:status_callback] = "https://hydra.aptx.cm/twilio/callbacks/status" if Rails.env.production?
 
     # send it
-    @message = @client.messages.create(recipient_hash)
+    @message = @twilio_client.messages.create(recipient_hash)
 
     # check it
     @message.refresh
@@ -30,7 +30,7 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     @local_message.from = @message.from
     @local_message.body = @message.body
     @local_message.error_message = @message.error_message
-    @local_message.price_in_cents = @message.price.to_f.abs
+    @local_message.price_in_cents = 0.0075
     @local_message.account_sid = @message.sid
     @local_message.organization_id = @organization.id
     @local_message.contact_id = @contact.id

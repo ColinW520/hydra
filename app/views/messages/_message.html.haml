@@ -13,9 +13,11 @@
       .text-primary
         %i.fa.fa-arrow-down
         In
-  %td= number_to_phone message.to
   %td
-    = message.contact.try :first_name
+    = message.contact.try(:first_name)
+    = number_to_phone message.to
+  %td
+    = message.try(:message_request).try(:user).try(:first_name)
     = number_to_phone message.from
   %td= message.body
   %td= number_to_currency message.price_in_cents, precision: 4

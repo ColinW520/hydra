@@ -20,7 +20,6 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
     )
 
     # Assign this Message to a line we manage.
-    # Sound the alarm if we don't have a line for this number.
     @line = Line.find_by_number params['To']
     if @line.present?
       @message.line_id = @line.id

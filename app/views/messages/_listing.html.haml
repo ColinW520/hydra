@@ -9,7 +9,7 @@
             %th= smart_listing.sortable 'Direction', :direction
             %th= smart_listing.sortable 'To', :to
             %th= smart_listing.sortable 'From', :from
-            %th{width: '50%'}= smart_listing.sortable 'Body', :body
+            %th= smart_listing.sortable 'Body', :body
             %th
           %tbody#messages
             - smart_listing.collection.each do |message|

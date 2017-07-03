@@ -1,12 +1,12 @@
 - provide(:title, 'Dashboard')
 - if current_user.setup?
   .row
-    .col-sm-12.col-md-12
+    .col-sm-12.col-md-6
       .card.card-primary
         .card-title
           %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
             Messages
-        = column_chart list_growth_dashboard_path
+        = line_chart messages_dashboard_path, range: 1.month.ago..Time.now, stacked: true, legend: 'bottom'
 
   %br
   .row
@@ -14,14 +14,14 @@
       .card.card-primary
         .card-title
           %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
-            Directory Size
+            List Growth
         = line_chart list_growth_dashboard_path
 
     .col-sm-12.col-md-6
       .card.card-primary
         .card-title
           %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
-            Usage Cost
+            Cost
         = line_chart list_growth_dashboard_path
 - else
   = render 'dashboard/setup_instructions'

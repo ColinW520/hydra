@@ -4,17 +4,17 @@
   %td
     - if line.forwarding_enabled?
       %i.fa.fa-check.text-success
+      = line.forwarding_number
     - else
-      %i.fa.fa-check.text-danger
+      %i.fa.fa-times.text-danger
       = line.forwarding_number
   %td= local_time line.created_at, format: "%m/%d/%Y"
-  %td
+  %td.text-center
     %i.fa.fa-arrow-down.text-primary
     = line.messages.inbound.count
     %i.fa.fa-arrow-up.text-success
     = line.messages.outbound.count
-  %td= rand(0..1000)
-
+  %td.text-center= number_with_delimiter line.call_logs.count
   %td.actions
     .btn-group
       = link_to line_path(line), class: 'btn btn-sm btn-info' do

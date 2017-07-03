@@ -8,8 +8,8 @@
             %th.sortable= smart_listing.sortable 'Number', :number
             %th.sortable= smart_listing.sortable 'Forwarding?', :forwarding_enabled
             %th.sortable= smart_listing.sortable 'Added', :created_at
-            %th Messages
-            %th Calls
+            %th.text-center Messages
+            %th.text-center Calls
             %th
           %tbody#lines
             - smart_listing.collection.each do |line|

@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resource :dashboard, controller: 'dashboard' do
     collection do
       get :list_growth
+      get :calls
+      get :messages
+      get :usage
     end
   end
   resources :lines

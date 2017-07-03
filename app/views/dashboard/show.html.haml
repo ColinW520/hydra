@@ -6,7 +6,13 @@
         .card-title
           %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
             Messages
-        = line_chart messages_dashboard_path, range: 1.month.ago..Time.now, stacked: true, legend: 'bottom'
+        = line_chart messages_dashboard_path, stacked: true, legend: 'bottom'
+    .col-sm-12.col-md-6
+      .card.card-primary
+        .card-title
+          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
+            Calls
+        = line_chart calls_dashboard_path, stacked: true, legend: 'none'
 
   %br
   .row
@@ -15,13 +21,15 @@
         .card-title
           %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
             List Growth
-        = line_chart list_growth_dashboard_path
+        = line_chart list_growth_dashboard_path, legend: 'none'
 
     .col-sm-12.col-md-6
-      .card.card-primary
-        .card-title
-          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
-            Cost
-        = line_chart list_growth_dashboard_path
+      #CostPanel
+        %br
+        %br
+        %br
+        .text-center
+          %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+          %h3 Loading...
 - else
   = render 'dashboard/setup_instructions'

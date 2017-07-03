@@ -1,0 +1,48 @@
+.row
+  .col-sm-6
+    .card.card-primary.table-card
+      .card-title
+        %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
+          Last Month
+    %table.table.table-bordered.table-primary.table-condensed
+      %thead
+        %tr
+          %th Item
+          %th.text-center Units
+          %th.text-right Cost
+      %tbody
+        - @last_month_records.each do |r|
+          %tr
+            %td= r[:description]
+            %td.text-center= number_with_delimiter r[:count]
+            %td.text-right= number_to_currency r[:price], precision: 4
+        %tr
+          %td
+            %strong Total
+          %td{colspan: 2}
+            .pull-right
+              %strong= number_to_currency @last_month_records.sum { |r| r[:price].to_f }, precision: 4
+
+  .col-sm-6
+    .card.card-primary.table-card
+      .card-title
+        %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
+          This Month
+    %table.table.table-bordered.table-primary.table-condensed
+      %thead
+        %tr
+          %th Item
+          %th.text-center Units
+          %th.text-center Cost
+      %tbody
+        - @this_month_records.each do |r|
+          %tr
+            %td= r[:description]
+            %td.text-center= number_with_delimiter r[:count]
+            %td.text-right= number_to_currency r[:price], precision: 4
+        %tr
+          %td
+            %strong Total
+          %td{colspan: 2}
+            .pull-right
+              %strong= number_to_currency @this_month_records.sum { |r| r[:price].to_f }, precision: 4

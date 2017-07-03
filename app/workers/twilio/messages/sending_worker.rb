@@ -1,11 +1,13 @@
 class Twilio::Messages::SendingWorker < Twilio::BaseWorker
 
-  def perform(message_id, contact_id)
-    @message_request = MessageRequest.find message_id
-    @organization = Organization.find @message_request.organization_id
+  def perform(message_request_id, contact_id)
+    @message_request = MessageRequest.find message_request_id
+    @contact = Contact.find contact_id
+
+    prepare_objects(@message_request.organization_id)
+    
     @line = Line.find @message_request.line_id
     @twilio_client = Twilio::REST::Client.new(@organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
-    @contact = Contact.find contact_id
 
     # prep it
     recipient_hash = { from: @line.number, body: @message_request.body }

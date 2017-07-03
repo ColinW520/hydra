@@ -29,7 +29,6 @@ class Twilio::Calls::LoggingWorker < Twilio::BaseWorker
       api_version: params['ApiVersion']
     )
 
-
     # Assign this Call Log to a line we manage.
     @line = Line.find_by_number params['To']
     @log.line_id = @line.id

@@ -11,9 +11,13 @@
 .row
   .col-sm-12.col-md-6.col-lg-4
     .row
-      .col-sm-12.col-md-8
+      .col-sm-8.col-md-8
         %h2 Profile
-      .col-sm-12.col-md-4
+      .col-sm-4.com-md-4
+        = link_to edit_contact_path(@contact), remote: true, class: 'btn btn-warning btn-sm pull-right' do
+          %i.fa.fa-edit
+    .row
+      .col-sm-12.col-md-12
         - @contact.tags.pluck(:name).each do |tag|
           %span.badge.badge-primary=tag
     .table-responsive.card.card-outline-default.table-card
@@ -37,11 +41,6 @@
               %strong Phone
             %td
               = number_to_phone @contact.mobile_phone
-              - if @contact.phone_is_valid_for_sms?
-                %i.fa.fa-check-circle.text-success
-              - else
-                %i.fa.fa-times.text-danger{"data-placement" => "right", "data-toggle" => "tooltip", :title => "We could not validate this phone number for SMS."}
-
           %tr
             %td
               %strong Email
@@ -72,12 +71,7 @@
 
   .col-sm-12.col-md-6.col-lg-8
     %h2 History
-    .card.card-outline-default
-      %div.alert.alert-success{style: 'margin: 15px;'}
-        .text-right
-          Test
-      %div.alert.alert-info{style: 'margin: 15px;'}
-        Test
+    #messages_placeholder
 
 -# / ["id", "organization_id", "first_name", "last_name", "email", "mobile_phone",
 -# / "title", "preferred_language", "birthday", "address_line", "address_city",

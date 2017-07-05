@@ -76,6 +76,7 @@ class ContactsController < ApplicationController
 
   def find_contact
     @contact = Contact.find(params[:id])
+    gon.contact_id = @contact.id
   end
 
   def contact_params

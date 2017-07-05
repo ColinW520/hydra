@@ -1,7 +1,17 @@
 %tr{id: "contact_#{contact.id}"}
   %td= check_box_tag "contact_ids[]", contact.id
-  %td= contact.first_name.titleize
-  %td= contact.last_name.titleize
+  %td
+    - if contact.first_name.present?
+      = contact.first_name.titleize
+    - else
+      .text-danger
+        unknown
+  %td
+    - if contact.last_name.present?
+      = contact.last_name.titleize
+    - else
+      .text-danger
+        unknown
   %td= contact.title
   %td= number_to_phone contact.mobile_phone
   %td= mail_to contact.email

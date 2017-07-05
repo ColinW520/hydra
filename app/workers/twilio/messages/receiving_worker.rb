@@ -21,14 +21,42 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
 
     # Assign this Message to a line we manage.
     @line = Line.find_by_number params['To']
-    if @line.present?
-      @message.line_id = @line.id
-      @message.organization_id = @line.organization_id
-    end
+    @message.line_id = @line.id
+    @message.organization_id = @line.organization_id
 
     # Assign this Message to the appropriate organization's contact record
     @contact = Contact.where(mobile_phone: params['From'], organization_id: @line.organization_id).first_or_create
     @message.contact_id = @contact.id
     @message.save!
+
+    # forwarding setup
+    if @line.sms_alert?
+      # send an sms to the specified number, with a link to view the message history with the contact
+      @twilio_client = Twilio::REST::Client.new(@line.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+      @forward = @client.messages.create(
+        from: params['From'],
+        to: @line.sms_forwarding_number,
+        body: params['Body']
+      )
+
+      @message.update_attribute(:forwarded_to, @line.sms_forwarding_number)
+    end
+
+    if @line.sms_alert?
+      # send an sms to the specified number, with a link to view the message history with the contact
+      @twilio_client = Twilio::REST::Client.new(@line.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+      @forward = @client.messages.create(
+        from: @line.number,
+        to: @line.sms_alert_number,
+        body: "The #{@line.name} line just received a new message on Hydra. Check it out here: https:/aptexx-hydra.herokuapp.com/contacts/#{@message.id}"
+      )
+
+      @message.update_attribute(:forwarded_to, @line.sms_forwarding_number)
+    end
+
+    if @line.email_alert?
+      # send an sms to the specified number, with a link to view the message history with the contact
+      # trigger email delivery asynchronous
+    end
   end
 end

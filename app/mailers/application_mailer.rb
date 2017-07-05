@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'no-replay@aptexx-hydra.herokuapp.com'
   layout 'mailer'
 end

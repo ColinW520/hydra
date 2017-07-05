@@ -30,7 +30,7 @@ class Users::InvitationsController < Devise::InvitationsController
   def after_invite_path_for(resource)
     if current_inviter.admin_role?
       flash[:notice] = 'Invitation Sent'
-      users_path
+      organization_users_path(current_inviter.organization)
     else
       after_sign_in_path_for(current_inviter)
     end

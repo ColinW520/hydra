@@ -14,7 +14,7 @@
           .form-group
             - if @line.persisted?
               %br
-              %p.text-muted
+              %h3.text-muted
                 Number:
                 = @line.number
                 %i.fa.fa-info-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "You cannot edit this number once it has been reserved. You may, however, remove this number from your account and purchase a new one if you no longer want to use this one."}
@@ -39,10 +39,23 @@
           .form-group
             = f.input :forwarding_number, label: 'Forward To:', as: :tel, placeholder: '+13162588774'
       %hr{color: '#0275d8'}
-      %legend SMS Forwarding Settings
-      %p.text-danger At this time, inbound messages are simply stored, and we notify users when we receive a new message. More advanced SMS forwarding is under development and will be available soon.
+      %legend Message Alert Settings
+      %p.text-danger Use the options below to configure how you would like to notified of new inbound messages. Alerting via SMS will incur Twilio message sending costs.
       %br
-      %br
+      .row
+        .col-sm-12.col-md-6
+          .form-group
+            = f.input :sms_alert, label: 'Alert via SMS', as: :boolean, inline_label: true
+        .col-sm-12.col-md-6
+          .form-group
+            = f.input :sms_alert_number, label: 'Number to Alert:', as: :tel, placeholder: '+13162588774'
+      .row
+        .col-sm-12.col-md-6
+          .form-group
+            = f.input :email_alert, label: 'Alert via Email', as: :boolean, inline_label: true
+        .col-sm-12.col-md-6
+          .form-group
+            = f.input :email_alert_address, label: 'Email Alert Address:', as: :email, input_html: {value: f.object.email_alert_address || current_user.email}
       - if current_user.admin_role?
         %hr{color: '#0275d8'}
         %legend Webhook Settings

@@ -40,7 +40,7 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
         body: "The #{@line.name} line just received a new message on Hydra. Check it out here: https:/aptexx-hydra.herokuapp.com/contacts/#{@message.id}"
       )
 
-      @message.update_attribute(:forwarded_to, @line.sms_forwarding_number)
+      @message.update_attribute(:forwarded_to, @line.sms_alert_number)
     end
 
     if @line.email_alert?

@@ -11,9 +11,9 @@
                   %td.content-block{:style => "text-align:center;"}
                     %h2 New Inbound Message
                     - if @contact.first_name
-                      %p.lead= "Hi, #{@user.first_name}! A text message has been received from #{@contact.first_name.titleize} (#{@message.from})."
+                      %p.lead= "Hi! A text message has been received from #{@contact.first_name.titleize} (#{@message.from})."
                     - else
-                      %p.lead= "Hi, #{@user.first_name}! A text message has been received from #{@message.from}."
+                      %p.lead= "Hi! A text message has been received from #{@message.from}."
                 %tr{:style => "text-align:center"}
                   %td.content-block
                     %strong Message Body

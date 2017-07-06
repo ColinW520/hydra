@@ -1,5 +1,4 @@
 class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
-  sidekiq_options retry: false
 
   def perform(params)
     # Regardless of all else, we store these params
@@ -34,19 +33,7 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
     # forwarding setup
     if @line.sms_alert?
       # send an sms to the specified number, with a link to view the message history with the contact
-      @twilio_client = Twilio::REST::Client.new(@line.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
-      @forward = @client.messages.create(
-        from: params['From'],
-        to: @line.sms_forwarding_number,
-        body: params['Body']
-      )
-
-      @message.update_attribute(:forwarded_to, @line.sms_forwarding_number)
-    end
-
-    if @line.sms_alert?
-      # send an sms to the specified number, with a link to view the message history with the contact
-      @twilio_client = Twilio::REST::Client.new(@line.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+      @client = Twilio::REST::Client.new(@line.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
       @forward = @client.messages.create(
         from: @line.number,
         to: @line.sms_alert_number,

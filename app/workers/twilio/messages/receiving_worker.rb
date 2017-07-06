@@ -55,8 +55,7 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
     end
 
     if @line.email_alert?
-      # send an sms to the specified number, with a link to view the message history with the contact
-      # trigger email delivery asynchronous
+      MessagesMailer.alert(@message.id).deliver
     end
   end
 end

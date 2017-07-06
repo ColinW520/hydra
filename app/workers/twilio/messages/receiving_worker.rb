@@ -1,4 +1,6 @@
 class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
+  sidekiq_options retry: false
+
   def perform(params)
     # Regardless of all else, we store these params
     @message = Message.new(

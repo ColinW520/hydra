@@ -9,6 +9,7 @@ class Message < ApplicationRecord
             uniqueness: true
 
   def self.filter_by(params)
+    params = params.with_indifferent_access
     messages_scope = Message.joins('LEFT JOIN contacts ON contacts.id = messages.contact_id')
     messages_scope = messages_scope.where(messages: { contact_id: params[:contact_id] }) if params[:contact_id]
     messages_scope = messages_scope.where(messages: { organization_id: params[:organization_id] }) if params[:organization_id].present?

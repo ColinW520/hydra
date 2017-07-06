@@ -1,5 +1,5 @@
 class MessagesMailer < ApplicationMailer
-  default template_path: "mailers/messages/"
+  default template_path: "mailers/messages"
 
   def alert(message_id)
     @message = Message.find message_id

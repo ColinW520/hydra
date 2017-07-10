@@ -47,6 +47,7 @@ gem "paperclip", "~> 5.0.0" # stores images & files to AWS
 gem 'aws-sdk'
 gem 'groupdate'
 gem 'acts-as-taggable-on', '~> 4.0'
+gem 'phony_rails' # keeps phone numbers consistent.
 
 # Third Party Stuff
 gem 'twilio-ruby'

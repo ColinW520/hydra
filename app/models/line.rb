@@ -10,6 +10,11 @@ class Line < ApplicationRecord
   validates :user, presence: true
   validates :organization, presence: true
 
+
+  phony_normalize :number, default_country_code: 'US'
+  phony_normalize :forwarding_number, default_country_code: 'US'
+  phony_normalize :sms_alert_number, default_country_code: 'US'
+
   def dropdown_name
     "#{self.name} - #{self.number}"
   end

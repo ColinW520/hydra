@@ -7,6 +7,8 @@ class Contact < ApplicationRecord
   validates :organization,
             presence: true
 
+
+  phony_normalize :mobile_phone, default_country_code: 'US'
   validates :mobile_phone,
             presence: true,
             uniqueness: { scope: [:organization_id] }

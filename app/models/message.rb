@@ -9,6 +9,9 @@ class Message < ApplicationRecord
             presence: true,
             uniqueness: true
 
+  phony_normalize :to, default_country_code: 'US'
+  phony_normalize :from, default_country_code: 'US'
+
   def self.filter_by(params)
     params = params.with_indifferent_access
     messages_scope = Message.joins('LEFT JOIN contacts ON contacts.id = messages.contact_id')

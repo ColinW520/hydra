@@ -3,6 +3,8 @@ class Organization < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  phony_normalize :phone, default_country_code: 'US'
+
   # relationships
   has_many :users
   has_many :contacts

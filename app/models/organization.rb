@@ -4,6 +4,7 @@ class Organization < ApplicationRecord
   friendly_id :name, use: :slugged
 
   phony_normalize :phone, default_country_code: 'US'
+  validates :phone, phony_plausible: true
 
   # relationships
   has_many :users

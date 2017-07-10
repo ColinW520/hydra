@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   default_scope -> { where(deleted_at: nil) }
   phony_normalize :mobile_phone, default_country_code: 'US'
+  validates :mobile_phone, phony_plausible: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

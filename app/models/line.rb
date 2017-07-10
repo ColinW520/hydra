@@ -15,6 +15,10 @@ class Line < ApplicationRecord
   phony_normalize :forwarding_number, default_country_code: 'US'
   phony_normalize :sms_alert_number, default_country_code: 'US'
 
+  validates :number, phony_plausible: true
+  validates :forwarding_number, phony_plausible: true
+  validates :sms_alert_number, phony_plausible: true
+
   def dropdown_name
     "#{self.name} - #{self.number}"
   end

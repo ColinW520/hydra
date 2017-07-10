@@ -11,4 +11,13 @@ class CallLog < ApplicationRecord
 
   phony_normalize :called, default_country_code: 'US'
   phony_normalize :forwarded_to, default_country_code: 'US'
+  phony_normalize :caller, default_country_code: 'US'
+  phony_normalize :to, default_country_code: 'US'
+  phony_normalize :from, default_country_code: 'US'
+
+  validates :called, phony_plausible: true
+  validates :caller, phony_plausible: true
+  validates :to, phony_plausible: true
+  validates :from, phony_plausible: true
+  validates :forwarded_to, phony_plausible: true
 end

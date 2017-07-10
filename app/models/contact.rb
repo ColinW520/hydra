@@ -11,7 +11,8 @@ class Contact < ApplicationRecord
   phony_normalize :mobile_phone, default_country_code: 'US'
   validates :mobile_phone,
             presence: true,
-            uniqueness: { scope: [:organization_id] }
+            uniqueness: { scope: [:organization_id] },
+            phony_plausible: true
 
 
   scope :name_like, ->(term) { where('first_name ILIKE ? OR last_name ILIKE ?', "%#{term}%", "%#{term}%") }

@@ -14,7 +14,9 @@
     = line.messages.inbound.count
     %i.fa.fa-arrow-up.text-success
     = line.messages.outbound.count
-  %td.text-center= number_with_delimiter line.call_logs.count
+  %td.text-center
+    = link_to call_logs_path(line_id: line.id) do
+      = number_with_delimiter line.call_logs.count
   %td.actions
     .btn-group
       = link_to line_path(line), class: 'btn btn-sm btn-info' do

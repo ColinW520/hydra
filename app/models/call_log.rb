@@ -25,6 +25,7 @@ class CallLog < ApplicationRecord
     params = params.with_indifferent_access
     logs_scope = CallLog.includes(:organization)
     logs_scope = logs_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
+    logs_scope = logs_scope.where(line_id: params[:line_id]) if params[:line_id].present?
     logs_scope = logs_scope.where(contact_id: params[:contact_id]) if params[:contact_id].present?
     return logs_scope
   end

@@ -1,0 +1,14 @@
+- unless @xhr
+  - provide(:title, 'Calls')
+  %br
+  .row
+    .col-sm-12.col-md-9
+      %h1.page-title
+        %i.fa.fa-smartphone-o
+        - if @line.present?
+          = "Call Logs for #{@line.name}"
+        - else
+          Call Logs
+.row
+  .col-sm-12
+    = smart_listing_render :call_logs

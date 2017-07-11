@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
   resources :lines
   resources :messages, only: [:index, :show]
+  resources :call_logs
   resources :message_requests
   resources :contacts
   resources :imports

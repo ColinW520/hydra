@@ -1,0 +1,18 @@
+.row
+  .col-sm-12
+    .card.card-outline-primary.table-card
+      .table-condensed
+        %table.table.table-hover
+          %thead.thead-inverse
+            %th= smart_listing.sortable 'Date', :created_at
+            %th= smart_listing.sortable 'From', :from
+            %th= smart_listing.sortable 'Forwarded?', :forwarded
+            %th
+              = smart_listing.sortable 'Duration', :duration_in_seconds
+              %i.fa.fa-info-circle{}
+            %th
+              = smart_listing.sortable 'Price', :price_in_cents
+              %i.fa.fa-info-circle{}
+          %tbody#call_logs
+            - smart_listing.collection.each do |call_log|
+              = render call_log

@@ -1,13 +1,13 @@
 %tr{id: "line_#{line.id}"}
   %td= line.name
-  %td= number_to_phone line.number
+  %td= number_to_phone line.number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
   %td
     - if line.forwarding_enabled?
       %i.fa.fa-check.text-success
       = line.forwarding_number
     - else
       %i.fa.fa-times.text-danger
-      = line.forwarding_number
+      = line.forwarding_number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
   %td= local_time line.created_at, format: "%m/%d/%Y"
   %td.text-center
     %i.fa.fa-arrow-down.text-primary

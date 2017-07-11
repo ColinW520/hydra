@@ -10,10 +10,10 @@
   %td
     = link_to contact_path(message.contact) do
       = message.contact.try(:first_name)
-      = number_to_phone message.to
+      = number_to_phone message.to.phony_formatted(normalize: :US, format: :international, spaces: ' ')
   %td
     = message.try(:message_request).try(:user).try(:first_name)
-    = number_to_phone message.from
+    = number_to_phone message.from.phony_formatted(normalize: :US, format: :international, spaces: ' ')
   %td= message.body
   %td
     .btn-group

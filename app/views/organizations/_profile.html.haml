@@ -13,7 +13,7 @@
       %tr
         %td
           %strong Phone
-        %td= number_to_phone @organization.phone
+        %td= number_to_phone @organization.phone.phony_formatted(normalize: :US, format: :international, spaces: ' ')
       %tr
         %td
           %strong City

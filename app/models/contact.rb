@@ -25,6 +25,7 @@ class Contact < ApplicationRecord
   def self.filter_by(params)
     params = params.with_indifferent_access
     contacts_scope = self.includes(:organization)
+    contacts_scope = contacts_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
     contacts_scope = contacts_scope.where(id: params[:id]) if params[:id].present?
     contacts_scope = contacts_scope.name_like(params[:name]) if params[:name].present?
     contacts_scope = contacts_scope.title_like(params[:title]) if params[:title].present?

@@ -20,4 +20,23 @@ class CallLog < ApplicationRecord
   validates :to, phony_plausible: true
   validates :from, phony_plausible: true
   validates :forwarded_to, phony_plausible: true
+
+  def self.filter_by(params)
+    params = params.with_indifferent_access
+    logs_scope = CallLog.includes(:organization)
+    logs_scope = logs_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
+    logs_scope = logs_scope.where(contact_id: params[:contact_id]) if params[:contact_id].present?
+    return logs_scope
+  end
+
+  def self.to_csv
+    attributes = self.column_names
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.each do |contact|
+        csv << attributes.map { |attr| contact.send(attr) }
+      end
+    end
+  end
 end

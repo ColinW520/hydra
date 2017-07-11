@@ -3,13 +3,14 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  return unless $("#messages_placeholder").length > 0
-  $.get
-    url: "/messages?contact_id=" + gon.contact_id
-    cache: false
-    success: (html) ->
-      $('#messages_placeholder').replaceWith html
-      return
-    error: (xhr, status, errorThrown) ->
-      $('#messages_placeholder').replaceWith """<div class="alert alert-dismissible alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>Whoops!</h4><p>#{error}</p></div>"""
-      return
+  if $('#contacts_show').length > 0
+    console.log('seeing this')
+    $.get
+      url: "/messages?contact_id=" + gon.contact_id
+      cache: false
+      success: (html) ->
+        $('#messages_placeholder').replaceWith html
+        return
+      error: (xhr, status, errorThrown) ->
+        $('#messages_placeholder').replaceWith """<div class="alert alert-dismissible alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>Whoops!</h4><p>#{error}</p></div>"""
+        return

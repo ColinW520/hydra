@@ -18,6 +18,7 @@ class ContactsController < ApplicationController
   end
 
   def create
+    @contact = Contact.new(contact_params.except(:tag_list_for_form))
     @contact.tag_list = params[:contact][:tag_list_for_form]
     @contact.mobile_phone = PhonyRails.normalize_number(params[:contact][:mobile_phone], country_code: 'US')
 

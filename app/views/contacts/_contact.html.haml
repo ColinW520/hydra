@@ -1,17 +1,8 @@
 %tr{id: "contact_#{contact.id}"}
   %td= check_box_tag "contact_ids[]", contact.id
   %td
-    - if contact.first_name.present?
-      = contact.first_name.titleize
-    - else
-      .text-danger
-        unknown
-  %td
-    - if contact.last_name.present?
-      = contact.last_name.titleize
-    - else
-      .text-danger
-        unknown
+    = contact.try(:first_name)
+    = contact.try(:last_name)
   %td= contact.title
   %td= number_to_phone contact.mobile_phone
   %td= mail_to contact.email

@@ -19,6 +19,7 @@ class ContactsController < ApplicationController
 
   def create
     @contact.tag_list = params[:contact][:tag_list_for_form]
+    @contact.mobile_phone = PhonyRails.normalize_number(params[:contact][:mobile_phone], country_code: 'US')
 
     respond_to do |format|
       if @contact.save
@@ -44,6 +45,7 @@ class ContactsController < ApplicationController
 
   def update
     @contact.tag_list = params[:contact][:tag_list_for_form]
+    @contact.mobile_phone = PhonyRails.normalize_number(params[:contact][:mobile_phone], country_code: 'US')
 
     respond_to do |format|
       if @contact.update(contact_params.except(:tag_list_for_form))

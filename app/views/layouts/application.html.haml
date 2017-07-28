@@ -16,7 +16,7 @@
   %body{id: "#{controller_name}_#{action_name}", class: "hydra-body #{controller_name}"}
     = include_gon(:init => true)
     = render 'shared/sidebar'
-    #main.container
+    #main.container{style: 'margin-bottom: 100px;'}
       .unobtrusive-flash-container
       = yield
       .footer

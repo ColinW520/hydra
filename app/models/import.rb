@@ -15,7 +15,6 @@ class Import < ApplicationRecord
 
   after_create :start_processing
   def start_processing
-    Imports::ImportStartingWorker.new.perform(self.id) if Rails.env.development?
     Imports::ImportStartingWorker.perform_async(self.id) if Rails.env.production?
   end
 end

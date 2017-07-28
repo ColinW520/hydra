@@ -11,7 +11,6 @@
                 = button_tag type: "submit", class: "btn btn-sm btn-success" do
                   %i.fa.fa-crosshairs{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This will message only the contacts you select."}
               %th.sortable= smart_listing.sortable 'Name', :first_name
-              %th.sortable= smart_listing.sortable 'Last', :last_name
               %th.sortable= smart_listing.sortable 'Title', :title
               %th.sortable= smart_listing.sortable 'Mobile', :mobile_phone
               %th.sortable= smart_listing.sortable 'Email', :email

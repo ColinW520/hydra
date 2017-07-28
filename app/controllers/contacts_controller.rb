@@ -18,12 +18,10 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @tags = params[:contact][:tag_list_for_form]
-    @contact = Contact.create(contact_params.except(:tag_list_for_form))
+    @contact.tag_list = params[:contact][:tag_list_for_form]
 
     respond_to do |format|
       if @contact.save
-        current_user.organization.tag(@contact, with: @tags, on: :tags) if @tags.present?
         format.json { head :no_content }
         format.js { flash[:success] = 'Contact has been created.' }
         format.html {
@@ -45,8 +43,7 @@ class ContactsController < ApplicationController
   end
 
   def update
-    @tags = params[:contact][:tag_list_for_form]
-    current_user.organization.tag(@contact, with: @tags, on: :tags) if @tags.present?
+    @contact.tag_list = params[:contact][:tag_list_for_form]
 
     respond_to do |format|
       if @contact.update(contact_params.except(:tag_list_for_form))

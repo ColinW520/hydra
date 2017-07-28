@@ -1,24 +1,4 @@
-.row
-  .col-sm-12
-    %p.lead
-      Please be sure to include
-      %strong at least
-      the following headers in your CSV file (as the first row!):
-    %ul
-      %li first_name
-      %li last_name
-      %li email
-      %li phone**
-    %p.text-danger ** We will use this to identify your team members!
-    %p.lead You can also use these headers:
-    %ul
-      %li title
-      %li city
-      %li birthday: Please format as MM/DD
-      %li
-        tags: Please separate multiple tags with the `|` symbol. Example: (Is Cool|San Antonio Region|High Performer)
-        * this will override any/all existing tags
-      %li started_at: Please format as MM/DD/YYYY
+= render 'imports/instructions'
 .row
   .col-sm-12
     = simple_form_for [@import], authenticity_token: true, :html => { id: 'ImportForm' } do |f|
@@ -34,8 +14,3 @@
           = f.hidden_field :type, value: 'contact'
           = f.hidden_field :organization_id, value: current_user.organization_id
           = f.submit 'Import this File', class: 'btn btn-success btn-md', id: 'ImportSubmit'
-:coffeescript
-  # because this form has uploads...
-  # $('#ImportSubmit').on 'click', (e) ->
-  #   e.preventDefault()
-  #   $('#ImportForm').submit()

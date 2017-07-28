@@ -1,0 +1,25 @@
+.row
+  .col-sm-12
+    %p.lead
+      Please be sure to include
+      %strong.text-danger at least
+      the following headers in your CSV file (as the first row!):
+    %ul
+      %li first_name
+      %li last_name
+      %li phone*
+    .help-block.text-info
+      %strong *
+      We will use this to identify your team members. You may format however you wish, as long as it is a MOBILE number and ALL non-numeric charachters will be removed.
+      %strong.text-danger NO EXTENSIONS! (example: (316) 258-8774 x103)
+    %p.lead You can also use these headers:
+    %ul
+      %li email
+      %li title
+      %li city
+      %li tags**
+      %li started_at: Please format as MM/DD/YYYY
+    .help-block.text-info
+      %strong **
+      Please separate multiple tags with the `|` symbol, which can be found above your enter key and below your backspace key. Example: (Is Cool|San Antonio Region|High Performer)
+      This column will ADD these tags to this contact.

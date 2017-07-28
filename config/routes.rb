@@ -33,6 +33,10 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
   }
 
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+
   # Twilio Endpoints
   match '/twilio/authorize' => 'twilio/authorizations#authorize', via: [:get]
   match '/twilio/deauthorize' => 'twilio/authorizations#deauthorize', via: [:get]

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @organization = Organization.find_by_slug params[:organization_id]
-    users_scope = current_user.organization.users
+    users_scope = @organization.users
     smart_listing_create :users,
                          users_scope,
                          partial: "users/listing",
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    gon.organization_id = current_user.organization_id
+    gon.organization_id = Organization.find_by_slug params[:organization_id]
   end
 
   def edit
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         format.html {
           flash[:sucess] = 'User has been updated!'
-          redirect_to users_path
+          redirect_to users_path(current_user.organization)
         }
         format.json { head :no_content }
         format.js { flash[:success] = 'User has been updated.' }
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user.soft_delete!
     respond_to do |format|
       format.js { flash[:success] = 'User removed and can no longer access account.' }
-      format.html { redirect_to users_path, notice: 'User removed.' }
+      format.html { redirect_to users_path(current_user.organization), notice: 'User removed.' }
       format.json { head :no_content }
     end
   end
@@ -50,6 +50,7 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
+    @organization = Organization.find_by_slug params[:organization_id]
   end
 
   def user_params

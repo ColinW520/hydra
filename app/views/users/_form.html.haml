@@ -3,11 +3,15 @@
     = f.input :first_name, autofocus: true
   .form-group
     = f.input :last_name
-  %p Limited to Super Admins
   .form-group
-    = f.input :admin_role
+    = f.input :mobile_phone, as: :tel
   .form-group
+    = f.input :email, as: :email
+  .form-group
+    .help-block.text-warning Only check this box if you want this user to be able to control other users
     = f.input :supervisor_role
+    .help-block.text-danger Only check this box if you want this user to be able to buy lines, change lines, and edit organization settings.
+    = f.input :admin_role
   .form-group
     = f.input :timezone, priority: /US/, as: :time_zone
   .form-actions.col-centered

@@ -5,6 +5,7 @@ class Twilio::VoiceCallsController < Twilio::BaseController
   def create
     @line = Line.find_by_number params[:Called]
 
+    # this should really, never, happen
     if @line.nil?
       response = Twilio::TwiML::Response.new do |r|
     	  r.Reject

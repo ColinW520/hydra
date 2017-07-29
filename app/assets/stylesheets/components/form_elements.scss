@@ -1,0 +1,14 @@
+label {
+  font-weight: bold;
+}
+
+
+abbr[title],
+abbr[data-original-title] {
+  cursor: auto;
+}
+
+abbr[title] {
+  color: $brand-danger;
+  text-decoration: none;
+}

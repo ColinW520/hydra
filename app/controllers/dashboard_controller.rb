@@ -9,14 +9,16 @@ class DashboardController < ApplicationController
   def usage
     @twilio_client = Twilio::REST::Client.new(current_user.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
 
-    @last_month_records = []
-    @twilio_client.usage.records.last_month.list.each do |record|
-      @last_month_records << { description: record.description, price: record.price, count: record.count } if record.count.to_f > 0.to_f
-    end
-
-    @this_month_records = []
-    @twilio_client.usage.records.this_month.list.each do |record|
-      @this_month_records << { description: record.description, price: record.price, count: record.count } if record.count.to_f > 0.to_f
+    @records = []
+    case params[:time_frame]
+      when 'last_month'
+        @twilio_client.usage.records.last_month.list.each do |record|
+          @records << { description: record.description, price: record.price, count: record.count } if record.count.to_f > 0.to_f
+        end
+      else
+        @twilio_client.usage.records.this_month.list.each do |record|
+          @records << { description: record.description, price: record.price, count: record.count } if record.count.to_f > 0.to_f
+        end
     end
   end
 

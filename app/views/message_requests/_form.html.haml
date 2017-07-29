@@ -4,9 +4,11 @@
     %ul#errors
   = f.error_notification
   .form-group
-    = f.input :body, label: 'Message Text', required: true, autofocus: true, input_html: { maxlength: 140 }, required: true
-  .form-group
     = f.input :line_id, label: 'From Line', as: :select, collection: current_user.organization.lines, label_method: :dropdown_name, value_method: :id, include_blank: false
+  .form-group
+    = f.input :body, label: 'Message Text', hint: 'Keep it brief, please. 140 characters, max.', as: :text, required: true, autofocus: true, input_html: { maxlength: 140 }, required: true, class: 'form-control'
+    %span#counter{"data-maximum-length" => "140"}= 140
+
   .form-actions
     .text-center
       = f.hidden_field :user_id, value: current_user.id
@@ -20,3 +22,12 @@
       %p.lead.text-danger
         Estimate:
         = number_to_currency @expected_count.to_f * 0.0075, precision: 4
+
+:coffeescript
+  $(document).ready ->
+    review_text = $('#message_request_body')
+    counter = $('#counter')
+    max_length = counter.data('maximum-length')
+    review_text.keyup ->
+      counter.val max_length - ($(this).val().length)
+      return

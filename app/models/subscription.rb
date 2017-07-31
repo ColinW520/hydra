@@ -1,6 +1,8 @@
 class Subscription < ApplicationRecord
   belongs_to :organization
 
+  validates :signer_name, presence: true
+
   before_create :create_on_stripe
   def create_on_stripe
     sub_details = {}

@@ -1,5 +1,6 @@
 class BillingMethodsController < ApplicationController
   before_action :find_billing_method, except: [:index, :new, :create]
+  layout :resolve_layout
 
   def index
     @organization = Organization.friendly.find params[:organization_id]
@@ -26,7 +27,7 @@ class BillingMethodsController < ApplicationController
         format.js { flash[:success] = 'Billing Method has been created.' }
         format.html {
           flash[:success] = 'Your Billing Method has been created!'
-          redirect_to organization_path(@billing_method.organization)
+          redirect_to new_organization_subscription_path(@billing_method.organization)
         }
       else
         format.json { render json: @billing_method.errors.full_messages, status: :unprocessable_entity }
@@ -78,5 +79,13 @@ class BillingMethodsController < ApplicationController
 
   def billing_method_params
     params.require(:billing_method).permit!
+  end
+
+  def resolve_layout
+    if action_name == "new" || action_name == "create"
+      "devise"
+    else
+      "application"
+    end
   end
 end

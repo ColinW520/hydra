@@ -1,10 +1,3 @@
-.row
-  .col-sm-12
-    .text-center
-      %h1.text-success $1/month
-      %p.lead Clicking 'Create Subscription' with charge your card $1 today, and monthly thereafter unless you cancel. By clicking this, you agree to our privacy poliy and terms of service.
-
-%br
 = simple_form_for [@organization, @subscription], authenticity_token: true, html: { id: 'SubscriptionForm' } do |f|
   #error_holder
     %ul#errors
@@ -13,8 +6,15 @@
   = f.input :stripe_customer_id, as: :hidden, input_html: { value: @organization.stripe_customer_id }
   = f.input :organization_id, as: :hidden, input_html: { value: @organization.id }
   .form-group
-    %label Have a Coupon?
-    = f.input :coupon_code
+    = f.input :terms_agreed, label: 'I agree to the terms and conditions.', as: :boolean, inline_label: true
+  .form-group
+    = f.input :spam_agreed, label: 'I will comply with the Anti-Spam requirements.', as: :boolean, inline_label: true
+  .form-group
+    %p.text-danger I agree that I am legally responsible for the content of any message I send with the help of this service.
+    = f.input :signer_name, label: 'Signed By', placeholder: 'Type Your Name Here'
+  .form-group
+    = f.input :coupon_code, label: 'Coupon Code', hint: 'If you have a coupon code, enter it here.'
   .form-actions
     .text-center
-      = f.button :submit, class: 'btn btn-lg btn-success'
+      = f.button :submit, 'Finish Setup & Charge My Card', class: 'btn btn-block btn-success'
+      .text-info Your service will begin immediately after clicking this button!

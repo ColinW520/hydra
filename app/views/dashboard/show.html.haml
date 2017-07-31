@@ -9,26 +9,23 @@
 - if current_user.setup?
   .row
     .col-sm-12.col-md-6
-      .card.card-primary
-        .card-title
-          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
-            Messages
-        = line_chart messages_dashboard_path, stacked: true, library: {position:  'bottom', pointSize: 0}
+      .card.card-default
+        .card-block
+          %h4 Messages
+          = line_chart messages_dashboard_path, stacked: true, library: { position:  'bottom', pointSize: 0 }
     .col-sm-12.col-md-6
-      .card.card-primary
-        .card-title
-          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
-            Calls
-        = line_chart calls_dashboard_path, stacked: true, library: { position:  'bottom', pointSize: 0}
+      .card.card-default
+        .card-block
+          %h4 Calls
+          = line_chart calls_dashboard_path, stacked: true, library: { position:  'bottom', pointSize: 0}
 
   %br
   .row
     .col-sm-12.col-md-4
-      .card.card-primary
-        .card-title
-          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
-            List Growth
-        = line_chart list_growth_dashboard_path, library: { position:  'bottom', pointSize: 0}
+      .card.card-default
+        .card-block
+          %h4 List Growth
+          = line_chart list_growth_dashboard_path, library: { position:  'bottom', pointSize: 0}
 
     .col-sm-12.col-md-4
       #LastMonth

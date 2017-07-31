@@ -1,22 +1,22 @@
-.card.card-primary.table-card
-  .card-title
-    %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
-      = params[:time_frame].titleize
-%table.table.table-bordered.table-primary.table-condensed
-  %thead
-    %tr
-      %th Item
-      %th.text-center Units
-      %th.text-right Cost
-  %tbody
-    - @records.each do |r|
-      %tr
-        %td= r[:description]
-        %td.text-center= number_with_delimiter r[:count]
-        %td.text-right= number_to_currency r[:price], precision: 4
-    %tr
-      %td
-        %strong Total
-      %td{colspan: 2}
-        .pull-right
-          %strong= number_to_currency @records.sum { |r| r[:price].to_f }, precision: 4
+.card.card-default
+  .card-title.pt-3.pl-3.mb-0
+    %h4= params[:time_frame].titleize
+  .card-block.px-0
+    %table.table.table-primary.table-condensed.mb-0.mt-0.pt-0
+      %thead
+        %tr
+          %th Item
+          %th.text-center Units
+          %th.text-right Cost
+      %tbody
+        - @records.each do |r|
+          %tr
+            %td= r[:description]
+            %td.text-center= number_with_delimiter r[:count]
+            %td.text-right= number_to_currency r[:price], precision: 4
+        %tr
+          %td
+            %strong Total
+          %td{colspan: 2}
+            .pull-right
+              %strong= number_to_currency @records.sum { |r| r[:price].to_f }, precision: 4

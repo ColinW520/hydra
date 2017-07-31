@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   before_filter :find_organization, except: [:index, :new, :create]
+  layout :resolve_layout
 
   def index
     smart_listing_create :organizations,
@@ -18,10 +19,10 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.save
         format.json { head :no_content }
-        format.js { flash[:success] = 'Organization has been created!' }
+        format.js { flash[:success] = 'Your organization has been created. Now you can Subscribe, and Connect your Twilio account.' }
         format.html {
-          flash[:success] = 'Your organization has been created! Now you can set up your billing and subscribe.'
-          redirect_to organization_path(@organization)
+          flash[:success] = 'Your organization has been created. Now you can connect your Twilio Account.'
+          redirect_to connect_organization_path(@organization)
         }
       else
         format.json { render json: @solution.errors.full_messages, status: :unprocessable_entity }
@@ -36,6 +37,10 @@ class OrganizationsController < ApplicationController
   end
 
   def edit
+
+  end
+
+  def connect
 
   end
 
@@ -86,5 +91,13 @@ class OrganizationsController < ApplicationController
 
   def organization_params
     params.require(:organization).permit!
+  end
+
+  def resolve_layout
+    if ["new", 'create', 'connect'].include? action_name
+      "devise"
+    else
+      "application"
+    end
   end
 end

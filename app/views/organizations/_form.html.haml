@@ -1,24 +1,24 @@
 = simple_form_for [@organization], authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
-  #error_holder
-    %ul#errors
-  = f.error_notification
-  = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
-  .form-group
-    = f.input :name, autofocus: true
-  .form-group
-    = f.input :email_domain, as: :email
-  .form-group
-    = f.input :city
-  .form-group
-    = f.input :state
-  .form-group
-    = f.input :zip
-  .form-group
-    = f.input :phone, as: :tel
-  .form-group
-    = f.input :preferred_area_code, as: :integer, placeholder: '210', max: 999
-  .form-actions
-    .text-center
-      = f.button :submit, class: 'btn btn-md btn-success', id: 'submit-button' do
-        %i.fa.fa-cc-stripe
-        Submit
+  .row
+    .col-sm-12
+      #error_holder
+        %ul#errors
+      = f.error_notification
+      = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
+  .row
+    .col-sm-12.col-md-12
+      .form-group
+        = f.input :name, hint: 'ie: United Apartment Group, EngergyX Fitess, Bald Man Brewing', autofocus: true
+  .row
+    .col-sm-12.col-md-12
+      .form-group
+        = f.input :email_domain, as: :email, label: 'Billing Email', required: true, hint: 'The email address to which you want Hydra receipts sent.'
+      .form-group
+        = f.input :phone, required: true, hint: 'Same as what you would put on a business listing.', as: :tel
+      .form-group
+        = f.input :preferred_area_code, label: 'Area Code', as: :integer, required: true, hint: 'Use the same area code as your business, ideally. This affects the area codes available to you when you add a line.', max: 999, required: true
+  .row
+    .col-sm-12
+      .form-actions
+        .text-center
+          = f.button :submit, class: 'btn btn-block btn-success', id: 'submit-button'

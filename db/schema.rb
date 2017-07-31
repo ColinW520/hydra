@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711060335) do
+ActiveRecord::Schema.define(version: 20170731175530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,18 @@ ActiveRecord::Schema.define(version: 20170711060335) do
     t.integer  "percent_off"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.string   "name"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.string   "description"
+    t.string   "link"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["organization_id"], name: "index_events_on_organization_id", using: :btree
   end
 
   create_table "imports", force: :cascade do |t|
@@ -237,11 +249,14 @@ ActiveRecord::Schema.define(version: 20170711060335) do
     t.integer  "created_by"
     t.integer  "canceled_by"
     t.string   "coupon_code"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.datetime "ends_at"
     t.string   "stripe_id"
     t.datetime "canceled_at"
+    t.boolean  "spam_agreed",        default: false
+    t.boolean  "terms_agreed",       default: false
+    t.string   "signer_name"
     t.index ["organization_id"], name: "index_subscriptions_on_organization_id", using: :btree
   end
 
@@ -308,6 +323,7 @@ ActiveRecord::Schema.define(version: 20170711060335) do
 
   add_foreign_key "billing_methods", "organizations"
   add_foreign_key "contacts", "organizations"
+  add_foreign_key "events", "organizations"
   add_foreign_key "imports", "organizations"
   add_foreign_key "lines", "organizations"
   add_foreign_key "lines", "users"

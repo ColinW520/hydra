@@ -6,7 +6,7 @@ class Twilio::AuthorizationsController < Twilio::BaseController
     respond_to do |format|
       format.html {
         flash[:notice] = 'You have successfully connected your Twilio account and authorized Aptexx Hydra to make charges on your behalf. Thanks!'
-        redirect_to root_path
+        redirect_to connect_organization_path(@organization)
       }
     end
   end

@@ -2,12 +2,13 @@
   .col-sm-12.col-md-6.col-lg-5.col-centered
     .card.mt-4
       .card-block
+        .progress
+          .progress-bar.progress-bar-striped.progress-bar-animated.bg-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "25", :role => "progressbar", :style => "width: 25%"}
+        %hr
         .row
           .col-sm-12
-            %p.lead.text-center.text-success
-              Creating an account is
-              %strong free.
-              We will guide you through account setup from here.
+            %h4 Step 1
+            %p Create your user profile.
         .row
           .col-sm-12
             = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
@@ -32,6 +33,6 @@
                 -# .form-group
                 -#   = f.input :password_confirmation, required: true
               .form-actions
-                = f.button :submit, "Sign up", class: 'btn btn-success btn-block'
+                = f.button :submit, "Next", class: 'btn btn-success btn-block'
     %br
     = render "users/shared/links"

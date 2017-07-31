@@ -1,0 +1,29 @@
+
+- provide(:title, 'Connect your Twilio Account')
+.row
+  .col-sm-12.col-md-8.col-lg-6.col-centered
+    .card.mt-4
+      .card-block
+        .row
+          .col-sm-12
+            .progress
+              .progress-bar.progress-bar-striped.progress-bar-animated.bg-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "66", :role => "progressbar", :style => "width: 66%"}
+            %hr
+            %h4 Step 3: Connect
+            %p Connect your Twilio account. This way, you pay the lowest possible fees for everything we do that is powered by Twilio.
+        %hr
+        .row
+          .col-sm-12
+            - if @organization.twilio_auth_id.present?
+              .text-center
+                %i.fa.fa-check.fa-5x.text-success
+                %br
+                Awesome! Your Twilio account is now connected. You may proceed with setting up your subscription.
+              %hr
+              = link_to new_organization_billing_method_path(@organization.slug), class: 'btn btn-block btn-success' do
+                NEXT
+            - else
+              %p Clicking this button will take you to Twilio, where you will be asked to connect your account. You may also create and fund a Twilio account during this process, if you do not already have one. Once complete, you will be brought back here.
+              = link_to "https://www.twilio.com/authorize/CN29760c1484efcafb62cf661a40e70338?state=#{@organization.id}", class: 'btn btn-block btn-info' do
+                %i.fa.fa-external-link
+                Connect My Account

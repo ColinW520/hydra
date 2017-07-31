@@ -20,6 +20,10 @@ class Organization < ApplicationRecord
 
   validates :name, presence: true
 
+  def setup?
+    self.twilio_auth_id && self.subscription.present?
+  end
+
   def twilio_account
     client = Twilio::REST::Client.new self.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN']
     return client.try(:account)

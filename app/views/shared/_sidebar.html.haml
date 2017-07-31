@@ -1,6 +1,6 @@
 #sidebar
   .nav-side-menu
-    .brand HYDRA
+    .brand{style: "font-size: 20px;"} HYDRA
     %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
     .menu-list
       %ul#menu-content.menu-content.collapse.out
@@ -8,18 +8,22 @@
           %li{class: @subnav == 'dashboard' ? 'active' : nil}
             %i.fa.fa-dashboard.fa-lg
             Dashboard
+        - if current_user.setup?
+          %a{href: contacts_path}
+            %li{class: @subnav == 'contacts' ? 'active' : nil}
+              %i.fa.fa-address-book-o.fa-lg
+              Directory
 
-        %a{href: contacts_path}
-          %li{class: @subnav == 'contacts' ? 'active' : nil}
-            %i.fa.fa-address-book-o.fa-lg
-            Directory
+          %a{href: messages_path}
+            %li{class: @subnav == 'messages' ? 'active' : nil}
+              %i.fa.fa-envelope.fa-lg
+              Messages
 
-        %a{href: lines_path}
-          %li{class: @subnav == 'lines' ? 'active' : nil}
-            %i.fa.fa-hashtag.fa-lg
-            Lines
+          %a{href: lines_path}
+            %li{class: @subnav == 'lines' ? 'active' : nil}
+              %i.fa.fa-hashtag.fa-lg
+              Lines
 
-        - if current_user.organization_id.present?
           %a{href: organization_users_path(current_user.organization)}
             %li{class: @subnav == 'users' ? 'active' : nil}
               %i.fa.fa-users
@@ -29,11 +33,6 @@
           %li{class: @subnav == 'organizations' ? 'active' : nil}
             %i.fa.fa-gears.fa-lg
             Settings
-
-        %a{href: messages_path}
-          %li{class: @subnav == 'messages' ? 'active' : nil}
-            %i.fa.fa-envelope.fa-lg
-            Messages
 
         %a{href: edit_user_registration_path}
           %li{class: @subnav == 'devise' ? 'active' : nil}

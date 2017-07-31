@@ -23,14 +23,14 @@
 
   %br
   .row
-    .col-sm-12.col-md-6
+    .col-sm-12.col-md-4
       .card.card-primary
         .card-title
           %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
             List Growth
         = line_chart list_growth_dashboard_path, library: { position:  'bottom', pointSize: 0}
 
-    .col-sm-12.col-md-3
+    .col-sm-12.col-md-4
       #LastMonth
         %br
         %br
@@ -38,7 +38,7 @@
         .text-center
           %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
           %h3 Loading...
-    .col-sm-12.col-md-3
+    .col-sm-12.col-md-4
       #ThisMonth
         %br
         %br

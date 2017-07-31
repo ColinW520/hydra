@@ -12,10 +12,11 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     %title
       = full_title('HYDRA', yield(:title))
-  %body{id: "#{controller_name}_#{action_name}", class: "#{controller_name}"}
+  %body{id: "#{controller_name}_#{action_name}", class: "#{controller_name}", style: "background-color: #f3f3f3"}
     .container
       %br
       %br
       %br
+      %h1.text-center HYDRA
       .unobtrusive-flash-container{style: 'max-width: 50vh; margin: 0 auto;'}
       = yield

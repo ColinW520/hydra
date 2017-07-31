@@ -1,55 +1,62 @@
 - provide(:title, 'Registration')
+%br
 .row
-  .col-sm-12.col-md-6
-    .card.card-outline-primary.mt-4
+  .col-sm-12.col-md-4.col-centered
+    .card.card-default.mt-4
       .card-block
         .row
           .col-sm-12
             %h2 Edit My Account
+            %p Edit your account settings below.
+        %hr
         .row
           .col-sm-12
             = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
               = f.error_notification
               .form-inputs
-                .form-group
-                  = f.input :first_name, required: true, autofocus: true, autofocus: true
-                .form-group
-                  = f.input :last_name, required: true, autofocus: true
-                .form-group
-                  = f.input :mobile_phone, required: true, autofocus: true, as: :tel
-                .form-group
-                  = f.input :email, required: true, autofocus: true
+                .row
+                  .col-sm-12.col-md-6
+                    .form-group
+                      = f.input :first_name, required: true, autofocus: true, autofocus: true
+                  .col-sm-12.col-md-6
+                    .form-group
+                      = f.input :last_name, required: true, autofocus: true
+                .row
+                  .col-sm-12.col-md-6
+                    .form-group
+                      = f.input :mobile_phone, required: true, autofocus: true, as: :tel
+                  .col-sm-12.col-md-6
+                    .form-group
+                      = f.input :email, required: true, autofocus: true
                 - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-                  %p
-                    Currently waiting confirmation for: #{resource.unconfirmed_email}
-                .form-group
-                  = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
-                .form-group
-                  = f.input :password_confirmation, required: false
-                .form-group
-                  = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
+                  .row
+                    .col-sm-12
+                      %p
+                        Currently waiting confirmation for: #{resource.unconfirmed_email}
+                .row
+                  .col-sm-12.col-md-6
+                    .form-group
+                      = f.input :password, autocomplete: "off", hint: "leave it blank to remain unchanged", required: false
+                  .col-sm-12.col-md-6
+                    .form-group
+                      = f.input :password_confirmation, hint: "leave it blank to remain unchanged", required: false
+                .row
+                  .col-sm-12
+                    .form-group
+                      = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
               .form-actions
-                = f.button :submit, "Update", class: 'btn btn-success pull-right'
-            = link_to "Back", :back
-
-  .col-sm-12.col-md-6
-    .card.card-outline-danger.mt-4
-      .card-block
-        .row
-          .col-sm-12
-            %h3 Cancel My Account
-            %hr
-            %p
-              Unhappy? We're sorry to hear that. Be sure to follow these instructions before clicking the red button below.
-            %ol
-              %li
-                Check with your account's administrator.
-                %ul
-                  %li If that's you, proceed to the next step.
-                  %li Once approved, go ahead and click the red button.
-              %li On your Organization Settings page, click the 'cancel' button next to the Subscription heading.
-              %li Cancel any pending/scheduled messages you have setup.
-              %li Release any lines you own (optional, you can keep them if you want, they're on your Organization's Twilio Account))
-              %li Disconnect your Twilio Account (optional)
-            %br
-            #{link_to "Cancel My Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger btn-md'}
+                = f.button :submit, "Update", class: 'btn btn-block btn-success'
+- if current_user.admin_role?
+  .row
+    .col-sm-12.col-md-4.col-centered
+      .card.card-outline-danger.mt-4
+        .card-block
+          .row
+            .col-sm-12
+              %h3 Cancel My Account
+              %hr
+              %p
+                Unhappy? We're sorry to hear that. Be sure to check with your account's administrator before cancelling your account.
+                %strong.text-danger IT WILL COST $100 TO RESTORE YOUR ACCOUNT SHOULD YOU MISTAKENLY CANCEL IT!
+              %br
+              #{link_to "Cancel My Account", registration_path(resource_name), data: { confirm: "Are you sure? IT WILL COST $100 TO RESTORE YOUR ACCOUNT SHOULD YOU MISTAKENLY CANCEL IT!" }, method: :delete, class: 'btn btn-danger btn-block'}

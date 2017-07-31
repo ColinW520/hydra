@@ -1,11 +1,11 @@
 .row
   .col-sm-12.col-md-6.col-lg-5.col-centered
-    .card.card-outline-primary.mt-4
+    .card.card-default.mt-4
       .card-block
         .row
           .col-sm-12
-            %h2 Forgetting Something?
-            %p.text-primary No worries. We'll send you some instructions for resetting your password and getting back in.
+            %h2 See, that was easy!
+            %p.text-primary Go ahead and pick out a new password here.
         %br
         .row
           .col-sm-12
@@ -20,4 +20,5 @@
                   = f.input :password_confirmation, label: "Confirm your new password", required: true
               .form-actions
                 = f.button :submit, "Change my password"
-            = render "users/shared/links"
+    %br    
+    = render "users/shared/links"

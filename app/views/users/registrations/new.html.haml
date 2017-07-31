@@ -17,14 +17,14 @@
                 .row
                   .col-sm-12.col-md-6
                     .form-group
-                      = f.input :first_name, required: true, autofocus: true
+                      = f.input :first_name, label: 'First Name', required: true, autofocus: true
                     .form-group
-                      = f.input :last_name, required: true
+                      = f.input :last_name, label: 'Last Name', required: true
                   .col-sm-12.col-md-6
                     .form-group
                       = f.input :email, required: true
                     .form-group
-                      = f.input :mobile_phone, required: true
+                      = f.input :mobile_phone, label: 'Mobile Phone', required: true
                 .row
                   .col-sm-12
                     .form-group

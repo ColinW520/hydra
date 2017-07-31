@@ -8,9 +8,6 @@
             - if current_user.organization_id.present?
               = link_to organization_path(current_user.organization), class: 'btn btn-lg btn-success' do
                 Configure Billing
-              .text-center
-                %br
-                Securely Powered by Stripe
             - else
               = link_to new_organization_path, class: 'btn btn-lg btn-success' do
                 Set Up My Organization

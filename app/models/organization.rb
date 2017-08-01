@@ -7,16 +7,16 @@ class Organization < ApplicationRecord
   validates :phone, phony_plausible: true
 
   # relationships
-  has_many :users
-  has_many :contacts
-  has_many :billing_methods
-  has_many :imports
+  has_many :users, dependent: :destroy
+  has_many :contacts, dependent: :destroy
+  has_many :billing_methods, dependent: :destroy
+  has_many :imports, dependent: :destroy
   has_one :primary_billing_method, ->(organization) { where(stripe_token_id: organization.stripe_token_id) }, class_name: 'BillingMethod'
   has_one :subscription
-  has_many :messages
-  has_many :message_requests
+  has_many :messages, dependent: :destroy
+  has_many :message_requests, dependent: :destroy
   has_many :lines
-  has_many :call_logs
+  has_many :call_logs, dependent: :destroy
 
   validates :name, presence: true
 

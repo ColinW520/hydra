@@ -19,6 +19,6 @@
                 .form-group
                   = f.input :password_confirmation, label: "Confirm your new password", required: true
               .form-actions
-                = f.button :submit, "Change my password"
-    %br    
+                = f.button :submit, "Change My Password", class: 'btn btn-success btn-block'
+    %br
     = render "users/shared/links"

@@ -10,8 +10,8 @@ class Twilio::Lines::BuyingWorker < Twilio::BaseWorker
     twilio_number = @twilio_client.incoming_phone_numbers.create(
       friendly_name: @line.name,
       phone_number: @line.number,
-      sms_url: "https://aptexx-hydra.herokuapp.com/twilio/messages",
-      voice_url: "https://aptexx-hydra.herokuapp.com/twilio/voice_calls",
+      sms_url: "https://www.textmy.team/twilio/messages",
+      voice_url: "https://www.textmy.team/twilio/voice_calls",
     )
 
     # NOTE WE REALLY NEED TO UPDATE THIS TO DEAL WITH NUMBER NOT AVAILABLE ERROS

@@ -13,7 +13,7 @@
     = javascript_include_tag "//www.google.com/jsapi", "chartkick"
     %script{:src => "https://js.stripe.com/v3/"}
     %title
-      = full_title('HYDRA', yield(:title))
+      = full_title('TMT', yield(:title))
   %body{id: "#{controller_name}_#{action_name}", class: "hydra-body #{controller_name}"}
     = include_gon(:init => true)
     = render 'shared/sidebar'

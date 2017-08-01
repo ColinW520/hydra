@@ -13,7 +13,7 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     # prep it
     recipient_hash = { from: @line.number, body: @message_request.body }
     recipient_hash[:to] = Rails.env.production? ? @contact.mobile_phone : "+13162588774"
-    recipient_hash[:status_callback] = "https://hydra.aptx.cm/twilio/callbacks/status" if Rails.env.production?
+    recipient_hash[:status_callback] = "https://textmy.team/twilio/callbacks/status" if Rails.env.production?
 
     # send it
     @message = @twilio_client.messages.create(recipient_hash)

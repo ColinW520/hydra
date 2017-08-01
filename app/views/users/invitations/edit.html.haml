@@ -2,7 +2,7 @@
   .card-block
     .row
       .col-sm-12
-        %h2= t 'devise.invitations.edit.header'
+        %h4= t 'devise.invitations.edit.header'
     .row
       .col-sm-12
         = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put } do |f|
@@ -24,11 +24,12 @@
                 .form-group
                   = f.input :email, as: :email
             .row
-              .col-sm-12.col-md-6
+              .col-sm-12
                 .form-group
-                  = f.input :password, label: 'Set Your Password'
-              .col-sm-12.col-md-6
+                  = f.input :password, label: 'Set Your Password', hint: 'At least 6 charachter. Bonus! Use two words.'
+            .row
+              .col-sm-12
                 .form-group
-                  = f.input :password_confirmation, label: 'Confirm You Password'
+                  = f.input :password_confirmation, label: 'Confirm You Password', hint: 'Same as your password field'
           .form-actions
             = f.button :submit, t("devise.invitations.edit.submit_button"), class: 'btn btn-block btn-md btn-success'

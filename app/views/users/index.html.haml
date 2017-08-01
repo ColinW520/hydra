@@ -5,10 +5,11 @@
       %h4
         %i.fa.fa-street-view
         Users
-        .pull-right
-          = link_to new_user_invitation_path, class: 'btn btn-sm btn-success' do
-            %i.fa.fa-plus
-            Invite
+        - if current_user.admin_role?
+          .pull-right
+            = link_to new_user_invitation_path, class: 'btn btn-sm btn-success' do
+              %i.fa.fa-plus
+              Invite
   %br
 .row
   .col-sm-12

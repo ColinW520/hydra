@@ -13,7 +13,7 @@ en:
         header: "Send invitation"
         submit_button: "Send an invitation"
       edit:
-        header: "Finish Setting Up Your Account"
+        header: "Welcome! Setup your account here."
         submit_button: "Finalize Acount"
     mailer:
       invitation_instructions:

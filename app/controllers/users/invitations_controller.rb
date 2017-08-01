@@ -2,6 +2,8 @@ class Users::InvitationsController < Devise::InvitationsController
   before_filter :set_sanitized_params, only: :create
   before_filter :update_sanitized_params, only: :update
 
+  layout :resolve_layout
+
   # PUT /resource/invitation
   def update
     respond_to do |format|
@@ -33,6 +35,14 @@ class Users::InvitationsController < Devise::InvitationsController
       organization_users_path(current_inviter.organization)
     else
       after_sign_in_path_for(current_inviter)
+    end
+  end
+
+  def resolve_layout
+    if action_name == "edit"
+      "devise"
+    else
+      "application"
     end
   end
 end

@@ -37,7 +37,7 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
       @forward = @client.messages.create(
         from: @line.number,
         to: @line.sms_alert_number,
-        body: "The #{@line.name} line just received a new message on Hydra. Check it out here: https://textmy.team/contacts/#{@message.contact.id}"
+        body: "The #{@line.name} line just received a new message on Hydra. Check it out here: https://www.textmy.team/contacts/#{@message.contact.id}"
       )
 
       @message.update_attribute(:forwarded_to, @line.sms_alert_number)

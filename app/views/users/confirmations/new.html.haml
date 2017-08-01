@@ -1,19 +1,17 @@
-.row
-  .col-sm-12.col-md-6.col-lg-5.col-centered
-    .card.card-default.mt-4
-      .card-block
-        .row
-          .col-sm-12
-            %h2 Resend Instrucitons
-        .row
-          .col-sm-12
-            = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-              = f.error_notification
-              = f.full_error :confirmation_token
-              .form-inputs
-                = f.input :email, required: true, autofocus: true
-              .form-actions
-                = f.button :submit, "Resend Instructions", class: 'btn btn-success pull-right'
+.card
+  .card-block
+    .row
+      .col-sm-12
+        %h2 Resend Instrucitons
+    .row
+      .col-sm-12
+        = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+          = f.error_notification
+          = f.full_error :confirmation_token
+          .form-inputs
+            = f.input :email, required: true, autofocus: true
+          .form-actions
+            = f.button :submit, "Resend Instructions", class: 'btn btn-success pull-right'
 
-    %br
-    = render "users/shared/links"
+%br
+= render "users/shared/links"

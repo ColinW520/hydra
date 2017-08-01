@@ -1,19 +1,17 @@
-.row
-  .col-sm-12.col-md-6.col-lg-5.col-centered
-    .card.mt-4
-      .card-block
-        .row
-          .col-sm-12
-            %p.text-primary.text-center No worries. We'll send you some instructions for resetting your password. You'll be back in before you know it!
-        %br
-        .row
-          .col-sm-12
-            = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-              = f.error_notification
-              .form-inputs
-                .form-group
-                  = f.input :email, required: true, autofocus: true
-              .form-actions
-                = f.button :submit, "Reset", class: 'btn btn-success btn-block'
+.card
+  .card-block
+    .row
+      .col-sm-12
+        %p.text-primary.text-center No worries. We'll send you some instructions for resetting your password. You'll be back in before you know it!
     %br
-    = render "users/shared/links"
+    .row
+      .col-sm-12
+        = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+          = f.error_notification
+          .form-inputs
+            .form-group
+              = f.input :email, required: true, autofocus: true
+          .form-actions
+            = f.button :submit, "Reset", class: 'btn btn-success btn-block'
+%br
+= render "users/shared/links"

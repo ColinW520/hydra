@@ -1,38 +1,35 @@
-.row
-  .col-sm-12.col-md-6.col-lg-5.col-centered
-    .card.mt-4
-      .card-block
-        .progress
-          .progress-bar.progress-bar-striped.progress-bar-animated.bg-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "25", :role => "progressbar", :style => "width: 25%"}
-        %hr
-        .row
-          .col-sm-12
-            %h4 Step 1
-            %p Create your user profile.
-        .row
-          .col-sm-12
-            = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-              = f.error_notification
-              .form-inputs
-                .row
-                  .col-sm-12.col-md-6
-                    .form-group
-                      = f.input :first_name, label: 'First Name', required: true, autofocus: true
-                    .form-group
-                      = f.input :last_name, label: 'Last Name', required: true
-                  .col-sm-12.col-md-6
-                    .form-group
-                      = f.input :email, required: true
-                    .form-group
-                      = f.input :mobile_phone, label: 'Mobile Phone', required: true
-                .row
-                  .col-sm-12
-                    .form-group
-                      = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum. Bonus! Use two words." if @minimum_password_length)
-                / we do not require password confirmation at this time.
-                -# .form-group
-                -#   = f.input :password_confirmation, required: true
-              .form-actions
-                = f.button :submit, "Next", class: 'btn btn-success btn-block'
-    %br
-    = render "users/shared/links"
+.card
+  .card-block
+    .progress
+      .progress-bar.progress-bar-striped.progress-bar-animated.bg-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "25", :role => "progressbar", :style => "width: 25%"}
+    %hr
+    .row
+      .col-sm-12
+        %h4 Register Your Profile
+    .row
+      .col-sm-12
+        = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = f.error_notification
+          .form-inputs
+            .row
+              .col-sm-12.col-md-6
+                .form-group
+                  = f.input :first_name, label: 'First Name', required: true, autofocus: true
+                .form-group
+                  = f.input :last_name, label: 'Last Name', required: true
+              .col-sm-12.col-md-6
+                .form-group
+                  = f.input :email, required: true
+                .form-group
+                  = f.input :mobile_phone, label: 'Mobile Phone', required: true
+            .row
+              .col-sm-12
+                .form-group
+                  = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum. Bonus! Use two words." if @minimum_password_length)
+            / we do not require password confirmation at this time.
+            -# .form-group
+            -#   = f.input :password_confirmation, required: true
+          .form-actions
+            = f.button :submit, "Next", class: 'btn btn-success btn-block'
+%br
+= render "users/shared/links"

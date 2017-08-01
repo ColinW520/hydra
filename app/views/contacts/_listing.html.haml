@@ -2,27 +2,29 @@
 %br
 .row
   .col-sm-12
-    .card.card-outline-primary.table-card
-      .table-responsive.table-condensed
-        = form_tag new_message_request_path, remote: true, method: :get do
-          %table.table.table-hover
-            %thead.thead-inverse
-              %th
-                = button_tag type: "submit", class: "btn btn-sm btn-success" do
-                  %i.fa.fa-crosshairs{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This will message only the contacts you select."}
-              %th.sortable= smart_listing.sortable 'Name', :first_name
-              %th.sortable= smart_listing.sortable 'Title', :title
-              %th.sortable= smart_listing.sortable 'Mobile', :mobile_phone
-              %th.sortable= smart_listing.sortable 'Email', :email
-              %th.sortable= smart_listing.sortable 'Messaged', :last_messaged_at
-              %th Tags
-              %th
-            %tbody#contacts
-              - smart_listing.collection.each do |contact|
-                = render contact
+    .card.card-default
+      .card-body
+        .table-responsive.table-condensed
+          = form_tag new_message_request_path, remote: true, method: :get do
+            %table.table.table-hover
+              %thead.thead-inverse
+                %th
+                  = button_tag type: "submit", class: "btn btn-sm btn-success" do
+                    %i.fa.fa-crosshairs{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This will message only the contacts you select."}
+                %th.sortable= smart_listing.sortable 'Name', :first_name
+                %th.sortable= smart_listing.sortable 'Title', :title
+                %th.sortable= smart_listing.sortable 'Mobile', :mobile_phone
+                %th.sortable= smart_listing.sortable 'Email', :email
+                %th.sortable= smart_listing.sortable 'Messaged', :last_messaged_at
+                %th Tags
+                %th
+              %tbody#contacts
+                - smart_listing.collection.each do |contact|
+                  = render contact
 %br
 .row
   .col-sm-12
     .pull-right
       = smart_listing.paginate
-      = smart_listing.pagination_per_page_links
+      .pull-right
+        = smart_listing.pagination_per_page_links

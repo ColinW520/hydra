@@ -1,16 +1,15 @@
 - unless @xhr
   - provide(:title, 'Messages')
-  %br
   .row
-    .col-sm-12.col-md-9
-      %h1.page-title
-        %i.fa.fa-clock-o
+    .col-sm-12.col-md-12
+      %h4
+        %i.fa.fa-envelope
         Messages
-    .col-sm-12.col-md-3
-      .pull-right
-        = link_to contacts_path(flash_instructions: true), class: 'btn btn-md btn-success' do
-          %i.fa.fa-pencil
-          Compose
+        .pull-right
+          = link_to contacts_path(flash_instructions: true), class: 'btn btn-sm btn-success' do
+            %i.fa.fa-pencil
+            Compose
+%br
 .row
   .col-sm-12
     = smart_listing_render :messages

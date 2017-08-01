@@ -2,14 +2,17 @@
   %div.alert.alert-info To compose a new message, first select the contacts to whom you would like it sent.
 - provide(:title, 'Contacts')
 .row
-  .col-sm-9
-    %h3
+  .col-sm-12
+    %h4
       %i.fa.fa-address-book
       Directory
-      = link_to new_contact_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success', title: "Add individual member.", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
-        %i.fa.fa-plus
-      = link_to new_import_path, remote: true, class: 'btn btn-sm btn-primary', title: "Upload Contacts via CSV", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
-        %i.fa.fa-upload
+      .pull-right
+        = link_to new_contact_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success', title: "Add individual member.", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
+          %i.fa.fa-plus
+          Add New
+        = link_to new_import_path, remote: true, class: 'btn btn-sm btn-primary', title: "Upload Contacts via CSV", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
+          %i.fa.fa-upload
+          Upload
 %br
 .row
   .col-sm-12

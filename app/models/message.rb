@@ -21,6 +21,7 @@ class Message < ApplicationRecord
     messages_scope = messages_scope.where(messages: { from: params[:from_number] }) if params[:from_number].present?
     messages_scope = messages_scope.where(messages: { to: params[:to_number] }) if params[:to_number].present?
     messages_scope = messages_scope.where(messages: { direction: params[:direction] }) if params[:direction].present?
+    messages_scope = messages_scope.where(messages: { line_id: params[:line] }) if params[:line].present?
     messages_scope = messages_scope.where('contacts.first_name ILIKE ? OR contacts.last_name ILIKE ?', "%#{params[:name]}%", "%#{params[:name]}%") if params[:name].present?
 
     return messages_scope

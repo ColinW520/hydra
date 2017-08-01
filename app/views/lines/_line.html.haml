@@ -1,25 +1,33 @@
-%tr{id: "line_#{line.id}"}
-  %td= line.name
-  %td= number_to_phone line.number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
-  %td
-    - if line.forwarding_enabled?
-      %i.fa.fa-check.text-success
-      = line.forwarding_number
-    - else
-      %i.fa.fa-times.text-danger
-      = line.forwarding_number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
-  %td= local_time line.created_at, format: "%m/%d/%Y"
-  %td.text-center
-    %i.fa.fa-arrow-down.text-primary
-    = line.messages.inbound.count
-    %i.fa.fa-arrow-up.text-success
-    = line.messages.outbound.count
-  %td.text-center
-    = link_to call_logs_path(line_id: line.id) do
-      = number_with_delimiter line.call_logs.count
-  %td.actions
-    .btn-group
-      = link_to line_path(line), class: 'btn btn-sm btn-info' do
-        %i.fa.fa-eye
-      = link_to edit_line_path(line), class: 'btn btn-sm btn-warning' do
-        %i.fa.fa-pencil
+- if line.released_at
+  %tr{id: "line_#{line.id}", class: 'table-danger'}
+    %td= line.name
+    %td{colspan: 6}
+      = "Line was released:"
+      = local_time_ago line.released_at, format: "%m/%d/%Y"
+      by
+      = User.find(line.released_by).try(:first_name)
+- else
+  %tr{id: "line_#{line.id}"}
+    %td= line.name
+    %td= number_to_phone line.number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+    %td
+      - if line.forwarding_enabled?
+        %i.fa.fa-check.text-success
+        = line.forwarding_number
+      - else
+        %i.fa.fa-times.text-danger
+        = line.forwarding_number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+    %td= local_time line.created_at, format: "%m/%d/%Y"
+    %td.text-center
+      %i.fa.fa-arrow-down.text-primary
+      = line.messages.inbound.count
+      %i.fa.fa-arrow-up.text-success
+      = line.messages.outbound.count
+    %td.text-center
+      = link_to call_logs_path(line_id: line.id) do
+        = number_with_delimiter line.call_logs.count
+    %td.actions
+      .pull-right
+        .btn-group
+          = link_to edit_line_path(line), class: 'btn btn-sm btn-warning' do
+            %i.fa.fa-pencil

@@ -21,7 +21,7 @@
               %br
             - else
               = f.input :number, as: :select, label: 'Select a Twilio™ number', collection: @numbers, label_method: :phone_number, value_method: :phone_number, include_blank: false
-      %hr{color: '#0275d8'}
+      %br
       %legend Voice Forwarding Settings
       %p.text-danger
         Use these settings to control what this phone number will do when it receives a phone call. If forwarding is not enabled, all phone calls made to this number will be
@@ -38,7 +38,7 @@
         .col-sm-12.col-md-6
           .form-group
             = f.input :forwarding_number, label: 'Forward To:', as: :tel, placeholder: '+13162588774'
-      %hr{color: '#0275d8'}
+      %br
       %legend Message Alert Settings
       %p.text-danger Use the options below to configure how you would like to notified of new inbound messages. Alerting via SMS will incur Twilio message sending costs.
       %br
@@ -57,7 +57,7 @@
           .form-group
             = f.input :email_alert_address, label: 'Email Alert Address:', as: :email, input_html: {value: f.object.email_alert_address || current_user.email}
       - if current_user.admin_role?
-        %hr{color: '#0275d8'}
+        %br
         %legend Webhook Settings
         %p.text-danger Configure Webhook Settings Here
         .row
@@ -78,9 +78,10 @@
             %br
           = f.hidden_field :user_id, value: @current_user.id
           = f.hidden_field :organization_id, value: @line.organization_id
-          = f.button :submit, f.object.persisted? ? 'Save Line Settings' : 'Purchase This Line for $1/month', class: 'btn btn-md btn-success'
+          = f.button :submit, f.object.persisted? ? 'Save Line Settings' : 'Purchase This Line for $1/month', class: 'btn btn-block btn-md btn-success'
           %br
-          %br
+          = link_to line_path(@line), method: :delete, data: { confirm: "Are you sure? You will no longer be able to use this line for sending messages. History will be preserved." }, class: 'text-center text-danger' do
+            Need to Remove this Line?
 
 :coffeescript
   $('[data-toggle="tooltip"]').tooltip()

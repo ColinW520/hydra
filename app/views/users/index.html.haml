@@ -2,11 +2,13 @@
   - provide(:title, 'Users')
   .row
     .col-sm-12
-      %h1
+      %h4
         %i.fa.fa-street-view
         Users
-        = link_to new_user_invitation_path, class: 'btn btn-sm btn-success' do
-          %i.fa.fa-plus
+        .pull-right
+          = link_to new_user_invitation_path, class: 'btn btn-sm btn-success' do
+            %i.fa.fa-plus
+            Invite
   %br
 .row
   .col-sm-12

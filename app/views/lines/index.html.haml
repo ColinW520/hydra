@@ -1,13 +1,14 @@
 - provide(:title, 'Lines')
-%br
-%br
 .row
-  .col-sm-9
-    %h3
+  .col-sm-12
+    %h4
       %i.fa.fa-hashtag
       Lines
-      = link_to new_line_path, class: 'btn btn-success btn-sm' do
-        %i.fa.fa-plus
+      .pull-right
+        = link_to new_line_path, class: 'btn btn-success btn-sm' do
+          %i.fa.fa-plus
+          Add
+%br
 .row
   .col-sm-12
     = smart_listing_render :lines

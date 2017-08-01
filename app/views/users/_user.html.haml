@@ -3,11 +3,12 @@
   %td= user.last_name
   %td= user.email
   %td.actions
-    .btn-group
-      - if current_user.supervisor_role?
-        = link_to edit_organization_user_path(user.organization, user), class: 'btn btn-sm btn-warning', remote: true do
-          %i.fa.fa-edit
-      = link_to organization_user_path(user.organization, user), class: 'btn btn-sm btn-info' do
-        %i.fa.fa-eye
-      = link_to organization_user_path(user.organization, user), method: :delete, remote: true, class: 'btn btn-sm btn-danger' do
-        %i.fa.fa-trash
+    .pull-right
+      .btn-group
+        - if current_user.supervisor_role?
+          = link_to edit_organization_user_path(user.organization, user), class: 'btn btn-sm btn-warning', remote: true do
+            %i.fa.fa-edit
+        = link_to organization_user_path(user.organization, user), class: 'btn btn-sm btn-info' do
+          %i.fa.fa-eye
+        = link_to organization_user_path(user.organization, user), method: :delete, remote: true, class: 'btn btn-sm btn-danger' do
+          %i.fa.fa-trash

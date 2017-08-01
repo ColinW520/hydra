@@ -1,11 +1,11 @@
 - provide(:title, "Dashboard")
-%div.page_header{style: 'margin-top: 2.5vh'}
-  %h4
-    - if current_user.first_name.present?
-      = "Welcome, #{current_user.try(:first_name)}!"
-    - else
-      Welcome!
-  %hr.text-primary
+%h4
+  %i.fa.fa-tachometer
+  - if current_user.first_name.present?
+    = "Welcome, #{current_user.try(:first_name)}!"
+  - else
+    Welcome!
+%br
 - if current_user.setup?
   .row
     .col-sm-12.col-md-6

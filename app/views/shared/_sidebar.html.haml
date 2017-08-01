@@ -8,7 +8,7 @@
           %li{class: @subnav == 'dashboard' ? 'active' : nil}
             %i.fa.fa-dashboard.fa-lg
             Dashboard
-        - if current_user.setup?
+        - if current_user.present? && current_user.setup?
           %a{href: contacts_path}
             %li{class: @subnav == 'contacts' ? 'active' : nil}
               %i.fa.fa-address-book-o.fa-lg

@@ -7,12 +7,13 @@
       %i.fa.fa-address-book
       Directory
       .pull-right
-        = link_to new_contact_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success', title: "Add individual member.", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
-          %i.fa.fa-plus
-          Add New
-        = link_to new_import_path, remote: true, class: 'btn btn-sm btn-primary', title: "Upload Contacts via CSV", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
-          %i.fa.fa-upload
-          Upload
+        .btn-group
+          = link_to new_contact_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success', title: "Add individual member.", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
+            %i.fa.fa-plus
+            Add New
+          = link_to new_import_path, remote: true, class: 'btn btn-sm btn-primary', title: "Upload Contacts via CSV", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
+            %i.fa.fa-upload
+            Upload
 %br
 .row
   .col-sm-12

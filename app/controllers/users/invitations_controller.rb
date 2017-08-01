@@ -22,11 +22,11 @@ class Users::InvitationsController < Devise::InvitationsController
   protected
 
   def set_sanitized_params
-    devise_parameter_sanitizer.permit(:invite, keys: [:email, :first_name, :last_name, :mobile_phone, :organization_id])
+    devise_parameter_sanitizer.permit(:invite, keys: [:email, :first_name, :last_name, :mobile_phone, :organization_id, :admin_role])
   end
 
   def update_sanitized_params
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :password, :password_confirmation, :invitation_token, :mobile_phone, :organization_id])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :password, :password_confirmation, :invitation_token, :mobile_phone, :organization_id, :admin_role])
   end
 
   def after_invite_path_for(resource)

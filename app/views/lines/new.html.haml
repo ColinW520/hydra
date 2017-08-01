@@ -1,14 +1,12 @@
-%br
-%br
+- provide(:title, 'Buy A Line')
+.row
+  .col-sm-12
+    %h4
+      %i.fa.fa-hashtag
+      Lines
 .row
   .col-sm-12.col-md-6.col-centered
-    .text-center
-      %h1 Buy A Line
-      %p.lead.text-danger
-        This will initiate the
-        %strong.text-danger purchase
-        of the Twilio Number you select, with the configuration options you specify.
-.row
-  .col-sm-12.col-md-6.col-centered
-    .card.card-outline-primary
-      = render 'form'
+    .card
+      .card-block
+        %h4 Buy A Line
+        = render 'form'

@@ -1,19 +1,33 @@
+- provide(:title, 'Invitations')
+.row
+  .col-sm-12
+    %h4
+      %i.fa.fa-users
+      Users
 .row
   .col-sm-12.col-md-6.col-lg-5.col-centered
     .card.card-default.mt-4
       .card-block
         .row
           .col-sm-12
-            %h2 Invite a User
+            %h4 Invite a User
+            %p To add a user to your organization, fill out the form below. We will then email them a link that they can then use to complete their registration.
         %br
-        .row
-          .col-sm-12
-            = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f|
-              = devise_error_messages!
-              = f.hidden_field :organization_id, value: current_user.organization_id
-              = f.input :first_name, autofocus: true
-              = f.input :last_name
-              = f.input :email, as: :email
-              = f.input :mobile_phone
-              %br
-              = f.button :submit, 'Send Invitation', class: 'btn btn-block btn-success'
+        = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f|
+          = devise_error_messages!
+          = f.hidden_field :organization_id, value: current_user.organization_id
+          .row
+            .col-sm-12.col-md-6
+              = f.input :first_name, label: 'First Name', required: true, autofocus: true
+            .col-sm-12.col-md-6
+              = f.input :last_name, label: 'Last Name', required: true
+          .row
+            .col-sm-12.col-md-6
+              = f.input :email, as: :email, required: true
+            .col-sm-12.col-md-6
+              = f.input :mobile_phone, as: :tel, label: 'Mobile Phone', required: true
+          .row
+            .col-sm-12
+              = f.input :admin_role, as: :boolean, inline_label: true, label: 'Grant this user Admin Priveleges'
+          .form-actions
+            = f.button :submit, 'Send Invitation', class: 'btn btn-block btn-success'

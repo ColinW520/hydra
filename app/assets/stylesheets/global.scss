@@ -11,6 +11,10 @@ body {
   opacity: 1;
 }
 
+.modal-body img {
+  max-width: 100%;
+}
+
 .pricing-cent::after {
   content:"\00a2";
   width: 0.1em;

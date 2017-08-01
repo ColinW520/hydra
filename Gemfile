@@ -38,6 +38,7 @@ gem 'simple_form'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'select2-rails'
+gem 'redcarpet', '~> 3.0.0'
 
 # Database Stuff
 gem 'pg', '~> 0.18'
@@ -53,6 +54,7 @@ gem 'phony_rails' # keeps phone numbers consistent.
 # Third Party Stuff
 gem 'twilio-ruby'
 gem 'stripe'
+gem "octokit", "~> 4.0"
 
 # Error Reporting
 gem 'raygun4ruby'

@@ -1,0 +1,13 @@
+%a{href: '#', "data-target" => "#form-modal-#{issue.id}", "data-toggle" => "modal"}
+  = issue.title
+%div.modal.fade.modal-form{role: "dialog", tabindex: "-1", id: "form-modal-#{issue.id}"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title
+          %i.fa.fa-exclamation-circle
+          = issue.title
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        = markdown(issue.body)

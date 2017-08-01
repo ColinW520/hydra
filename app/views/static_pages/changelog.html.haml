@@ -1,0 +1,49 @@
+- provide(:title, "Changelog")
+.row
+  .col-sm-12
+    %h4
+      %i.fa.fa-free-code-camp
+      ChangeLog
+
+.row
+  .col-sm-12.col-md-6
+    .card.my-2
+      .card-block.mb-0.pb-0
+        .pull-left
+          %h4 Commits
+          %p A commit is a collection of actual changes to the application itself. The message should describe what is being changed.
+      .card-block.px-0
+        %table.table.table-primary.table-condensed.mb-0.mt-0.pt-0
+          %thead
+            %tr
+              %th Time
+              %th Author
+              %th Note
+          %tbody
+            - @commits.each do |commit|
+              %tr
+                %td= local_time_ago commit.author.date
+                %td= commit.author.name.titleize
+                %td= commit.message
+  .col-sm-12.col-md-6
+    .card.my-2
+      .card-block.mb-0.pb-0
+        .pull-left
+          %h4 Open Issues
+          %p An issue is a documented work item for the issue.
+      .card-block.px-0
+        %table.table.table-primary.table-condensed.mb-0.mt-0.pt-0
+          %thead
+            %tr
+              %td ID
+              %th Title
+              %th Status
+              %th
+          %tbody
+            - @issues.each do |issue|
+              %tr
+                %td= '#' + issue.number.to_s
+                %td= render partial: "layouts/issue_modal", locals: {issue: issue}
+                %td
+                  - issue.labels.each do |l|
+                    %span.badge{style: "background-color: ##{l.color}; padding: 8px;"}= l.name.upcase

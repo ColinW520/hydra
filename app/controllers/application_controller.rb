@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  after_action :track_action
+
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
   protect_from_forgery with: :exception, prepend: true
@@ -6,6 +8,10 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :set_xhr_flag, :gon_setup, :set_subnav
   after_action :prepare_unobtrusive_flash
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
+
+  def track_action
+    ahoy.track "Viewed #{controller_name}##{action_name}", params unless request.xhr?
+  end
 
   def after_sign_in_path_for(resource)
     dashboard_path

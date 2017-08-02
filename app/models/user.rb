@@ -15,6 +15,10 @@ class User < ApplicationRecord
 
   scope :forwarding_capable, -> { where(mobile_phone_validated: true) }
 
+  def inviter
+    User.find_by_id self.invited_by
+  end
+
   def setup?
     self.organization.present? && self.organization.setup?
   end

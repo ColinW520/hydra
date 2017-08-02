@@ -9,10 +9,9 @@
   .col-sm-12.col-md-4
     .table-responsive.card.table-card
       %table.table.table-condensed
-        %thead.bg-info
-          %th
+        %thead.thead-inverse
+          %th{colspan: 2}
             %h6.text-white Profile Details
-          %th
         %tbody
           %tr
             %td
@@ -20,6 +19,18 @@
             %td
               =@user.first_name
               =@user.last_name
+          %tr
+            %td
+              %strong Admin?
+            %td
+              - if @user.admin_role?
+                %i.fa.fa-check.text-success
+              - else
+                %i.fa.fa-times.text-danger
+          %tr
+            %td
+              %strong Invited By
+            %td= @user.inviter.try(:first_name)
           %tr
             %td
               %strong Phone
@@ -36,17 +47,29 @@
             %td
               %strong Updated
             %td= local_time_ago @user.updated_at
-  .col-sm-12.col-md-8
+          %tr
+            %td
+              %strong TimeZone
+            %td= @user.timezone
+  .col-sm-12.col-md-4
     .table-responsive.card.table-card
       %table.table.table-condensed
         %thead.thead-inverse
-          %th
+          %th{colspan: 2}
             %h6.text-white Activity
-          %th
-          %th
         %tbody
           - @ahoy_events.each do |event|
             %tr
               %td= event.name
-              %td= event.properties['page']
               %td= local_time_ago event.time
+  .col-sm-12.col-md-4
+    .table-responsive.card.table-card
+      %table.table.table-condensed
+        %thead.thead-inverse
+          %th{colspan: 2}
+            %h6.text-white Emails
+        %tbody
+          - @ahoy_emails.each do |email|
+            %tr
+              %td= email.subject
+              %td= local_time_ago email.sent_at

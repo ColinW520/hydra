@@ -3,10 +3,7 @@ class OrganizationsController < ApplicationController
   layout :resolve_layout
 
   def index
-    smart_listing_create :organizations,
-                         Organization.includes(:users),
-                         partial: "organizations/listing",
-                         default_sort: { created_at: "desc" }
+    redirect_to organization_path(current_user.organization)
   end
 
   def new

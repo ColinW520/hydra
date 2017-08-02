@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   match '/terms' => "static_pages#terms", via: [:get]
   match '/anti-spam' => "static_pages#anti_spam", via: [:get]
   match '/changelog' => "static_pages#changelog", via: [:get]
+  match '/privacy' => "static_pages#privacy", via: [:get]
 
   # The User-facing App
   resource :dashboard, controller: 'dashboard' do

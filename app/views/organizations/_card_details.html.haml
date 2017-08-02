@@ -1,6 +1,7 @@
 .table-responsive.card.card-outline-default.table-card
   %table.table
     %thead
+      %th Brand
       %th Type
       %th Last4
       %th Expires
@@ -18,8 +19,6 @@
               %i.fa.fa-cc-discover.fa-2x
             -else
               %i.fa.fa-cc-alt.fa-2x
-          %span{style: 'font-size: 20px;'}=@card.funding.titleize
-        %td
-          %span{style: 'font-size: 20px;'}=@card.last4
-        %td
-          %span{style: 'font-size: 20px;'}=@card.exp_month.to_s + ' / ' + @card.exp_year.to_s
+        %td= @card.funding.titleize
+        %td=@card.last4
+        %td=@card.exp_month.to_s + ' / ' + @card.exp_year.to_s

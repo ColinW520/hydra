@@ -27,6 +27,7 @@ class CallLog < ApplicationRecord
     logs_scope = logs_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
     logs_scope = logs_scope.where(line_id: params[:line_id]) if params[:line_id].present?
     logs_scope = logs_scope.where(contact_id: params[:contact_id]) if params[:contact_id].present?
+    logs_scope = logs_scope.where('call_logs.caller ILIKE ?', "%#{params[:from_number]}%") if params[:from_number].present?
     return logs_scope
   end
 

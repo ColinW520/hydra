@@ -1,10 +1,9 @@
 - unless @xhr
   - provide(:title, 'Calls')
-  %br
   .row
     .col-sm-12.col-md-9
-      %h1.page-title
-        %i.fa.fa-smartphone-o
+      %h4
+        %i.fa.fa-phone
         - if @line.present?
           = "Call Logs for #{@line.name}"
         - else

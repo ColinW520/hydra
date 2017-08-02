@@ -1,6 +1,8 @@
+= render partial: 'filter_fields', locals: { smart_listing: smart_listing }
+%br
 .row
   .col-sm-12
-    .card.card-outline-primary.table-card
+    .card
       .table-condensed
         %table.table.table-hover
           %thead.thead-inverse
@@ -9,10 +11,14 @@
             %th= smart_listing.sortable 'Forwarded?', :forwarded
             %th
               = smart_listing.sortable 'Duration', :duration_in_seconds
-              %i.fa.fa-info-circle{}
+              %i.fa.fa-info-circle{"data-placement" => "left", "data-toggle" => "tooltip", :title => "This is what Twilio reports."}
             %th
               = smart_listing.sortable 'Price', :price_in_cents
-              %i.fa.fa-info-circle{}
+              %i.fa.fa-info-circle{"data-placement" => "left", "data-toggle" => "tooltip", :title => "This is what Twilio reports."}
           %tbody#call_logs
-            - smart_listing.collection.each do |call_log|
-              = render call_log
+            - if smart_listing.count > 0
+              - smart_listing.collection.each do |call_log|
+                = render call_log
+            - else
+              %tr
+                %td{colspan: 5} No call logs match these parameters.

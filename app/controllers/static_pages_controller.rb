@@ -9,7 +9,9 @@ class StaticPagesController < ApplicationController
   end
 
   def anti_spam
+  end
 
+  def privacy
   end
 
   def changelog

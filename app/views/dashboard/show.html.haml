@@ -7,7 +7,6 @@
         = "Welcome, #{current_user.try(:first_name)}!"
       - else
         Welcome!
-%br
 - if current_user.setup?
   = render 'dashboard/charts'
 - else

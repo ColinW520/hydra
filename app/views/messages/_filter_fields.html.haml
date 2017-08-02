@@ -10,7 +10,7 @@
           .col-sm-12.col-md-2
             .form-group.has-feedback.filter.input-append
               %label.control-label{for: 'inputLine'} To Line
-              = select_tag :line, options_for_select(current_user.organization.lines.collect { |line| [line.name, line.id]}), { include_blank: true, class: 'search form-control', id: 'inputDirection' }
+              = select_tag :line, options_for_select(current_user.organization.lines.collect { |line| [line.name, line.id]}), { include_blank: true, class: 'search form-control', id: 'inputLineId' }
           .col-sm-12.col-md-2
             .form-group.has-feedback.filter.input-append
               %label.control-label{for: 'inputName'} Received From?

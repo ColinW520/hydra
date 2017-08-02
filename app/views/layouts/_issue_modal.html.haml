@@ -11,3 +11,10 @@
           %span{"aria-hidden" => "true"} ×
       .modal-body
         = markdown(issue.body)
+      .modal-footer
+        %span
+          %i.fa.fa-user
+          = issue.assignee.login
+        %span
+          %i.fa.fa-clock-o
+          = local_time_ago issue.updated_at

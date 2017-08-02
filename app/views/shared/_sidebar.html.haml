@@ -24,9 +24,14 @@
               %i.fa.fa-hashtag.fa-lg
               Lines
 
+          %a{href: call_logs_path}
+            %li{class: @subnav == 'call_logs' ? 'active' : nil}
+              %i.fa.fa-phone.fa-lg
+              Calls
+
           %a{href: organization_users_path(current_user.organization)}
             %li{class: @subnav == 'users' ? 'active' : nil}
-              %i.fa.fa-users
+              %i.fa.fa-users.fa-lg
               Users
 
         %a{href: current_user.organization_id.present? ? organization_path(current_user.organization) : new_organization_path}

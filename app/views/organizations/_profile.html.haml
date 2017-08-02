@@ -1,6 +1,11 @@
 .table-responsive.card.card-outline-default.table-card
   %table.table
     %thead.thead-inverse
+      %th
+        %h6.text-white Profile
+      %th
+        = link_to edit_organization_path, remote: true, class: 'pull-right btn btn-warning btn-sm' do
+          %i.fa.fa-edit
     %tbody
       %tr
         %td
@@ -30,7 +35,6 @@
         %td
           %strong
             Twilio Account
-            %i.fa.fa-info-circle
         %td
           - if @organization.twilio_auth_id.present?
             .text-success

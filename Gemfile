@@ -10,6 +10,8 @@ gem 'sidekiq'
 gem 'figaro'
 gem 'smarter_csv'
 gem 'sendgrid-ruby'
+gem 'ahoy_matey'
+gem 'ahoy_email'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -44,7 +46,6 @@ gem 'redcarpet', '~> 3.0.0'
 gem 'pg', '~> 0.18'
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'friendly_id'
-gem 'ahoy_email'
 gem "paperclip", "~> 5.0.0" # stores images & files to AWS
 gem 'aws-sdk'
 gem 'groupdate'

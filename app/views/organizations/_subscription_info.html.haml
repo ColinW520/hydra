@@ -6,8 +6,9 @@
       %th
         .pull-right
           - if @subscription && @subscription.canceled_at.nil?
-            = link_to organization_subscription_path(@organization, @subscription.id), method: :delete, class: 'btn btn-warning btn-sm' do
+            = link_to organization_subscription_path(@organization, @subscription.id), method: :delete, class: 'btn btn-danger btn-sm' do
               %i.fa.fa-ban
+              Cancel
           - elsif @subscription.nil? && @card.present?
             = link_to new_organization_subscription_path(@organization), remote: true, class: 'btn btn-warning btn-sm' do
               %i.fa.fa-plus

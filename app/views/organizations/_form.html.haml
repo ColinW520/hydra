@@ -20,6 +20,18 @@
     .col-sm-12.col-md-6
       .form-group
         = f.input :preferred_area_code, label: 'Area Code', as: :integer, required: true, hint: 'Use the same area code as your business, ideally. This affects the area codes available to you when you add a line.', max: 999, required: true
+  - if @organization.persisted?
+    .row
+      .col-sm-12.col-md-4
+        .form-group
+          = f.input :city
+      .col-sm-12.col-md-4
+        .form-group
+          = f.input :state
+      .col-sm-12.col-md-4
+        .form-group
+          = f.input :zip
+
   .row
     .col-sm-12
       .form-actions

@@ -1,11 +1,13 @@
-.table-responsive.card.card-outline-default.table-card
+.table-responsive.card.table-card
   %table.table
     %thead.thead-inverse
       %th
         %h6.text-white Profile
       %th
-        = link_to edit_organization_path, remote: true, class: 'pull-right btn btn-warning btn-sm' do
-          %i.fa.fa-edit
+        = link_to edit_organization_path, data: { confirm: "Are you sure? You will lose access to all of your contacts, lines, call logs, and message history if you do this." }, remote: true, class: 'pull-right btn btn-sm btn-secondary' do
+          .text-warning
+            %i.fa.fa-edit
+            Edit
     %tbody
       %tr
         %td

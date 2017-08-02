@@ -1,10 +1,14 @@
 .table-responsive.card.card-outline-default.table-card
   %table.table
-    %thead
-      %th Brand
-      %th Type
-      %th Last4
-      %th Expires
+    %thead.thead-inverse
+      %th Card Details
+      %th
+      %th
+      %th
+        = link_to new_organization_billing_method_path(@organization), remote: true, class: 'pull-right btn btn-warning btn-sm' do
+          %i.fa.fa-exchange
+          Change
+
     %tbody
       %tr
         %td

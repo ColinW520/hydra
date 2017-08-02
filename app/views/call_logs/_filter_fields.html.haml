@@ -1,0 +1,26 @@
+.row
+  .col-sm-12
+    .card.card-default
+      = smart_listing_controls_for(:call_logs, { class: 'form-control' }) do
+        .row
+          .col-sm-12.col-md-4
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputLine'} To Line
+              = select_tag :line_id, options_for_select(current_user.organization.lines.collect { |line| [line.name, line.id]}, selected: params[:line_id]), { include_blank: true, class: 'search form-control', id: 'inputDirection' }
+          .col-sm-12.col-md-4
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputQuery'} From Number ?
+              = text_field_tag :from_number, params[:from_number], class: 'form-control'
+          .col-sm-12.col-md-4a
+        .row
+          .col-sm-12.col-md-6
+            %p= "Matches: #{smart_listing.count}"
+          .col-sm-12.col-md-6
+            .pull-right
+              = button_tag type: "submit", class: "btn btn-sm btn-info", title: "Update filter results.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+                %i.fa.fa-filter
+              = link_to call_logs_path(format: :csv), class: 'btn btn-primary btn-sm', title: "Download THESE Call Logs to a CSV.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+                %i.fa.fa-download
+
+:coffeescript
+  $('[data-toggle="tooltip"]').tooltip()

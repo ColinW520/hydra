@@ -3,6 +3,8 @@ class User < ApplicationRecord
   phony_normalize :mobile_phone, default_country_code: 'US'
   validates :mobile_phone, phony_plausible: true
 
+  has_many :ahoy_events, dependent: :destroy, class_name: 'Ahoy::Event'
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,

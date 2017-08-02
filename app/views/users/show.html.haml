@@ -1,10 +1,52 @@
-- unless @xhr
-  - provide(:title, "#{@user.email}")
+- provide(:title, "#{@user.first_name || @user.last_name}")
 .row
   .col-sm-12
-    %ol.breadcrumb
-      %li.breadcrumb-item Users
-      %li.breadcrumb-item= "#{@user.email}"
-      %li.breadcrumb-item.active Profile
-%h1 Show this Users Details
-%p messages sent, other users invited, logins, lines purchased, etc
+    %h4
+      %i.fa.fa-user
+      = @user.try :first_name
+
+.row
+  .col-sm-12.col-md-4
+    .table-responsive.card.table-card
+      %table.table.table-condensed
+        %thead.bg-info
+          %th
+            %h6.text-white Profile Details
+          %th
+        %tbody
+          %tr
+            %td
+              %strong Name
+            %td
+              =@user.first_name
+              =@user.last_name
+          %tr
+            %td
+              %strong Phone
+            %td= number_to_phone @user.mobile_phone.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+          %tr
+            %td
+              %strong Email
+            %td= mail_to @user.email
+          %tr
+            %td
+              %strong Started
+            %td= local_time_ago @user.created_at
+          %tr
+            %td
+              %strong Updated
+            %td= local_time_ago @user.updated_at
+  .col-sm-12.col-md-8
+    .table-responsive.card.table-card
+      %table.table.table-condensed
+        %thead.thead-inverse
+          %th
+            %h6.text-white Activity
+          %th
+          %th
+        %tbody
+          - @ahoy_events.each do |event|
+            %tr
+              %td= event.name
+              %td= event.properties['page']
+              %td= local_time_ago event.time

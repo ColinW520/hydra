@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def show
     gon.organization_id = Organization.find_by_slug params[:organization_id]
+    @ahoy_events = Ahoy::Event.includes(:visit).where(user_id: @user.id).order('time DESC').limit(30)
   end
 
   def edit

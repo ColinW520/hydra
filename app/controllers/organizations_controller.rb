@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_filter :find_organization, except: [:index, :new, :create]
+  before_action :find_organization, except: [:index, :new, :create]
   layout :resolve_layout
 
   def index

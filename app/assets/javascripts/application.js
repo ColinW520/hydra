@@ -17,6 +17,7 @@
 //= require tether
 //= require bootstrap
 //= require jquery_ujs
+//= require ahoy
 //= require local_time
 //= require smart_listing
 //= require unobtrusive_flash

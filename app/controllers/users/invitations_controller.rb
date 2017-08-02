@@ -1,6 +1,6 @@
 class Users::InvitationsController < Devise::InvitationsController
-  before_filter :set_sanitized_params, only: :create
-  before_filter :update_sanitized_params, only: :update
+  before_action :set_sanitized_params, only: :create
+  before_action :update_sanitized_params, only: :update
 
   layout :resolve_layout
 

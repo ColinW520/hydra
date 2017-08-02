@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  before_filter :find_contact, except: [:index, :new, :create, :download]
+  before_action :find_contact, except: [:index, :new, :create, :download]
 
   def index
     contacts_scope = current_user.organization.contacts.filter_by(params)

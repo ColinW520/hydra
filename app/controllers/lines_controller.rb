@@ -1,5 +1,5 @@
 class LinesController < ApplicationController
-  before_filter :find_line, except: [:index, :new, :create, :download]
+  before_action :find_line, except: [:index, :new, :create, :download]
 
   def index
     lines_scope = current_user.organization.lines

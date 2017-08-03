@@ -8,8 +8,6 @@
       .form-group
         %label{:for => "exampleInputFile"} Select Your CSV
         = f.input :datafile, as: :file, class: 'form-control-file', id: 'exampleInputFile', required: true, autofocus: true
-        %small#fileHelp.form-text.text-muted This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.
-      .form-actions
         .text-center
           = f.hidden_field :type, value: 'contact'
           = f.hidden_field :organization_id, value: current_user.organization_id

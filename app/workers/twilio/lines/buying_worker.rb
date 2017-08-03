@@ -17,6 +17,8 @@ class Twilio::Lines::BuyingWorker < Twilio::BaseWorker
     # NOTE WE REALLY NEED TO UPDATE THIS TO DEAL WITH NUMBER NOT AVAILABLE ERROS
 
     # udpate the line
+    @line.sms_url = "https://www.textmy.team/twilio/messages"
+    @line.voice_url = "https://www.textmy.team/twilio/voice_calls"
     @line.twilio_id = twilio_number.sid
     @line.save! #save this ASAP.
   end

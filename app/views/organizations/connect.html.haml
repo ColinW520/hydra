@@ -24,6 +24,7 @@
             NEXT
         - else
           %p Clicking this button will take you to Twilio, where you will be asked to connect your account. You may also create and fund a Twilio account during this process, if you do not already have one. Once complete, you will be brought back here.
+          %p.text-muted If you do end up creating a Twilio account, you will want to keep your credit card handy for the next step.
           = link_to "https://www.twilio.com/authorize/CN29760c1484efcafb62cf661a40e70338?state=#{@organization.id}", class: 'btn btn-block btn-info' do
             %i.fa.fa-external-link
             Connect My Twilio Account

@@ -7,6 +7,8 @@
       = number_to_phone call_log.forwarded_to.phony_formatted(normalize: :US, format: :international, spaces: ' ')
     - else
       %i.fa.fa-times.text-danger
-  %td= number_to_phone call_log.answered_by.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+  %td
+    - if call_log.answered_by.present?
+      = number_to_phone call_log.answered_by.phony_formatted(normalize: :US, format: :international, spaces: ' ')
   %td= number_with_delimiter call_log.duration_in_seconds
   %td= number_to_currency call_log.price_in_cents, precision: 4

@@ -18,6 +18,14 @@ class Contact < ApplicationRecord
   scope :name_like, ->(term) { where('first_name ILIKE ? OR last_name ILIKE ?', "%#{term}%", "%#{term}%") }
   scope :title_like, ->(term) { where('title ILIKE ?', "%#{term}%") }
 
+  def full_name
+    if self.first_name.present? || self.last_name.present?
+      "#{self.first_name} #{self.last_name}"
+    else
+      'unknown'
+    end
+  end
+
   def tag_list_for_form
     self.tags.pluck(:name).join(', ')
   end

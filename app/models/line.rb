@@ -19,6 +19,8 @@ class Line < ApplicationRecord
   validates :forwarding_number, phony_plausible: true
   validates :sms_alert_number, phony_plausible: true
 
+  scope :active, -> { where(released_at: nil) }
+
   def dropdown_name
     "#{self.name} - #{self.number}"
   end

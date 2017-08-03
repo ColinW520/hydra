@@ -1,5 +1,14 @@
 - if params[:flash_instructions]
   %div.alert.alert-info To compose a new message, first select the contacts to whom you would like it sent.
+- unless @organization_can_message
+  %div.alert.alert-warning
+    %p.lead
+      %i.fa.fa-exclamation-triangle
+      Heads up!
+    %p
+      You cannot actually send any messages until you
+      %a{href: lines_path} add a line.
+
 - provide(:title, 'Contacts')
 .row
   .col-sm-12

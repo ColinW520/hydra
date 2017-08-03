@@ -2,6 +2,7 @@ class ContactsController < ApplicationController
   before_action :find_contact, except: [:index, :new, :create, :download]
 
   def index
+    @has_line = current_user.organization.lines.active.present?
     contacts_scope = current_user.organization.contacts.filter_by(params)
 
     respond_to do |format|

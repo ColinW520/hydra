@@ -18,7 +18,7 @@ class Twilio::VoiceCallsController < Twilio::BaseController
       end
     else
       response = Twilio::TwiML::Response.new do |r|
-    	  r.Say 'Hi there! We only use this number for text messaging at this time. Please give', :voice => 'alice'
+    	  r.Say "Hi there! We only use this number for text messaging at this time.", :voice => 'alice'
         r.Hangup
     	end
     end

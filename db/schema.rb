@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170803022912) do
+ActiveRecord::Schema.define(version: 20170803035844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,8 +150,8 @@ ActiveRecord::Schema.define(version: 20170803022912) do
     t.string   "name"
     t.boolean  "forwarding_enabled"
     t.string   "forwarding_number"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.datetime "released_at"
     t.string   "released_by"
     t.integer  "errors_count"
@@ -163,6 +163,8 @@ ActiveRecord::Schema.define(version: 20170803022912) do
     t.boolean  "sms_alert"
     t.boolean  "email_alert"
     t.boolean  "email_alert_address"
+    t.boolean  "use_auto_response",      default: false
+    t.string   "sms_auto_response_text"
     t.index ["organization_id"], name: "index_lines_on_organization_id", using: :btree
     t.index ["user_id"], name: "index_lines_on_user_id", using: :btree
   end

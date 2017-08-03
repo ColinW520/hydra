@@ -45,8 +45,8 @@ class SubscriptionsController < ApplicationController
         format.json { head :no_content }
         format.js { flash[:success] = 'Subscription has been created.' }
         format.html do
-          flash[:success] = 'Thank you for completing your subscription! You may now add contacts and send messages.'
-          redirect_to contacts_path
+          flash[:success] = 'Thank you for completing your subscription! Now you can add lines, contacts, and start sending messages.'
+          redirect_to lines_path
         end
       else
         format.html do

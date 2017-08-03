@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper  SmartListing::Helper
   protect_from_forgery with: :exception, prepend: true
 
-  before_action :authenticate_user!, :set_xhr_flag, :gon_setup, :set_subnav
+  before_action :authenticate_user!, :set_xhr_flag, :gon_setup, :set_subnav, :set_line_warning
   after_action :prepare_unobtrusive_flash
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
 
   def set_xhr_flag
     @xhr = request.xhr?
+  end
+
+  def set_line_warning
+    @organization_can_message = current_user.organization.lines.present?
   end
 
   def gon_setup

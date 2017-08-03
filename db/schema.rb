@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170802044605) do
+ActiveRecord::Schema.define(version: 20170803022912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(version: 20170802044605) do
     t.datetime "updated_at",                            null: false
     t.boolean  "phone_is_valid_for_sms"
     t.boolean  "is_active",              default: true
+    t.string   "internal_identifier"
+    t.index ["internal_identifier"], name: "index_contacts_on_internal_identifier", using: :btree
     t.index ["organization_id"], name: "index_contacts_on_organization_id", using: :btree
   end
 

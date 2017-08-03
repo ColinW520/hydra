@@ -18,7 +18,8 @@ class Imports::ImportContactRowWorker
     contact.address_city = row[:city]
     contact.address_state = row[:state]
     contact.address_zip = row[:zip]
-    contact.is_active = row[:is_active]
+    contact.is_active = row[:is_active] ||= true
+    contact.internal_identifier = row[:internal_identifier]
 
     if contact.persisted?
       tags_array = row[:tags].split('|') + contact.tag_list

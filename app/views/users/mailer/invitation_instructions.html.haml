@@ -1,6 +1,6 @@
 %p= t("devise.mailer.invitation_instructions.hello", email: @resource.first_name)
 %p
-  ="Someone from #{@resource.organization.name} invited you to join their organization"
+  ="Someone from #{@resource.organization.name} invited you to join their organization on"
   %a{href: root_url} TextMy.team
 %p= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token)
 - if @resource.invitation_due_at

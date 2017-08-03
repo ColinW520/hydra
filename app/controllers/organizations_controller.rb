@@ -15,6 +15,7 @@ class OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
+        current_user.update_attribute(:organization_id, @organization.id) if current_user.organization_id.nil?
         format.json { head :no_content }
         format.js { flash[:success] = 'Your organization has been created. Now you can Subscribe, and Connect your Twilio account.' }
         format.html {

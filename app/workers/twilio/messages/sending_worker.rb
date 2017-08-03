@@ -29,7 +29,7 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     @local_message.line_id = @line.id
     @local_message.status = @message.status
     @local_message.direction = 'outbound'
-    @local_message.sent_at = DateTime.parse @message.date_sent
+    @local_message.sent_at = Time.now
     @local_message.to = @message.to
     @local_message.from = @message.from
     @local_message.body = @message.body

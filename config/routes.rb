@@ -53,13 +53,14 @@ Rails.application.routes.draw do
     resources :voice_calls, only: [:create]
   end
 
+  # sidekiq
+  authenticate :user, -> (user) { user.is_super_user? } do
+    require 'sidekiq/web'
+    mount Sidekiq::Web => 'admin/sidekiq'
+  end
 
   # Admin Space
   namespace :admin do
     resources :users
-    authenticate :user, -> (user) { user.admin_role? } do
-      require 'sidekiq/web'
-      mount Sidekiq::Web => '/sidekiq'
-    end
   end
 end

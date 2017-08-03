@@ -44,7 +44,7 @@ class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
     end
 
     if @line.email_alert?
-      MessagesMailer.alert(@message.id).deliver
+      MessagesMailer.alert(@message.id).deliver_now
     end
   end
 end

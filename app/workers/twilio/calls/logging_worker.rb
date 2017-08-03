@@ -31,12 +31,12 @@ class Twilio::Calls::LoggingWorker < Twilio::BaseWorker
 
     # Assign this Call Log to a line we manage.
     @line = Line.find_by_number params['To']
-    @log.line_id = @line.id
-    @log.organization_id = @line.organization_id
+    @log.line_id = @line.try(:id)
+    @log.organization_id = @line.try(:organization_id)
 
     # Assign this CallLog to the appropriate organization's contact record, or create one for it, based on the mobile #
     @contact = Contact.where(mobile_phone: params['From'], organization_id: @line.organization_id).first_or_create
-    @log.contact_id = @contact.id
+    @log.contact_id = @contact.try(:id)
     @log.save!
 
     Twilio::Calls::LogUpdatingWorker.perform_in(30.minutes, @log.id)

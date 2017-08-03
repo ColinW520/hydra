@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
   def track_action
-    ahoy.track "Viewed #{controller_name}##{action_name}", params unless request.xhr?
+    ahoy.track "Viewed #{controller_name}##{action_name}" unless request.xhr?
   end
 
   def after_sign_in_path_for(resource)

@@ -45,4 +45,4 @@
                 %td= render partial: "layouts/issue_modal", locals: {issue: issue}
                 %td
                   - issue.labels.each do |l|
-                    %span.badge{style: "background-color: ##{l.color}; padding: 8px;"}= l.name.upcase
+                    %span.badge{style: "background-color: ##{l.color}; padding: 8px; margin: 1px;"}= l.name.upcase

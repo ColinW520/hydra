@@ -38,6 +38,10 @@
         .col-sm-12.col-md-6
           .form-group
             = f.input :forwarding_number, label: 'Forward To:', as: :tel, placeholder: '+13162588774'
+      -# %br
+      -# %legend Response Settings
+      -# %p.text-danger If you would like an automatic response to be sent to anyone who sends a text message to this line, configure that here.
+      -#
       %br
       %legend Message Alert Settings
       %p.text-danger Use the options below to configure how you would like to notified of new inbound messages. Alerting via SMS will incur Twilio message sending costs.

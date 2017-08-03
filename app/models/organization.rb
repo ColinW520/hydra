@@ -46,6 +46,10 @@ class Organization < ApplicationRecord
     Stripe::Subscription.retrieve self.subscription.stripe_id
   end
 
+  def twilio_client
+    Twilio::REST::Client.new(self.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+  end
+
   # hooks
   after_create :update_primary_user
   def update_primary_user

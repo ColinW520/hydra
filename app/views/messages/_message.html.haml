@@ -1,5 +1,5 @@
 %tr{id: "message_#{message.id}"}
-  %td= local_time message.created_at
+  %td= local_time_ago message.sent_at
   %td
     - if message.direction == 'outbound'
       %i.fa.fa-arrow-up.text-success

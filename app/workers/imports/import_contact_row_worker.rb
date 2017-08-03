@@ -7,6 +7,10 @@ class Imports::ImportContactRowWorker
     the_import = Import.find import_id
     the_organization = Organization.find the_import.organization_id
 
+    # dont bother if there is no number.
+    return unless row[:phone].present?
+
+    # find or init the contact by the organization and the phone number, properly normalized
     contact = Contact.where(organization_id: the_organization.id, mobile_phone: PhonyRails.normalize_number(row[:phone], country_code: 'US')).first_or_initialize
 
     contact.organization_id = the_import.organization_id

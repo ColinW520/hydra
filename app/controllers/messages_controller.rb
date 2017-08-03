@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
     messages_scope = current_user.organization.messages.filter_by(params)
 
     sort_columns = [
-      [:date, 'messages.created_at'],
+      [:date, 'messages.sent_at'],
       [:direction, 'messages.direction'],
       [:name, 'contacts.first_name'],
       [:to, 'messages.to'],

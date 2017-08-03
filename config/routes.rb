@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
   # Static Stuff
@@ -55,7 +57,6 @@ Rails.application.routes.draw do
 
   # sidekiq
   authenticate :user, -> (user) { user.is_super_user? } do
-    require 'sidekiq/web'
     mount Sidekiq::Web => 'admin/sidekiq'
   end
 

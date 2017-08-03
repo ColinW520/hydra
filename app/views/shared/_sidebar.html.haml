@@ -53,3 +53,10 @@
           %li
             %i.fa.fa-sign-out.fa-lg
             Sign Out
+    - if current_user.is_super_user?
+      .super-menu-list
+        %ul
+          %a{href: sidekiq_web_path}
+            %li.text-warning
+              %i.fa.fa-pied-piper-alt
+              %strong Sidekiq

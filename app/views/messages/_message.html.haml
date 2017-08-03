@@ -8,12 +8,23 @@
       %i.fa.fa-arrow-down.text-primary
       In
   %td
-    = link_to contact_path(message.contact) do
-      = message.contact.try(:first_name)
-      = number_to_phone message.to.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+    - if message.direction == 'outbound'
+      = link_to contact_path(message.contact) do
+        = message.contact.full_name
+        = number_to_phone message.to.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+    - else
+      = link_to line_path(message.line) do
+        = message.line.name
+        = number_to_phone message.to.phony_formatted(normalize: :US, format: :international, spaces: ' ')
   %td
-    = message.try(:message_request).try(:user).try(:first_name)
-    = number_to_phone message.from.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+    - if message.direction == 'inbound'
+      = link_to contact_path(message.contact) do
+        = message.contact.full_name
+        = number_to_phone message.from.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+    - else
+      = link_to line_path(message.line) do
+        = message.line.name
+        = number_to_phone message.from.phony_formatted(normalize: :US, format: :international, spaces: ' ')
   %td= message.body
   %td
     .btn-group

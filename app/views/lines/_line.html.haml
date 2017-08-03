@@ -30,5 +30,6 @@
     %td.actions
       .pull-right
         .btn-group
-          = link_to edit_line_path(line), class: 'btn btn-sm btn-warning' do
-            %i.fa.fa-pencil
+          - if current_user.admin_role?
+            = link_to edit_line_path(line), class: 'btn btn-sm btn-warning' do
+              %i.fa.fa-pencil

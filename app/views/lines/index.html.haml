@@ -5,9 +5,10 @@
       %i.fa.fa-hashtag
       Lines
       .pull-right
-        = link_to new_line_path, class: 'btn btn-success btn-sm' do
-          %i.fa.fa-plus
-          Add
+        - if current_user.admin_role?
+          = link_to new_line_path, class: 'btn btn-success btn-sm' do
+            %i.fa.fa-plus
+            Add
 .row
   .col-sm-12
     = smart_listing_render :lines

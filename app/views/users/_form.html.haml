@@ -8,8 +8,6 @@
   .form-group
     = f.input :email, as: :email
   .form-group
-    .help-block.text-warning Only check this box if you want this user to be able to control other users
-    = f.input :supervisor_role
     .help-block.text-danger Only check this box if you want this user to be able to buy lines, change lines, and edit organization settings.
     = f.input :admin_role
   .form-group

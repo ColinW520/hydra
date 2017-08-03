@@ -40,7 +40,7 @@
             %td
               %strong Phone
             %td
-              = number_to_phone @contact.mobile_phone
+              = number_to_phone @contact.mobile_phone.phony_formatted(normalize: :US, format: :international, spaces: ' ')
           %tr
             %td
               %strong Email

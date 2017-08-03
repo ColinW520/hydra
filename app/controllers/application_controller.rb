@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_line_warning
-    @organization_can_message = current_user.organization.lines.present?
+    @organization_can_message = current_user.organization.lines.present? if @current_user.present?
   end
 
   def gon_setup

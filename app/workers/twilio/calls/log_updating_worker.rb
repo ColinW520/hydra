@@ -3,6 +3,8 @@ class Twilio::Calls::LogUpdatingWorker < Twilio::BaseWorker
     @log = CallLog.find log_id
     prepare_objects(@log.organization_id)
 
+    return if @log.line.released_at.present?
+
     @call = @twilio_client.calls.get(@log.call_sid)
 
     @log.update_attributes(

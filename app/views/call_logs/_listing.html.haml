@@ -9,6 +9,7 @@
             %th= smart_listing.sortable 'Date', :created_at
             %th= smart_listing.sortable 'From', :from
             %th= smart_listing.sortable 'Forwarded?', :forwarded
+            %th Answered By
             %th
               = smart_listing.sortable 'Duration', :duration_in_seconds
               %i.fa.fa-info-circle{"data-placement" => "left", "data-toggle" => "tooltip", :title => "This is what Twilio reports."}

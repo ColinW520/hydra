@@ -4,5 +4,5 @@
   %td= local_time message_request.created_at, format: "%m/%d/%Y"
   %td.actions
     .btn-group
-      = link_to messages_path(JSON.parse message_request.filter_query), class: 'btn btn-sm btn-default' do
+      = link_to messages_path(JSON.parse(message_request.filter_query)), class: 'btn btn-sm btn-default' do
         %i.fa.fa-users

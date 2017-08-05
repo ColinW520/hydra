@@ -23,7 +23,10 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     # send it
     @message = @twilio_client.messages.create(recipient_hash)
 
+    # refresh it
+    @message.refresh
+
     # store it
-    Twilio::Messages::StoringWorker.perform_asyncperform(@message.twilio_sid, @organization.id, @line.id, @contact.id)
+    Twilio::Messages::StoringWorker.perform_asyncperform(@message.twilio_sid ||= @message.id, @organization.id, @line.id, @contact.id)
   end
 end

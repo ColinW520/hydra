@@ -1,12 +1,10 @@
 ---
-:concurrency: 1
+:concurrency: 5
 :queues:
   - twilio
   - imports
   - default
-  - single_file
 :limits:
   twilio: 1
   imports: 1
   default: 1
-  single_file: 1

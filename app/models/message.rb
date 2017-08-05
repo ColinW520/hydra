@@ -28,38 +28,6 @@ class Message < ApplicationRecord
     return messages_scope
   end
 
-  def detail_table
-    # this should be a _decorator_ or helper...
-    "<table>
-      <tbody>
-        <tr>
-          <td><b>From City:</b></td>
-          <td>#{self.from_city}</td>
-        </tr>
-        <tr>
-          <td><b>From Zip:</b></td>
-          <td>#{self.from_zip}</td>
-        </tr>
-        <tr>
-          <td><b>From State:</b></td>
-          <td>#{self.from_state}</td>
-        </tr>
-        <tr>
-          <td><b>From Country:</b></td>
-          <td>#{self.from_country}</td>
-        </tr>
-        <tr>
-          <td><b>Segments:</b></td>
-          <td>#{self.num_segments}</td>
-        </tr>
-        <tr>
-          <td><b>Attachments:</b></td>
-          <td>#{self.num_media}</td>
-        </tr>
-      </tbody>
-    </table>"
-  end
-
   def self.to_csv
     attributes = self.column_names
 

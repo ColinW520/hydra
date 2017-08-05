@@ -20,7 +20,7 @@
           = link_to new_contact_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success', title: "Add individual member.", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
             %i.fa.fa-plus
             Add New
-          = link_to new_import_path, remote: true, class: 'btn btn-sm btn-primary', title: "Upload Contacts via CSV", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
+          = link_to new_import_path, class: 'btn btn-sm btn-primary', title: "Upload Contacts via CSV", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do
             %i.fa.fa-upload
             Upload
 .row

@@ -30,8 +30,6 @@
     .btn-group
       = link_to new_message_request_path(contact_ids: [message.contact_id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-reply
-      %button.btn.btn-sm.btn-secondary{"aria-describedby" => "popover", "data-html" => "true", "data-container" => "body", "data-content" => message.detail_table, "data-original-title" => "Message Details", "data-placement" => "left", "data-toggle" => "popover", :title => "Message Details", :type => "button"}
-        %i.fa.fa-info-circle
 
 
 = render "contacts/dialog"

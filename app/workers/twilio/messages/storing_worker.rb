@@ -25,10 +25,6 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
       body: @message.body,
       error_message: @message.error_message,
       price_in_cents: @message.price.to_f.abs,
-      from_zip: @message.try(:from_zip),
-      from_city: @message.try(:from_city),
-      from_state: @message.try(:from_state),
-      from_country: @message.try(:from_country),
       num_media: @message.num_media,
       num_segments: @message.num_segments,
       received_at: @message.direction == 'inbound' ? Time.now : nil

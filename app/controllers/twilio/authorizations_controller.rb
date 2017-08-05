@@ -12,7 +12,8 @@ class Twilio::AuthorizationsController < Twilio::BaseController
   end
 
   def deauthorize
-    organization = Organization.where(twilio_auth_id: params['AccountSid'])
+    organization = Organization.where(account_sid: params['AccountSid'])
     organization.update_attribute(:twilio_auth_id, nil)
+    # TODO: We need a mailer here to inform A) us and B) them.
   end
 end

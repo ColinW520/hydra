@@ -25,8 +25,7 @@ class Organization < ApplicationRecord
   end
 
   def twilio_account
-    client = Twilio::REST::Client.new self.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN']
-    return client.try(:account)
+    return Twilio::REST::Client.new self.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN']
   end
 
   def stripe_customer

@@ -4,7 +4,7 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     @organization = Organization.find organization_id
     @line = Line.find line_id
     @contact = Contact.find contact_id
-    @twilio_client = Twilio::REST::Client.new(@organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+    @twilio_client = @organization.twilio_client
 
     @message = @twilio_client.messages.get twilio_sid
 
@@ -18,17 +18,17 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
       contact_id: @contact.id,
       message_request_id: message_request_id,
       status: @message.status,
-      direction: @message.direction,
+      direction: @message.direction == 'outbound-api' ? 'outbound' : 'inbound',
       sent_at: DateTime.parse(@message.date_sent),
       to: @message.to,
       from: @message.from,
       body: @message.body,
       error_message: @message.error_message,
       price_in_cents: @message.price.to_f.abs,
-      from_zip: @message.from_zip,
-      from_city: @message.from_city,
-      from_state: @message.from_state,
-      from_country: @message.from_country,
+      from_zip: @message.try(:from_zip),
+      from_city: @message.try(:from_city),
+      from_state: @message.try(:from_state),
+      from_country: @message.try(:from_country),
       num_media: @message.num_media,
       num_segments: @message.num_segments,
       received_at: @message.direction == 'inbound' ? Time.now : nil

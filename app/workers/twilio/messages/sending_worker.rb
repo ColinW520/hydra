@@ -6,7 +6,7 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     @contact = Contact.find contact_id
 
     # we've somehow already processed a request with this message request id
-    return if contact.messages.where(messsage_request_id: message_request_id).present?
+    return if @contact.messages.where(messsage_request_id: message_request_id).present?
 
     @line = Line.find @message_request.line_id
 

@@ -1,76 +1,82 @@
-.row
-  .col-sm-12
-    = simple_form_for [@line], authenticity_token: true, html: { id: 'LineForm', class: 'form-control' } do |f|
-      #error_holder
-        %ul#errors
-      = f.error_notification
-      %legend Number Settings
-      %br
-      .row
-        .col-sm-12.col-md-6
-          .form-group
-            = f.input :name, label: 'Reference Name', id: 'InputName', required: true, placeholder: 'Marketing Line', autofocus: true
-        .col-sm-12.col-md-6
-          .form-group
-            - if @line.persisted?
-              %br
-              %h5.text-muted
-                Number:
-                = @line.number
-                %i.fa.fa-info-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "You cannot edit this number once it has been reserved. You may, however, remove this number from your account and purchase a new one if you no longer want to use this one."}
-              %br
-            - else
-              = f.input :number, as: :select, label: 'Select a Twilio™ number', collection: @numbers, label_method: :phone_number, value_method: :phone_number, include_blank: false
-      %br
-      %legend Voice Forwarding Settings
-      %p.text-danger
-        Use these settings to control what this phone number will do when it receives a phone call. If forwarding is not enabled, all phone calls made to this number will be
-        %strong rejected.
-        %br
-        %strong Twilio charges $0.0085/minute for Voice forwarding.
-        Learn more about call forwarding costs
-        %a{href: 'https://support.twilio.com/hc/en-us/articles/223132367-How-much-am-I-charged-for-call-forwarding'} here.
-      %br
-      .row
-        .col-sm-12.col-md-6
-          .form-group
-            = f.input :forwarding_enabled, label: 'Forwarding Enabled?', as: :boolean, inline_label: true
-        .col-sm-12.col-md-6
-          .form-group
-            = f.input :forwarding_number, label: 'Forward To:', as: :tel, placeholder: '+13162588774'
-      -# %br
-      -# %legend Response Settings
-      -# %p.text-danger If you would like an automatic response to be sent to anyone who sends a text message to this line, configure that here.
-      -#
-      %br
-      %legend Message Alert Settings
-      %p.text-danger Use the options below to configure how you would like to notified of new inbound messages. Alerting via SMS will incur Twilio message sending costs.
-      %br
-      .row
-        .col-sm-12.col-md-6
-          .form-group
-            = f.input :sms_alert, label: 'Alert via SMS', as: :boolean, inline_label: true
-        .col-sm-12.col-md-6
-          .form-group
-            = f.input :sms_alert_number, label: 'Number to Alert:', as: :tel, placeholder: '+13162588774'
-      .row
-        .col-sm-12.col-md-6
-          .form-group
-            = f.input :email_alert, label: 'Alert via Email', as: :boolean, inline_label: true
-        .col-sm-12.col-md-6
-          .form-group
-            = f.input :email_alert_address, label: 'Email Alert Address:', as: :email, input_html: {value: f.object.email_alert_address || current_user.email}
-      .form-actions
-        .text-center.text-danger
-          - unless @line.persisted?
-            By clicking this button you ackowledge that you are purchasing a number from Twilio™ and by doing so you accept any applicable charges related to the use of this line. For information about potential charges, visit Twilio's
-            %a{href: 'https://www.twilio.com/sms/pricing', target: '_blank'} Pricing Guide.
-            %br
-            %br
-          = f.hidden_field :user_id, value: @current_user.id
-          = f.hidden_field :organization_id, value: @line.organization_id
-          = f.button :submit, f.object.persisted? ? 'Save Line Settings' : 'Purchase This Line for $1/month', class: 'btn btn-block btn-md btn-success'
+= simple_form_for [@line], authenticity_token: true, html: { id: 'LineForm', class: 'form-control' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  %legend Line Profile
+  %p.text-info Use these settings to internally identify this phone number within your organization.
+  .row
+    .col-sm-12.col-md-6
+      .form-group
+        = f.input :name, label: 'Reference Name', id: 'InputName', required: true, placeholder: 'Marketing Line', autofocus: true
+    .col-sm-12.col-md-6
+      .form-group
+        - if @line.persisted?
+          %br
+          %h5.text-muted
+            Number:
+            = @line.number
+            %i.fa.fa-info-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "You cannot edit this number once it has been reserved. You may, however, remove this number from your account and purchase a new one if you no longer want to use this one."}
+          %br
+        - else
+          = f.input :number, as: :select, label: 'Select a Twilio™ number', collection: @numbers, label_method: :phone_number, value_method: :phone_number, include_blank: false
+  %hr{style: "color: #333; border: 1px solid #333; width: 10%; margin-left: 0px; margin-top: 30px;"}
+  %legend Accept Voice Calls?
+  %p.text-info Use these settings to control what this phone number will do when it receives an inbound voice call.
+  %br
+  .row
+    .col-sm-12.col-md-12
+      .form-group
+        = f.input :reject_voice_calls, label: 'Immediately Reject All Voice Calls?', as: :boolean, inline_label: true, class: 'text-danger'
+        .help-block.text-danger Choosing this option overrides all other Voice settings, and rejects all inbound calls immediately. Choose this option to prevent this line from incurring any voice related charges.
+  #voice_settings{style: "display: #{f.object.reject_voice_calls? ? 'none' : 'block'}"}
+    %legend Voice Handling
+    %p.text-info
+      Use these settings to customize what will happen when someone tries to call this line. These settings are not available if the line is set to immediately reject all voice calls.
+      Any text you put in the Auto Response field will be read aloud to the caller, automatically. Use this in conjunction with a fowarding number if you would like an auto-greeting for your line! Or, you can use this to advise callers that this is a texting-only line. Keep this message short to minimize your Twilio usage costs.
+    .row
+      .col-sm-12.col-md-6
+        .form-group
+          = f.input :voice_auto_response, label: 'Auto Response', as: :text
+      .col-sm-12.col-md-6
+        .form-group
+          = f.input :voice_forwarding_number, label: 'Forward To #:', as: :tel
 
+  %hr{style: "color: #333; border: 1px solid #333; width: 10%; margin-left: 0px; margin-top: 30px;"}
+  %legend SMS Handling
+  %p.text-info You can specify a message to automatically be sent if anyone tries to text this line directly. If you do, keep it short to minimize your costs. It not possible to completely block inbound text messages with Twilio at this time.
+  %br
+  .row
+    .col-sm-12.col-md-12
+      .form-group
+        = f.input :sms_auto_response_text, label: 'Text Auto Response'
+
+  %hr{style: "color: #333; border: 1px solid #333; width: 10%; margin-left: 0px; margin-top: 30px;"}
+  %legend Message Alert Settings
+  %p.text-danger Use the options below to configure how you would like to notified of new inbound messages. Alerting via SMS will incur Twilio message sending costs.
+  %br
+  %div.alert.alert-info
+    %h4 Coming Soon!
+    %p.text-white
+      Users will be able to 'subscribe' to line alerts and receive inbound messaging instant alerts, or hourly/daily summaries via SMS or Email. See the
+      %a{href: changelog_path} Change Log
+      for updates!
+
+  .form-actions
+    = f.hidden_field :user_id, value: @current_user.id
+    = f.hidden_field :organization_id, value: @line.organization_id
+    = f.button :submit, f.object.persisted? ? 'Save Line Settings' : 'Purchase This Line for $1/month', class: 'btn btn-block btn-md btn-success'
+    - unless @line.persisted?
+      %br
+      .text-center.text-danger
+        By clicking this button you ackowledge that you are purchasing a number from Twilio™ and by doing so you accept any applicable charges related to the use of this line. For information about potential charges, visit Twilio's
+        %a{href: 'https://www.twilio.com/sms/pricing', target: '_blank'} Pricing Guide.
+        %br
 :coffeescript
-  $('[data-toggle="tooltip"]').tooltip()
-  $('[data-toggle="popover"]').popover()
+  checkbox = document.getElementById('line_reject_voice_calls')
+  details_div = document.getElementById('voice_settings')
+  checkbox.onchange = ->
+    if @checked
+      details_div.style['display'] = 'none'
+    else
+      details_div.style['display'] = 'block'
+    return

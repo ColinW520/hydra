@@ -46,13 +46,19 @@ Rails.application.routes.draw do
   end
 
   # Twilio Endpoints
-  match '/twilio/authorize' => 'twilio/authorizations#authorize', via: [:get]
-  match '/twilio/deauthorize' => 'twilio/authorizations#deauthorize', via: [:get]
-  match '/twilio/callbacks/status' => 'twilio/callbacks#status', via: [:get]
+  # match '/twilio/authorize' => 'twilio/authorizations#authorize', via: [:get]
+  # match '/twilio/deauthorize' => 'twilio/authorizations#deauthorize', via: [:get]
+  # match '/twilio/callbacks/status' => 'twilio/callbacks#status', via: [:post]
 
   namespace :twilio do
-    resources :messages, only: [:create]
-    resources :voice_calls, only: [:create]
+    resources :messages
+    resources :voice_calls
+    resources :callbacks do
+      collection do
+        post :status
+      end
+    end
+    resources :authorizations
   end
 
   # sidekiq

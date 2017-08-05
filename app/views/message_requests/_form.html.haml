@@ -4,7 +4,7 @@
     %ul#errors
   = f.error_notification
   .form-group
-    = f.input :line_id, label: 'From Line', as: :select, collection: current_user.organization.lines, label_method: :dropdown_name, value_method: :id, include_blank: false
+    = f.input :line_id, label: 'From Line', as: :select, collection: current_user.organization.lines.active, label_method: :dropdown_name, value_method: :id, include_blank: false
   .form-group
     = f.input :body, label: 'Message Text', hint: 'Keep it brief, please. 140 characters, max.', as: :text, required: true, autofocus: true, input_html: { maxlength: 140 }, required: true, class: 'form-control'
     %span#counter{"data-maximum-length" => "140"}= 140

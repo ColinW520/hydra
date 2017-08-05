@@ -10,14 +10,11 @@ class Line < ApplicationRecord
   validates :user, presence: true
   validates :organization, presence: true
 
-
   phony_normalize :number, default_country_code: 'US'
-  phony_normalize :forwarding_number, default_country_code: 'US'
-  phony_normalize :sms_alert_number, default_country_code: 'US'
-
   validates :number, phony_plausible: true
-  validates :forwarding_number, phony_plausible: true
-  validates :sms_alert_number, phony_plausible: true
+
+  phony_normalize :voice_forwarding_number, default_country_code: 'US'
+  validates :voice_forwarding_number, phony_plausible: true
 
   scope :active, -> { where(released_at: nil) }
 

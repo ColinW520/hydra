@@ -2,6 +2,7 @@ class Message < ApplicationRecord
   belongs_to :contact
   belongs_to :message_request
   belongs_to :line
+  belongs_to :organization
   scope :inbound, -> { where(direction: 'inbound') }
   scope :outbound, -> { where(direction: 'outbound') }
 

@@ -9,15 +9,17 @@
 - else
   %tr{id: "line_#{line.id}"}
     %td
-      = link_to line.name, line_path(line)
+      = link_to line.name, edit_line_path(line)
     %td= number_to_phone line.number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
-    %td
-      - if line.forwarding_enabled?
-        %i.fa.fa-check.text-success
-        = line.forwarding_number
+    %td.text-center
+      - if line.reject_voice_calls?
+        %i.fa.fa-times.text-danger{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Will reject all calls."}
       - else
-        %i.fa.fa-times.text-danger
-        = line.forwarding_number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+        %i.fa.fa-check.text-success{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Configured to accept phone calls."}
+        - if line.voice_forwarding_number.present?
+          %i.fa.fa-arrow-right.text-info{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Forwarding to #{line.voice_forwarding_number.phony_formatted(normalize: :US, format: :international, spaces: ' ')}"}
+        - if line.voice_auto_response.present?
+          %i.fa.fa-volume-up.text-warning{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Saying: #{line.voice_auto_response}"}
     %td= local_time line.created_at, format: "%m/%d/%Y"
     %td.text-center
       %i.fa.fa-arrow-down.text-primary

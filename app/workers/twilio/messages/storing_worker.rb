@@ -1,12 +1,12 @@
 class Twilio::Messages::StoringWorker < Twilio::BaseWorker
 
   def perform(twilio_sid, organization_id, line_id, contact_id, message_request_id = nil)
-    @organization = Organization.find organization_id
+    @@organization = Organization.find organization_id
     @line = Line.find line_id
     @contact = Contact.find contact_id
     @twilio_client = Twilio::REST::Client.new(@organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
 
-    @message = @twilio_client.account.messages.get(twilio_sid)
+    @message = @twilio_client.messages.get twilio_sid
 
     # store it
     @local_message = Message.where(twilio_sid: @message.sid).first_or_create(

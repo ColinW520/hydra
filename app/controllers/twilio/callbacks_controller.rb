@@ -5,7 +5,7 @@ class Twilio::CallbacksController < Twilio::BaseController
     @contact = Contact.where(mobile_phone: params['To'], organization_id: @line.organization_id).first
 
     # store this. we want an error to pop if we dont have a contact or a line.
-    Twilio::Messages::StoringWorker.perform_async(params['smsSid'], @line.organization_id, @line.id, @contact.id)
+    Twilio::Messages::StoringWorker.perform_async(params['messageSid'], @line.organization_id, @line.id, @contact.id)
   end
 end
 

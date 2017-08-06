@@ -6,7 +6,7 @@ class Message < ApplicationRecord
   scope :inbound, -> { where(direction: 'inbound') }
   scope :outbound, -> { where(direction: 'outbound') }
 
-  validates :sms_sid,
+  validates :twilio_sid,
             presence: true,
             uniqueness: true
 

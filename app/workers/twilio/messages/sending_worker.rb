@@ -27,6 +27,6 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     @message.refresh
 
     # store it
-    Twilio::Messages::StoringWorker.perform_asyncperform(@message.sid, @organization.id, @line.id, @contact.id)
+    Twilio::Messages::StoringWorker.perform_async(@message.sid, @organization.id, @line.id, @contact.id)
   end
 end

@@ -41,8 +41,8 @@ class MessageRequestsController < ApplicationController
           flash[:success] = 'There were some issues with your message...'
           redirect_to message_requests_path
         }
-        format.json { render json: { error_message_requests:  @message_request.errors.full_message_requests }, status: :unprocessable_entity }
-        format.js { render json: { error_message_requests:  @message_request.errors.full_message_requests }, status: :unprocessable_entity }
+        format.json { render json: { error_message_requests:  @message_request.errors.full_messages }, status: :unprocessable_entity }
+        format.js { render json: { error_message_requests:  @message_request.errors.full_messages }, status: :unprocessable_entity }
       end
 
     end

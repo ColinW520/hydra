@@ -1,6 +1,6 @@
 class Twilio::Messages::StoringWorker < Twilio::BaseWorker
 
-  def perform(twilio_sid, organization_id, line_id, contact_id, message_request_id = nil)
+  def perform(twilio_sid, organization_id, line_id, contact_id, message_request_id = nil, called_by = nil)
     @organization = Organization.find organization_id
     @line = Line.find line_id
     @contact = Contact.find contact_id

@@ -24,6 +24,6 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     @message = @twilio_client.messages.create(recipient_hash)
 
     # store it if it has an ID
-    Twilio::Messages::StoringWorker.perform_async(@message.sid, @organization.id, @line.id, @contact.id) if @message.sid.present?
+    Twilio::Messages::StoringWorker.perform_async(@message.sid, @organization.id, @line.id, @contact.id, 'sending worker') if @message.sid.present?
   end
 end

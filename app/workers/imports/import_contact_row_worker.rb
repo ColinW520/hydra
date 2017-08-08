@@ -24,13 +24,8 @@ class Imports::ImportContactRowWorker
     contact.address_zip = row[:zip]
     contact.is_active = row[:is_active] ||= true
     contact.internal_identifier = row[:internal_identifier]
+    contact.tag_list = row[:tags].split('|').join(', ')
 
-    if contact.persisted?
-      tags_array = row[:tags].split('|') + contact.tag_list
-      contact.tag_list = tags_array.uniq.join(', ')
-    else
-      contact.tag_list = row[:tags].split('|').join(', ')
-    end
     contact.save!
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
     if (@retry_count += 1) <= 2

@@ -1,6 +1,6 @@
 class Twilio::Messages::StoringWorker < Twilio::BaseWorker
 
-  def perform(twilio_sid, organization_id, line_id, contact_id, message_request_id = nil, called_by = nil)
+  def perform(twilio_sid, organization_id, line_id, contact_id, message_request_id = nil)
     @organization = Organization.find organization_id
     @line = Line.find line_id
     @contact = Contact.find contact_id
@@ -24,10 +24,9 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
       from: @message.from,
       body: @message.body,
       error_message: @message.error_message,
-      price_in_cents: @message.price.to_f.abs,
+      price_in_cents: @message.price.to_f.abs.to_s,
       num_media: @message.num_media,
-      num_segments: @message.num_segments,
-      received_at: @message.direction == 'inbound' ? Time.now : nil
+      num_segments: @message.num_segments
     )
 
     @contact.touch(:last_messaged_at)

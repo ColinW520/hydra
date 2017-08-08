@@ -5,6 +5,7 @@ class Message < ApplicationRecord
   belongs_to :organization
   scope :inbound, -> { where(direction: 'inbound') }
   scope :outbound, -> { where(direction: 'outbound') }
+  scope :visible, -> { where() }
 
   validates :twilio_sid,
             presence: true,

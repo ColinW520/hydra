@@ -8,8 +8,6 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
 
     @message = @twilio_client.messages.get twilio_sid
 
-    the_time = DateTime.parse(@message.date_sent) ||= Time.now
-
     # store it
     @local_message = Message.where(twilio_sid: @message.sid).first_or_create(
       sms_sid: @message.sid,
@@ -21,7 +19,7 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
       message_request_id: message_request_id,
       status: @message.status,
       direction: @message.direction == 'outbound-api' ? 'outbound' : 'inbound',
-      sent_at: the_time,
+      sent_at: Time.now,
       to: @message.to,
       from: @message.from,
       body: @message.body,

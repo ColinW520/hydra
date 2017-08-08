@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804202354) do
+ActiveRecord::Schema.define(version: 20170808025148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,27 @@ ActiveRecord::Schema.define(version: 20170804202354) do
     t.boolean  "reject_voice_calls",      default: false
     t.index ["organization_id"], name: "index_lines_on_organization_id", using: :btree
     t.index ["user_id"], name: "index_lines_on_user_id", using: :btree
+  end
+
+  create_table "media_items", force: :cascade do |t|
+    t.integer  "message_request_id"
+    t.string   "name"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["message_request_id"], name: "index_media_items_on_message_request_id", using: :btree
+  end
+
+  create_table "media_links", force: :cascade do |t|
+    t.integer  "message_id"
+    t.string   "link"
+    t.string   "direction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_media_links_on_message_id", using: :btree
   end
 
   create_table "message_requests", force: :cascade do |t|
@@ -355,6 +376,8 @@ ActiveRecord::Schema.define(version: 20170804202354) do
   add_foreign_key "imports", "organizations"
   add_foreign_key "lines", "organizations"
   add_foreign_key "lines", "users"
+  add_foreign_key "media_items", "message_requests"
+  add_foreign_key "media_links", "messages"
   add_foreign_key "message_requests", "lines"
   add_foreign_key "message_requests", "organizations"
   add_foreign_key "message_requests", "users"

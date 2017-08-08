@@ -29,6 +29,10 @@ class Message < ApplicationRecord
     return messages_scope
   end
 
+  def twilio_instance
+    self.organization.twilio_client.messages.get(self.twilio_id)
+  end
+
   def self.to_csv
     attributes = self.column_names
 

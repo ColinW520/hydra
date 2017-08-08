@@ -4,6 +4,8 @@ class MessageRequest < ApplicationRecord
   belongs_to :line
   serialize :filter_query, JSON
 
+  has_many :media_items, dependent: :destroy
+
   validates :body, presence: true, length: { minimum: 1, maximum: 140 }
 
   after_create :queue_message

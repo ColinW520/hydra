@@ -19,7 +19,7 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
       message_request_id: message_request_id,
       status: @message.status,
       direction: @message.direction == 'outbound-api' ? 'outbound' : 'inbound',
-      sent_at: DateTime.parse(@message.date_sent),
+      sent_at: DateTime.parse(@message.date_sent) rescue Time.now,
       to: @message.to,
       from: @message.from,
       body: @message.body,
@@ -28,6 +28,8 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
       num_media: @message.num_media,
       num_segments: @message.num_segments
     )
+
+    # this is where we would need to store any message links if needed
 
     @contact.touch(:last_messaged_at)
   end

@@ -15,6 +15,10 @@ class User < ApplicationRecord
 
   scope :forwarding_capable, -> { where(mobile_phone_validated: true) }
 
+  def safe_to_cancel?
+    return true unless current_user.admin_role?
+  end
+
   def inviter
     User.find_by_id self.invited_by
   end

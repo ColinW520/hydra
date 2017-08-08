@@ -18,7 +18,7 @@ class MessageRequestsController < ApplicationController
     @query = params[:query].present? ? params[:query] : Hash.new
     @query[:id] = params[:contact_ids] if params[:contact_ids].present?
 
-    @expected_count = params[:count] ||= params[:contact_ids].count
+    gon.recipients_count & @expected_count = params[:count] ||= params[:contact_ids].count
     @message_request = MessageRequest.new
   end
 

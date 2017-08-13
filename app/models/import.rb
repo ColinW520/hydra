@@ -11,7 +11,8 @@ class Import < ApplicationRecord
     dependent: :destroy,
     path: '/hydra_imports/:hash-:id.:extension',
     hash_secret: 'a92342be23ad9827634654a5617646'
-  validates_attachment :datafile, content_type: { content_type: 'text/csv' }
+
+  validates_attachment :datafile, content_type: { content_type: ['text/plain', 'text/csv', 'application/vnd.ms-excel'] }
 
   after_create :start_processing
   def start_processing

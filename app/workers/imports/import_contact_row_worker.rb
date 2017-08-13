@@ -1,5 +1,6 @@
 class Imports::ImportContactRowWorker
   include Sidekiq::Worker
+  sidekiq_options queue: :imports
 
   def perform(row, import_id)
     row = row.with_indifferent_access

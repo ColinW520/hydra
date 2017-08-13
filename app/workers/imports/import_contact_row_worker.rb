@@ -24,7 +24,7 @@ class Imports::ImportContactRowWorker
     contact.address_zip = row[:zip]
     contact.is_active = row[:is_active] ||= true
     contact.internal_identifier = row[:internal_identifier]
-    contact.tag_list = row[:tags].split('|').join(', ')
+    contact.tag_list = row[:tags].split('|').join(', ').compact.reject(&:blank?)
 
     contact.save!
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique

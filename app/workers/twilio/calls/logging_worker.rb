@@ -32,7 +32,7 @@ class Twilio::Calls::LoggingWorker < Twilio::BaseWorker
     # Assign this Call Log to a line we manage.
     @line = Line.find_by_number params['To']
     @log.line_id = @line.try(:id)
-    @log.forwarded = true if @line.forwarding_enabled?
+    @log.forwarded = true if @line.forwarding_number.present?
     @log.forwarded_to = @line.forwarding_number if @log.forwarded?
     @log.organization_id = @line.try(:organization_id)
 

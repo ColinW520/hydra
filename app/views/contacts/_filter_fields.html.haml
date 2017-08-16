@@ -3,18 +3,24 @@
     .card.card-default
       = smart_listing_controls_for(:contacts, { class: 'form-control' }) do
         .row
-          .col-sm-12.col-md-4
+          .col-sm-12.col-md-3
             .form-group.has-feedback.filter.input-append
-              %label.control-label{for: 'inputQuery'} Name Like ?
+              %label.control-label{for: 'inputQuery'}
+                %i.fa.fa-search
+                Name Like ?
               = text_field_tag :name, params[:name], class: "search form-control"
-          .col-sm-12.col-md-4
+          .col-sm-12.col-md-3
             .form-group.has-feedback.filter.input-append
               %label.control-label{for: 'inputQuery'} Title Like ?
               = text_field_tag :title, params[:title], class: "search form-control"
-          .col-sm-12.col-md-4
+          .col-sm-12.col-md-3
             .form-group.has-feedback.filter.input-append
               %label.control-label{for: 'inputQuery'} Tagged With ?
               = text_field_tag :tags, params[:tags], class: "search form-control"
+          .col-sm-12.col-md-3
+            .form-group.has-feedback.filter.input-append
+              %label.control-label{for: 'inputInternal'} Internal Id #
+              = text_field_tag :internal_identifier, params[:internal_identifier], class: "search form-control"
         .row
           .col-sm-12.col-md-6
             %p= "Matches: #{smart_listing.count}"

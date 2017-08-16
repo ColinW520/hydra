@@ -24,8 +24,12 @@
             %td
               %strong Name
             %td
-              =@contact.try(:first_name)
+              = @contact.try(:first_name)
               = @contact.try(:last_name)
+          %tr
+            %td
+              %strong Internal ID #
+            %td= @contact.try(:internal_identifier)
           %tr
             %td
               %strong Tags

@@ -65,7 +65,7 @@ class ContactsController < ApplicationController
   end
 
   def destroy
-    @contact.destroy
+    @contact.remove(current_user.id)
     respond_to do |format|
       format.js { flash[:success] = 'Contact removed.' }
       format.html { redirect_to contacts_path, notice: 'Contact removed. This will remove the contact from your list, but dont worry, all messaging history will be preserved.' }

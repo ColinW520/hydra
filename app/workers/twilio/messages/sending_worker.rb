@@ -8,6 +8,8 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     # we've somehow already processed a request with this message request id
     return if @contact.messages.where(message_request_id: message_request_id).present?
 
+    return unless @contact.active
+
     @line = Line.find @message_request.line_id
 
     prepare_objects(@line.organization_id)

@@ -14,9 +14,16 @@ class Contact < ApplicationRecord
             uniqueness: { scope: [:organization_id] },
             phony_plausible: true
 
-
+  scope :not_removed, -> { where(removed_at: nil) }
+  scope :active, -> { where(active: true) }
   scope :name_like, ->(term) { where('first_name ILIKE ? OR last_name ILIKE ?', "%#{term}%", "%#{term}%") }
   scope :title_like, ->(term) { where('title ILIKE ?', "%#{term}%") }
+
+  def remove(user_id)
+    self.removed_at = Time.now
+    self.removed_by = user_id
+    self.save!
+  end
 
   def full_name
     if self.first_name.present? || self.last_name.present?
@@ -33,6 +40,7 @@ class Contact < ApplicationRecord
   def self.filter_by(params)
     params = params.with_indifferent_access
     contacts_scope = self.includes(:organization)
+    contacts_scope = contacts_scope.not_removed
     contacts_scope = contacts_scope.where(internal_identifier: params[:internal_identifier]) if params[:internal_identifier].present?
     contacts_scope = contacts_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
     contacts_scope = contacts_scope.where(id: params[:id]) if params[:id].present?

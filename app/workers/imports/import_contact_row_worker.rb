@@ -27,6 +27,9 @@ class Imports::ImportContactRowWorker
     contact.internal_identifier = row[:internal_identifier]
     contact.tag_list = row[:tags].split('|').compact.reject(&:blank?).uniq.join(', ')
 
+    contact.removed_at = nil
+    contact.removed_by = nil
+
     contact.save!
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
     if (@retry_count += 1) <= 2

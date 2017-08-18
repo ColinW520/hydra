@@ -26,8 +26,7 @@ class Contact < ApplicationRecord
   end
 
   def textable?
-    return false if self.removed_at.present?
-    return false unless self.is_active?
+    return false if self.removed_at.present? || !self.is_active?
     return true
   end
 
@@ -44,7 +43,7 @@ class Contact < ApplicationRecord
   end
 
   def self.filter_by(params)
-    params = params.with_indifferent_access
+    params = params.to_unsafe_hash
     contacts_scope = self.includes(:organization)
     contacts_scope = contacts_scope.not_removed
     contacts_scope = contacts_scope.where(internal_identifier: params[:internal_identifier]) if params[:internal_identifier].present?

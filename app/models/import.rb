@@ -12,10 +12,18 @@ class Import < ApplicationRecord
     path: '/hydra_imports/:hash-:id.:extension',
     hash_secret: 'a92342be23ad9827634654a5617646'
 
-  validates_attachment :datafile, content_type: { content_type: ['text/plain', 'text/csv', 'application/vnd.ms-excel'] }
+  validates_attachment :datafile, content_type: {
+    content_type: [
+      'text/plain',
+      'text/csv',
+      'application/vnd.ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      ]
+    }
 
   after_create :start_processing
   def start_processing
-    Imports::ImportStartingWorker.perform_async(self.id) if Rails.env.production?
+    Imports::ImportStartingWorker.perform_async(self.id)
+    Imports::ImportStartingWorker.new.perform(self.id)
   end
 end

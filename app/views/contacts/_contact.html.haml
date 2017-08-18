@@ -1,4 +1,4 @@
-%tr{id: "contact_#{contact.id}", class: contact.textable? ? '' : 'danger' }
+%tr{id: "contact_#{contact.id}", class: contact.textable? ? '' : 'table-danger' }
   %td= check_box_tag "contact_ids[]", contact.id
   %td
     = link_to contact.full_name, contact_path(contact)

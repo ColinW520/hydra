@@ -33,7 +33,7 @@ class Twilio::Calls::LoggingWorker < Twilio::BaseWorker
     @line = Line.find_by_number params['To']
     @log.line_id = @line.try(:id)
     @log.forwarded = true if @line.forwarding_number.present?
-    @log.forwarded_to = @line.forwarding_number if @log.forwarded?
+    @log.forwarded_to = @line.voice_forwarding_number if @log.forwarded?
     @log.organization_id = @line.try(:organization_id)
 
     # Assign this CallLog to the appropriate organization's contact record, or create one for it, based on the mobile #

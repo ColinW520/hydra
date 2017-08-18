@@ -1,4 +1,4 @@
-%tr{id: "contact_#{contact.id}"}
+%tr{id: "contact_#{contact.id}", class: contact.textable? ? '' : 'danger' }
   %td= check_box_tag "contact_ids[]", contact.id
   %td
     = link_to contact.full_name, contact_path(contact)
@@ -19,5 +19,5 @@
         %i.fa.fa-eye
       = link_to edit_contact_path(contact), remote: true, class: 'btn btn-sm btn-warning', title: "Edit this Contact", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-pencil
-      = link_to contact_path(contact), method: :delete, class: 'btn btn-sm btn-danger', title: "Remove this Contact", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+      = link_to contact_path(contact), remote: true, method: :delete, class: 'btn btn-sm btn-danger', title: "Remove this Contact", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-trash

@@ -25,6 +25,12 @@ class Contact < ApplicationRecord
     self.save!
   end
 
+  def textable?
+    return false if self.removed_at.present?
+    return false unless self.is_active?
+    return true
+  end
+
   def full_name
     if self.first_name.present? || self.last_name.present?
       "#{self.first_name} #{self.last_name}"

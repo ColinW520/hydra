@@ -8,6 +8,11 @@
       %li first_name
       %li last_name
       %li phone*
+      %li tags**
+    .help-block.text-info
+      %strong **
+      Please separate multiple tags with the `|` symbol, which can be found above your enter key and below your backspace key. Example: (Is Cool|San Antonio Region|High Performer)
+      Whatever is in this column, even if completely blank, will BE the tags for this contact going forward. Any existing tags not present here will be removed. Tags are case insensitive.
     .help-block.text-info
       %strong *
       We will use this to identify your team members. You may format however you wish, as long as it is a MOBILE number and ALL non-numeric charachters will be removed.
@@ -18,12 +23,7 @@
       %li email
       %li title
       %li city
-      %li tags**
       %li started_at: Please format as MM/DD/YYYY
-    .help-block.text-info
-      %strong **
-      Please separate multiple tags with the `|` symbol, which can be found above your enter key and below your backspace key. Example: (Is Cool|San Antonio Region|High Performer)
-      Whatever is in this column, even if completely blank, will BE the tags for this contact going forward. Any existing tags not present here will be removed. Tags are case insensitive.
 .row
   .col-sm-12
     = link_to '#', class: 'btn btn-sm btn-info' do

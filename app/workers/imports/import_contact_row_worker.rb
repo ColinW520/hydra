@@ -19,13 +19,14 @@ class Imports::ImportContactRowWorker
     contact.last_name = row[:last_name]
     contact.mobile_phone = PhonyRails.normalize_number(row[:phone], country_code: 'US')
 
-    contact.title = row[:title]
-    contact.address_city = row[:city]
-    contact.address_state = row[:state]
-    contact.address_zip = row[:zip]
+    contact.title = row[:title] if row[:title].present?
+    contact.address_city = row[:city] if row[:city].present?
+    contact.address_state = row[:state] if row[:state].present?
+    contact.address_zip = row[:zip] if row[:zip].present?
     contact.is_active = row[:is_active] ||= true
-    contact.internal_identifier = row[:internal_identifier]
-    contact.tag_list = row[:tags].split('|').compact.reject(&:blank?).uniq.join(', ')
+    contact.internal_identifier = row[:internal_identifier] if row[:internal_identifier].present?
+
+    contact.tag_list = row[:tags].split('|').compact.reject(&:blank?).uniq.join(', ') if row[:tag_list].present?
 
     contact.removed_at = nil
     contact.removed_by = nil

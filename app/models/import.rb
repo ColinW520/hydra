@@ -24,6 +24,5 @@ class Import < ApplicationRecord
   after_create :start_processing
   def start_processing
     Imports::ImportStartingWorker.perform_async(self.id)
-    Imports::ImportStartingWorker.new.perform(self.id)
   end
 end

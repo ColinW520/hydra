@@ -14,12 +14,12 @@ class Imports::ImportStartingWorker
       force_simple_split: true,
       strip_chars_from_headers: /[\-"]/
     }
-    
+
     @the_import = Import.find import_id
     return if @the_import.is_enqueued?
     @the_import.update_attributes(is_enqueued: true, status: 'processing')
 
-    file = open(@the_import.datafile.url)
+    file = open(@the_import.datafile.url).force_encoding("UTF-8")
 
     SmarterCSV.process(file, default_options).each do |chunk|
       chunk.each do |row|

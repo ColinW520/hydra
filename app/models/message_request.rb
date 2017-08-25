@@ -6,11 +6,10 @@ class MessageRequest < ApplicationRecord
 
   has_many :media_items, dependent: :destroy
 
-  validates :body, presence: true, length: { minimum: 1, maximum: 140 }
+  validates :body, presence: true
 
   after_create :queue_message
   def queue_message
-    Twilio::Messages::QueuingWorker.perform_async(self.id) if Rails.env.production?
-    Twilio::Messages::QueuingWorker.new.perform(self.id) if Rails.env.development?
+    Twilio::Messages::QueuingWorker.perform_async(self.id)
   end
 end

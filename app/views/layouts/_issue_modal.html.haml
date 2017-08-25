@@ -14,7 +14,7 @@
       .modal-footer
         %span
           %i.fa.fa-user
-          = issue.assignee.login
+          = issue.try(:assignee).try(:login)
         %span
           %i.fa.fa-clock-o
           = local_time_ago issue.updated_at

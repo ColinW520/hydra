@@ -20,7 +20,7 @@ class Imports::ImportStartingWorker
     @the_import.update_attributes(is_enqueued: true, status: 'processing')
 
 
-    open(url, 'r:utf-8') do |file|   # don't forget to specify the UTF-8 encoding!!
+    open(@the_import.datafile.url, 'r:utf-8') do |file|   # don't forget to specify the UTF-8 encoding!!
       SmarterCSV.process(file, default_options).each do |chunk|
         chunk.each do |row|
           Imports::ImportContactRowWorker.perform_async(row, @the_import.id) if Rails.env.production?

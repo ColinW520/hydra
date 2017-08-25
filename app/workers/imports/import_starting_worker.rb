@@ -19,14 +19,17 @@ class Imports::ImportStartingWorker
     return if @the_import.is_enqueued?
     @the_import.update_attributes(is_enqueued: true, status: 'processing')
 
-    file = open(@the_import.datafile.url).force_encoding("UTF-8")
 
-    SmarterCSV.process(file, default_options).each do |chunk|
-      chunk.each do |row|
-        Imports::ImportContactRowWorker.perform_async(row, @the_import.id) if Rails.env.production?
-        Imports::ImportContactRowWorker.new.perform(row, @the_import.id) if Rails.env.development?
+    open(url, 'r:utf-8') do |file|   # don't forget to specify the UTF-8 encoding!!
+      SmarterCSV.process(file, default_options).each do |chunk|
+        chunk.each do |row|
+          Imports::ImportContactRowWorker.perform_async(row, @the_import.id) if Rails.env.production?
+          Imports::ImportContactRowWorker.new.perform(row, @the_import.id) if Rails.env.development?
+        end
       end
     end
+
+
 
     @the_import.update_attributes(is_enqueued: false, status: 'succeeded')
   rescue => error

@@ -6,6 +6,8 @@ class Twilio::Messages::QueuingWorker < Twilio::BaseWorker
     return if @message_request.processed_at.present?
 
     @recipients = Contact.filter_by JSON.parse @message_request.filter_query
+    @recipients = @recipients.where(organization_id: @message_request.organization_id)
+
 
     return unless @recipients.present?
 

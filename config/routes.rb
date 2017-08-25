@@ -62,9 +62,7 @@ Rails.application.routes.draw do
   end
 
   # sidekiq
-  authenticate :user, -> (user) { user.is_super_user? } do
-    mount Sidekiq::Web => 'admin/sidekiq'
-  end
+  mount Sidekiq::Web => 'admin/sidekiq'
 
   # Admin Space
   namespace :admin do

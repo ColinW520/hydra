@@ -8,7 +8,7 @@
   %td= local_time contact.last_messaged_at, format: "%m/%d/%Y" rescue ''
   %td
     - contact.tags.pluck(:name).each do |tag|
-      %span.badge.badge-primary=tag
+      %span.badge.badge-primary=tag.titleize
 
   %td.actions
     .btn-group

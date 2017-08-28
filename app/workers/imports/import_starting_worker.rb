@@ -4,6 +4,8 @@ class Imports::ImportStartingWorker
 
   def perform(import_id)
     default_options = {
+      force_utf8: true,
+      invalid_byte_sequence: '',
       chunk_size: 100,
       downcase_header: true,
       headers_in_file: true,

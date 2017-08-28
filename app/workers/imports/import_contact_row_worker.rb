@@ -26,7 +26,7 @@ class Imports::ImportContactRowWorker
     contact.is_active = row[:is_active] ||= true
     contact.internal_identifier = row[:internal_identifier] if row[:internal_identifier].present?
 
-    contact.tag_list = row[:tags].split('|').compact.reject(&:blank?).uniq.join(', ') if row[:tag_list].present?
+    contact.tag_list = row[:tags].split('|').compact.reject(&:blank?).uniq.join(', ') if row[:tags].present?
 
     contact.removed_at = nil
     contact.removed_by = nil

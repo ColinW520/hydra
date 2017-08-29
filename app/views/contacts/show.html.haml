@@ -57,12 +57,13 @@
             %td
               %strong Updated
             %td= local_time_ago @contact.updated_at
-          %tr
-            %td
-              %strong Address
-            %td
-              = @contact.address_line
-              = "#{@contact.address_city}, #{@contact.address_state} #{@contact.address_zip}"
+          - if @contact.opted_out_at.present?
+            %tr.table-danger
+              %td
+                %strong Opted Out At
+              %td
+                = local_time @contact.opted_out_at
+
 
 
   .col-sm-12.col-md-6.col-lg-8

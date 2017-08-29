@@ -4,7 +4,6 @@
 
 $ ->
   if $('#contacts_show').length > 0
-    console.log('seeing this')
     $.get
       url: "/messages?contact_id=" + gon.contact_id
       cache: false

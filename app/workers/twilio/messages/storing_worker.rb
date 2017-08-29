@@ -32,5 +32,10 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     # this is where we would need to store any message links if needed
 
     @contact.touch(:last_messaged_at)
+
+    # handle optouts
+    if @message.body == 'STOP'
+      @contact.update_attributes(opted_out_at: Time.now, is_active: false)
+    end
   end
 end

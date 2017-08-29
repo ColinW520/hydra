@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818191312) do
+ActiveRecord::Schema.define(version: 20170829162348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20170818191312) do
     t.string   "internal_identifier"
     t.datetime "removed_at"
     t.string   "removed_by"
+    t.datetime "opted_out_at"
     t.index ["internal_identifier"], name: "index_contacts_on_internal_identifier", using: :btree
     t.index ["organization_id"], name: "index_contacts_on_organization_id", using: :btree
   end

@@ -3,6 +3,7 @@ class MessagesMailer < ApplicationMailer
 
   def alert(message_id, user_id)
     @message = Message.find message_id
+    @contact = @message.contact
     @user = User.find user_id
 
     mail to: @user.email, subject: "You have a new message from: #{@message.contact.full_name} on your TMT line: #{@message.line.name}."

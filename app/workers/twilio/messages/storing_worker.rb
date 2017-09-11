@@ -34,8 +34,15 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     @contact.touch(:last_messaged_at)
 
     # handle optouts
-    if @message.body == 'STOP'
+    if %w(STOP STOPALL UNSUBSCRIBE CANCEL END QUIT REMOVE).include? @message.body.squish
       @contact.update_attributes(opted_out_at: Time.now, is_active: false)
+    end
+
+    # handle alerts
+    if @message.direction == 'inbound' && !@message.alerts_sent?
+      @organization.users.subscribed_to_instant_alerts.pluck(:id).each do |user_id|
+        MessagesMailer.alert(@message.id, user_id).deliver_later
+      end
     end
   end
 end

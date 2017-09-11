@@ -14,6 +14,9 @@ class User < ApplicationRecord
   belongs_to :organization
 
   scope :forwarding_capable, -> { where(mobile_phone_validated: true) }
+  scope :subscribed_to_instant_alerts, -> { where(notify_instantly: true) }
+  scope :subscribed_to_daily_summary, -> { where(summarize_daily: true) }
+  scope :subscribed_to_weekly_summary, -> { where(summarize_weekly: true) }
 
   def safe_to_cancel?
     !self.admin_role?

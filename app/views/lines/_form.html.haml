@@ -50,17 +50,6 @@
       .form-group
         = f.input :sms_auto_response_text, label: 'Text Auto Response'
 
-  %hr{style: "color: #333; border: 1px solid #333; width: 10%; margin-left: 0px; margin-top: 30px;"}
-  %legend Message Alert Settings
-  %p.text-danger Use the options below to configure how you would like to notified of new inbound messages. Alerting via SMS will incur Twilio message sending costs.
-  %br
-  %div.alert.alert-info
-    %h4 Coming Soon!
-    %p.text-white
-      Users will be able to 'subscribe' to line alerts and receive inbound messaging instant alerts, or hourly/daily summaries via SMS or Email. See the
-      %a{href: changelog_path} Change Log
-      for updates!
-
   .form-actions
     = f.hidden_field :user_id, value: @current_user.id
     = f.hidden_field :organization_id, value: @line.organization_id

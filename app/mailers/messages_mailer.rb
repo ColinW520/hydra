@@ -1,11 +1,10 @@
 class MessagesMailer < ApplicationMailer
   default template_path: "mailers/messages"
 
-  def alert(message_id)
+  def alert(message_id, user_id)
     @message = Message.find message_id
-    @line = @message.line
-    @contact = @message.contact
+    @user = User.find user_id
 
-    mail to: @line.email_alert_address, subject: "Your #{@line.name} line has a new message."
+    mail to: @user.email, subject: "You have a new message from: #{@message.contact.full_name} on your TMT line: #{@message.line.name}."
   end
 end

@@ -10,19 +10,16 @@
                 %tr
                   %td.content-block{:style => "text-align:center;"}
                     %h2 New Inbound Message
-                    - if @contact.first_name
-                      %p.lead= "Hi! A text message has been received from #{@contact.first_name.titleize} (#{@message.from})."
-                    - else
-                      %p.lead= "Hi! A text message has been received from #{@message.from}."
+                    %p.lead= "Hi! A text message has been received from #{@contact.full_name.titleize} (#{@message.from})."
                 %tr{:style => "text-align:center"}
                   %td.content-block
-                    %strong Message Body
+                    %strong Message
                     %br
                     %em= @message.body
                 %tr{:style => "text-align:center;"}
                   %br
                   %td.content-block
-                    %a.btn-primary{:href => "https://www.textmy.team/contacts/#{@contact.id}"} See History.
+                    %a.btn-primary{:href => "https://www.textmy.team/contacts/#{@contact.id}"} See Message History
                 %tr
         .footer
           %table{:width => "100%"}

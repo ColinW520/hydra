@@ -4,7 +4,9 @@
   - twilio
   - imports
   - default
+  - mailers
 :limits:
+  mailers: 4
   twilio: 1
   imports: 4
   default: 1

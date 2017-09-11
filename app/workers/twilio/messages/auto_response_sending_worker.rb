@@ -16,6 +16,6 @@ class Twilio::Messages::AutoResponseSendingWorker < Twilio::BaseWorker
     @message = @twilio_client.messages.create(recipient_hash)
 
     # store it
-    Twilio::Messages::StoringWorker.perform_asyncperform(@message.sid, @line.organization_id, @line.id, @contact.id)
+    Twilio::Messages::StoringWorker.perform_async(@message.sid, @line.organization_id, @line.id, @contact.id)
   end
 end

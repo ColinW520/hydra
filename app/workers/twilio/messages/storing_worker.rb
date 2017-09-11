@@ -5,7 +5,6 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     @line = Line.find line_id
     @contact = Contact.find contact_id
     @twilio_client = @organization.twilio_client
-
     @message = @twilio_client.messages.get twilio_sid
 
     # store it
@@ -30,7 +29,6 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     )
 
     # this is where we would need to store any message links if needed
-
     @contact.touch(:last_messaged_at)
 
     # handle optouts

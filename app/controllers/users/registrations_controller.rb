@@ -14,7 +14,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
     def configure_permitted_parameters
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :mobile_phone, :organization_id, :admin_role])
+      Rails.logger.info "\n\n\n d-reg \n\n\n"
+      the_keys = [:first_name, :last_name, :mobile_phone, :organization_id, :admin_role, :notify_instantly, :summarize_daily, :summarize_weekly]
+      devise_parameter_sanitizer.permit(:sign_up, keys: the_keys)
+      devise_parameter_sanitizer.permit(:account_update, keys: the_keys)
     end
 
     def after_sign_up_path_for(resource)

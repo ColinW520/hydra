@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :track_action
 
   include SmartListing::Helper::ControllerExtensions
@@ -42,6 +43,8 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-   devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :organization_id, :admin_role, :mobile_phone, :email])
+   the_keys = [:first_name, :last_name, :mobile_phone, :organization_id, :admin_role, :notify_instantly, :summarize_daily, :summarize_weekly]
+   devise_parameter_sanitizer.permit(:sign_up, keys: the_keys)
+   devise_parameter_sanitizer.permit(:accunt_update, keys: the_keys)
   end
 end

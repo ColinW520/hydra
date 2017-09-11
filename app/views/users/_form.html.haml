@@ -13,5 +13,12 @@
       = f.input :admin_role
   .form-group
     = f.input :timezone, priority: /US/, as: :time_zone
+  %br
+  %p.lead Notification Settings
+  .form-group
+    = f.input :notify_instantly, hint: "Send this user an email every time an inbound message is received."
+    = f.input :summarize_daily, hint: "Send this user an email every day summarizing inbound and outbound messaging activity."
+    = f.input :summarize_weekly, hint: "Send this user an email every Monday summarizing the previous week's messaging activity."
+  %br
   .form-actions.col-centered
     = f.button :submit, class: 'btn btn-md btn-success'

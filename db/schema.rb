@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829162348) do
+ActiveRecord::Schema.define(version: 20170911181050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -337,6 +337,9 @@ ActiveRecord::Schema.define(version: 20170829162348) do
     t.string   "timezone"
     t.boolean  "mobile_phone_validated"
     t.boolean  "is_super_user",          default: false
+    t.boolean  "notify_instantly",       default: false
+    t.boolean  "summarize_daily",        default: false
+    t.boolean  "summarize_weekly",       default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
     t.index ["organization_id"], name: "index_users_on_organization_id", using: :btree

@@ -19,10 +19,10 @@
         %td
           - if @subscription.status == 'active' && @subscription.canceled_at.nil?
             .text-success
-              = @subscription.status
+              = @subscription.status.titleize
           - else
             %strong.text-danger
-              = @subscription.status
+              = @subscription.status.titleize
               - if @subscription.canceled_at.present?
                 for now
       %tr

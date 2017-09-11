@@ -16,10 +16,10 @@ class StaticPagesController < ApplicationController
 
   def changelog
     @subnav = 'changelog'
-    $git_client = Octokit::Client.new(access_token: ENV['GITHUB_PERSONAL'])
+    client = Octokit::Client.new(username: ENV['GITHUB_USERNAME'], password: ENV['GITHUB_PASSWORD'])
 
-    @commits = $git_client.commits('ColinW520/hydra', 'master', since: 1.month.ago ).map(&:commit)
-    @issues = $git_client.issues('ColinW520/hydra', state: 'open')
+    @commits = client.commits('ColinW520/hydra', 'master', since: 1.month.ago ).map(&:commit)
+    @issues = client.issues('ColinW520/hydra', state: 'open')
   end
 
   protected

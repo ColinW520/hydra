@@ -27,7 +27,11 @@ class BillingMethodsController < ApplicationController
         format.js { flash[:success] = 'Billing Method has been created.' }
         format.html {
           flash[:success] = 'Your Billing Method has been created!'
-          redirect_to new_organization_subscription_path(@billing_method.organization)
+          if @billing_method.organization.subscription.present?
+            redirect_to organization_path(current_user.organization)
+          else
+            redirect_to new_organization_subscription_path(@billing_method.organization)
+          end
         }
       else
         format.json { render json: @billing_method.errors.full_messages, status: :unprocessable_entity }
@@ -52,7 +56,10 @@ class BillingMethodsController < ApplicationController
           redirect_to organization_path(@organization)
         }
         format.json { head :no_content }
-        format.js { flash[:success] = 'Billing Method has been updated.' }
+        format.js {
+          redirect_to organization_path(@organization)
+          flash[:success] = 'Billing Method has been updated.'
+        }
       else
         format.json { render json: @billing_method.errors.full_messages, status: :unprocessable_entity }
       end

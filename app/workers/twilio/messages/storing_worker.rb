@@ -37,11 +37,11 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     end
 
     # handle alerts
-    if @message.direction == 'inbound' && !@message.alerts_sent?
+    if @local_message.direction == 'inbound' && !@local_message.alerts_sent?
       @organization.users.subscribed_to_instant_alerts.pluck(:id).each do |user_id|
         MessagesMailer.alert(@message.id, user_id).deliver_later
       end
-      @message.update_attribute(:alerts_sent, true)
+      @local_message.update_attribute(:alerts_sent, true)
     end
   end
 end

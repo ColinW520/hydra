@@ -18,12 +18,16 @@
                   %td.content-block
                     %strong Outbound Messages
                     %br
+                    sent
                     = @stats[:outbound_messages]
+                    messages
+                    %em to
+                    = @stats[:outbound_sent]
+                    recipients
                 %tr{:style => "text-align:center"}
                   %td.content-block
                     %a.btn.btn-primary{:href => "https://www.textmy.team/messages"}
                       See Message History
-                %tr
         .footer
           %table{:width => "100%"}
             %tr

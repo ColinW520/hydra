@@ -10,8 +10,13 @@ class MessagesMailer < ApplicationMailer
   end
 
   def weekly_summary(user_id)
+    range = 1.week.ago..Time.now
     @user = User.find user_id
-    @stats = { inbound_messages: @user.organization.messages.inbound.where(created_at: 1.week.ago..Time.now).count, outbound_messages: @user.organization.message_requests.where(created_at: 1.week.ago..Time.now).count }
+    @stats = {
+      inbound_messages: @user.organization.messages.inbound.where(range).count,
+      outbound_messages: @user.organization.message_requests.where(range).count,
+      outbound_sent:  @user.organization.messages.outbound.where(range).count
+    }
 
     return unless @stats[:inbound_messages] > 0 && @stats[:outbound_messages] > 0
 
@@ -19,9 +24,13 @@ class MessagesMailer < ApplicationMailer
   end
 
   def daily_summary(user_id)
+    range = 1.day.ago..Time.now
     @user = User.find user_id
-    @stats = { inbound_messages: @user.organization.messages.inbound.where(created_at: 1.day.ago..Time.now).count, outbound_messages: @user.organization.message_requests.where(created_at: 1.day.ago..Time.now).count }
-
+    @stats = {
+      inbound_messages: @user.organization.messages.inbound.where(range).count,
+      outbound_messages: @user.organization.message_requests.where(range).count,
+      outbound_sent:  @user.organization.messages.outbound.where(range).count
+    }
     return unless @stats[:inbound_messages] > 0 && @stats[:outbound_messages] > 0
 
     mail to: @user.email, subject: "Your daily TextMy.Team messaging activity summary."

@@ -13,7 +13,7 @@ class MessagesMailer < ApplicationMailer
     @user = User.find user_id
     @stats = { inbound_messages: @user.organization.messages.inbound.where(created_at: 1.week.ago..Time.now).count, outbound_messages: @user.organization.message_requests.where(created_at: 1.week.ago..Time.now).count }
 
-    return if @stats[:inbound_messages] > 0 && @stats[:outbound_messages] > 0
+    return unless @stats[:inbound_messages] > 0 && @stats[:outbound_messages] > 0
 
     mail to: @user.email, subject: "Your weekly TextMy.Team messaging activity summary."
   end
@@ -22,7 +22,7 @@ class MessagesMailer < ApplicationMailer
     @user = User.find user_id
     @stats = { inbound_messages: @user.organization.messages.inbound.where(created_at: 1.day.ago..Time.now).count, outbound_messages: @user.organization.message_requests.where(created_at: 1.day.ago..Time.now).count }
 
-    return if @stats[:inbound_messages] > 0 && @stats[:outbound_messages] > 0
+    return unless @stats[:inbound_messages] > 0 && @stats[:outbound_messages] > 0
 
     mail to: @user.email, subject: "Your daily TextMy.Team messaging activity summary."
   end

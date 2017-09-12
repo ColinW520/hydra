@@ -9,17 +9,19 @@
               %table{:cellpadding => "0", :cellspacing => "0", :width => "100%"}
                 %tr
                   %td.content-block{:style => "text-align:center;"}
-                    %h2 New Inbound Message
-                    %p.lead= "Hi! A text message has been received from #{@contact.full_name.titleize} (#{@message.from})."
+                    %h2 Daily Summary
                 %tr{:style => "text-align:center"}
                   %td.content-block
-                    %strong Message
+                    %strong Inbound Messages
                     %br
-                    %em= @message.body
-                %tr{:style => "text-align:center;"}
-                  %br
+                    = @stats[:inbound_messages]
                   %td.content-block
-                    %a.btn.btn-primary{:href => "https://www.textmy.team/contacts/#{@contact.id}"}
+                    %strong Outbound Messages
+                    %br
+                    = @stats[:outbound_messages]
+                %tr{:style => "text-align:center"}
+                  %td.content-block
+                    %a.btn.btn-primary{:href => "https://www.textmy.team/messages"}
                       See Message History
                 %tr
         .footer

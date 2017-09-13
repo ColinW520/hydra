@@ -6,9 +6,9 @@
   = f.input :stripe_customer_id, as: :hidden, input_html: { value: @organization.stripe_customer_id }
   = f.input :organization_id, as: :hidden, input_html: { value: @organization.id }
   .form-group
-    = f.input :terms_agreed, :as => :boolean, label: ("I agree to the #{link_to 'Terms of Service', terms_path, target: '_blank'} and #{link_to 'Privacy Policy', privacy_path, target: '_blank'}").html_safe
+    = f.input :terms_agreed, :as => :boolean, label: ("I agree to the #{link_to 'Terms of Service', terms_path, target: '_blank'} and #{link_to 'Privacy Policy', privacy_path, target: '_blank'}").html_safe, class: 'required_check'
   .form-group
-    = f.input :spam_agreed, :as => :boolean, label: ("I will follow the #{link_to 'AntiSpam Requirements', anti_spam_path, target: '_blank'}.").html_safe
+    = f.input :spam_agreed, :as => :boolean, label: ("I will follow the #{link_to 'AntiSpam Requirements', anti_spam_path, target: '_blank'}.").html_safe, class: 'required_check'
   .form-group
     %p.text-danger I agree that I am legally responsible for the content of any message I send with the help of this service.
     = f.input :signer_name, label: 'Signed By', placeholder: 'Type Your Name Here'
@@ -16,5 +16,23 @@
     = f.input :coupon_code, label: 'Coupon Code', hint: 'If you have a coupon code, enter it here.'
   .form-actions
     .text-center
-      = f.button :submit, 'Finish Setup & Charge My Card', class: 'btn btn-block btn-success'
+      = f.button :submit, 'Finish Setup & Charge My Card', class: 'disabled btn btn-block btn-success', id: 'subscription_submit'
       .text-info Your service will begin immediately after clicking this button!
+
+:coffeescript
+  $ ->
+    $('#subscription_terms_agreed').on('change', ->
+      console.log 'seeing change'
+      if @checked
+      else
+        $('#subscription_submit').addClass 'disabled'
+      #true: disabled, false: enabled
+      return
+    ).trigger 'change'
+
+    $('#subscription_spam_agreed').on('change', ->
+      console.log 'seeing change'
+      $('#subscription_submit').addClass 'disabled', !@checked
+      #true: disabled, false: enabled
+      return
+    ).trigger 'change'

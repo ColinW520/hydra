@@ -53,7 +53,11 @@
   .form-actions
     = f.hidden_field :user_id, value: @current_user.id
     = f.hidden_field :organization_id, value: @line.organization_id
-    = f.button :submit, f.object.persisted? ? 'Save Line Settings' : 'Purchase This Line for $1/month', class: 'btn btn-block btn-md btn-success'
+    - if current_user.admin_role
+      = f.button :submit, f.object.persisted? ? 'Save Line Settings' : 'Purchase This Line for $1/month', class: 'btn btn-block btn-md btn-success'
+    - else
+      = link_to lines_path, class: 'btn btn-block btn-md btn-outline-danger' do
+        Back
     - unless @line.persisted?
       %br
       .text-center.text-danger

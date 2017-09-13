@@ -33,11 +33,11 @@
             %li{class: @subnav == 'users' ? 'active' : nil}
               %i.fa.fa-users.fa-lg
               Users
-
-        %a{href: current_user.organization_id.present? ? organization_path(current_user.organization) : new_organization_path}
-          %li{class: @subnav == 'organizations' ? 'active' : nil}
-            %i.fa.fa-gears.fa-lg
-            Settings
+        - if current_user.admin_role
+          %a{href: current_user.organization_id.present? ? organization_path(current_user.organization) : new_organization_path}
+            %li{class: @subnav == 'organizations' ? 'active' : nil}
+              %i.fa.fa-gears.fa-lg
+              Settings
 
         %a{href: edit_user_registration_path}
           %li{class: @subnav == 'devise' ? 'active' : nil}

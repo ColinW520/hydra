@@ -5,9 +5,10 @@
       %th
       %th
       %th
-        = link_to new_organization_billing_method_path(@organization), remote: true, class: 'pull-right btn btn-warning btn-sm' do
-          %i.fa.fa-exchange
-          Change
+        - if current_user.admin_role
+          = link_to new_organization_billing_method_path(@organization), remote: true, class: 'pull-right btn btn-warning btn-sm' do
+            %i.fa.fa-exchange
+            Change
 
     %tbody
       %tr

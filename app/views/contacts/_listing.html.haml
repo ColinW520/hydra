@@ -9,9 +9,6 @@
             %table.table.table-hover
               %thead.thead-inverse
                 %th
-                  - if @organization_can_message && current_user.admin_role?
-                    = button_tag type: "submit", class: "btn btn-sm btn-success" do
-                      %i.fa.fa-crosshairs{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This will message only the contacts with the checkboxes selected."}
                   %input#selectAll{:type => "checkbox", :value => "selectAll", "data-placement" => "top", "data-toggle" => "tooltip", :title => "This will check / uncheck all the boxes below."}
                 %th.sortable= smart_listing.sortable 'Name', :first_name
                 %th.sortable= smart_listing.sortable 'Title', :title
@@ -23,6 +20,10 @@
               %tbody#contacts
                 - smart_listing.collection.each do |contact|
                   = render contact
+                %tr{style: 'background-color: #f3f3f3'}
+                  %td{colspan: 8}
+                    = button_tag type: "submit", class: "btn btn-sm btn-success" do
+                      %i.fa.fa-crosshairs{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This will message only the contacts with the checkboxes selected."}
 %br
 .row
   .col-sm-12

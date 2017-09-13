@@ -8,6 +8,14 @@ $ ->
     e.preventDefault()
     $('#wrapper').toggleClass 'toggled'
 
+  $('#selectAll').click ->
+    if (this.checked)
+      $(':checkbox').each ->
+        $(this).prop('checked', true)
+    else
+      $(':checkbox').each ->
+        $(this).prop('checked', false)
+
 $(document).on 'ajax:error', 'form', (evt, xhr, status) ->
   $('div#error_holder').html '<ul id="errors"></ul>'
   errors = jQuery.parseJSON(xhr.responseText)

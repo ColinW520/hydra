@@ -9,7 +9,7 @@
               %table{:cellpadding => "0", :cellspacing => "0", :width => "100%"}
                 %tr
                   %td.content-block{:style => "text-align:center;"}
-                    %h2 New Inbound Message
+                    %h2="New Inbound Message for #{@user.organization.name} on TMT"
                     %p.lead= "Hi! A text message has been received from #{@contact.full_name.titleize} (#{@message.from})."
                 %tr{:style => "text-align:center"}
                   %td.content-block

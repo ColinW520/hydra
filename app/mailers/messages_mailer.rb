@@ -10,7 +10,7 @@ class MessagesMailer < ApplicationMailer
   end
 
   def weekly_summary(user_id)
-    range = 1.week.ago..Time.now
+    range = 1.week.ago.beginning_of_day..Time.now.beginning_of_day
     @user = User.find user_id
     @stats = {
       inbound_messages: @user.organization.messages.inbound.where(range).count,
@@ -24,7 +24,7 @@ class MessagesMailer < ApplicationMailer
   end
 
   def daily_summary(user_id)
-    range = 1.day.ago..Time.now
+    range = 1.day.ago.beginning_of_day..Time.now.beginning_of_day
     @user = User.find user_id
     @stats = {
       inbound_messages: @user.organization.messages.inbound.where(range).count,

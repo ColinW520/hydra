@@ -51,7 +51,7 @@ class Contact < ApplicationRecord
     contacts_scope = contacts_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
     contacts_scope = contacts_scope.where(id: params[:id]) if params[:id].present?
     contacts_scope = contacts_scope.name_like(params[:name]) if params[:name].present?
-    contacts_scope = contacts_scope.title_like(params[:title]) if params[:title].present?
+    contacts_scope = contacts_scope.where(title: params[:title]) if params[:title].present?
     contacts_scope = contacts_scope.tagged_with(params[:tags], any: true, wild: true) if params[:tags].present?
     contacts_scope = contacts_scope.where(contacts: { mobile_phone: params[:mobile_phone] }) if params[:mobile_phone].present?
     return contacts_scope

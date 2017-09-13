@@ -4,32 +4,50 @@
       = smart_listing_controls_for(:contacts, { class: 'form-control' }) do
         .row
           .col-sm-12.col-md-3
-            .form-group.has-feedback.filter.input-append
+            .form-group
               %label.control-label{for: 'inputQuery'}
                 %i.fa.fa-search
-                Name Like ?
+                Name
+                %i.fa.fa-question-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "You can enter either a first, or a last name here! We will look for anyone with a name that is similar to what you enter here."}
               = text_field_tag :name, params[:name], class: "search form-control"
           .col-sm-12.col-md-3
-            .form-group.has-feedback.filter.input-append
-              %label.control-label{for: 'inputQuery'} Title Like ?
-              = text_field_tag :title, params[:title], class: "search form-control"
+            .form-group
+              %label.control-label{for: 'inputTitle'}
+                %i.fa.fa-asterisk
+                Titles
+                %i.fa.fa-question-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "Start typing a title you want to search by, and we'll show you an option! You can even include multiple. The options are populated by the titles you assigned to your actual contacts. The search is additive -- we'll return any contact with a title in this box."}
+              = select_tag :title, options_for_select(current_user.organization.contacts.where.not(title: '').pluck(:title).uniq.sort, selected: params[:title]), { multiple: true, include_blank: true, class: 'search form-control select2', id: 'inputTitle' }
           .col-sm-12.col-md-3
-            .form-group.has-feedback.filter.input-append
-              %label.control-label{for: 'inputQuery'} Tagged With ?
-              = text_field_tag :tags, params[:tags], class: "search form-control"
+            .form-group
+              %label.control-label{for: 'inputQuery'}
+                %i.fa.fa-tag
+                Tagged With
+                %i.fa.fa-question-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "Start typing a tag you want to search by, and we'll show you an option! You can even include multiple. The options are populated by your actual contacts' tags. The search is additive -- we'll return any contact with any of these tags."}
+              = select_tag :tags, options_for_select(current_user.organization.contacts.tag_counts.pluck(:name).sort, selected: params[:tags]), { multiple: true, include_blank: true, class: 'search form-control select2', id: 'inputTags' }
           .col-sm-12.col-md-3
-            .form-group.has-feedback.filter.input-append
-              %label.control-label{for: 'inputInternal'} Internal Id #
+            .form-group
+              %label.control-label{for: 'inputInternal'}
+                %i.fa.fa-hashtag
+                Internal Id
+                %i.fa.fa-question-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This will return any employee ID that is LIKE one entered."}
               = text_field_tag :internal_identifier, params[:internal_identifier], class: "search form-control"
         .row
           .col-sm-12.col-md-6
-            %p= "Matches: #{smart_listing.count}"
-          .col-sm-12.col-md-6
+            %i.fa.fa-filter
+            = "Matches: #{smart_listing.count}"
+            %i.fa.fa-question-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This is the number of people who match these filters above."}
+          .col-sm-12.col-md-6.col-centered
             .pull-right
               - if current_user.organization.lines.active.present?
                 = link_to new_message_request_path(count: smart_listing.count, query: {name: params[:name],title: params[:title],tags: params[:tags], organization_id: current_user.organization_id}), id: 'NewMessageButton', remote: true, class: 'btn btn-success btn-sm', title: "Message all #{smart_listing.count} members matching these filters.", 'data-toggle' => 'tooltip', 'data-placement' => 'top' do
                   %i.fa.fa-send
-              = button_tag type: "submit", class: "btn btn-sm btn-info", title: "Update filter results.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+                  Message
+              = button_tag type: "submit", class: "btn btn-sm btn-info", title: "This will update your filter results. You can also just press your enter key.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
                 %i.fa.fa-filter
-              = link_to contacts_path(format: :csv), class: 'btn btn-primary btn-sm', title: "Download THESE members to a CSV.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
-                %i.fa.fa-download
+                Update
+              = link_to contacts_path, class: 'btn btn-danger btn-sm', title: "This will remove any filters you've added and restart your search.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+                %i.fa.fa-times
+                Clear
+
+:javascript
+  $('.select2').select2();

@@ -6,7 +6,7 @@
           .col-sm-12.col-md-2
             .form-group.has-feedback.filter.input-append
               %label.control-label{for: 'inputDirection'} Direction
-              = select_tag :direction, options_for_select([['Outbound', 'outbound'], ['Inbound', 'inbound']]), { include_blank: true, class: 'search form-control', id: 'inputDirection' }
+              = select_tag :direction, options_for_select([['Outbound', 'outbound'], ['Inbound', 'inbound']], selected: params[:direction]), { include_blank: true, class: 'search form-control', id: 'inputDirection' }
           .col-sm-12.col-md-2
             .form-group.has-feedback.filter.input-append
               %label.control-label{for: 'inputLine'} To Line

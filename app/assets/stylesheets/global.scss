@@ -35,6 +35,17 @@ strong {
   margin-left: 0px;
 }
 
+
+.select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--multiple {
+  border: 0 !important;
+  border-radius: 0px !important;
+  border-bottom: solid #DDDDDD 1px !important;
+}
+
+.form-control {
+  line-height: 2;
+}
+
 #main {
   min-height: 100vh;
 }

@@ -16,14 +16,14 @@
                 %i.fa.fa-asterisk
                 Titles
                 %i.fa.fa-question-circle{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Start typing a title you want to search by, and we'll show you an option! You can even include multiple. The options are populated by the titles you assigned to your actual contacts. The search is additive -- we'll return any contact with a title in this box."}
-              = select_tag :title, options_for_select(current_user.organization.contacts.where.not(title: '').pluck(:title).uniq.sort, selected: params[:title]), { multiple: true, include_blank: true, class: 'search form-control select2', id: 'inputTitle' }
+              = select_tag :title, options_for_select(current_user.organization.contacts.not_removed.where.not(title: '').pluck(:title).uniq.sort, selected: params[:title]), { multiple: true, include_blank: true, class: 'search form-control select2', id: 'inputTitle' }
           .col-sm-12.col-md-3
             .form-group
               %label.control-label{for: 'inputQuery'}
                 %i.fa.fa-tag
                 Tagged With
                 %i.fa.fa-question-circle{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Start typing a tag you want to search by, and we'll show you an option! You can even include multiple. The options are populated by your actual contacts' tags. The search is additive -- we'll return any contact with any of these tags."}
-              = select_tag :tags, options_for_select(current_user.organization.contacts.tag_counts.pluck(:name).sort, selected: params[:tags]), { multiple: true, include_blank: true, class: 'search form-control select2', id: 'inputTags' }
+              = select_tag :tags, options_for_select(current_user.organization.contacts.not_removed.tag_counts.pluck(:name).sort, selected: params[:tags]), { multiple: true, include_blank: true, class: 'search form-control select2', id: 'inputTags' }
           .col-sm-12.col-md-3
             .form-group
               %label.control-label{for: 'inputInternal'}

@@ -33,3 +33,12 @@
   .col-sm-12
     .pull-right
       = smart_listing.pagination_per_page_links
+
+:coffeescript
+  $('#selectAll').click ->
+    if (this.checked)
+      $(':checkbox').each ->
+        $(this).prop('checked', true)
+    else
+      $(':checkbox').each ->
+        $(this).prop('checked', false)

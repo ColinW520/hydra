@@ -13,9 +13,9 @@ class MessagesMailer < ApplicationMailer
     range = 1.week.ago.beginning_of_day..Time.now.beginning_of_day
     @user = User.find user_id
     @stats = {
-      inbound_messages: @user.organization.messages.inbound.where(range).count,
-      outbound_messages: @user.organization.message_requests.where(range).count,
-      outbound_sent:  @user.organization.messages.outbound.where(range).count
+      inbound_messages: @user.organization.messages.inbound.where(created_at: range).count,
+      outbound_messages: @user.organization.message_requests.where(created_at: range).count,
+      outbound_sent:  @user.organization.messages.outbound.where(created_at: range).count
     }
 
     return unless @stats[:inbound_messages] > 0 && @stats[:outbound_messages] > 0
@@ -27,9 +27,9 @@ class MessagesMailer < ApplicationMailer
     range = 1.day.ago.beginning_of_day..Time.now.beginning_of_day
     @user = User.find user_id
     @stats = {
-      inbound_messages: @user.organization.messages.inbound.where(range).count,
-      outbound_messages: @user.organization.message_requests.where(range).count,
-      outbound_sent:  @user.organization.messages.outbound.where(range).count
+      inbound_messages: @user.organization.messages.inbound.where(created_at: range).count,
+      outbound_messages: @user.organization.message_requests.where(created_at: range).count,
+      outbound_sent:  @user.organization.messages.outbound.where(created_at: range).count
     }
     return unless @stats[:inbound_messages] > 0 && @stats[:outbound_messages] > 0
 

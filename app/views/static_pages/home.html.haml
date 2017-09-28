@@ -25,25 +25,25 @@
             %h1 How It Works
   .section-content
     .container
-      .row
+      .row.mb-5.pb-5
         .col-sm-6
-          %h1
+          %h2
             BYO
             %img.img-fluid{src: asset_url('twilio-logo-red.svg')}
           %p
             Twilio is a cloud communications platform as a service company that allows software developers to programmatically make and receive phone calls and send and receive text messages using its web service APIs.
             TextMy.team uses the Twilio Connect™ platform to help you leverage Twilio's amazing capabilities, as well as its cost effective pay-as-you-go pricing,
-            %em without having to write any code yourself.
+            %em
+              %strong.text-info without having to write any code yourself.
           %p
             What makes TextMy.team different from most text messaging service providers is that because you connect
             %strong your own Twilio account,
             you pay
             %em cost
-            for whatever your usage is. Instead of paying us a ridiculous per-message upcharge, you simply pay us a low monthly fee to make it easy to send & receive messages and manage your contact database.
+            for whatever your usage is. Instead of paying us a ridiculous per-message upcharge, you simply pay a low monthly fee to make it easy to send & receive messages, configure your line settings, and manage your contacts.
 
-          %p
-            All TmT users must have a Twilio account connected for anything to work.
-            %em Create yours today!
+          %p.text-info
+            %strong All TmT users must have a Twilio account connected for anything to work. If you don't already have a Twilio account, you can create one when you register for TmT, or, you can create one now!
 
           .text-center
             %a.btn.btn-lg{href: "https://www.twilio.com/pricing", target: '_blank', style: "background-color: #0D122B; text-decoration: none; color: #fff"}
@@ -51,7 +51,12 @@
               SIGN UP
         .col-sm-6
           %img.img-fluid.rounded{src: asset_url('https://www.twilio.com/marketing/bundles/company-brand/img/photo-twilio-whiteboard-hi-res.jpg')}
-
+      .row.mt-5.pt-5
+        .col-sm-6
+          %img.img-fluid.rounded{src: asset_url('https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb')}
+        .col-sm-6
+          %h2 Configuring Lines
+          %p TextMy.team makes it easy to configure the phone lines you reserve with forwarding settings, auto-responders, call-tracking, greeting prompts, and more. No more need for developer intervention to setup a voice greeting, or forward calls to another number.
 
 
 %section#Pricing
@@ -89,7 +94,7 @@
                 %li.list-group-item Unlimited Messages
                 %li.list-group-item.text-danger
                   %em 0 support hours
-              %a.btn.btn-primary.mt-3.btn-block.disabled{:href => "#"} Coming Soon!
+              %a.btn.btn-primary.mt-3.btn-block.disabled{href: new_user_registration_path} Coming Soon!
         / Table #1
         .col-xs-12.col-lg-4
           .card.text-xs-center{style: "border-radius: 3px; border: 2px solid #5cb85c"}
@@ -104,13 +109,14 @@
               %ul.list-group
                 %li.list-group-item Twilio Integration
                 %li.list-group-item Unlimited Users
+                %li.list-group-item.text-success User Permissions
                 %li.list-group-item Unlimited Managed Lines
                 %li.list-group-item Unlimited Contacts
                 %li.list-group-item.text-success Contact Uploader
                 %li.list-group-item Unlimited Messages
                 %li.list-group-item.text-success
                   %em 2 support hours
-              %a.btn.btn-primary.mt-3.btn-block.disabled{:href => "#"} Coming Soon!
+              %a.btn.btn-primary.mt-3.btn-block.disabled{href: new_user_registration_path} Coming Soon!
         / Table #1
         .col-xs-12.col-lg-4
           .card.text-xs-center
@@ -125,6 +131,7 @@
               %ul.list-group
                 %li.list-group-item Twilio Integration
                 %li.list-group-item Unlimited Users
+                %li.list-group-item.text-success User Permissions
                 %li.list-group-item Unlimited Managed Lines
                 %li.list-group-item Unlimited Contacts
                 %li.list-group-item.text-success Contact Uploader
@@ -135,4 +142,4 @@
                   %em Feature Requests
                 %li.list-group-item.text-success
                   %em Custom Integrations
-              %a.btn.btn-primary.mt-3.btn-block{:href => "#"} Choose Plan
+              %a.btn.btn-primary.mt-3.btn-block{href: new_user_registration_path} Choose Plan

@@ -2,6 +2,11 @@
   #error_holder
     %ul#errors
   = f.error_notification
+  .row
+    .col-sm-12
+      %h2
+        %i.fa.fa-hashtag
+        Buy a Line
   %legend Line Profile
   %p.text-info Use these settings to internally identify this phone number within your organization.
   .row
@@ -64,6 +69,9 @@
         By clicking this button you ackowledge that you are purchasing a number from Twilio™ and by doing so you accept any applicable charges related to the use of this line. For information about potential charges, visit Twilio's
         %a{href: 'https://www.twilio.com/sms/pricing', target: '_blank'} Pricing Guide.
         %br
+  .row
+    .col-sm-4.col-centered
+      %img.img-fluid{src: asset_url('twilio-badge-red.png')}
 :coffeescript
   checkbox = document.getElementById('line_reject_voice_calls')
   details_div = document.getElementById('voice_settings')

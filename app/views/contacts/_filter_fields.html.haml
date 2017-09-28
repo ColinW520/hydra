@@ -38,16 +38,18 @@
             %i.fa.fa-question-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This is the number of people who match these filters above."}
           .col-sm-12.col-md-6.col-centered
             .pull-right
-              - if current_user.organization.lines.active.present?
-                = link_to new_message_request_path(count: smart_listing.count, query: {name: params[:name],title: params[:title],tags: params[:tags], organization_id: current_user.organization_id}), id: 'NewMessageButton', remote: true, class: 'btn btn-success btn-sm', title: "Message all #{smart_listing.count} members matching these filters.", 'data-toggle' => 'tooltip', 'data-placement' => 'top' do
-                  %i.fa.fa-send
-                  Message
-              = button_tag type: "submit", class: "btn btn-sm btn-info", title: "This will update your filter results. You can also just press your enter key.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
-                %i.fa.fa-filter
-                Update
-              = link_to contacts_path, class: 'btn btn-danger btn-sm', title: "This will remove any filters you've added and restart your search.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
-                %i.fa.fa-times
-                Clear
+              .btn-group
+                - if current_user.organization.lines.active.present?
+                  = link_to new_message_request_path(count: smart_listing.count, query: {name: params[:name],title: params[:title],tags: params[:tags], organization_id: current_user.organization_id}), id: 'NewMessageButton', remote: true, class: 'btn btn-success btn-sm', title: "Message all #{smart_listing.count} members matching these filters.", 'data-toggle' => 'tooltip', 'data-placement' => 'top' do
+                    %i.fa.fa-send
+                    Message ALL
+                    = "(#{smart_listing.count})"
+                = button_tag type: "submit", class: "btn btn-sm btn-info", title: "This will update your filter results. You can also just press your enter key.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+                  %i.fa.fa-filter
+                  Update
+                = link_to contacts_path, class: 'btn btn-danger btn-sm', title: "This will remove any filters you've added and restart your search.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+                  %i.fa.fa-times
+                  Clear
 
 :javascript
   $('.select2').select2();

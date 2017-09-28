@@ -1,33 +1,56 @@
-%p.lead= "You're about to send a message to #{@expected_count} contacts."
-= simple_form_for [@message_request], authenticity_token: true, html: { id: 'MessageRequestForm' } do |f|
-  #error_holder
-    %ul#errors
-  = f.error_notification
-  .form-group
-    = f.input :line_id, label: 'From Line', as: :select, collection: current_user.organization.lines.active, label_method: :dropdown_name, value_method: :id, include_blank: false
-  .form-group
-    = f.input :body, label: 'Message Text', as: :text, required: true, autofocus: true, class: 'form-control'
-    %span#message_length_counter= 0
+.row
+  .col-sm-12
+    %div.alert.alert-danger
+      = "You're about to send a message to #{@expected_count} contacts."
+    = simple_form_for [@message_request], authenticity_token: true, html: { id: 'MessageRequestForm' } do |f|
+      .row
+        .col-sm-12
+          #error_holder
+            %ul#errors
+          = f.error_notification
+          .form-group
+            = f.input :line_id, label: 'From Line', as: :select, collection: current_user.organization.lines.active, label_method: :dropdown_name, value_method: :id, include_blank: false
+          .form-group
+            = f.input :body, label: 'Message Text', as: :text, required: true, autofocus: true, input_html: { class: 'form-control', id: "foobar" }
+            #counter.pull-right{style: 'z-index: 1000'} 0
+          #warning.alert.alert-danger
+            Hey, this really long. Are you sure this should be a text message? Wouldn't it be better to send this as an email this instead?
+      .row
+        .col-sm-12
+          .form-actions
+            .text-center
+              = f.hidden_field :user_id, value: current_user.id
+              = f.hidden_field :organization_id, value: current_user.organization_id
+              = f.hidden_field :filter_query, value: @query.to_json
+              = f.hidden_field :send_at, value: Time.now
+              = f.button :submit, 'Send Message', class: 'btn btn-md btn-success'
+              %br
+              %br
+              %small.text-danger By clicking this button, you are accepting all applicable Twilio charges.
+              #estimate{"data-original" => @expected_count}= number_to_currency @expected_count.to_f * 0.0075, precision: 4
+              %small.text-danger
+                %em Estimated Cost to Send this Message
 
-  .form-actions
-    .text-center
-      = f.hidden_field :user_id, value: current_user.id
-      = f.hidden_field :organization_id, value: current_user.organization_id
-      = f.hidden_field :filter_query, value: @query.to_json
-      = f.hidden_field :send_at, value: Time.now
-      = f.button :submit, 'Send Message', class: 'btn btn-md btn-success'
-      %br
-      %br
-      %small.text-danger By clicking this button, you are accepting any applicable charges from Twilio.
-      %p.lead.text-danger
-        Estimate:
-        = number_to_currency @expected_count.to_f * 0.0075, precision: 4
 
 :coffeescript
-  $(document).ready ->
-    review_text = $('#message_request_body')
-    counter = $('#counter')
-    max_length = counter.data('maximum-length')
-    review_text.keyup ->
-      counter.val max_length - ($(this).val().length)
-      return
+  $ ->
+    $('#warning.alert.alert-danger').eq(1).hide()
+    $('textarea').on 'keyup', ->
+      length = $(this).val().length
+      if length < 140
+        $('#counter.pull-right').eq(1).html "<p class='text-success'>" + length + "</p>"
+        $('#warning.alert.alert-danger').eq(1).hide()
+        estimate_value = $('div#estimate').eq(1).data("original") * 1 * 0.0075
+        $('div#estimate').eq(1).html "<p class='text-danger'>$" + estimate_value + "</p>"
+      if length > 140 && length < 280
+        $('#counter.pull-right').eq(1).html "<p class='lead text-danger'>" + length + "</p>"
+        $('#warning.alert.alert-danger').eq(1).hide()
+        estimate_value = $('div#estimate').eq(1).data("original") * 2 * 0.0075
+        $('div#estimate').eq(1).html "<p class='text-danger'>$" + estimate_value + "</p>"
+      if length > 280 && length < 420
+        $('#counter.pull-right').eq(1).html "<h3 class='text-white'>" + length + "</h3>"
+        $('#warning.alert.alert-danger').eq(1).show()
+        estimate_value = $('div#estimate').eq(1).data("original") * 3 * 0.0075
+        $('div#estimate').eq(1).html "<p class='text-danger'>$" + estimate_value + "</p>"
+      if length > 420
+        $('div#estimate').eq(1).html "<p class='text-danger'>Unable to compute.</p>"

@@ -1,5 +1,13 @@
--# %footer
--#   .row
--#     .col-md-12
--#       .pull-right
--#         %span ©2017 Brand, Inc.
+%footer.footer
+  %br
+  .container
+    .row
+      .col-md-6
+        %p.text-white
+          Built by
+          %a.text-success{href: "https://www.atlasdoes.com", style: "text-decoration: none;"} AtlasDoes
+      .col-md-6
+        .pull-right
+          %a{href: "https://www.twilio.com"}
+            %img.img-fluid{src: asset_url('twilio-seal-white.svg'), style: "max-width: 100px"}
+  %br

@@ -1,4 +1,4 @@
-- provide(:title, "Text Your Contacts")
+- provide(:title, "TextMy.Team | Text Your Contacts")
 %section#LandingContainer
   .container
     .row
@@ -7,62 +7,132 @@
           %h1.text-white{style: 'font-weight: 900;'}
             %b
               Texting Is
-            %b
+            %br
+            %b{style: 'font-size: 2em;'}
               %em NOW
           %br
-          %p.text-white What do people always have in their hand? Their phone. Let's be honest: if you want your message read in a timely manner, you send a text. We make that easy. Simply connect your own Twilio account, setup your organization, add your contacts, and you're good to go!
+          %p.text-white What do people always have in their hand? Their phone. Let's be honest: if you want your message read in a timely manner, you send a text. We make that easy.
           %br
-          %a.btn.btn-success.btn-lg.btn-block{href: new_user_registration_path} Sign Up
--# %br
--# %section#Features
--#   .container
--#     %hr
--#     .section-header
--#       .section-title
--#         .row
--#           .col-sm-12.col-md-8.col-lg-6.col-centered
--#             .text-center
--#               %h1 How It Works
--#               %p.lead The more you row, the higher you go! Join the challenge!
--#   .section-content
--#     .row
--#       .col-sm-12
--#         #leaderboard_placeholder.text-center
--#           %p.lead
--#             %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
--#
--#
--# %section#Pricing
--#   .container
--#     .section-header
--#       .section-title
--#         .row
--#           .col-sm-12.col-md-8.col-lg-6.col-centered
--#             .text-center
--#               %h1 SCHEDULE
--#               %p
--#                 This is our general, weekly schedule. For the the most up-to-date info, check out our
--#                 %a{href: 'https://clients.mindbodyonline.com/classic/home?studioid=226360'} direct booking site.
--#                 Powered by MindBody™.
--#     .section-content
--#       #schedule_placeholder.text-center
--#         %p.lead
--#           %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
--#
--#
--# %section#Demo
--#   .container
--#     .section-header
--#       .section-title
--#         .row
--#           .col-sm-12.col-md-8.col-lg-6.col-centered
--#             .text-center
--#               %h1 SCHEDULE
--#               %p
--#                 This is our general, weekly schedule. For the the most up-to-date info, check out our
--#                 %a{href: 'https://clients.mindbodyonline.com/classic/home?studioid=226360'} direct booking site.
--#                 Powered by MindBody™.
--#     .section-content
--#       #schedule_placeholder.text-center
--#         %p.lead
--#           %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+          %a.btn.btn-success.btn-lg.btn-block{href: new_user_registration_path} See How
+
+%section#Features
+  .section-header
+    .section-title
+      .row
+        .col-sm-12.col-md-8.col-lg-6.col-centered
+          .text-center
+            %hr
+            %h1 How It Works
+  .section-content
+    .container
+      .row
+        .col-sm-6
+          %h1
+            BYO
+            %img.img-fluid{src: asset_url('twilio-logo-red.svg')}
+          %p
+            Twilio is a cloud communications platform as a service company that allows software developers to programmatically make and receive phone calls and send and receive text messages using its web service APIs.
+            TextMy.team uses the Twilio Connect™ platform to help you leverage Twilio's amazing capabilities, as well as its cost effective pay-as-you-go pricing,
+            %em without having to write any code yourself.
+          %p
+            What makes TextMy.team different from most text messaging service providers is that because you connect
+            %strong your own Twilio account,
+            you pay
+            %em cost
+            for whatever your usage is. Instead of paying us a ridiculous per-message upcharge, you simply pay us a low monthly fee to make it easy to send & receive messages and manage your contact database.
+
+          %p
+            All TmT users must have a Twilio account connected for anything to work.
+            %em Create yours today!
+
+          .text-center
+            %a.btn.btn-lg{href: "https://www.twilio.com/pricing", target: '_blank', style: "background-color: #0D122B; text-decoration: none; color: #fff"}
+              %img.img-fluid{src: asset_url('twilio-mark-white.svg')}
+              SIGN UP
+        .col-sm-6
+          %img.img-fluid.rounded{src: asset_url('https://www.twilio.com/marketing/bundles/company-brand/img/photo-twilio-whiteboard-hi-res.jpg')}
+
+
+
+%section#Pricing
+  .section-header
+    .section-title
+      .row
+        .col-sm-12.col-md-8.col-lg-6.col-centered
+          .text-center
+            %hr
+            %h1 Pricing
+            %p.lead Choose the plan that makes the most sense for you.
+            %span.text-muted
+              Upgrade or downgrade at any time. TextMy.team monthly pricing
+              %strong does not include
+              Twilio usage costs.
+  .section-content
+    .container
+      .row.flex-items-xs-middle.flex-items-xs-center
+        / Table #1
+        .col-xs-12.col-lg-4
+          .card.text-xs-center
+            .card-header
+              %h4.card-title
+                Solo Plan
+              %h3.display-2
+                %span.currency> $
+                5
+                %span.period / month
+            .card-block
+              %ul.list-group
+                %li.list-group-item Twilio Integration
+                %li.list-group-item One User
+                %li.list-group-item One Managed Line
+                %li.list-group-item Unlimited Contacts
+                %li.list-group-item Unlimited Messages
+                %li.list-group-item.text-danger
+                  %em 0 support hours
+              %a.btn.btn-primary.mt-3.btn-block.disabled{:href => "#"} Coming Soon!
+        / Table #1
+        .col-xs-12.col-lg-4
+          .card.text-xs-center{style: "border-radius: 3px; border: 2px solid #5cb85c"}
+            .card-header
+              %h4.card-title
+                Group Plan
+              %h3.display-2
+                %span.currency> $
+                10
+                %span.period / month
+            .card-block
+              %ul.list-group
+                %li.list-group-item Twilio Integration
+                %li.list-group-item Unlimited Users
+                %li.list-group-item Unlimited Managed Lines
+                %li.list-group-item Unlimited Contacts
+                %li.list-group-item.text-success Contact Uploader
+                %li.list-group-item Unlimited Messages
+                %li.list-group-item.text-success
+                  %em 2 support hours
+              %a.btn.btn-primary.mt-3.btn-block.disabled{:href => "#"} Coming Soon!
+        / Table #1
+        .col-xs-12.col-lg-4
+          .card.text-xs-center
+            .card-header
+              %h4.card-title
+                Enterprise Plan
+              %h3.display-2
+                %span.currency> $
+                50
+                %span.period / month
+            .card-block
+              %ul.list-group
+                %li.list-group-item Twilio Integration
+                %li.list-group-item Unlimited Users
+                %li.list-group-item Unlimited Managed Lines
+                %li.list-group-item Unlimited Contacts
+                %li.list-group-item.text-success Contact Uploader
+                %li.list-group-item Unlimited Messages
+                %li.list-group-item.text-success
+                  %em 25 priority support hours
+                %li.list-group-item.text-success
+                  %em Feature Requests
+                %li.list-group-item.text-success
+                  %em Custom Integrations
+              %a.btn.btn-primary.mt-3.btn-block{:href => "#"} Choose Plan

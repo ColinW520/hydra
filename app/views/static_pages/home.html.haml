@@ -1,10 +1,68 @@
-.row{style: 'padding-top: 15vh;'}
-  .col-sm-4
-    .card.card-primary
-      .card-block
-        .text-center
-          %h1.text-white{style: "font-size: 4em"} Two-Way Text Messaging
+- provide(:title, "Text Your Contacts")
+%section#LandingContainer
+  .container
+    .row
+      .col-sm-12.col-md-8.col-lg-4
+        .jumbotron
+          %h1.text-white{style: 'font-weight: 900;'}
+            %b
+              Texting Is
+            %b
+              %em NOW
           %br
-          %p.text-white
-            For your team, customers, contacts, members, donors, supporters, fans, etc.
-          %a.btn.btn-success.btn-lg{:href => new_user_registration_path} Sign Up Here!
+          %p.text-white What do people always have in their hand? Their phone. Let's be honest: if you want your message read in a timely manner, you send a text. We make that easy. Simply connect your own Twilio account, setup your organization, add your contacts, and you're good to go!
+          %br
+          %a.btn.btn-success.btn-lg.btn-block{href: new_user_registration_path} Sign Up
+-# %br
+-# %section#Features
+-#   .container
+-#     %hr
+-#     .section-header
+-#       .section-title
+-#         .row
+-#           .col-sm-12.col-md-8.col-lg-6.col-centered
+-#             .text-center
+-#               %h1 How It Works
+-#               %p.lead The more you row, the higher you go! Join the challenge!
+-#   .section-content
+-#     .row
+-#       .col-sm-12
+-#         #leaderboard_placeholder.text-center
+-#           %p.lead
+-#             %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+-#
+-#
+-# %section#Pricing
+-#   .container
+-#     .section-header
+-#       .section-title
+-#         .row
+-#           .col-sm-12.col-md-8.col-lg-6.col-centered
+-#             .text-center
+-#               %h1 SCHEDULE
+-#               %p
+-#                 This is our general, weekly schedule. For the the most up-to-date info, check out our
+-#                 %a{href: 'https://clients.mindbodyonline.com/classic/home?studioid=226360'} direct booking site.
+-#                 Powered by MindBody™.
+-#     .section-content
+-#       #schedule_placeholder.text-center
+-#         %p.lead
+-#           %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+-#
+-#
+-# %section#Demo
+-#   .container
+-#     .section-header
+-#       .section-title
+-#         .row
+-#           .col-sm-12.col-md-8.col-lg-6.col-centered
+-#             .text-center
+-#               %h1 SCHEDULE
+-#               %p
+-#                 This is our general, weekly schedule. For the the most up-to-date info, check out our
+-#                 %a{href: 'https://clients.mindbodyonline.com/classic/home?studioid=226360'} direct booking site.
+-#                 Powered by MindBody™.
+-#     .section-content
+-#       #schedule_placeholder.text-center
+-#         %p.lead
+-#           %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw

@@ -1,3 +1,12 @@
+%br
+#ThisMonth
+  %br
+  %br
+  %br
+  .text-center
+    %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+    %h3 Loading Twilio Usage Report...
+%br
 .card.card-default
   .card-header
     %h4.card-title
@@ -13,11 +22,3 @@
       Calls
   .card-block
     = line_chart calls_dashboard_path, library: { legend: { position:  'bottom' }, pointSize: 0, curveType: "none", hAxis: { format: 'MM/dd' } }
-%br
-#ThisMonth
-  %br
-  %br
-  %br
-  .text-center
-    %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
-    %h3 Loading...

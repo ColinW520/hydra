@@ -61,7 +61,7 @@
     - if current_user.admin_role
       = f.button :submit, f.object.persisted? ? 'Save Line Settings' : 'Purchase This Line for $1/month', class: 'btn btn-block btn-md btn-success'
     - else
-      = link_to lines_path, class: 'btn btn-block btn-md btn-outline-danger' do
+      = link_to lines_path, class: 'btn btn-block btn-md btn-danger' do
         Back
     - unless @line.persisted?
       %br

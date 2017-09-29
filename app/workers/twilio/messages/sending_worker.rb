@@ -23,6 +23,7 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
     }
 
     # send it
+    return if Rails.env.development?
     @message = @twilio_client.messages.create(recipient_hash)
 
     # store it if it has an ID

@@ -13,7 +13,7 @@
           %br
           %p.text-white What do people always have in their hand? Their phone. Let's be honest: if you want your message read in a timely manner, you send a text. We make that easy.
           %br
-          %a.btn.btn-success.btn-lg.btn-block{href: new_user_registration_path} See How
+          %a.btn.btn-success.btn-lg.btn-block{href: '#Features'} See How
 
 %section#Features
   .section-header
@@ -50,14 +50,35 @@
               %img.img-fluid{src: asset_url('twilio-mark-white.svg')}
               SIGN UP
         .col-sm-6
-          %img.img-fluid.rounded{src: asset_url('https://www.twilio.com/marketing/bundles/company-brand/img/photo-twilio-whiteboard-hi-res.jpg')}
-      .row.mt-5.pt-5
+          %img.img-fluid.rounded{src: 'https://www.twilio.com/marketing/bundles/company-brand/img/photo-twilio-whiteboard-hi-res.jpg'}
+      .row.mt-5.pt-5.mb-5.pb-5
+        .col-sm-6
+          %img.img-fluid.rounded{src: 'https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'}
+        .col-sm-6
+          %h2 Configure Line(s)
+          %p TextMy.team makes it easy to reserve a local phone number and configure auto-responses, call-forwarding, call-tracking, greeting prompts, and more.
+          %p No more need for developer intervention or special scripts. Whether you want conversational texting, one-way blast messaging, or even advertising performance evaluation.
+      .row.mt-5.pt-5.mb-5.pb-5
+        .col-sm-6
+          %h2 Manage Contacts
+          %p One single list to manage. Contacts are easily filtered using tags, sorted by any attribute, and kept up to date with quickforms.
+          %p The contact directory is your launching point for messages. Once you've selected your contacts, you simply either message everyone who matches the filter (message all), or just the contacts you selected (message selected). It's that easy.
+        .col-sm-6
+          %img.img-fluid.rounded{src: asset_url('srubbed-contacts.jpg')}
+      .row.mt-5.pt-5.mb-5.pb-5
+        .col-sm-6
+          %img.img-fluid.rounded{src: 'http://g.recordit.co/1bGCLppnS1.gif'}
+        .col-sm-6
+          %h2 Send Messages
+          %p TextMy.team makes it easy to reserve a local phone number and configure auto-responses, call-forwarding, call-tracking, greeting prompts, and more.
+          %p No more need for developer intervention or special scripts. Whether you want conversational texting, one-way blast messaging, or even advertising performance evaluation.
+      .row.mt-5.pt-5.mb-5.pb-5
+        .col-sm-6
+          %h2 Follow the Action
+          %p TextMy.team makes it easy to reserve a local phone number and configure auto-responses, call-forwarding, call-tracking, greeting prompts, and more.
+          %p No more need for developer intervention or special scripts. Whether you want conversational texting, one-way blast messaging, or even advertising performance evaluation.
         .col-sm-6
           %img.img-fluid.rounded{src: asset_url('https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb')}
-        .col-sm-6
-          %h2 Configuring Lines
-          %p TextMy.team makes it easy to configure the phone lines you reserve with forwarding settings, auto-responders, call-tracking, greeting prompts, and more. No more need for developer intervention to setup a voice greeting, or forward calls to another number.
-
 
 %section#Pricing
   .section-header
@@ -92,8 +113,6 @@
                 %li.list-group-item One Managed Line
                 %li.list-group-item Unlimited Contacts
                 %li.list-group-item Unlimited Messages
-                %li.list-group-item.text-danger
-                  %em 0 support hours
               %a.btn.btn-primary.mt-3.btn-block.disabled{href: new_user_registration_path} Coming Soon!
         / Table #1
         .col-xs-12.col-lg-4
@@ -114,8 +133,7 @@
                 %li.list-group-item Unlimited Contacts
                 %li.list-group-item.text-success Contact Uploader
                 %li.list-group-item Unlimited Messages
-                %li.list-group-item.text-success
-                  %em 2 support hours
+                %li.list-group-item.text-success MMS Support
               %a.btn.btn-primary.mt-3.btn-block.disabled{href: new_user_registration_path} Coming Soon!
         / Table #1
         .col-xs-12.col-lg-4
@@ -136,8 +154,9 @@
                 %li.list-group-item Unlimited Contacts
                 %li.list-group-item.text-success Contact Uploader
                 %li.list-group-item Unlimited Messages
+                %li.list-group-item.text-success MMS Support
                 %li.list-group-item.text-success
-                  %em 25 priority support hours
+                  %em 2 priority support hours/mo
                 %li.list-group-item.text-success
                   %em Feature Requests
                 %li.list-group-item.text-success

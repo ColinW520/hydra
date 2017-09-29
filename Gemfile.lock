@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/stympy/faker.git
+  revision: dfb0762fffe7cd5ba80a6de726e063b2bf6e6240
+  branch: master
+  specs:
+    faker (1.8.4)
+      i18n (~> 0.5)
+
+GIT
   remote: https://github.com/ColinW520/smart_listing.git
   revision: c228a3f9710c77d942c83b14db754a135aba8ac8
   specs:
@@ -397,6 +405,7 @@ DEPENDENCIES
   devise
   devise_invitable
   erb2haml
+  faker!
   figaro
   font-awesome-rails!
   friendly_id

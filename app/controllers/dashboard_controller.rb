@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
   end
 
   def list_growth
-    render json: current_user.organization.contacts.group_by_day(:created_at, range: 1.month.ago..Time.now, format: "%b %d").count.to_json
+    render json: current_user.organization.contacts.group_by_day(:created_at, range: 2.week.ago..Time.now, format: "%b %d").count.to_json
   end
 
   def usage
@@ -23,10 +23,10 @@ class DashboardController < ApplicationController
   end
 
   def messages
-    render json: current_user.organization.messages.group(:direction).group_by_day(:created_at, range: 1.month.ago..Time.now, format: "%b %d").count.chart_json
+    render json: current_user.organization.messages.group(:direction).group_by_day(:created_at, range: 2.week.ago..Time.now, format: "%b %d").count.chart_json
   end
 
   def calls
-    render json: CallLog.where(organization_id: current_user.organization_id).group_by_day(:created_at, range: 1.month.ago..Time.now, format: "%b %d").count.chart_json
+    render json: CallLog.where(organization_id: current_user.organization_id).group_by_day(:created_at, range: 2.week.ago..Time.now, format: "%b %d").count.chart_json
   end
 end

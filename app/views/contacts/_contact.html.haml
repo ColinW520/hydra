@@ -4,7 +4,6 @@
     = link_to contact.full_name, contact_path(contact)
   %td= contact.title
   %td= number_to_phone contact.mobile_phone.phony_formatted(normalize: :US, format: :international, spaces: ' ')
-  %td= mail_to contact.email
   %td= local_time contact.last_messaged_at, format: "%m/%d/%Y" rescue ''
   %td
     - contact.tags.pluck(:name).each do |tag|

@@ -72,4 +72,5 @@ group :development, :test do
   gem 'html2haml'
   gem 'erb2haml'
   gem 'mailcatcher'
+  gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 end

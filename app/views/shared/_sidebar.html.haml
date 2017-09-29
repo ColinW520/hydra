@@ -7,10 +7,10 @@
     %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
     .menu-list
       %ul#menu-content.menu-content.collapse.out
-        %a{href: dashboard_path}
+        %a{href: feed_items_path}
           %li{class: @subnav == 'dashboard' ? 'active' : nil}
             %i.fa.fa-dashboard.fa-lg
-            Activities
+            Dashboard
         - if current_user.present? && current_user.setup?
           %a{href: contacts_path}
             %li{class: @subnav == 'contacts' ? 'active' : nil}

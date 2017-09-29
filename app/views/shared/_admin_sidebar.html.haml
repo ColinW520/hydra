@@ -10,7 +10,11 @@
         %a{href: admin_dashboard_path}
           %li{class: @subnav == 'dashboard' ? 'active' : nil}
             %i.fa.fa-user-plus
-            Dashboard
+            Super Dashboard
+        %a{href: feed_items_path}
+          %li
+            %i.fa.fa-tachometer
+            Admin Dashboard
         %a{href: admin_sidekiq_web_path}
           %li.text-warning
             %i.fa.fa-pied-piper-alt

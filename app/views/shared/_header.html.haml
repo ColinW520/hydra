@@ -19,9 +19,14 @@
               Demo
           - if current_user.present?
             %li.nav-item
-              %a.nav-link{href: dashboard_path}
-                %i.fa.fa-dashboard
-                Dashboard
+              - if current_user.is_super_user?
+                %a.nav-link{href: admin_dashboard_path}
+                  %i.fa.fa-dashboard
+                  Dashboard
+              - else
+                %a.nav-link{href: feed_items_path}
+                  %i.fa.fa-dashboard
+                  Dashboard
             %li.nav-item
               %a.nav-link{href: destroy_user_session_url, method: :delete}
                 %i.fa.fa-sign-out

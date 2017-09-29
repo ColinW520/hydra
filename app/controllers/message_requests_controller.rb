@@ -27,7 +27,7 @@ class MessageRequestsController < ApplicationController
 
     respond_to do |format|
       if @message_request.save
-        store_feed_item(@message_request, "Sent a message to #{@message_request.recipients_count} contacts.")
+        store_feed_item(@message_request, "#{current_user.try(:first_name).try(:titleize)} sent a message to #{@message_request.recipients_count} contacts from the #{@message_request.line.name} line:")
         format.json { head :no_content }
         format.js {
           flash[:success] = 'Message Request has been queued for sending! It will go out ASAP.'

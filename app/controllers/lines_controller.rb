@@ -17,7 +17,7 @@ class LinesController < ApplicationController
 
     respond_to do |format|
       if @line.save
-        store_feed_item(@line, "Reserved a line.")
+        store_feed_item(@line, "#{current_user.try(:first_name).try(:titleize)} reserved a new line: #{@line.name}.")
         format.json { head :no_content }
         format.js { flash[:success] = 'Line is created.' }
         format.html {
@@ -48,7 +48,7 @@ class LinesController < ApplicationController
     respond_to do |format|
       if @line.update(line_params)
         @line.update_on_twilio # triggering this here intentionally.
-        store_feed_item(@line, "Updated line settings.")
+        store_feed_item(@line, "#{current_user.try(:first_name).try(:titleize)} updated line settings for the #{@line.name} line.")
         format.html {
           flash[:sucess] = 'Line has been updated!'
           redirect_to lines_path
@@ -63,7 +63,7 @@ class LinesController < ApplicationController
 
   def destroy
     @line.release!(current_user.id)
-    store_feed_item(@line, "Removed a line.")
+    store_feed_item(@line, "#{current_user.try(:first_name).try(:titleize)} removed the #{@line.name} line.")
     respond_to do |format|
       format.js { flash[:success] = 'Line released. It will remain in this list for historical purposes.' }
       format.html { redirect_to lines_path, success: 'Line released. It will remain in this list for historical purposes.' }

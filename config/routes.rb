@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   # The User-facing App
-  resources :feed_items
+  resources :feed_items, path: 'activities'
   resource :dashboard, controller: 'dashboard' do
     collection do
       get :list_growth

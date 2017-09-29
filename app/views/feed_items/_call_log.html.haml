@@ -1,9 +1,7 @@
-%blockquote.blockquote
-  %i.fa.fa-envelope-open
-  %i.fa.fa-arrow-up.text-success
+%blockquote.blockquote.blockquote-reverse
+  %i.fa.fa-phone
+  %i.fa.fa-arrow-down.text-primary
   = feed_item.phrase
   %br
-  %br
-  %p= feed_item.parent.body
   .blockquote-footer
     %cite{:title => feed_item.phrase}= local_time_ago feed_item.created_at

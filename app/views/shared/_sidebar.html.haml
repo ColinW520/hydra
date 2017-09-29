@@ -10,7 +10,7 @@
         %a{href: dashboard_path}
           %li{class: @subnav == 'dashboard' ? 'active' : nil}
             %i.fa.fa-dashboard.fa-lg
-            Dashboard
+            Activities
         - if current_user.present? && current_user.setup?
           %a{href: contacts_path}
             %li{class: @subnav == 'contacts' ? 'active' : nil}
@@ -24,7 +24,7 @@
 
           %a{href: lines_path}
             %li{class: @subnav == 'lines' ? 'active' : nil}
-              %i.fa.fa-hashtag.fa-lg
+              %img.img-fluid{src: asset_url('twilio-mark-white.svg'), style: "height: 20px; margin: 4% 2% 4% 4%"}
               Lines
 
           %a{href: call_logs_path}

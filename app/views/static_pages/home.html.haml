@@ -1,4 +1,4 @@
-- provide(:title, "Text Your Contacts")
+- provide(:title, "Messaging Solution")
 %section#LandingContainer
   .container
     .row
@@ -41,14 +41,6 @@
             you pay
             %em cost
             for whatever your usage is. Instead of paying us a ridiculous per-message upcharge, you simply pay a low monthly fee to make it easy to send & receive messages, configure your line settings, and manage your contacts.
-
-          %p.text-info
-            %strong All TmT users must have a Twilio account connected for anything to work. If you don't already have a Twilio account, you can create one when you register for TmT, or, you can create one now!
-
-          .text-center
-            %a.btn.btn-lg{href: "https://www.twilio.com/pricing", target: '_blank', style: "background-color: #0D122B; text-decoration: none; color: #fff"}
-              %img.img-fluid{src: asset_url('twilio-mark-white.svg')}
-              SIGN UP
         .col-sm-6
           %img.img-fluid.rounded{src: 'https://www.twilio.com/marketing/bundles/company-brand/img/photo-twilio-whiteboard-hi-res.jpg'}
       .row.mt-5.pt-5.mb-5.pb-5
@@ -75,7 +67,10 @@
       .row.mt-5.pt-5.mb-5.pb-5
         .col-sm-6
           %h2 Follow the Action
-          %p With the TmT action feed, it's easy to stay up to date with your messaging activity.
+          %p
+            With the TmT action feed, it's easy to stay on top of what is going on, without having to
+            %em manage
+            it.
         .col-sm-6
           %img.img-fluid.rounded{src: asset_url('https://static.pexels.com/photos/541522/pexels-photo-541522.jpeg')}
 
@@ -89,9 +84,9 @@
             %h1 Pricing
             %p.lead Choose the plan that makes the most sense for you.
             %span.text-muted
-              Upgrade or downgrade at any time. TextMy.team monthly pricing
-              %strong does not include
-              Twilio usage costs.
+              Change plans any time. TextMy.team monthly pricing
+              %strong does not include your Twilio usage costs.
+              You will be asked to confirm your plan before finalizing your subscription.
   .section-content
     .container
       .row.flex-items-xs-middle.flex-items-xs-center
@@ -101,6 +96,7 @@
             .card-header
               %h4.card-title
                 Solo Plan
+              %small Perfect for organizations with just one simple messaging need.
               %h3.display-2
                 %span.currency> $
                 5
@@ -115,10 +111,11 @@
               %a.btn.btn-primary.mt-3.btn-block.disabled{href: new_user_registration_path} Coming Soon!
         / Table #1
         .col-xs-12.col-lg-4
-          .card.text-xs-center{style: "border-radius: 3px; border: 2px solid #5cb85c"}
+          .card.text-xs-center
             .card-header
               %h4.card-title
                 Group Plan
+              %small Perfect for organizations looking to track advertising performance, or those with more than one person who may want to send messages, or multiple departments needing their own lines.
               %h3.display-2
                 %span.currency> $
                 10
@@ -140,6 +137,7 @@
             .card-header
               %h4.card-title
                 Enterprise Plan
+              %small This plan is for organizations that want TmT to work hand-in-hand with their other software solutions; or, to have extra attention paid to their needs.
               %h3.display-2
                 %span.currency> $
                 50

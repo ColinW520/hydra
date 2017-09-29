@@ -1,5 +1,6 @@
 class Twilio::BaseWorker
   include Sidekiq::Worker
+  include ApplicationHelper
   sidekiq_options queue: :twilio
 
   def prepare_objects(organization_id)

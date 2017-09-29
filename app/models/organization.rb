@@ -8,6 +8,8 @@ class Organization < ApplicationRecord
 
   # relationships
   has_many :users, dependent: :destroy
+  has_many :feed_items
+  has_many :ahoy_events, through: :user
   has_many :contacts, dependent: :destroy
   has_many :billing_methods, dependent: :destroy
   has_many :imports, dependent: :destroy

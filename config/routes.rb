@@ -10,7 +10,19 @@ Rails.application.routes.draw do
   match '/changelog' => "static_pages#changelog", via: [:get]
   match '/privacy' => "static_pages#privacy", via: [:get]
 
+  # Supers only
+  namespace :admin do
+    # engines
+    mount Sidekiq::Web => '/sidekiq'
+
+    # dashboards
+    get '/' => redirect('admin/dashboard')
+    resource :dashboard, controller: 'dashboard' do
+    end
+  end
+
   # The User-facing App
+  resources :feed_items
   resource :dashboard, controller: 'dashboard' do
     collection do
       get :list_growth
@@ -59,13 +71,5 @@ Rails.application.routes.draw do
       end
     end
     resources :authorizations
-  end
-
-  # sidekiq
-  mount Sidekiq::Web => 'admin/sidekiq'
-
-  # Admin Space
-  namespace :admin do
-    resources :users
   end
 end

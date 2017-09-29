@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :mobile_phone, phony_plausible: true
 
   has_many :ahoy_events, dependent: :destroy, class_name: 'Ahoy::Event'
-
+  has_many :feed_items
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,

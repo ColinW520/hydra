@@ -31,8 +31,6 @@ class Imports::ImportStartingWorker
       end
     end
 
-
-
     @the_import.update_attributes(is_enqueued: false, status: 'succeeded')
   rescue => error
     @the_import.update_attributes(status: 'failed', message: error.message, is_enqueued: false)

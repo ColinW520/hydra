@@ -1,6 +1,6 @@
 class Import < ApplicationRecord
   self.inheritance_column = :_type_disabled
-
+  has_many :feed_items, as: :parent, dependent: :destroy
   has_one :creator, class_name: 'User', foreign_key: :created_by
   belongs_to :organization
 

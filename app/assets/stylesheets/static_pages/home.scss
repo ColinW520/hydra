@@ -30,21 +30,21 @@
       will-change:transform;
       margin-bottom: 15px;
 
-      &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 5px;
-        background-color: $brand-success;
-        transition: 0.5s;
-      }
+      // &:after {
+      //   content: '';
+      //   position: absolute;
+      //   top: 0;
+      //   left: 0;
+      //   width: 0%;
+      //   height: 5px;
+      //   background-color: $brand-success;
+      //   transition: 0.5s;
+      // }
 
       &:hover {
         transform: scale(1.05);
-        -webkit-box-shadow: 0 20px 35px 0 rgba(0, 0, 0, .08);
-        box-shadow: 0 20px 35px 0 rgba(0, 0, 0, .08);
+        -webkit-box-shadow: 0 22px 40px 0 rgba(92, 184, 92, .50);
+        box-shadow: 0 22px 40px 0 rgba(92, 184, 92, .50);
 
         &:after {
           width: 100%;

@@ -1,4 +1,5 @@
 class MessageRequest < ApplicationRecord
+  has_many :feed_items, as: :parent, dependent: :destroy
   belongs_to :user
   belongs_to :organization
   belongs_to :line

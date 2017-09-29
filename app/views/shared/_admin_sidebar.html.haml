@@ -1,0 +1,17 @@
+#sidebar
+  .nav-side-menu
+    .brand{style: "font-size: 25px; padding: 5px;"}
+      %a{href: current_user.present? ? dashboard_path : root_path}
+        %i.fa.fa-user-plus
+        TmT Super
+    %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
+    .menu-list
+      %ul#menu-content.menu-content.collapse.out
+        %a{href: admin_dashboard_path}
+          %li{class: @subnav == 'dashboard' ? 'active' : nil}
+            %i.fa.fa-user-plus
+            Dashboard
+        %a{href: admin_sidekiq_web_path}
+          %li.text-warning
+            %i.fa.fa-pied-piper-alt
+            %strong Sidekiq

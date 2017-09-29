@@ -4,6 +4,7 @@ class Line < ApplicationRecord
   has_many :message_requests
   has_many :messages
   has_many :call_logs
+  has_many :feed_items, as: :parent, dependent: :destroy
 
   validates :name, presence: true
   validates :number, presence: true

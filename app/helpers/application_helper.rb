@@ -7,6 +7,16 @@ module ApplicationHelper
     end
   end
 
+  def store_feed_item(item, phrase)
+    FeedItems::CreatorWorker.perform_async({
+      organization_id: item.try(:organization_id),
+      user_id: item.try(:user_id),
+      parent_type: item.class_name,
+      parent_id: item.id,
+      phrase: phrase
+    })
+  end
+
   def markdown(text)
     options = {
       filter_html:     true,

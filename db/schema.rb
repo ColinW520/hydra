@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929045720) do
+ActiveRecord::Schema.define(version: 20170929204858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,20 @@ ActiveRecord::Schema.define(version: 20170929045720) do
     t.integer  "percent_off"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "feed_items", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.integer  "user_id"
+    t.string   "parent_type"
+    t.integer  "parent_id"
+    t.string   "phrase"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "action_type"
+    t.index ["organization_id"], name: "index_feed_items_on_organization_id", using: :btree
+    t.index ["parent_type", "parent_id"], name: "index_feed_items_on_parent_type_and_parent_id", using: :btree
+    t.index ["user_id"], name: "index_feed_items_on_user_id", using: :btree
   end
 
   create_table "imports", force: :cascade do |t|
@@ -395,6 +409,8 @@ ActiveRecord::Schema.define(version: 20170929045720) do
 
   add_foreign_key "billing_methods", "organizations"
   add_foreign_key "contacts", "organizations"
+  add_foreign_key "feed_items", "organizations"
+  add_foreign_key "feed_items", "users"
   add_foreign_key "imports", "organizations"
   add_foreign_key "lines", "organizations"
   add_foreign_key "lines", "users"

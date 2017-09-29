@@ -8,6 +8,52 @@
       - else
         Welcome!
 - if current_user.setup?
-  = render 'dashboard/charts'
+  .row
+    .col-sm-12.col-md-6
+      %h4 Activity
+      .card.card-default
+        .card-block
+          .card.card-outline-primary.text-xs-center
+            .card-block
+              %blockquote.card-blockquote
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                %footer
+                  Someone famous in
+                  %cite{:title => "Source Title"} Source Title
+          %br
+          .card.card-outline-success.text-xs-center
+            .card-block
+              %blockquote.card-blockquote
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                %footer
+                  Someone famous in
+                  %cite{:title => "Source Title"} Source Title
+          %br
+          .card.card-outline-info.text-xs-center
+            .card-block
+              %blockquote.card-blockquote
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                %footer
+                  Someone famous in
+                  %cite{:title => "Source Title"} Source Title
+          %br
+          .card.card-outline-warning.text-xs-center
+            .card-block
+              %blockquote.card-blockquote
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                %footer
+                  Someone famous in
+                  %cite{:title => "Source Title"} Source Title
+          %br
+          .card.card-outline-danger.text-xs-center
+            .card-block
+              %blockquote.card-blockquote
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                %footer
+                  Someone famous in
+                  %cite{:title => "Source Title"} Source Title
+          %br
+    .col-sm-12.col-md-6
+      = render 'dashboard/charts'
 - else
   = render 'dashboard/setup_instructions'

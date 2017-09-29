@@ -2,6 +2,7 @@ class CallLog < ApplicationRecord
   belongs_to :contact
   belongs_to :organization
   belongs_to :line
+  has_many :feed_items, as: :parent, dependent: :destroy
 
   validates :contact_id, presence: true
   validates :organization_id, presence: true

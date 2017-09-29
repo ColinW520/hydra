@@ -41,6 +41,8 @@ class Twilio::Calls::LoggingWorker < Twilio::BaseWorker
     @log.contact_id = @contact.try(:id)
     @log.save!
 
+    store_feed_item(@log, "Received a phone call.")
+
     Twilio::Calls::LogUpdatingWorker.perform_in(30.minutes, @log.id)
   end
 end

@@ -1,32 +1,13 @@
-.row
-  .col-sm-12.col-md-6
-    .card.my-2
-      .card-block
-        %h4 Messages
-      = line_chart messages_dashboard_path, library: { legend: { position:  'bottom' }, pointSize: 0, curveType: "none", hAxis: { format: 'MM/dd' } }
-
-  .col-sm-12.col-md-6
-    .card.my-2
-      .card-block
-        %h4 Calls
-      = line_chart calls_dashboard_path, library: { legend: { position:  'bottom' }, pointSize: 0, curveType: "none", hAxis: { format: 'MM/dd' } }
-
+%h4 Messages
+= line_chart messages_dashboard_path, library: { legend: { position:  'bottom' }, pointSize: 0, curveType: "none", hAxis: { format: 'MM/dd' } }
 %br
-.row
-  .col-sm-12.col-md-6
-    #LastMonth
-      %br
-      %br
-      %br
-      .text-center
-        %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
-        %h3 Loading...
-
-  .col-sm-12.col-md-6
-    #ThisMonth
-      %br
-      %br
-      %br
-      .text-center
-        %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
-        %h3 Loading...
+%h4 Calls
+= line_chart calls_dashboard_path, library: { legend: { position:  'bottom' }, pointSize: 0, curveType: "none", hAxis: { format: 'MM/dd' } }
+%br
+#ThisMonth
+  %br
+  %br
+  %br
+  .text-center
+    %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+    %h3 Loading...

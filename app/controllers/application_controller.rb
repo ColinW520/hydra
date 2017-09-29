@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
   def track_action
-    ahoy.track "#{controller_name} ##{action_name}" unless request.xhr?
+    ahoy.track "Viewed#{controller_name} ##{action_name}" unless request.xhr?
   end
 
   def after_sign_in_path_for(resource)
@@ -21,6 +21,14 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource_or_scope)
     root_path
   end
+
+  def require_admin!
+    unless current_user && current_user.is_super_user?
+      flash[:alert] = 'Sorry, that action is only available to Super Users.'
+      redirect_to root_path
+    end
+  end
+  helper_method :require_admin!
 
   protected
 

@@ -38,6 +38,7 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
 
     # handle alerts
     if @local_message.direction == 'inbound' && !@local_message.alerts_sent?
+      store_feed_item(@local_message, "Received a message:") 
       @organization.users.subscribed_to_instant_alerts.pluck(:id).each do |user_id|
         MessagesMailer.alert(@local_message.id, user_id).deliver_later
       end

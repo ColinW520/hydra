@@ -1,0 +1,11 @@
+- case feed_item.parent_type
+  - when 'Message'
+    = render partial: 'feed_items/message', locals: { feed_item: feed_item }
+  - when 'MessageRequest'
+    = render partial: 'feed_items/message_request', locals: { feed_item: feed_item }
+  - when 'CallLog'
+    = render partial: 'feed_items/call_log', locals: { feed_item: feed_item }
+  - when 'Line'
+    = render partial: 'feed_items/line', locals: { feed_item: feed_item }
+  - else
+    = render partial: 'feed_items/other', locals: { feed_item: feed_item }

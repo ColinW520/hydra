@@ -1,0 +1,10 @@
+- unless @xhr
+  - provide(:title, 'Activity Feed')
+.row
+  .col-sm-12.col-md-6
+    %h4
+      %i.fa.fa-newspaper-o
+      Activity Feed
+    = smart_listing_render :feed_items
+  .col-sm-12.col-md-6
+    = render 'dashboard/charts'

@@ -1,0 +1,9 @@
+.row
+  .col-sm-12
+    .card.card-default
+      .card-block
+        - smart_listing.collection.each do |feed_item|
+          = render feed_item
+        .pull-right
+          = smart_listing.paginate
+          = smart_listing.pagination_per_page_links

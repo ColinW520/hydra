@@ -3,22 +3,16 @@
     .card.my-2
       .card-block
         %h4 Messages
-      = column_chart messages_dashboard_path, stacked: true, library: { position:  'bottom', pointSize: 0 }
+      = line_chart messages_dashboard_path, library: { legend: { position:  'bottom' }, pointSize: 0, curveType: "none", hAxis: { format: 'MM/dd' } }
 
   .col-sm-12.col-md-6
     .card.my-2
       .card-block
         %h4 Calls
-      = column_chart calls_dashboard_path, stacked: true, library: { position:  'bottom', pointSize: 0}
+      = line_chart calls_dashboard_path, library: { legend: { position:  'bottom' }, pointSize: 0, curveType: "none", hAxis: { format: 'MM/dd' } }
 
 %br
 .row
-  .col-sm-12
-    .card.my-2
-      .card-block
-        %h4 List Growth
-      = column_chart list_growth_dashboard_path, library: { position:  'bottom', pointSize: 0}
-
   .col-sm-12.col-md-6
     #LastMonth
       %br

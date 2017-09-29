@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911184902) do
+ActiveRecord::Schema.define(version: 20170929045720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer  "visit_id"
@@ -33,6 +34,12 @@ ActiveRecord::Schema.define(version: 20170911184902) do
     t.string   "user_type"
     t.string   "mailer"
     t.text     "subject"
+    t.text     "content"
+    t.string   "utm_source"
+    t.string   "utm_medium"
+    t.string   "utm_term"
+    t.string   "utm_content"
+    t.string   "utm_campaign"
     t.datetime "sent_at"
     t.datetime "opened_at"
     t.datetime "clicked_at"
@@ -55,7 +62,7 @@ ActiveRecord::Schema.define(version: 20170911184902) do
   end
 
   create_table "call_logs", force: :cascade do |t|
-    t.string   "line_id"
+    t.integer  "line_id"
     t.string   "organization_id"
     t.string   "contact_id"
     t.boolean  "forwarded"
@@ -256,6 +263,14 @@ ActiveRecord::Schema.define(version: 20170911184902) do
     t.index ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string   "text"
+    t.text     "answer"
+    t.integer  "display_order"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
     t.text     "data"
@@ -309,18 +324,18 @@ ActiveRecord::Schema.define(version: 20170911184902) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
+    t.string   "email",                  default: "",                           null: false
     t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,                            null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
     t.boolean  "admin_role",             default: false
     t.integer  "organization_id"
     t.string   "first_name"
@@ -335,7 +350,7 @@ ActiveRecord::Schema.define(version: 20170911184902) do
     t.string   "invited_by_type"
     t.datetime "deleted_at"
     t.string   "mobile_phone"
-    t.string   "timezone"
+    t.string   "timezone",               default: "Pacific Time (US & Canada)"
     t.boolean  "mobile_phone_validated"
     t.boolean  "is_super_user",          default: false
     t.boolean  "notify_instantly",       default: false

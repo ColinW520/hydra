@@ -68,9 +68,9 @@
       .text-center.text-danger
         By clicking this button you ackowledge that you are purchasing a number from Twilio™ and by doing so you accept any applicable charges related to the use of this line. For information about potential charges, visit Twilio's
         %a{href: 'https://www.twilio.com/sms/pricing', target: '_blank'} Pricing Guide.
-        %br
   .row
     .col-sm-4.col-centered
+      %br
       %img.img-fluid{src: asset_url('twilio-badge-red.png')}
 :coffeescript
   checkbox = document.getElementById('line_reject_voice_calls')

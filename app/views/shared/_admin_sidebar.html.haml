@@ -11,6 +11,10 @@
           %li{class: @subnav == 'dashboard' ? 'active' : nil}
             %i.fa.fa-user-plus
             Super Dashboard
+        %a{href: admin_blazer_path}
+          %li{class: @subnav == '' ? 'active' : nil}
+            %i.fa.fa-database
+            DataBlazer
         %a{href: feed_items_path}
           %li
             %i.fa.fa-tachometer

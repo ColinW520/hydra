@@ -11,13 +11,16 @@ Rails.application.routes.draw do
   match '/privacy' => "static_pages#privacy", via: [:get]
 
   # Supers only
-  namespace :admin do
-    # engines
-    mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, -> (user) { user.is_super_user? } do
+    namespace :admin do
+      # engines
+      mount Sidekiq::Web => '/sidekiq'
+      mount Blazer::Engine, at: "blazer"
 
-    # dashboards
-    get '/' => redirect('admin/dashboard')
-    resource :dashboard, controller: 'dashboard' do
+      # dashboards
+      get '/' => redirect('admin/dashboard')
+      resource :dashboard, controller: 'dashboard' do
+      end
     end
   end
 

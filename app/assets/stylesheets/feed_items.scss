@@ -1,0 +1,13 @@
+.feed-item {
+  transition: all .4s ease-in-out;
+  will-change:transform;
+
+  &:hover {
+    transform: scale(1.01);
+    -webkit-box-shadow: 0 12px 30px 0 rgba(33,150,143, .50);
+    box-shadow: 0 12px 30px 0 rgba(33,150,143, .50);
+    &:after {
+      width: 100%;
+    }
+  }
+}

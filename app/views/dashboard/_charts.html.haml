@@ -12,7 +12,7 @@
       %i.fa.fa-envelope
       Messages
   .card-block
-    = line_chart messages_dashboard_path, library: { legend: { position:  'bottom' }, pointSize: 0, curveType: "none", hAxis: { format: 'MM/dd' } }
+    = column_chart messages_dashboard_path, library: { legend: { position:  'bottom' } }
 %br
 .card.card-default
   .card-header
@@ -20,4 +20,4 @@
       %i.fa.fa-phone
       Calls
   .card-block
-    = line_chart calls_dashboard_path, library: { legend: { position:  'bottom' }, pointSize: 0, curveType: "none", hAxis: { format: 'MM/dd' } }
+    = column_chart calls_dashboard_path, library: { legend: { position:  'bottom' } }

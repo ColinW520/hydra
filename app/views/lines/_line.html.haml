@@ -9,7 +9,7 @@
 - else
   %tr{id: "line_#{line.id}"}
     %td
-      = link_to line.name, edit_line_path(line)
+      = link_to line.name, line_path(line)
     %td= number_to_phone line.number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
     %td.text-center
       - if line.reject_voice_calls?

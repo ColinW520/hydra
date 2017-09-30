@@ -1,1 +1,75 @@
-%h1= @line.name
+- provide(:title, "#{@line.name}")
+.row
+  .col-sm-12
+    %ol.breadcrumb
+      %li.breadcrumb-item
+        = link_to lines_path do
+          Lines
+      %li.breadcrumb-item.active= "#{@line.name} Details"
+
+.row
+  .col-sm-12.col-md-6.col-lg-4
+    .card.card-outline-default
+      .card-header
+        .row
+          .col-sm-9
+            %h4.card-title= @line.name
+          .col-sm-3
+            = link_to edit_line_path(@line), class: 'btn btn-sm btn-warning pull-right' do
+              %i.fa.fa-edit
+      %table.table
+        %thead.thead-inverse
+        %tbody
+          %tr
+            %td
+              %strong Last Updated
+            %td= local_time @line.updated_at
+          %tr
+            %td
+              %strong Number
+            %td= number_to_phone @line.number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+          %tr
+            %td
+              %strong Voice Calls
+            %td
+              - if @line.reject_voice_calls?
+                %i.fa.fa-times.text-danger{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Will reject all calls."}
+              - else
+                %i.fa.fa-check.text-success{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Configured to accept phone calls."}
+          %tr
+            %td
+              %strong Forwarding Number
+            %td= number_to_phone @line.voice_forwarding_number.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+          %tr
+            %td
+              %strong Voice Auto-Response
+            %td= @line.voice_auto_response
+          %tr
+            %td
+              %strong Text Response
+            %td= @line.sms_auto_response_text
+          %tr
+            %td
+              %strong Added
+            %td= local_time_ago @line.created_at
+          %tr
+            %td
+              %strong Reserved By
+            %td
+              = @line.user.first_name
+              = local_time_ago @line.created_at, format: '%m/%d/%y'
+
+
+
+  .col-sm-12.col-md-6.col-lg-8
+    .card.card-default
+      .card-header
+        %h4.card-title Messages
+      .card-block
+        = column_chart @line.messages.group(:direction).group_by_month(:created_at, range: @line.created_at.beginning_of_month..Time.now).count
+    %br
+    .card.card-default
+      .card-header
+        %h4.card-title Calls
+      .card-block
+        = column_chart @line.call_logs.group_by_month(:created_at, range: @line.created_at.beginning_of_month..Time.now).count

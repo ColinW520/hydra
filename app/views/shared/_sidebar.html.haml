@@ -1,14 +1,14 @@
 #sidebar
   .nav-side-menu
     .brand{style: "font-size: 25px; padding: 5px;"}
-      %a{href: current_user.present? ? dashboard_path : root_path}
+      %a{href: current_user.is_super_user? ? admin_dashboard_path : feed_items_path}
         %i.fa.fa-comments-o
         TmT
     %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
     .menu-list
       %ul#menu-content.menu-content.collapse.out
         %a{href: feed_items_path}
-          %li{class: @subnav == 'dashboard' ? 'active' : nil}
+          %li{class: @subnav == 'feed_items' ? 'active' : nil}
             %i.fa.fa-dashboard.fa-lg
             Dashboard
         - if current_user.present? && current_user.setup?

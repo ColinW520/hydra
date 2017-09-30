@@ -1,9 +1,10 @@
-%blockquote.blockquote
-  %i.fa.fa-envelope-open
-  %i.fa.fa-arrow-up.text-success
-  = feed_item.phrase
-  %br
-  %br
-  %p= feed_item.parent.body
-  .blockquote-footer
-    %cite{:title => feed_item.phrase}= local_time_ago feed_item.created_at
+%a{href: message_request_path(feed_item.parent), style: 'text-decoration: none; color: unset'}
+  %blockquote.blockquote.feed-item
+    %i.fa.fa-envelope-open
+    %i.fa.fa-arrow-up.text-success
+    = feed_item.phrase
+    %br
+    %br
+    %p= feed_item.parent.body
+    .blockquote-footer
+      %cite{:title => feed_item.phrase}= local_time_ago feed_item.created_at

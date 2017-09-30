@@ -1,15 +1,16 @@
-%blockquote.blockquote.blockquote-reverse
-  %i.fa.fa-phone
-  %i.fa.fa-arrow-down.text-primary
-  = feed_item.phrase
-  %ul{style: "list-style-type: none;"}
-    %li
-      Duration:
-      = feed_item.parent.duration_in_seconds
-      seconds
-    %li
-      Location:
-      = feed_item.parent.from_city
-  %br
-  .blockquote-footer
-    %cite{:title => feed_item.phrase}= local_time_ago feed_item.created_at
+%a{href: contact_path(feed_item.parent.contact), style: 'text-decoration: none; color: unset'}
+  %blockquote.blockquote.blockquote-reverse.feed-item
+    %i.fa.fa-phone
+    %i.fa.fa-arrow-down.text-primary
+    = feed_item.phrase
+    %ul{style: "list-style-type: none;"}
+      %li
+        Duration:
+        = feed_item.parent.duration_in_seconds
+        seconds
+      %li
+        Location:
+        = feed_item.parent.from_city
+    %br
+    .blockquote-footer
+      %cite{:title => feed_item.phrase}= local_time_ago feed_item.created_at

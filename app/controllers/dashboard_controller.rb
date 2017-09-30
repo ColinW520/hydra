@@ -23,10 +23,10 @@ class DashboardController < ApplicationController
   end
 
   def messages
-    render json: current_user.organization.messages.group(:direction).group_by_day(:created_at, range: 2.week.ago..Time.now, time_zone: 'America/Chicago').count.chart_json
+    render json: current_user.organization.messages.group(:direction).group_by_day(:created_at, range: 1.weeks.ago..Time.now, time_zone: 'America/Chicago', format: "%d-%b").count.chart_json
   end
 
   def calls
-    render json: current_user.organization.call_logs.joins(:line).group('lines.name').group_by_day('call_logs.created_at', range: 2.week.ago..Time.now, time_zone: 'America/Chicago').count.chart_json
+    render json: current_user.organization.call_logs.group_by_day(:created_at, range: 1.week.ago..Time.now, time_zone: 'America/Chicago', format: "%d-%b").count.chart_json
   end
 end

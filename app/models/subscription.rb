@@ -1,6 +1,6 @@
 class Subscription < ApplicationRecord
   belongs_to :organization
-  belongs_to :plan, foreign_key: :stripe_plan_id
+  belongs_to :plan, primary_key: :stripe_id, foreign_key: :stripe_plan_id
   validates :signer_name, presence: true
 
   before_create :create_on_stripe

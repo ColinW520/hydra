@@ -14,6 +14,6 @@ class MessageRequest < ApplicationRecord
 
   after_create :queue_message
   def queue_message
-    Twilio::Messages::QueuingWorker.perform_async(self.id)
+    Twilio::Messages::QueuingWorker.perform_in(30.seconds, self.id)
   end
 end

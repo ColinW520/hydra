@@ -6,7 +6,7 @@ class Twilio::MessagesController < Twilio::BaseController
 private
 
   def twilio_message_params
-    params.permit([:ToCountry :ToState, :SmsMessageSid, :NumMedia, :ToCity, :FromZip, :SmsSid, :FromState, :SmsStatus, :FromCity, :Body, :FromCountry, :To, :ToZip, :NumSegments, :MessageSid, :AccountSid, :From, :ApiVersion])
+    params.permit([:ToCountry, :ToState, :SmsMessageSid, :NumMedia, :ToCity, :FromZip, :SmsSid, :FromState, :SmsStatus, :FromCity, :Body, :FromCountry, :To, :ToZip, :NumSegments, :MessageSid, :AccountSid, :From, :ApiVersion])
   end
 end
 

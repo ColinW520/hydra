@@ -21,8 +21,9 @@ Rails.application.routes.draw do
       resource :dashboard, controller: 'dashboard' do
       end
 
-      # resources
+      # Stripe resources
       resources :plans
+      resources :subscriptions
     end
   end
 

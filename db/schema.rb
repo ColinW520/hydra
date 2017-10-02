@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002030308) do
+ActiveRecord::Schema.define(version: 20171002041713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -378,6 +378,7 @@ ActiveRecord::Schema.define(version: 20171002030308) do
     t.boolean  "spam_agreed",        default: false
     t.boolean  "terms_agreed",       default: false
     t.string   "signer_name"
+    t.string   "current_status"
     t.index ["organization_id"], name: "index_subscriptions_on_organization_id", using: :btree
   end
 

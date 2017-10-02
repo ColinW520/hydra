@@ -7,10 +7,18 @@
     %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
     .menu-list
       %ul#menu-content.menu-content.collapse.out
+        %a{href: admin_dashboard_path}
+          %li{class: @subnav == 'dashboard' ? 'active' : ''}
+            %i.fa.fa-user-plus
+            + Super
         %a{href: admin_plans_path}
           %li{class: @subnav == 'plans' ? 'active' : ''}
             %i.fa.fa-shopping-cart
             Plans
+        %a{href: admin_subscriptions_path}
+          %li{class: @subnav == 'subscriptions' ? 'active' : ''}
+            %i.fa.fa-refresh
+            Subscriptions
         %a{href: admin_blazer_path}
           %li.text-danger
             %i.fa.fa-database

@@ -1,0 +1,5 @@
+%tr{id: "subscription_#{subscription.id}"}
+  %td= local_time subscription.created_at, '%m/%d/%y'
+  %td= subscription.current_status.try(:upcase)
+  %td= subscription.try(:plan).try(:name)
+  %td

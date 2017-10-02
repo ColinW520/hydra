@@ -11,6 +11,7 @@
             %th= smart_listing.sortable 'To', :to
             %th= smart_listing.sortable 'From', :from
             %th= smart_listing.sortable 'Body', :body
+            %th= smart_listing.sortable 'Media', :num_media
             %th
           %tbody#messages
             - smart_listing.collection.each do |message|

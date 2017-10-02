@@ -7,7 +7,7 @@
     %br
     %p= feed_item.parent.body
     - feed_item.parent.media_links.each do |media_link|
-      %a{href: media_link.link, target: '_blank'}
+      %a{href: media_link.link, target: '_blank', style: "text-decoration: none"}
         %img.img-fluid.img-thumbnail.m-2{src: media_link.link, style: 'max-height: 150px;'}
     .blockquote-footer
       %cite{:title => feed_item.phrase}= local_time_ago feed_item.created_at

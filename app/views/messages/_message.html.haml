@@ -27,6 +27,11 @@
         = message.line.name
   %td= message.body
   %td
+    - if message.num_media > 0
+      - message.media_links.each do |media_link|
+        %a{href: media_link.link, target: '_blank', style: "text-decoration: none"}
+          %img.img-fluid.img-thumbnail{src: media_link.link, style: 'max-height: 50px;'}
+  %td
     .btn-group
       = link_to new_message_request_path(contact_ids: [message.contact_id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-reply

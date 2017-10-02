@@ -6,5 +6,8 @@
     %br
     %br
     %p= feed_item.parent.body
+    - if feed_item.parent.media_item.present?
+      %a{href: feed_item.parent.media_item.url, target: '_blank', style: "text-decoration: none"}
+        %img.img-fluid.img-thumbnail.m-2{src: feed_item.parent.media_item.url, style: 'max-height: 150px;'}
     .blockquote-footer
       %cite{:title => feed_item.phrase}= local_time_ago feed_item.created_at

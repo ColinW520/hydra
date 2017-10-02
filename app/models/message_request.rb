@@ -5,7 +5,10 @@ class MessageRequest < ApplicationRecord
   belongs_to :line
   serialize :filter_query, JSON
 
-  has_many :media_items, dependent: :destroy
+  has_attached_file :media_item,
+    dependent: :destroy
+  validates_attachment_content_type :media_item, content_type: /\Aimage\/.*\Z/
+  validates_attachment :media_item, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
 
   validates :body, presence: true
 

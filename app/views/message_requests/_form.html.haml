@@ -2,7 +2,7 @@
   .col-sm-12
     %div.alert.alert-info
       %strong= "You're about to send a message to #{@expected_count} contacts."
-    = simple_form_for [@message_request], authenticity_token: true, html: { id: 'MessageRequestForm' } do |f|
+    = simple_form_for [@message_request], authenticity_token: true, multipart: true, html: { id: 'MessageRequestForm' } do |f|
       .row
         .col-sm-12
           #error_holder
@@ -16,6 +16,12 @@
             %br
           #warning.alert.alert-danger
             Hey, this really long. Are you sure this should be a text message? Wouldn't it be better to send this as an email this instead?
+          .form-group
+            %label Add A Picture
+            = f.input :media_item, label: '', class: 'form-control'
+
+
+
       .row
         .col-sm-12
           .form-actions
@@ -36,6 +42,10 @@
 
 :coffeescript
   $ ->
+    $('#my-file-selector').on 'change', ->
+      $('#upload-file-info').val $(this).val()
+      return
+
     $('#warning.alert.alert-danger').eq(1).hide()
     $('textarea').on 'keyup', ->
       length = $(this).val().length

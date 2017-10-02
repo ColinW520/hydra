@@ -22,6 +22,8 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
       status_callback: "https://www.textmy.team/twilio/callbacks/status"
     }
 
+    recipient_hash[:media_url] = @message_request.media_item.url if @message_request.media_item.present?
+
     # send it
     return if Rails.env.development?
     @message = @twilio_client.messages.create(recipient_hash)

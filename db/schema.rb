@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002182932) do
+ActiveRecord::Schema.define(version: 20171002204303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -271,11 +271,15 @@ ActiveRecord::Schema.define(version: 20171002182932) do
     t.string   "body"
     t.integer  "recipients_count"
     t.datetime "processed_at"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "line_id"
     t.text     "filter_query"
     t.datetime "send_at"
+    t.string   "media_item_file_name"
+    t.string   "media_item_content_type"
+    t.integer  "media_item_file_size"
+    t.datetime "media_item_updated_at"
     t.index ["line_id"], name: "index_message_requests_on_line_id", using: :btree
     t.index ["organization_id"], name: "index_message_requests_on_organization_id", using: :btree
     t.index ["user_id"], name: "index_message_requests_on_user_id", using: :btree

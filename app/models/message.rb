@@ -1,5 +1,6 @@
 class Message < ApplicationRecord
   has_many :feed_items, as: :parent, dependent: :destroy
+  has_many :media_links
   belongs_to :contact
   belongs_to :message_request
   belongs_to :line

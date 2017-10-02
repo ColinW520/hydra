@@ -23,10 +23,24 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
       from: @message.from,
       body: @message.body,
       error_message: @message.error_message,
-      price_in_cents: @message.price.to_f.abs.to_s,
+      price_in_cents: @message.price.to_f.abs,
       num_media: @message.num_media,
       num_segments: @message.num_segments
     )
+
+    # now store any media
+    if @local_message.present? && @local_message.num_media > 0
+      @message.media.list.each do |media_link|
+        the_link = "https://api.twilio.com" + media_link.uri.remove('.json')
+        MediaLink.where(link: the_link).first_or_create(
+          message_id: @local_message.id,
+          twilio_message_sid: @message.sid,
+          twilio_file_type: media_link.content_type,
+          link: the_link,
+          direction: @message.direction == 'outbound-api' ? 'outbound' : 'inbound'
+        )
+      end
+    end
 
     # this is where we would need to store any message links if needed
     @contact.touch(:last_messaged_at)
@@ -38,7 +52,7 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
 
     # handle alerts
     if @local_message.direction == 'inbound' && !@local_message.alerts_sent?
-      store_feed_item(@local_message, "The #{@local_message.line.name} received a message from #{@contact.try(:full_name)} (#{@local_message.from}):") 
+      store_feed_item(@local_message, "The #{@local_message.line.name} received a message from #{@contact.try(:full_name)} (#{@local_message.from}):")
       @organization.users.subscribed_to_instant_alerts.pluck(:id).each do |user_id|
         MessagesMailer.alert(@local_message.id, user_id).deliver_later
       end

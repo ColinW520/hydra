@@ -1,6 +1,6 @@
 class Twilio::Messages::ReceivingWorker < Twilio::BaseWorker
 
-  def perform(params)
+  def perform(params, links = [])
     @line = Line.find_by_number params['To']
     @contact = Contact.where(mobile_phone: params['From'], organization_id: @line.organization_id).first_or_create
 

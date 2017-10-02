@@ -1,25 +1,25 @@
 #sidebar
   .nav-side-menu
     .brand{style: "font-size: 25px; padding: 5px;"}
-      %a{href: current_user.present? ? dashboard_path : root_path}
+      %a{href: admin_dashboard_path}
         %i.fa.fa-user-plus
         TmT Super
     %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
     .menu-list
       %ul#menu-content.menu-content.collapse.out
-        %a{href: admin_dashboard_path}
-          %li{class: @subnav == 'dashboard' ? 'active' : nil}
-            %i.fa.fa-user-plus
-            Super Dashboard
+        %a{href: admin_plans_path}
+          %li{class: @subnav == 'plans' ? 'active' : ''}
+            %i.fa.fa-shopping-cart
+            Plans
         %a{href: admin_blazer_path}
-          %li{class: @subnav == '' ? 'active' : nil}
+          %li.text-danger
             %i.fa.fa-database
             DataBlazer
-        %a{href: feed_items_path}
-          %li
-            %i.fa.fa-tachometer
-            Admin Dashboard
         %a{href: admin_sidekiq_web_path}
-          %li.text-warning
+          %li.text-danger
             %i.fa.fa-pied-piper-alt
             %strong Sidekiq
+        %a{href: feed_items_path}
+          %li.text-primary
+            %i.fa.fa-tachometer
+            Normal Dashboard

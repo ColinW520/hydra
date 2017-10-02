@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930195820) do
+ActiveRecord::Schema.define(version: 20171002030308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -329,6 +329,21 @@ ActiveRecord::Schema.define(version: 20170930195820) do
     t.string   "twilio_auth_id"
     t.string   "preferred_area_code"
     t.index ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string   "stripe_id"
+    t.string   "name"
+    t.integer  "amount_in_cents"
+    t.integer  "trial_period_days"
+    t.string   "statement_descriptor"
+    t.boolean  "can_add_users"
+    t.boolean  "can_send_mms"
+    t.boolean  "can_schedule_messages"
+    t.boolean  "can_upload_contacts"
+    t.boolean  "can_add_lines"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "questions", force: :cascade do |t|

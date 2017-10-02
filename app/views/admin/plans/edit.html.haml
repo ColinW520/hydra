@@ -1,0 +1,11 @@
+- provide(:title, "Edit #{@plan.name} Line")
+.row
+  .col-sm-12
+    %h4
+      %i.fa.fa-shopping-cart
+      Plans
+.row
+  .col-sm-12.col-md-6.col-centered
+    .card.card-default
+      .card-block
+        = render 'form'

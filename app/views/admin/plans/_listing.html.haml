@@ -1,0 +1,35 @@
+.row
+  .col-sm-12
+    .card.card-default
+      .table-responsive
+        %table.table.table-hover
+          %thead.thead-inverse
+            %th.sortable= smart_listing.sortable 'Name', :name
+            %th.sortable= smart_listing.sortable 'Stripe ID', :stripe_id
+            %th.sortable= smart_listing.sortable 'Price', :price
+            %th.text-center Users +
+            %th.text-center
+              %i.fa.fa-picture
+              MMS
+            %th.text-center
+              %i.fa.fa-clock
+              Schedule
+              %i.fa.fa-envelope
+            %th.text-center
+              %i.fa.fa-upload
+              Import
+              %i.fa.fa-address-book
+            %th.text-center
+              %i.fa.fa-plus
+              Lines
+            %th.sortable= smart_listing.sortable 'Created', :created_at
+            %th
+          %tbody#plans
+            - smart_listing.collection.each do |plan|
+              = render plan
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

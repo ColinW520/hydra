@@ -5,7 +5,7 @@
       %h4
         %i.fa.fa-users
         Users
-        - if current_user.admin_role?
+        - if current_user.admin_role? && current_organization.can_add_users?
           .pull-right
             = link_to new_user_invitation_path, class: 'btn btn-sm btn-success' do
               %i.fa.fa-plus

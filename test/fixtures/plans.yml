@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stripe_id: MyString
+  name: MyString
+  amount_in_cents: 1
+  trial_period_days: 
+  statement_descriptor: MyString
+  can_add_users: false
+  can_send_mms: false
+  can_schedule_messages: false
+  can_upload_contacts: false
+  can_add_lines: false
+
+two:
+  stripe_id: MyString
+  name: MyString
+  amount_in_cents: 1
+  trial_period_days: 
+  statement_descriptor: MyString
+  can_add_users: false
+  can_send_mms: false
+  can_schedule_messages: false
+  can_upload_contacts: false
+  can_add_lines: false

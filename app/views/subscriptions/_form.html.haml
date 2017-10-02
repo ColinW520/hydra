@@ -6,6 +6,9 @@
   = f.input :stripe_customer_id, as: :hidden, input_html: { value: @organization.stripe_customer_id }
   = f.input :organization_id, as: :hidden, input_html: { value: @organization.id }
   .form-group
+    = f.input :stripe_plan_id, as: :select, label: 'Confirm Your Plan', collection: Stripe::Plan.list, selected: params[:plan_level], label_method: :name, value_method: :id, include_blank: false
+  %br
+  .form-group
     = f.input :terms_agreed, :as => :boolean, label: ("I agree to the #{link_to 'Terms of Service', terms_path, target: '_blank'} and #{link_to 'Privacy Policy', privacy_path, target: '_blank'}").html_safe, class: 'required_check'
   .form-group
     = f.input :spam_agreed, :as => :boolean, label: ("I will follow the #{link_to 'AntiSpam Requirements', anti_spam_path, target: '_blank'}.").html_safe, class: 'required_check'

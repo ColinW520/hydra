@@ -16,11 +16,13 @@ Rails.application.routes.draw do
       # engines
       mount Sidekiq::Web => '/sidekiq'
       mount Blazer::Engine, at: "blazer"
-
       # dashboards
       get '/' => redirect('admin/dashboard')
       resource :dashboard, controller: 'dashboard' do
       end
+
+      # resources
+      resources :plans
     end
   end
 

@@ -1,0 +1,3 @@
+$('#plan_dialog').modal('toggle');
+$('#plan_<%= @plan.id %>').replaceWith('<%= j render (@plan) %>');
+$("#plans").smart_listing().fadeLoaded();

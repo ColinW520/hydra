@@ -43,8 +43,8 @@ class ApplicationController < ActionController::Base
 
   def gon_setup
     @current_organization = current_user.try(:organization)
-    @current_subscription = current_user.organization.subscription
-    @current_plan = @current_subscription.plan
+    @current_subscription = @current_organization.try(:subscription)
+    @current_plan = @current_subscription.try(:plan)
     gon.organization_id = current_user.try(:organization_id)
     gon.organization_slug = current_user.try(:organization).try(:slug)
     gon.stripe_publishable_key = ENV['STRIPE_PUBLISHABLE_KEY']

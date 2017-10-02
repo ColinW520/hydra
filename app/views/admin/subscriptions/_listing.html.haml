@@ -7,6 +7,9 @@
             %th.sortable= smart_listing.sortable 'Created', :created_at
             %th.sortable= smart_listing.sortable 'Status', :current_status
             %th.sortable Plan
+            %th.sortable Coupon
+            %th Canceled At
+            %th Ends At
             %th
           %tbody#plans
             - smart_listing.collection.each do |subscription|
@@ -17,3 +20,4 @@
     .pull-right
       = smart_listing.paginate
       = smart_listing.pagination_per_page_links
+      %small Synchronized Hourly

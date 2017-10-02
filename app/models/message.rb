@@ -31,7 +31,7 @@ class Message < ApplicationRecord
   end
 
   def twilio_instance
-    self.organization.twilio_client.messages.get(self.twilio_id)
+    self.organization.twilio_client.messages.get(self.twilio_sid)
   end
 
   def self.to_csv

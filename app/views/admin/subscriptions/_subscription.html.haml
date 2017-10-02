@@ -2,4 +2,6 @@
   %td= local_time subscription.created_at, '%m/%d/%y'
   %td= subscription.current_status.try(:upcase)
   %td= subscription.try(:plan).try(:name)
-  %td
+  %td= subscription.try(:coupon_code)
+  %td= local_time subscription.canceled_at rescue ''
+  %td= local_time subscription.ends_at rescue ''

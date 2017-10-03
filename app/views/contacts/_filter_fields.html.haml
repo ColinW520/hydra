@@ -39,7 +39,7 @@
           .col-sm-12.col-md-6.col-centered
             .pull-right
               .btn-group
-                - if current_user.organization.lines.active.present?
+                - if @current_organization.valid_setup?
                   = link_to new_message_request_path(count: smart_listing.count, query: {name: params[:name],title: params[:title],tags: params[:tags], organization_id: current_user.organization_id}), id: 'NewMessageButton', remote: true, class: 'btn btn-success btn-sm', title: "Message all #{smart_listing.count} members matching these filters.", 'data-toggle' => 'tooltip', 'data-placement' => 'top' do
                     %i.fa.fa-send
                     Message ALL

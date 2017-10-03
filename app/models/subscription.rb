@@ -3,6 +3,10 @@ class Subscription < ApplicationRecord
   belongs_to :plan, primary_key: :stripe_id, foreign_key: :stripe_plan_id
   validates :signer_name, presence: true
 
+  def is_valid?
+    return true unless self.status == 'unpaid' || self.status == 'canceled'
+  end
+
   before_create :create_on_stripe
   def create_on_stripe
     sub_details = {}

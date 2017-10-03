@@ -11,33 +11,32 @@
           %li{class: @subnav == 'feed_items' ? 'active' : nil}
             %i.fa.fa-dashboard.fa-lg
             Dashboard
-        - if current_user.present? && current_user.setup?
-          %a{href: contacts_path}
-            %li{class: @subnav == 'contacts' ? 'active' : nil}
-              %i.fa.fa-address-book-o.fa-lg
-              Directory
+        %a{href: contacts_path}
+          %li{class: @subnav == 'contacts' ? 'active' : nil}
+            %i.fa.fa-address-book-o.fa-lg
+            Directory
 
-          %a{href: messages_path}
-            %li{class: @subnav == 'messages' ? 'active' : nil}
-              %i.fa.fa-envelope.fa-lg
-              Messages
+        %a{href: messages_path}
+          %li{class: @subnav == 'messages' ? 'active' : nil}
+            %i.fa.fa-envelope.fa-lg
+            Messages
 
-          %a{href: lines_path}
-            %li{class: @subnav == 'lines' ? 'active' : nil}
-              %img.img-fluid{src: asset_url('twilio-mark-white.svg'), style: "height: 20px; margin: 4% 2% 4% 4%"}
-              Lines
+        %a{href: lines_path}
+          %li{class: @subnav == 'lines' ? 'active' : nil}
+            %img.img-fluid{src: asset_url('twilio-mark-white.svg'), style: "height: 20px; margin: 4% 2% 4% 4%"}
+            Lines
 
-          %a{href: call_logs_path}
-            %li{class: @subnav == 'call_logs' ? 'active' : nil}
-              %i.fa.fa-phone.fa-lg
-              Calls
+        %a{href: call_logs_path}
+          %li{class: @subnav == 'call_logs' ? 'active' : nil}
+            %i.fa.fa-phone.fa-lg
+            Calls
 
-          %a{href: organization_users_path(current_user.organization)}
-            %li{class: @subnav == 'users' ? 'active' : nil}
-              %i.fa.fa-users.fa-lg
-              Users
-        - if current_user.admin_role
-          %a{href: current_user.organization_id.present? ? organization_path(current_user.organization) : new_organization_path}
+        %a{href: organization_users_path(current_user.organization)}
+          %li{class: @subnav == 'users' ? 'active' : nil}
+            %i.fa.fa-users.fa-lg
+            Users
+        - if current_user.admin_role?
+          %a{href: organization_path(current_user.organization)}
             %li{class: @subnav == 'organizations' ? 'active' : nil}
               %i.fa.fa-gears.fa-lg
               Settings

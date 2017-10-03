@@ -35,6 +35,7 @@ module Hydra
     }
 
     config.action_mailer.default_url_options = { :host => Rails.env.development? ? "hydra.dev" : "https://www.textmy.team" }
+    config.action_mailer.default_options = { from: "colin@atlasdoes.com" }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true

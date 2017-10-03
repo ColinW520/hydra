@@ -16,7 +16,7 @@
             %br
           #warning.alert.alert-danger
             Hey, this really long. Are you sure this should be a text message? Wouldn't it be better to send this as an email this instead?
-          - if @current_plan.present? && @current_plan.can_send_mms?
+          - if @current_plan.can_send_mms?
             .form-group
               %label Add A Picture
               = f.input :media_item, label: false, class: 'form-control', hint: 'PNG, JPEG, and GIF are presently supported.'

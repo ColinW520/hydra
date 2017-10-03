@@ -22,11 +22,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     def after_sign_up_path_for(resource)
       # we need to accomodate new users from invites, as well as new users from registrations
-      current_user.organization_id.present? ? dashboard_path : new_organization_path
+      current_user.organization_id.present? ? feed_items_path : new_organization_path
     end
 
     def after_update_path_for(resource)
-      dashboard_path
+      feed_items_path
     end
 
     def resolve_layout

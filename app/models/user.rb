@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def setup?
-    self.organization.present? && self.organization.setup?
+    self.organization.present? && self.organization.valid_setup?
   end
 
   def soft_delete!

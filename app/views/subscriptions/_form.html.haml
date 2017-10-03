@@ -24,18 +24,21 @@
 
 :coffeescript
   $ ->
-    $('#subscription_terms_agreed').on('change', ->
-      console.log 'seeing change'
-      if @checked
+    terms = $('input#subscription_terms_agreed')
+    spam = $('input#subscription_spam_agreed')
+
+    terms.on('change', ->
+      if @checked && spam.is(':checked')
+          $('input#subscription_submit').removeClass 'disabled'
       else
-        $('#subscription_submit').addClass 'disabled'
+        $('input#subscription_submit').addClass 'disabled'
       #true: disabled, false: enabled
       return
     ).trigger 'change'
 
-    $('#subscription_spam_agreed').on('change', ->
-      console.log 'seeing change'
-      $('#subscription_submit').addClass 'disabled', !@checked
-      #true: disabled, false: enabled
-      return
+    spam.on('change', ->
+      if @checked && terms.is(':checked')
+         $('input#subscription_submit').removeClass 'disabled'
+      else
+        $('input#subscription_submit').addClass 'disabled'
     ).trigger 'change'

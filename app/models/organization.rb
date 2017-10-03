@@ -23,8 +23,11 @@ class Organization < ApplicationRecord
 
   validates :name, presence: true
 
-  def setup?
-    self.twilio_auth_id && self.subscription.present?
+  def valid_setup?
+    return false unless self.twilio_auth_id
+    return false unless self.subscription.present?
+    return false if self.subscription.current_status == 'canceled' || self.subscription.current_status == 'unpaid'
+    return true
   end
 
   def twilio_account

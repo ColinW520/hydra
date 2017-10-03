@@ -20,4 +20,6 @@
     = render 'shared/sidebar'
     #main.container{style: 'margin-bottom: 100px;'}
       .unobtrusive-flash-container
+      - unless @current_organization.valid_setup?
+        = render partial: 'setup_warning'
       = yield

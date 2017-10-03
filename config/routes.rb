@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   match '/anti-spam' => "static_pages#anti_spam", via: [:get]
   match '/changelog' => "static_pages#changelog", via: [:get]
   match '/privacy' => "static_pages#privacy", via: [:get]
+  post '/contact', to: 'static_pages#contact', as: 'contact'
 
   # Supers only
   authenticate :user, -> (user) { user.is_super_user? } do

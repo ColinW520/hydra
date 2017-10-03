@@ -14,6 +14,19 @@ class StaticPagesController < ApplicationController
   def privacy
   end
 
+  def contact
+    respond_to do |format|
+      format.js do
+        if params[:spam_check] != 'gotcha.'
+          flash[:alert] = 'We think this might be spam...'
+        else
+          ContactMailer.contact_message(params[:name], params[:email], params[:message]).deliver
+          flash[:success] = 'Your message was sent! We will get back to you shortly.'
+        end
+      end
+    end
+  end
+
   def changelog
     @subnav = 'changelog'
     client = Octokit::Client.new(username: ENV['GITHUB_USERNAME'], password: ENV['GITHUB_PASSWORD'])

@@ -14,15 +14,21 @@ namespace :summaries do
 end
 
 namespace :stripe do
-  # runs every 10 minutes
+  # runs HOURLY
   desc "Updates Plans with their respective Stripe Info"
   task :sync_plans => :environment do
     Stripe::PlanSyncWorker.perform_async
   end
 
-  # runs every 10 minutes
+  # runs HOURLY
   desc "Updates Subscriptions with their respective Stripe Info"
   task :sync_subscriptions => :environment do
     Stripe::SubscriptionSyncWorker.perform_async
+  end
+
+  # runs HOURLY
+  desc "Updates Invoice with their respective Stripe Info"
+  task :sync_invoices => :environment do
+    Stripe::InvoiceSyncWorker.perform_async
   end
 end

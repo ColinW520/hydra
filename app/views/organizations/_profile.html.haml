@@ -42,5 +42,11 @@
             .text-success
               %i.fa.fa-check-circle
               Connected!
+              - if @current_organization.lines.count < 1
+                .pull-right
+                  %a.btn.btn-sm.btn-warning{href: "https://www.twilio.com/authorize/#{ENV['TWILIO_HYDRA_SID']}?state=#{@organization.id}"}
+                    %i.fa.fa-exchange{"data-placement" => "left", "data-toggle" => "tooltip", :title => "Use this to change your Twilio account."}
+                  = link_to organization_path(@organization_path, twilio_auth_id: nil), :method => :put, :confirm => "Are you sure? This will render your account relatively useless, and could really mess with your data.")
+                    %i.fa.fa-ban{"data-placement" => "left", "data-toggle" => "tooltip", :title => "Use this to completely disconnect your Twilio account. This will render TmT unusable until a new account is connected."}
           - else
-            = link_to 'Connect Your Account', "https://www.twilio.com/authorize/CN29760c1484efcafb62cf661a40e70338?state=#{@organization.id}"
+            = link_to 'Connect Your Account', "https://www.twilio.com/authorize/#{ENV['TWILIO_HYDRA_SID']}?state=#{@organization.id}"

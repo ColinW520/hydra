@@ -1,0 +1,10 @@
+%tr{id: "invoice_#{invoice.id}"}
+  %td= local_time invoice.date, '%m/%d/%y'
+  %td= number_to_currency invoice.amount_due / 100
+  %td= invoice.customer_id
+  %td= invoice.subscription_id
+  %td
+    - if invoice.paid?
+      %i.fa.fa-check.text-success
+    - else
+      %i.fa.fa-times.text-danger

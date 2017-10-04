@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002204303) do
+ActiveRecord::Schema.define(version: 20171004044506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -218,6 +218,34 @@ ActiveRecord::Schema.define(version: 20171002204303) do
     t.integer  "datafile_file_size"
     t.datetime "datafile_updated_at"
     t.index ["organization_id"], name: "index_imports_on_organization_id", using: :btree
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.string   "stripe_id"
+    t.integer  "amount_due"
+    t.integer  "attempt_count"
+    t.boolean  "attempted"
+    t.string   "billing"
+    t.string   "charge_id"
+    t.boolean  "closed"
+    t.string   "currency"
+    t.string   "customer_id"
+    t.datetime "date"
+    t.string   "description"
+    t.string   "discount_code"
+    t.integer  "ending_balance"
+    t.boolean  "forgiven"
+    t.string   "number"
+    t.boolean  "paid"
+    t.datetime "period_end"
+    t.datetime "period_start"
+    t.string   "receipt_number"
+    t.string   "statement_descriptor"
+    t.string   "subscription_id"
+    t.integer  "subtotal"
+    t.integer  "total"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "lines", force: :cascade do |t|

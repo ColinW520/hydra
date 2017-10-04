@@ -1,0 +1,53 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stripe_id: MyString
+  amount_due: 1
+  attempt_count: 1
+  attempted: false
+  billing: MyString
+  charge_id: MyString
+  closed: false
+  currency: MyString
+  customer_id: MyString
+  date: 2017-10-03 23:45:06
+  description: MyString
+  discount_code: MyString
+  ending_balance: 1
+  forgiven: false
+  next_payment_attempt: 2017-10-03 23:45:06
+  number: MyString
+  paid: false
+  period_end: 2017-10-03 23:45:06
+  period_start: 2017-10-03 23:45:06
+  receipt_number: MyString
+  statement_descriptor: MyString
+  subscription: MyString
+  subtotal: 1
+  total: 1
+
+two:
+  stripe_id: MyString
+  amount_due: 1
+  attempt_count: 1
+  attempted: false
+  billing: MyString
+  charge_id: MyString
+  closed: false
+  currency: MyString
+  customer_id: MyString
+  date: 2017-10-03 23:45:06
+  description: MyString
+  discount_code: MyString
+  ending_balance: 1
+  forgiven: false
+  next_payment_attempt: 2017-10-03 23:45:06
+  number: MyString
+  paid: false
+  period_end: 2017-10-03 23:45:06
+  period_start: 2017-10-03 23:45:06
+  receipt_number: MyString
+  statement_descriptor: MyString
+  subscription: MyString
+  subtotal: 1
+  total: 1

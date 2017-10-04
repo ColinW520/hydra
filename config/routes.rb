@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       # Stripe resources
       resources :plans
       resources :subscriptions
+      resources :invoices
     end
   end
 

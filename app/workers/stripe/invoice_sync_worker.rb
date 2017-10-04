@@ -1,4 +1,4 @@
-class Stripe::InvoicesSyncWorker
+class Stripe::InvoiceSyncWorker
   include Sidekiq::Worker
   # this runs every 5 minutes
   def perform

@@ -2,12 +2,12 @@ class Admin::InvoicesController < Admin::BaseController
   before_action :find_invoice, except: [:index, :new, :create]
 
   def index
-    invoices_scope = Invoice.all
+    invoices_scope = Invoice.includes(:organization)
 
     smart_listing_create :invoices,
                         invoices_scope,
                         partial: "admin/invoices/listing",
-                        default_sort: { created_at: "desc" }
+                        default_sort: { date: "desc" }
   end
 
   def show

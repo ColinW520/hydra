@@ -12,6 +12,8 @@
       = render 'organizations/card_details'
     - else
       = render 'organizations/no_card_info'
+    - if @organization.invoices.present?
+      #invoices_placeholder
   .col-sm-12.col-md-4
     - if @subscription.present?
       = render 'organizations/subscription_info'

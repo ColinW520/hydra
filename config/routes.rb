@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :message_requests
   resources :contacts
   resources :imports
+  resources :invoices
   resources :organizations do
     resources :billing_methods
     resources :subscriptions

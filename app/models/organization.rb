@@ -16,6 +16,7 @@ class Organization < ApplicationRecord
   has_one :primary_billing_method, ->(organization) { where(stripe_token_id: organization.stripe_token_id) }, class_name: 'BillingMethod'
   has_one :subscription
   has_one :plan, through: :subscription
+  has_many :invoices, primary_key: :stripe_customer_id, foreign_key: :customer_id
   has_many :messages, dependent: :destroy
   has_many :message_requests, dependent: :destroy
   has_many :lines

@@ -24,8 +24,8 @@ class Stripe::InvoiceSyncWorker
         receipt_number: stripe_invoice.receipt_number,
         statement_descriptor: stripe_invoice.statement_descriptor,
         subscription_id: stripe_invoice.subscription,
-        subtotal: stripe_invoice.ending_balance.to_i,
-        total: stripe_invoice.ending_balance.to_i
+        subtotal: stripe_invoice.subtotal.to_i,
+        total: stripe_invoice.total.to_i
       )
     end
   end

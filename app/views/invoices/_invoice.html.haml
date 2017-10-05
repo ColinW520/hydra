@@ -1,0 +1,12 @@
+%tr{id: "invoice_#{invoice.id}"}
+  %td= local_time invoice.date, '%m/%d/%y'
+  %td= number_to_currency invoice.amount_due / 100
+  %td= invoice.subscription.try(:plan).try(:name)
+  %td
+    - if invoice.paid?
+      %i.fa.fa-check.text-success
+    - else
+      %i.fa.fa-times.text-danger
+  %td
+    = link_to invoice_path(invoice) do
+      %i.fa.fa-file-text-o

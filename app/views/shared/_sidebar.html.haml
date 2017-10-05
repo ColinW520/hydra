@@ -21,10 +21,16 @@
             %i.fa.fa-envelope.fa-lg
             Messages
 
-        %a{href: lines_path}
-          %li{class: @subnav == 'lines' ? 'active' : nil}
-            %img.img-fluid{src: asset_url('twilio-mark-white.svg'), style: "height: 20px; margin: 4% 2% 4% 4%"}
-            Lines
+        - if @current_organization.lines.count == 0
+          %a{href: new_line_path}
+            %li{class: @subnav == 'lines' ? 'active' : nil}
+              %img.img-fluid{src: asset_url('twilio-mark-white.svg'), style: "height: 20px; margin: 4% 2% 4% 4%"}
+              Lines
+        - else
+          %a{href: lines_path}
+            %li{class: @subnav == 'lines' ? 'active' : nil}
+              %img.img-fluid{src: asset_url('twilio-mark-white.svg'), style: "height: 20px; margin: 4% 2% 4% 4%"}
+              Lines
 
         %a{href: call_logs_path}
           %li{class: @subnav == 'call_logs' ? 'active' : nil}

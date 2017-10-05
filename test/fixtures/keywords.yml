@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  line: one
+  text: MyString
+  response: MyString
+  is_active: false
+  sent_count: 1
+
+two:
+  organization: two
+  line: two
+  text: MyString
+  response: MyString
+  is_active: false
+  sent_count: 1

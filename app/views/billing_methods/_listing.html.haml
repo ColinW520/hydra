@@ -2,7 +2,9 @@
   .table-responsive.card.card-outline-primary.table-card
     %table.table.table-hover
       %thead.thead-inverse
-        %th= smart_listing.sortable 'Name', :nickname
+        %th
+          %p.lead Billing Method
+          = smart_listing.sortable 'Name', :nickname
         %th= smart_listing.sortable 'Created', :created_at
         %th
       %tbody#billing_methods

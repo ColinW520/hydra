@@ -5,7 +5,7 @@
       %i.fa.fa-hashtag
       Lines
       .pull-right
-        - if current_user.admin_role? && @current_plan.can_add_line?
+        - if current_user.admin_role? && @current_plan.can_add_lines?
           = link_to new_line_path, class: 'btn btn-success btn-sm' do
             %i.fa.fa-plus
             Add

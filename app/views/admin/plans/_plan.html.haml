@@ -1,5 +1,10 @@
 %tr{id: "plan_#{plan.id}"}
   %td= plan.name
+  %td.text-center
+    - if plan.is_available?
+      %i.fa.fa-check.text-success
+    - else
+      %i.fa.fa-check.text-danger
   %td= plan.stripe_id
   %td= number_to_currency plan.amount_in_cents / 100
   %td.text-center

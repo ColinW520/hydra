@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004154027) do
+ActiveRecord::Schema.define(version: 20171006230439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -389,8 +389,9 @@ ActiveRecord::Schema.define(version: 20171004154027) do
     t.boolean  "can_schedule_messages"
     t.boolean  "can_upload_contacts"
     t.boolean  "can_add_lines"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "is_available",          default: false
   end
 
   create_table "questions", force: :cascade do |t|

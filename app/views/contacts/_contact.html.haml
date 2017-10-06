@@ -1,7 +1,8 @@
 %tr{id: "contact_#{contact.id}", class: contact.textable? ? '' : 'table-danger' }
   %td= check_box_tag "contact_ids[]", contact.id
   %td
-    = link_to contact.full_name, contact_path(contact)
+    = link_to contact_path(contact) do
+      = contact.full_name
   %td= contact.title
   %td= number_to_phone contact.mobile_phone.phony_formatted(normalize: :US, format: :international, spaces: ' ')
   %td= local_time contact.last_messaged_at, format: "%m/%d/%Y" rescue ''

@@ -1,0 +1,47 @@
+.table-responsive.card.card-outline-default.table-card
+  %table.table
+    %thead.thead-inverse
+    %tbody
+      %tr
+        %td
+          %strong Name
+        %td
+          = @contact.try(:first_name)
+          = @contact.try(:last_name)
+      %tr
+        %td
+          %strong Internal ID #
+        %td= @contact.try(:internal_identifier)
+      %tr
+        %td
+          %strong Tags
+        %td
+          - @contact.tags.pluck(:name).each do |tag|
+            %span.badge.badge-primary=tag
+      %tr
+        %td
+          %strong Title
+        %td=@contact.title
+      %tr
+        %td
+          %strong Phone
+        %td
+          = number_to_phone @contact.mobile_phone.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+      %tr
+        %td
+          %strong Email
+        %td= mail_to @contact.email
+      %tr
+        %td
+          %strong Added
+        %td= local_time_ago @contact.created_at
+      %tr
+        %td
+          %strong Updated
+        %td= local_time_ago @contact.updated_at
+      - if @contact.opted_out_at.present?
+        %tr.table-danger
+          %td
+            %strong Opted Out At
+          %td
+            = local_time @contact.opted_out_at

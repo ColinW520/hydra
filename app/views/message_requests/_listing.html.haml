@@ -5,8 +5,9 @@
         %table.table.table-hover
           %thead.thead-inverse
             %th ID
-            %th= smart_listing.sortable 'Body', :body
             %th= smart_listing.sortable 'Created', :created_at
+            %th= smart_listing.sortable 'Message', :body
+            %th Recipients
             %th
           %tbody#message_requests
             - smart_listing.collection.each do |message_request|

@@ -14,7 +14,7 @@ class StaticPagesController < ApplicationController
   def privacy
   end
 
-  def contact
+  def form_contact
     respond_to do |format|
       format.js do
         if params[:spam_check] != 'gotcha.'

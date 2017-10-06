@@ -4,6 +4,7 @@ class MessageRequest < ApplicationRecord
   belongs_to :organization
   belongs_to :line
   serialize :filter_query, JSON
+  has_many :messages
 
   has_attached_file :media_item,
     dependent: :destroy
@@ -11,6 +12,14 @@ class MessageRequest < ApplicationRecord
   validates_attachment :media_item, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
 
   validates :body, presence: true
+
+  def expected_recipients
+    Contact.filter_by JSON.parse self.filter_query
+  end
+
+  def actual_recipients
+    Contact.where(id: self.messages.pluck(:contact_id))
+  end
 
   after_create :queue_message
   def queue_message

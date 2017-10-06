@@ -1,0 +1,23 @@
+.table-responsive.card.card-outline-default.table-card
+  %table.table
+    %thead.thead-inverse
+    %tbody
+      %tr
+        %td
+          %strong ID
+        %td= @message_request.id
+      %tr
+        %td
+          %strong Created
+        %td= local_time_ago @message_request.created_at
+      %tr
+        %td
+          %strong Expected Recipient Count
+        %td= @message_request.recipients_count
+      - if @message_request.media_item.present?
+        %tr
+          %td
+            %strong Media
+          %td
+            %a{href: @message_request.media_item.url, target: '_blank', style: "text-decoration: none"}
+              %img.img-fluid.img-thumbnail.m-2{src: @message_request.media_item.url, style: 'max-height: 150px;'}

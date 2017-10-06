@@ -1,8 +1,13 @@
 %tr{id: "message_request_#{message_request.id}"}
-  %td= message_request.id
+  %td
+    = link_to message_request_path(message_request), class: '' do
+      = message_request.id
+  %td= local_time message_request.created_at
   %td= message_request.body
-  %td= local_time message_request.created_at, format: "%m/%d/%Y"
+  %td= number_with_delimiter message_request.recipients_count
   %td.actions
-    .btn-group
-      = link_to messages_path(JSON.parse(message_request.filter_query)), class: 'btn btn-sm btn-default' do
-        %i.fa.fa-users
+    = link_to message_request_path(message_request), class: 'btn btn-outline-info btn-sm' do
+      %i.fa.fa-eye
+    -# .btn-group
+    -#   = link_to messages_path(JSON.parse(message_request.filter_query)), class: 'btn btn-sm btn-default' do
+    -#     %i.fa.fa-users

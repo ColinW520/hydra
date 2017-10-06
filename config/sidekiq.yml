@@ -1,5 +1,5 @@
 ---
-:concurrency: 5
+:concurrency: 22
 :queues:
   - twilio
   - imports
@@ -7,6 +7,6 @@
   - mailers
 :limits:
   mailers: 1
-  twilio: 4
-  imports: 4
-  default: 1
+  twilio: 8
+  imports: 8
+  default: 4

@@ -50,7 +50,7 @@ class MessageRequestsController < ApplicationController
   end
 
   private
-    def set_message
+    def set_message_request
       @message_request = MessageRequest.find(params[:id])
     end
 

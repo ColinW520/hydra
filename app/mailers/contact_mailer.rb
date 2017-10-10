@@ -6,6 +6,6 @@ class ContactMailer < ApplicationMailer
     @email = email
     @message = message
 
-    mail to: 'colinhagan@gmail.com', from: @email, subject: "New message from contact form on TextMy.team"
+    mail to: User.super_admins.pluck(:email), from: @email, subject: "New message from contact form on TextMy.team"
   end
 end

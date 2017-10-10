@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   default_scope -> { where(deleted_at: nil) }
+
   phony_normalize :mobile_phone, default_country_code: 'US'
   validates :mobile_phone, phony_plausible: true
 
@@ -17,6 +18,7 @@ class User < ApplicationRecord
   scope :subscribed_to_instant_alerts, -> { where(notify_instantly: true) }
   scope :subscribed_to_daily_summary, -> { where(summarize_daily: true) }
   scope :subscribed_to_weekly_summary, -> { where(summarize_weekly: true) }
+  scope :super_admins, -> { where(is_super_user: true) }
 
   def safe_to_cancel?
     !self.admin_role?

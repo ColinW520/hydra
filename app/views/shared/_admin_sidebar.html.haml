@@ -23,6 +23,10 @@
           %li{class: @subnav == 'invoices' ? 'active' : ''}
             %i.fa.fa-file-text-o
             Invoices
+        %a{href: admin_questions_path}
+          %li{class: @subnav == 'questions' ? 'active' : ''}
+            %i.fa.fa-question-circle
+            FAQs
         %a{href: admin_blazer_path}
           %li.text-danger
             %i.fa.fa-database

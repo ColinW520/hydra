@@ -1,0 +1,16 @@
+- provide(:title, 'Questions')
+%br
+%br
+.row
+  .col-sm-12
+    %h3
+      Questions
+      .pull-right
+        = link_to new_admin_question_path, class: 'btn btn-success btn-sm', remote: true do
+          %i.fa.fa-plus
+          New
+.row
+  .col-sm-12
+    = smart_listing_render :questions
+
+= render "admin/questions/dialog"

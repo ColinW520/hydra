@@ -1,0 +1,18 @@
+#accordion{"aria-multiselectable" => "true", :role => "tablist"}
+  - @questions.each_with_index do |question, index|
+    - if index == 0
+      .card
+        %div.card-header.bg-success{:role => "tab", :id => "heading_#{question.id}"}
+          %h5.mb-0
+            %a.question{"aria-controls" => "collapse_#{question.id}", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse_#{question.id}"}
+              = question.text
+        %div.collapse.show{"aria-labelledby" => "heading_#{question.id}", :role => "tabpanel", id: "collapse_#{question.id}"}
+          .card-block= question.answer
+    - else
+      .card
+        %div.card-header.bg-success{:role => "tab", :id => "heading_#{question.id}"}
+          %h5.mb-0
+            %a.question.collapsed{"aria-controls" => "collapse_#{question.id}", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse_#{question.id}"}
+              = question.text
+        %div.collapse{"aria-labelledby" => "heading_#{question.id}", :role => "tabpanel", id: "collapse_#{question.id}"}
+          .card-block= question.answer

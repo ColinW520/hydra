@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   # Supers only
   authenticate :user, -> (user) { user.is_super_user? } do
     namespace :admin do
+      resources :questions do
+        get :list, on: :collection
+        post :update_row_order, on: :collection
+      end
       # engines
       mount Sidekiq::Web => '/sidekiq'
       mount Blazer::Engine, at: "blazer"

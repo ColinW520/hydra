@@ -1,0 +1,21 @@
+.row
+  .col-sm-12
+    .card.card-outline-primary.table-card
+      .table-responsive
+        %table.table.table-hover#sortable
+          %thead.thead-inverse
+            %th
+            %th= smart_listing.sortable 'Question', :text
+            %th= smart_listing.sortable 'Answer', :answer
+            %th= smart_listing.sortable 'Updated', :updated_at
+            %th
+          %tbody#questions
+            - smart_listing.collection.each do |question|
+              = render question
+        %br
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

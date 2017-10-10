@@ -1,0 +1,3 @@
+$('#question_dialog').modal('toggle');
+$('#question_<%= @question.id %>').replaceWith('<%= j render (@question) %>');
+$("#questions").smart_listing().fadeLoaded();

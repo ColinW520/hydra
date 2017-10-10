@@ -1,0 +1,10 @@
+// Render the form
+$('.modal-body').html('<%= j render "admin/questions/form" %>');
+
+// Show the dynamic dialog
+$('#question_dialog').modal("show");
+
+// Set focus to the first element
+$('#question_dialog').on('shown.bs.modal', function () {$('#InputText').focus()})
+
+$("#questions").smart_listing().fadeLoaded();

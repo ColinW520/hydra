@@ -8,7 +8,7 @@ class Stripe::PlanSyncWorker
       local_plan.name = stripe_plan.name
       local_plan.trial_period_days = stripe_plan.trial_period_days
       local_plan.statement_descriptor = stripe_plan.statement_descriptor
-      local_plan.available = stripe_plan.metadata[:is_available] == 'true' ? true : false
+      local_plan.is_available = stripe_plan.metadata[:available] == 'true' ? true : false
       local_plan.save!
     end
   end

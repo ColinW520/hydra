@@ -17,6 +17,9 @@
 //= require tether
 //= require bootstrap
 //= require jquery_ujs
+//= require jquery-ui
+//= require jquery-ui/sortable
+//= require jquery-ui/effect-highlight
 //= require ahoy
 //= require local_time
 //= require smart_listing

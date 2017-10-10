@@ -13,7 +13,7 @@
           %br
           %p.text-white What do people always have in their hand? Their phone. Let's be honest: if you want your message read in a timely manner, you send a text. We make that easy.
           %br
-          %a.btn.btn-success.btn-lg.btn-block{href: '#Features'} See How
+          %a.btn.btn-success.btn-lg.btn-block.nav-link{href: '#Features'} See How
 
 %section#Features
   .section-header
@@ -47,14 +47,12 @@
         .col-sm-6
           %img.img-fluid.rounded{src: 'https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'}
         .col-sm-6
-          %h2 Configure Line(s)
-          %p TextMy.team makes it easy to reserve a local phone number and configure auto-responses, call-forwarding, call-tracking, greeting prompts, and more.
-          %p No more need for developer intervention or special scripts. Whether you want conversational texting, one-way blast messaging, or even advertising performance evaluation.
+          %h2 Configure Your Lines
+          %p Textmy.team makes it easy to reserve local, dedicated phones number for your organization to send and receive messages. You can configure auto-responses, call-forwarding, call-tracking, greeting prompts and much more for each line.
       .row.mt-5.pt-5.mb-5.pb-5
         .col-sm-6
-          %h2 Manage Contacts
-          %p One single list to manage. Contacts are easily filtered using tags, sorted by any attribute, and kept up to date with quickforms.
-          %p The contact directory is your launching point for messages. Once you've selected your contacts, you simply either message everyone who matches the filter (message all), or just the contacts you selected (message selected). It's that easy.
+          %h2 Upload your Contacts
+          %p One single list to manage. Quickly upload your contacts, easily filter using tags, and sort by any attribute. Keep your contacts up to date with quickforms.
         .col-sm-6
           %img.img-fluid.rounded{src: asset_url('srubbed-contacts.jpg')}
       .row.mt-5.pt-5.mb-5.pb-5
@@ -62,15 +60,14 @@
           %img.img-fluid.rounded{src: 'http://g.recordit.co/1bGCLppnS1.gif'}
         .col-sm-6
           %h2 Send Messages
-          %p TextMy.team makes it easy to reserve a local phone number and configure auto-responses, call-forwarding, call-tracking, greeting prompts, and more.
-          %p No more need for developer intervention or special scripts. Whether you want conversational texting, one-way blast messaging, or even advertising performance evaluation.
+          %p Send text messages to any of your contacts from your dedicated lines. The message interface makes it easy to input your message and includes character count and a message cost calculator!  Perfect for one-way blast messages or advertising.
+          %p It's not just a one-way conversation either! Your phone lines can also receive text messages and support call forwarding to enhance team and customer communication.
       .row.mt-5.pt-5.mb-5.pb-5
         .col-sm-6
           %h2 Follow the Action
-          %p
-            With the TmT action feed, it's easy to stay on top of what is going on, without having to
-            %em manage
-            it.
+          %p All message activity is smartly displayed on your dashboard. Quickly view sent and received text messages as well as voice call activity.
+          %p You can also configure email notifications of incoming messages so no one on your team goes unheard.
+
         .col-sm-6
           %img.img-fluid.rounded{src: asset_url('https://static.pexels.com/photos/541522/pexels-photo-541522.jpeg')}
 
@@ -91,6 +88,19 @@
     .container
       = render partial: 'pricing'
 
-
+%section#Questions
+  %hr
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-8.col-lg-6.col-centered
+            .text-center
+              %h1 FAQs
+              %p You got questions, we got answers.
+    .section-content
+      #questions_placeholder
+        %p.lead.text-center
+          %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
 
 = render partial: 'static_pages/section_contact'

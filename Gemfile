@@ -13,6 +13,7 @@ gem 'sendgrid-ruby'
 gem 'ahoy_matey'
 gem 'ahoy_email'
 gem 'blazer'
+gem 'ranked-model'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -30,6 +31,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
+gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'jbuilder', '~> 2.5'
 gem 'chartkick'
 gem 'smart_listing', github: 'ColinW520/smart_listing'

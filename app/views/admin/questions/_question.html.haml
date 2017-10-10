@@ -1,0 +1,14 @@
+%tr.item{id: "question_#{question.id}", "data-item-id"=> "#{question.id}", "data-item-path"=>"admin/questions"}
+  %td
+    %i.fa.fa-arrows-v
+  %td= question.text
+  %td= question.answer
+  %td= local_time question.updated_at, format: "%m/%d/%Y"
+  %td.actions
+    .btn-group.pull-right
+      = link_to edit_admin_question_path(question), remote: true, class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-edit
+        Edit
+      = link_to admin_question_path(question), remote: true, method: :delete, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash
+        Destroy

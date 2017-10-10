@@ -12,6 +12,7 @@ class MessageRequestsController < ApplicationController
   end
 
   def show
+    @contact_ids = @message_request.expected_recipients.pluck(:id)
   end
 
   def new

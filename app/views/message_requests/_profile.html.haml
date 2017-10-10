@@ -12,8 +12,14 @@
         %td= local_time_ago @message_request.created_at
       %tr
         %td
-          %strong Expected Recipient Count
-        %td= @message_request.recipients_count
+          %strong Recipients
+        %td
+          = link_to contacts_path(id: @contact_ids) do
+            = @message_request.recipients_count
+      %tr
+        %td
+          %strong Message
+        %td= @message_request.body
       - if @message_request.media_item.present?
         %tr
           %td

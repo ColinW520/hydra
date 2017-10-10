@@ -27,7 +27,7 @@ Rails.application.configure do
 
   # MAILER
   config.action_mailer.default_url_options = { host: 'hydra.dev' }
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_deliveries = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
 

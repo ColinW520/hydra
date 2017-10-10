@@ -13,7 +13,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body{id: "#{controller_name}_#{action_name}", class: "tmt-body-static #{controller_name}"}
+    .unobtrusive-flash-container
     = render 'shared/header'
-    .unobtrusive-flash-container{style: 'position: absolute; top: 150px; z-index: 1000000'}
     = yield
     = render 'shared/footer'

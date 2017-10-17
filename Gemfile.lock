@@ -110,9 +110,8 @@ GEM
       chartkick
       rails
       safely_block (>= 0.1.1)
-    bootstrap (4.0.0.beta)
+    bootstrap (4.0.0.alpha6)
       autoprefixer-rails (>= 6.0.3)
-      popper_js (~> 1.11.1)
       sass (>= 3.4.19)
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
@@ -259,7 +258,6 @@ GEM
     phony_rails (0.14.6)
       activesupport (>= 3.0)
       phony (> 2.15)
-    popper_js (1.11.1)
     public_suffix (2.0.5)
     puma (3.8.2)
     rack (2.0.1)
@@ -408,7 +406,7 @@ DEPENDENCIES
   ahoy_matey
   aws-sdk
   blazer
-  bootstrap (~> 4.0.0.beta)
+  bootstrap (= 4.0.0.alpha6)
   bootstrap3-datetimepicker-rails (~> 4.17.42)
   byebug
   chartkick

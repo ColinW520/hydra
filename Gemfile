@@ -21,7 +21,7 @@ git_source(:github) do |repo_name|
 end
 
 # Font End Stuff
-gem 'bootstrap', '~> 4.0.0.beta'
+gem 'bootstrap', '4.0.0.alpha6'
 gem 'tether-rails'
 gem 'font-awesome-rails', github: 'bokmann/font-awesome-rails'
 gem 'turbolinks', '~> 5'

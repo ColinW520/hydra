@@ -17,7 +17,7 @@ class InvoicesController < ApplicationController
   private
 
   def find_invoice
-    @invoice = Invoice.find params[:id]
+    @invoice = Invoice.friendly.find params[:id]
   end
 
   def invoice_params

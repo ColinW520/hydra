@@ -14,7 +14,7 @@ class Stripe::InvoiceSyncWorker
         customer_id: stripe_invoice.customer,
         date: Time.at(stripe_invoice.date),
         description: stripe_invoice.description,
-        discount_code: stripe_invoice.discount,
+        discount_code: stripe_invoice.discount.coupon.code,
         ending_balance: stripe_invoice.ending_balance.to_i,
         forgiven: stripe_invoice.forgiven,
         number: stripe_invoice.number,

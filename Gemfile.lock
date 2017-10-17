@@ -95,7 +95,7 @@ GEM
       user_agent_parser
       uuidtools
     arel (7.1.4)
-    autoprefixer-rails (6.7.7.1)
+    autoprefixer-rails (7.1.5)
       execjs
     aws-sdk (2.9.9)
       aws-sdk-resources (= 2.9.9)
@@ -110,8 +110,9 @@ GEM
       chartkick
       rails
       safely_block (>= 0.1.1)
-    bootstrap (4.0.0.alpha6)
+    bootstrap (4.0.0.beta)
       autoprefixer-rails (>= 6.0.3)
+      popper_js (~> 1.11.1)
       sass (>= 3.4.19)
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
@@ -258,6 +259,7 @@ GEM
     phony_rails (0.14.6)
       activesupport (>= 3.0)
       phony (> 2.15)
+    popper_js (1.11.1)
     public_suffix (2.0.5)
     puma (3.8.2)
     rack (2.0.1)
@@ -406,7 +408,7 @@ DEPENDENCIES
   ahoy_matey
   aws-sdk
   blazer
-  bootstrap (~> 4.0.0.alpha6)
+  bootstrap (~> 4.0.0.beta)
   bootstrap3-datetimepicker-rails (~> 4.17.42)
   byebug
   chartkick

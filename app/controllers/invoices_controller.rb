@@ -3,12 +3,11 @@ class InvoicesController < ApplicationController
 
   def index
     invoices_scope = @current_organization.invoices
-
     smart_listing_create :invoices,
                         invoices_scope,
                         partial: "/invoices/listing",
                         default_sort: { date: "desc" },
-                        page_sizes: [50, 100, 150, 200]
+                        page_sizes: [12, 24, 36, 48]
   end
 
   def show

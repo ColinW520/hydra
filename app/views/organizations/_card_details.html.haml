@@ -26,11 +26,14 @@
             -else
               %i.fa.fa-cc-alt.fa-2x
         %tr
-          %td Type
+          %td
+            %strong Type
           %td= @card.funding.titleize
         %tr
-          %td Last4
+          %td
+            %strong Last4
           %td=@card.last4
         %tr
-          %td Expiration
+          %td
+            %strong Expiration
           %td=@card.exp_month.to_s + ' / ' + @card.exp_year.to_s

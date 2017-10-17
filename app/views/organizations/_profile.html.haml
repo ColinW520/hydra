@@ -16,7 +16,7 @@
         %td=@organization.name
       %tr
         %td
-          %strong Primary Billing Contact
+          %strong Email
         %td=@organization.email_domain
       %tr
         %td
@@ -24,20 +24,8 @@
         %td= number_to_phone @organization.phone.phony_formatted(normalize: :US, format: :international, spaces: ' ')
       %tr
         %td
-          %strong City
-        %td=@organization.city
-      %tr
-        %td
-          %strong State
-        %td=@organization.state
-      %tr
-        %td
-          %strong Zip
-        %td=@organization.zip
-      %tr
-        %td
           %strong
-            Twilio Account
+            Twilio
         %td
           - if @organization.twilio_auth_id.present?
             .text-success

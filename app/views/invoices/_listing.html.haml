@@ -1,14 +1,13 @@
 .row
   .col-sm-12
-    .card.card-default
-      .table-responsive
-        %table.table.table-hover
-          %thead.thead-inverse
-            %tr
-              %th Created
-              %th Amount
-              %th Paid?
-              %th
-          %tbody#invoices
-            - smart_listing.collection.each do |subscription|
-              = render subscription
+    .table-responsive.card.card-outline-default.table-card
+      %table.table
+        %thead.thead-inverse
+          %tr
+            %th Created
+            %th Amount
+            %th Paid?
+            %th
+        %tbody#invoices
+          - smart_listing.collection.each do |subscription|
+            = render subscription

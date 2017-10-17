@@ -1,28 +1,28 @@
 - provide(:title, "Settings")
 .row
-  .col-sm-12
-    %h4
-      %i.fa.fa-gears
-      Settings
-.row
   .col-sm-12.col-md-4
     = render 'organizations/profile'
-  .col-sm-12.col-md-4
-    - if @card.present?
-      = render 'organizations/card_details'
-    - else
-      = render 'organizations/no_card_info'
-    - if @organization.invoices.present?
-      #invoices_placeholder
-  .col-sm-12.col-md-4
-    - if @subscription.present?
-      = render 'organizations/subscription_info'
-    - elsif @card.present?
-      = render 'organizations/no_subscription'
-    - else
-      %div.alert.alert-warning
-        %h4 First, add a billing method!
-        %p Before you subscribe, we need an active billing method on file.
+  .col-sm-12.col-md-8
+    .row
+      .col-sm-12.col-md-6
+        - if @card.present?
+          = render 'organizations/card_details'
+        - else
+          = render 'organizations/no_card_info'
+
+      .col-sm-12.col-md-6
+        - if @subscription.present?
+          = render 'organizations/subscription_info'
+        - elsif @card.present?
+          = render 'organizations/no_subscription'
+        - else
+          %div.alert.alert-warning
+            %h4 First, add a billing method!
+            %p Before you subscribe, we need an active billing method on file.
+    .row{style: 'margin-top: 10px;'}
+      .col-sm-12
+        - if @organization.invoices.present?
+          #invoices_placeholder
 
 = render 'organizations/dialog'
 = render 'billing_methods/dialog'

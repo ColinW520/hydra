@@ -1,17 +1,18 @@
 .table-responsive.card.card-outline-default.table-card
   %table.table
     %thead.thead-inverse
-      %tr
-        %th
-          %p.lead Card
-          Brand
-        %th Type
-        %th Last4
-        %th EXP
-        %th
+      %th
+        %h6.text-white Payment Method
+      %th
+        - if current_user.admin_role?
+          = link_to new_organization_billing_method_path(@organization), remote: true, class: 'pull-right btn btn-warning btn-sm' do
+            %i.fa.fa-exchange
+            Change
 
     %tbody
       %tr
+        %td
+          %strong Brand
         %td
           -case @card.brand
             -when 'Visa'
@@ -24,10 +25,12 @@
               %i.fa.fa-cc-discover.fa-2x
             -else
               %i.fa.fa-cc-alt.fa-2x
-        %td= @card.funding.titleize
-        %td=@card.last4
-        %td=@card.exp_month.to_s + ' / ' + @card.exp_year.to_s
-        %td
-          - if current_user.admin_role
-            = link_to new_organization_billing_method_path(@organization), remote: true, class: 'pull-right btn btn-warning btn-sm' do
-              %i.fa.fa-exchange
+        %tr
+          %td Type
+          %td= @card.funding.titleize
+        %tr
+          %td Last4
+          %td=@card.last4
+        %tr
+          %td Expiration
+          %td=@card.exp_month.to_s + ' / ' + @card.exp_year.to_s

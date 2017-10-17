@@ -1,4 +1,4 @@
-#sidebar
+#sidebar.hidden-print
   .nav-side-menu
     .brand{style: "font-size: 25px; padding: 5px;"}
       %a{href: current_user.is_super_user? ? admin_dashboard_path : feed_items_path}
@@ -16,28 +16,44 @@
             %i.fa.fa-address-book-o.fa-lg
             Directory
 
-        %li.collapsed{"data-target" => "#messages", "data-toggle" => "collapse", "class" => ['message', 'message_requests'].include?(@subnav) ? 'active' : nil}
-          %a{href: "#"}
-            %i.fa.fa-envelope.fa-lg
-            Messages
-            %span.arrow
-        %ul#messages.sub-menu.collapse
-          %li
-            %a{href: contacts_path(flash_instructions: true)}
-              %i.fa.fa-pencil
-              Compose
-          %li{class: @subnav == 'message_requests' ? 'active' : nil}
-            %a{href: message_requests_path}
-              %i.fa.fa-paper-plane-o
-              Sent
-          %li{class: @subnav == 'messages' ? 'active' : nil}
-            %a{href: messages_path(direction: 'inbound')}
-              %i.fa.fa-reply
-              Received
-          -# %li
-          -#   %a{href: "#"}
-          -#     %i.fa.fa-clock-o
-          -#     Scheduled
+        - if ['messages', 'message_requests'].include?(@subnav)
+          %li{"data-target" => "#messages", "data-toggle" => "collapse", "aria-expanded" => "true"}
+            %a{href: "#"}
+              %i.fa.fa-envelope.fa-lg
+              Messages
+              %span.arrow
+          %ul#messages.sub-menu
+            %li
+              %a{href: contacts_path(flash_instructions: true)}
+                %i.fa.fa-pencil
+                Compose
+            %li{class: @subnav == 'message_requests' ? 'active' : nil}
+              %a{href: message_requests_path}
+                %i.fa.fa-paper-plane-o
+                Sent
+            %li{class: @subnav == 'messages' ? 'active' : nil}
+              %a{href: messages_path(direction: 'inbound')}
+                %i.fa.fa-reply
+                Received
+        - else
+          %li.collapsed{"data-target" => "#messages", "data-toggle" => "collapse", "aria-expanded" => "false"}
+            %a{href: "#"}
+              %i.fa.fa-envelope.fa-lg
+              Messages
+              %span.arrow
+          %ul#messages.sub-menu.collapse
+            %li
+              %a{href: contacts_path(flash_instructions: true)}
+                %i.fa.fa-pencil
+                Compose
+            %li{class: @subnav == 'message_requests' ? 'active' : nil}
+              %a{href: message_requests_path}
+                %i.fa.fa-paper-plane-o
+                Sent
+            %li{class: @subnav == 'messages' ? 'active' : nil}
+              %a{href: messages_path(direction: 'inbound')}
+                %i.fa.fa-reply
+                Received
 
         - if @current_organization.lines.count == 0
           %a{href: new_line_path}

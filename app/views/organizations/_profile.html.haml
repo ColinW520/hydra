@@ -1,11 +1,12 @@
 .table-responsive.card.table-card
   %table.table
     %thead.thead-inverse
-      %th
+      %th{colspan: 2}
         %h6.text-white Profile
       %th
-        = link_to edit_organization_path, remote: true, class: 'pull-right btn btn-sm btn-secondary' do
-          .text-warning
+        .pull-right
+        - if current_user.admin_role?
+          = link_to edit_organization_path, remote: true, class: 'btn btn-sm btn-warning' do
             %i.fa.fa-edit
             Edit
     %tbody

@@ -4,27 +4,24 @@
       %th
         %h6.text-white Subscription
       %th
-        .pull-right
-          - if @subscription && @subscription.canceled_at.nil?
-            = link_to organization_subscription_path(@organization, @subscription.id), method: :delete, class: 'btn btn-danger btn-sm' do
-              %i.fa.fa-ban
-              Cancel
-          - elsif @subscription.nil? && @card.present?
-            = link_to new_organization_subscription_path(@organization), remote: true, class: 'btn btn-warning btn-sm' do
-              %i.fa.fa-plus
+        - if current_user.admin_role?
+          .pull-right
+            - if @subscription && @subscription.canceled_at.nil?
+              = link_to organization_subscription_path(@organization, @subscription.id), method: :delete, class: 'btn btn-danger btn-sm' do
+                %i.fa.fa-ban
+                Cancel
+            - elsif @subscription.nil? && @card.present?
+              = link_to new_organization_subscription_path(@organization), remote: true, class: 'btn btn-warning btn-sm' do
+                %i.fa.fa-plus
     %tbody
       %tr
         %td
           %strong Status
         %td
           - if @subscription.status == 'active' && @subscription.canceled_at.nil?
-            .text-success
-              = @subscription.status.titleize
+            %span.badge.badge-success{style: 'font-size: 16px;'}= @subscription.status.upcase
           - else
-            %strong.text-danger
-              = @subscription.status.titleize
-              - if @subscription.canceled_at.present?
-                for now
+            %span.badge.badge-danger= @subscription.status.upcase
       %tr
         %td
           %strong Started
@@ -35,11 +32,12 @@
           %strong Renews
         %td
           = local_time Time.at(@subscription.current_period_end)
-      %tr
-        %td
-          %strong Canceled
-        %td
-          = local_time Time.at(@subscription.canceled_at) if @subscription.canceled_at.present?
+      - if @subscription.canceled_at.present?
+        %tr
+          %td
+            %strong Canceled
+          %td
+            = local_time Time.at(@subscription.canceled_at) if @subscription.canceled_at.present?
       %tr
         %td
           %strong Ends

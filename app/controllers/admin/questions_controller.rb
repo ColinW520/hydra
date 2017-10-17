@@ -12,10 +12,6 @@ class Admin::QuestionsController < Admin::BaseController
     end
   end
 
-  def list
-    @questions = Question.rank(:display_order).all
-  end
-
   def new
     @question = Question.new
   end

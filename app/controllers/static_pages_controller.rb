@@ -3,6 +3,7 @@ class StaticPagesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def home
+    @questions = Question.rank(:display_order).all
   end
 
   def terms

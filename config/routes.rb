@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   authenticate :user, -> (user) { user.is_super_user? } do
     namespace :admin do
       resources :questions do
-        get :list, on: :collection
         post :update_row_order, on: :collection
       end
       # engines

@@ -24,4 +24,8 @@ class Subscription < ApplicationRecord
     sub = Stripe::Subscription.retrieve(self.stripe_id)
     sub.delete(at_period_end: true)
   end
+
+  def stripe_instance
+    Stripe::Subscription.retrieve self.stripe_id
+  end
 end

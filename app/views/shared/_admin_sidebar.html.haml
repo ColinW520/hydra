@@ -1,4 +1,4 @@
-#sidebar
+#sidebar.hidden-print
   .nav-side-menu
     .brand{style: "font-size: 25px; padding: 5px;"}
       %a{href: admin_dashboard_path}
@@ -9,8 +9,8 @@
       %ul#menu-content.menu-content.collapse.out
         %a{href: admin_dashboard_path}
           %li{class: @subnav == 'dashboard' ? 'active' : ''}
-            %i.fa.fa-user-plus
-            + Super
+            %i.fa.fa-dashboard
+            Dashboard
         %a{href: admin_plans_path}
           %li{class: @subnav == 'plans' ? 'active' : ''}
             %i.fa.fa-shopping-cart
@@ -28,14 +28,18 @@
             %i.fa.fa-question-circle
             FAQs
         %a{href: admin_blazer_path}
-          %li.text-danger
+          %li.text-warning
             %i.fa.fa-database
             DataBlazer
         %a{href: admin_sidekiq_web_path}
-          %li.text-danger
+          %li.text-warning
             %i.fa.fa-pied-piper-alt
             %strong Sidekiq
         %a{href: feed_items_path}
           %li.text-primary
-            %i.fa.fa-tachometer
+            %i.fa.fa-arrow-left
             Normal Dashboard
+        %a{href: root_path}
+          %li.text-primary
+            %i.fa.fa-home
+            Home

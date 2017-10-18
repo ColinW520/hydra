@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017213119) do
+ActiveRecord::Schema.define(version: 20171018183849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -376,6 +376,8 @@ ActiveRecord::Schema.define(version: 20171017213119) do
     t.string   "stripe_customer_id"
     t.string   "twilio_auth_id"
     t.string   "preferred_area_code"
+    t.integer  "canceled_by"
+    t.datetime "canceled_at"
     t.index ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
   end
 
@@ -428,6 +430,7 @@ ActiveRecord::Schema.define(version: 20171017213119) do
     t.boolean  "terms_agreed",       default: false
     t.string   "signer_name"
     t.string   "current_status"
+    t.integer  "value_in_cents",     default: 0
     t.index ["organization_id"], name: "index_subscriptions_on_organization_id", using: :btree
   end
 

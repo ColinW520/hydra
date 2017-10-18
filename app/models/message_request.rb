@@ -13,6 +13,8 @@ class MessageRequest < ApplicationRecord
 
   validates :body, presence: true
 
+  scope :sent, -> { where.not(processed_at: nil) }
+
   def expected_recipients
     Contact.filter_by JSON.parse self.filter_query
   end

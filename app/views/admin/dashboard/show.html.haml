@@ -1,1 +1,76 @@
-%h1 Welcome!
+- provide(:title, "Super")
+.row
+  .col-12
+    %h4
+      %i.fa.fa-tachometer
+      - if current_user.first_name.present?
+        = "Welcome, #{current_user.try(:first_name)}!"
+      - else
+        Super Dash
+    %p= "As of now we serve #{Organization.active.count} organizations and #{User.count} users."
+
+%section
+  .row
+    .col-sm-12.col-md-3
+      .card.card-success
+        .card-header
+          %p.lead.card-title.text-center.text-white Run Rate
+        .card-block.text-center.text-white
+          %h1.text-white= number_to_currency Subscription.active.sum(:value_in_cents) / 100, precision: 0
+        .card-footer.text-center.text-white
+          %small
+            Last subscriber joined
+            = local_time_ago Subscription.active.order(created_at: :desc).first.created_at
+    .col-sm-12.col-md-3
+      .card.card-danger
+        .card-header
+          %p.lead.card-title.text-center.text-white Delinquencies
+        .card-block.text-center.text-white
+          %h1.text-white= Subscription.where(current_status: 'unpaid').count
+        .card-footer.text-center.text-white
+          %small
+            Last updated
+            = local_time_ago Subscription.order(updated_at: :desc).first.try(:updated_at) rescue ''
+    .col-sm-12.col-md-6
+      .card.card-primary
+        .card-header
+          %p.lead.card-title.text-center.text-white
+            %i.fa.fa-clock-o
+            Recent Activity
+        .card-block
+          .row
+            .col-sm-12.col-md-4
+              %h1.text-white.text-center
+                %i.fa.fa-paper-plane-o
+                = MessageRequest.sent.where(processed_at: 1.month.ago..Time.now).count
+            .col-sm-12.col-md-4
+              %h1.text-white.text-center
+                %i.fa.fa-reply
+                = Message.inbound.where(created_at: 1.month.ago..Time.now).count
+            .col-sm-12.col-md-4
+              %h1.text-white.text-center
+                %i.fa.fa-phone
+                = CallLog.where(created_at: 1.month.ago..Time.now).count
+        .card-footer.text-center.text-white
+          %small
+            Last message was processed
+            = local_time_ago Message.order(created_at: :desc).first.try(:created_at) rescue ''
+
+  .row
+    .col-sm-12.col-md-6
+      .card
+        .card-header
+          %h4.card-tile Subscription Activity
+        .card-block
+          = line_chart Subscription.group_by_day(:created_at, range: 1.month.ago..Time.now).count
+    .col-sm-12.col-md-6
+      .card
+        .card-header
+          %h4.card-tile Activity Volume
+        .card-block
+          = line_chart Message.select('distinct body').group_by_day(:created_at, range: 1.month.ago..Time.now).count
+
+:css
+  .card { margin-bottom: 5% }
+  .card-header { border: 0px }
+  .card-footer { border: 0px }

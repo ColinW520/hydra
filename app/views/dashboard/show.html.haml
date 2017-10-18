@@ -1,9 +1,16 @@
 - provide(:title, "Dashboard")
 .row
-  .col-sm-12
+  .col-12
     %h4
       %i.fa.fa-tachometer
       - if current_user.first_name.present?
         = "Welcome, #{current_user.try(:first_name)}!"
       - else
-        Welcome!
+        Super Dashboard
+    %p.lead 
+
+
+%section
+  .row
+    .col-3
+      .card.card-success

@@ -19,6 +19,7 @@ class User < ApplicationRecord
   scope :subscribed_to_daily_summary, -> { where(summarize_daily: true) }
   scope :subscribed_to_weekly_summary, -> { where(summarize_weekly: true) }
   scope :super_admins, -> { where(is_super_user: true) }
+  scope :active, -> { where(deleted_at: nil) }
 
   def safe_to_cancel?
     !self.admin_role?

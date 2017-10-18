@@ -1,4 +1,6 @@
 class Organization < ApplicationRecord
+  scope :active, -> { where(canceled_at: nil) }
+
   acts_as_tagger
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -75,8 +77,6 @@ class Organization < ApplicationRecord
     customer = Stripe::Customer.create customer_details
     self.stripe_customer_id = customer.id
   end
-
-  # helpers
 
   def soft_delete!(user_id)
     update_attributes(removed_at: Time.current, removed_by: user_id)

@@ -62,13 +62,13 @@
         .card-header
           %h4.card-tile Subscription Activity
         .card-block
-          = line_chart Subscription.group_by_day(:created_at, range: 1.month.ago..Time.now).count
+          = line_chart Subscription.group_by_day(:created_at, range: 1.month.ago..Time.now).count, library: { pointSize: 0 }
     .col-sm-12.col-md-6
       .card
         .card-header
           %h4.card-tile Activity Volume
         .card-block
-          = line_chart @activity_hash
+          = line_chart @activity_hash, library: { pointSize: 0 }
 
   .row
     .col-sm-12
@@ -76,7 +76,7 @@
         .card-header
           %h4.card-title Page Views
         .card-block
-          = line_chart Ahoy::Event.group_by_day(:time).count
+          = line_chart Ahoy::Event.group_by_day(:time).count, library: { pointSize: 0, lineTension: 0 }
 
 
 :css

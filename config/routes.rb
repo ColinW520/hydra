@@ -1,4 +1,5 @@
 require 'sidekiq/web'
+Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
 
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
   post '/form_contact', to: 'static_pages#form_contact', as: 'form_contact'
 
   # Supers only
-  authenticate :user, -> (user) { user.is_super_user? } do
+  authenticate :user, lambda { |u| u.is_super_user? } do
     namespace :admin do
       resources :questions do
         post :update_row_order, on: :collection

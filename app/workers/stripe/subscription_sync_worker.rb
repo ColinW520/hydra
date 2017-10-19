@@ -15,7 +15,6 @@ class Stripe::SubscriptionSyncWorker
         local_subscription.value_in_cents = plan_value - coupon.amount_off if coupon.amount_off.present?
         local_subscription.value_in_cents = plan_value - (( coupon.percent_off / 100 ) * plan_value) if coupon.percent_off.present?
       else
-        puts "no coupon  \n\n"
         local_subscription.value_in_cents = plan_value
       end
       # end value calc

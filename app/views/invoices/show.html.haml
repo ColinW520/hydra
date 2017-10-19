@@ -54,7 +54,10 @@
                       %td{colspan: 3}
                         Discount Code:
                         = @invoice.discount_code
-                      %td= number_to_percentage @stripe_invoice.discount.try(:coupon).try(:percent_off)
+                      - if @stripe_invoice.discount.try(:coupon).try(:percent_off).present?
+                        %td= number_to_percentage @stripe_invoice.discount.try(:coupon).try(:percent_off)
+                      - else
+                        %td= number_to_currency @stripe_invoice.discount.try(:coupon).try(:amount_off)
                   %tr.table-info
                     %td{colspan: 3}
                       %strong Total

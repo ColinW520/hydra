@@ -7,6 +7,7 @@
             %th= smart_listing.sortable "First", :first_name
             %th= smart_listing.sortable "Last", :last_name
             %th= smart_listing.sortable "Email", :email
+            %th= smart_listing.sortable "Last Seen", :current_sign_in_at
             %th
           %tbody#users
             - smart_listing.collection.each do |user|

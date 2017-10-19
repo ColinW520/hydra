@@ -1,31 +1,43 @@
 .row
   .col-sm-12
-    %p.lead
-      Use this form to upload your pre-existing contact list.
+    %p Use this form to upload your pre-existing contact list. CSV uploads can be tricky, so, be sure and read these instructions closely to ensure a smooth experience.
     %p
-      %strong.text-danger First Row Headers
+      %strong.text-danger
+        First Row Headers
+      %small (these can be in any order)
+.row
+  .col-sm-12.col-md-6
     %ul
       %li first_name
+      %ul
+        %li Example: John
       %li last_name
-      %li phone*
-      %li tags**
-    .help-block.text-info
-      %strong **
-      Please separate multiple tags with the `|` symbol, which can be found above your enter key and below your backspace key. Example: (Is Cool|San Antonio Region|High Performer)
-      Whatever is in this column, even if completely blank, will BE the tags for this contact going forward. Any existing tags not present here will be removed. Tags are case insensitive.
-    .help-block.text-info
-      %strong *
-      We will use this to identify your team members. You may format however you wish, as long as it is a MOBILE number and ALL non-numeric charachters will be removed.
-      %strong.text-danger NO EXTENSIONS! (example: (316) 258-8774 x103)
-    %p.lead You can also use these headers:
+      %ul
+        %li Example: Smith
+      %li phone
+      %ul
+        %li This is the lookup value. If we find an existing contact with this phone number, we will update that contact with the information you specify.
+        %li Please make sure it is a Mobile number
+        %li Example: 3162588774
+      %li tags
+      %ul
+        %li.text-danger
+          %strong Please separate multiple tags with the `|` symbol, it can be found above your enter key and below your backspace/delete key.
+        %li Example: Is Cool|San Antonio Region|High Performer
+        %li If this column is blank, any existing tags on this contact's record will be removed.
+        %li.text-info Tags are not case sensitive.
+  .col-sm-6
     %ul
-      %li internal_identifier (any ID you may have for your contacts)
+      %li internal_identifier
+      %ul
+        %li This can be anything you want. Maybe something you use elsewhere?
       %li email
-      %li title
-      %li city
-      %li started_at: Please format as MM/DD/YYYY
+      %ul
+        %li We don't do anything with emails, but it could save you a lookup to have it here.
 .row
   .col-sm-12
+    %p
+      %strong Here is an example of a file that works for uploads:
     = link_to "https://www.dropbox.com/s/2ty3g17nzagt6x6/contacts-example-file.csv?dl=0", target: '_blank', class: 'btn btn-sm btn-outline-info' do
       %i.fa.fa-download
       Sample File

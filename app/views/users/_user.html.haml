@@ -2,6 +2,7 @@
   %td= user.first_name
   %td= user.last_name
   %td= user.email
+  %td= local_time_ago user.last_sign_in_at rescue ''
   %td.actions
     .pull-right
       .btn-group

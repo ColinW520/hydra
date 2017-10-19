@@ -14,7 +14,7 @@ class Stripe::InvoiceSyncWorker
       invoice.customer_id = stripe_invoice.customer
       invoice.date = Time.at(stripe_invoice.date)
       invoice.description = stripe_invoice.description
-      invoice.discount_code = stripe_invoice.try( =discount).try( =coupon).try( =id)
+      invoice.discount_code = stripe_invoice.try(:discount).try(:coupon).try(:id)
       invoice.ending_balance = stripe_invoice.ending_balance.to_i
       invoice.forgiven = stripe_invoice.forgiven
       invoice.number = stripe_invoice.number

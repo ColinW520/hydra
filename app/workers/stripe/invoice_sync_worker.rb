@@ -28,5 +28,7 @@ class Stripe::InvoiceSyncWorker
         total: stripe_invoice.total.to_i
       )
     end
+
+    puts "Synchronized the #{Stripe::Invoice.list.count} latest stripe invoices. \n\n"
   end
 end

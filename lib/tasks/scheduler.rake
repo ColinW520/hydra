@@ -14,6 +14,14 @@ namespace :summaries do
 end
 
 namespace :stripe do
+  # runs ON DEMAND
+  desc "Updates all the stripe things."
+  task :sync_all => :environment do
+    Stripe::PlanSyncWorker.perform_async
+    Stripe::SubscriptionSyncWorker.perform_async
+    Stripe::InvoiceSyncWorker.perform_async
+  end
+
   # runs HOURLY
   desc "Updates Plans with their respective Stripe Info"
   task :sync_plans => :environment do

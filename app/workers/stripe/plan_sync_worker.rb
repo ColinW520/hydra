@@ -11,5 +11,7 @@ class Stripe::PlanSyncWorker
       local_plan.is_available = stripe_plan.metadata[:available] == 'true' ? true : false
       local_plan.save!
     end
+
+    puts "Synchronized #{Plan.count} plans. \n\n"
   end
 end

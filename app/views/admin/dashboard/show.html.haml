@@ -68,7 +68,16 @@
         .card-header
           %h4.card-tile Activity Volume
         .card-block
-          = line_chart Message.select('distinct body').group_by_day(:created_at, range: 1.month.ago..Time.now).count
+          = line_chart @activity_hash
+
+  .row
+    .col-sm-12
+      .card
+        .card-header
+          %h4.card-title Page Views
+        .card-block
+          = line_chart Ahoy::Event.group_by_day(:time).count
+
 
 :css
   .card { margin-bottom: 5% }

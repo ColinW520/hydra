@@ -1,11 +1,10 @@
-- provide(:title, 'Import Contacts')
-.row
-  .col-sm-12
-    %h4
-      %i.fa.fa-file
-      Import
+- provide(:title, 'Import')
 .row
   .col-sm-12.col-md-8.col-centered
     .card
+      .card-header
+        %h4.card-title
+          %i.fa.fa-file
+          Create a new Import
       .card-block
         = render 'form'

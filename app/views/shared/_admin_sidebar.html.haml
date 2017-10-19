@@ -27,11 +27,11 @@
           %li{class: @subnav == 'questions' ? 'active' : ''}
             %i.fa.fa-question-circle
             FAQs
-        %a{href: admin_blazer_path}
+        %a{href: admin_blazer_path, target: '_blank'}
           %li.text-warning
             %i.fa.fa-database
             DataBlazer
-        %a{href: admin_sidekiq_web_path}
+        %a{href: admin_sidekiq_web_path, target: '_blank'}
           %li.text-warning
             %i.fa.fa-pied-piper-alt
             %strong Sidekiq

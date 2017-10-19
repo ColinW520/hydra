@@ -1,32 +1,38 @@
-.card.card-default
-  .card-header
-    .card-title
-      %h4
-        %img.img-fluid{src: asset_url('twilio-mark-blue.svg')}
-        Usage
-  %table.table.table-primary.table-condensed
-    %thead
-      %tr
-        %th
-        %th.text-center{colspan: 2} Units
-        %th.text-center{colspan: 2} Cost
-      %tr
-        %th Item
-        %th.text-center Last Month
-        %th.text-center This Month
-        %th.text-center Last Month
-        %th.text-center This Month
-    %tbody
-      - @the_records.each do |r|
+- if @flash_twilio_error
+  .card.card-danger
+    .card-block.text-white
+      %h2.text-white Whoops
+      %p Twilio doesn't appear to be available at the moment...rest assured, we are looking into this!
+- else
+  .card.card-default
+    .card-header
+      .card-title
+        %h4
+          %img.img-fluid{src: asset_url('twilio-mark-blue.svg')}
+          Usage
+    %table.table.table-primary.table-condensed
+      %thead
         %tr
-          %td= r[0]
-          %td.text-center= number_with_delimiter r[1][:last_month_count]
-          %td.text-center= number_with_delimiter r[1][:this_month_count]
-          %td.text-center= number_to_currency r[1][:last_month_price], precision: 2
-          %td.text-center= number_to_currency r[1][:this_month_price], precision: 2
-      -# %tr
-      -#   %td
-      -#     %strong Total
-      -#   %td{colspan: 2}
-      -#     .pull-right
-      -#       %strong= number_to_currency @records.sum { |r| r[:price].to_f }, precision: 4
+          %th
+          %th.text-center{colspan: 2} Units
+          %th.text-center{colspan: 2} Cost
+        %tr
+          %th Item
+          %th.text-center Last Month
+          %th.text-center This Month
+          %th.text-center Last Month
+          %th.text-center This Month
+      %tbody
+        - @the_records.each do |r|
+          %tr
+            %td= r[0]
+            %td.text-center= number_with_delimiter r[1][:last_month_count]
+            %td.text-center= number_with_delimiter r[1][:this_month_count]
+            %td.text-center= number_to_currency r[1][:last_month_price], precision: 2
+            %td.text-center= number_to_currency r[1][:this_month_price], precision: 2
+        -# %tr
+        -#   %td
+        -#     %strong Total
+        -#   %td{colspan: 2}
+        -#     .pull-right
+        -#       %strong= number_to_currency @records.sum { |r| r[:price].to_f }, precision: 4

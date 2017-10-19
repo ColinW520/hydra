@@ -24,6 +24,9 @@ class DashboardController < ApplicationController
       next unless record[1][:this_month_count] > 0 || record[1][:last_month_count] > 0
       @the_records << record
     end
+
+  rescue
+    @flash_twilio_error = true
   end
 
   def messages

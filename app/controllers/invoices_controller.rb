@@ -12,6 +12,7 @@ class InvoicesController < ApplicationController
 
   def show
     @stripe_invoice = @invoice.stripe_instance
+    @card = @current_organization.default_card
   end
 
   private

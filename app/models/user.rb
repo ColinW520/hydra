@@ -21,6 +21,10 @@ class User < ApplicationRecord
   scope :super_admins, -> { where(is_super_user: true) }
   scope :active, -> { where(deleted_at: nil) }
 
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   def safe_to_cancel?
     !self.admin_role?
   end

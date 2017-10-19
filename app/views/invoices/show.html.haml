@@ -34,7 +34,48 @@
               %h3= "#" + @invoice.number
         %hr
         .row
+          .col-6
+            %p.lead Bill To:
+            %hr
+            %p
+              %strong= @invoice.organization.name
+            %p= mail_to @invoice.organization.email_domain
+          .col-6
+            %p.lead Payment Method
+            %table.table
+              %tbody
+                %tr
+                  %td
+                    %strong Brand
+                  %td
+                    -case @card.brand
+                      -when 'Visa'
+                        %i.fa.fa-cc-visa.fa-2x
+                      -when 'American Express'
+                        %i.fa.fa-cc-amex.fa-2x
+                      -when 'MasterCard'
+                        %i.fa.fa-cc-mastercard.fa-2x
+                      -when 'Discover'
+                        %i.fa.fa-cc-discover.fa-2x
+                      -else
+                        %i.fa.fa-cc-alt.fa-2x
+                  %tr
+                    %td
+                      %strong Type
+                    %td= @card.funding.titleize
+                  %tr
+                    %td
+                      %strong Last4
+                    %td=@card.last4
+                  %tr
+                    %td
+                      %strong Expiration
+                    %td=@card.exp_month.to_s + ' / ' + @card.exp_year.to_s
+        %br
+        %br
+        .row
           .col-12
+            %p.lead Items
             %table.table.table-bordered
               %thead
                 %tr
@@ -49,15 +90,15 @@
                       %td= local_time Time.at(line.period.start), format: "%m/%d/%Y"
                       %td= local_time Time.at(line.period.end), format: "%m/%d/%Y"
                       %td= number_to_currency line.amount / 100
-                  - if @invoice.discount_code
+                  - if @stripe_invoice.discount.present?
                     %tr.table-success
                       %td{colspan: 3}
                         Discount Code:
-                        = @invoice.discount_code
+                        = @stripe_invoice.discount.coupon.id
                       - if @stripe_invoice.discount.try(:coupon).try(:percent_off).present?
                         %td= number_to_percentage @stripe_invoice.discount.try(:coupon).try(:percent_off)
                       - else
-                        %td= number_to_currency @stripe_invoice.discount.try(:coupon).try(:amount_off)
+                        %td= number_to_currency @stripe_invoice.discount.try(:amount_off) / 100
                   %tr.table-info
                     %td{colspan: 3}
                       %strong Total
@@ -79,5 +120,19 @@
   @media print {
     *::first-letter {
       position: relative !important;
+    }
+
+    body {
+      visibility: hidden;
+    }
+
+    #InvoiceBody, #InvoiceBody * {
+      visibility: visible;
+    }
+
+    #InvoiceBody {
+      position: absolute;
+      left: 0;
+      top: 0;
     }
   }

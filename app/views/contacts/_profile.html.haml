@@ -37,6 +37,14 @@
         %td= local_time_ago @contact.created_at
       %tr
         %td
+          %strong State
+        %td= @contact.address_state
+      %tr
+        %td
+          %strong Zip Code
+        %td= @contact.address_zip
+      %tr
+        %td
           %strong Updated
         %td= local_time_ago @contact.updated_at
       - if @contact.opted_out_at.present?

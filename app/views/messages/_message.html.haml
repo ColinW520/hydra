@@ -35,7 +35,3 @@
     .btn-group
       = link_to new_message_request_path(contact_ids: [message.contact_id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-reply
-
-
-= render "contacts/dialog"
-= render "message_requests/dialog"

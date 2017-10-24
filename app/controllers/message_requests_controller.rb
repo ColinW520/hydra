@@ -7,7 +7,7 @@ class MessageRequestsController < ApplicationController
     respond_to do |format|
       format.html { smart_listing_create :message_requests, message_requests_scope, partial: 'message_requests/listing', default_sort: { created_at: :desc }, page_sizes: [25, 50, 100, 150, 200] }
       format.js { smart_listing_create :message_requests, message_requests_scope, partial: 'message_requests/listing', default_sort: { created_at: :desc }, page_sizes: [25, 50, 100, 150, 200] }
-      # format.csv { message_requests_scope.to_csv, filename: "message_requests_as_of-#{Time.now}.csv" }
+      format.csv { send_data message_requests_scope.to_csv, filename: "messages_composed_as_of-#{Time.now}.csv" }
     end
   end
 
@@ -16,6 +16,7 @@ class MessageRequestsController < ApplicationController
   end
 
   def new
+    @subnav = 'compose'
     @query = params[:query].present? ? params[:query] : Hash.new
     @query[:id] = params[:contact_ids] if params[:contact_ids].present?
 

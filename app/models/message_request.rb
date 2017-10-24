@@ -27,4 +27,16 @@ class MessageRequest < ApplicationRecord
   def queue_message
     Twilio::Messages::QueuingWorker.perform_in(5.seconds, self.id)
   end
+
+  def self.to_csv
+    attributes = self.column_names
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |request|
+        csv << attributes.map { |attr| contact.send(attr) }
+      end
+    end
+  end
 end

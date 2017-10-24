@@ -3,10 +3,10 @@ class Contact < ApplicationRecord
 
   belongs_to :organization
   has_many :messages
+  has_many :stops
 
   validates :organization,
             presence: true
-
 
   phony_normalize :mobile_phone, default_country_code: 'US'
   validates :mobile_phone,
@@ -15,7 +15,7 @@ class Contact < ApplicationRecord
             phony_plausible: true
 
   scope :not_removed, -> { where(removed_at: nil) }
-  scope :active, -> { where(active: true) }
+  scope :active, -> { where(contacts: { is_active: true }) }
   scope :name_like, ->(term) { where('first_name ILIKE ? OR last_name ILIKE ?', "%#{term}%", "%#{term}%") }
   scope :title_like, ->(term) { where('title ILIKE ?', "%#{term}%") }
 
@@ -25,9 +25,12 @@ class Contact < ApplicationRecord
     self.save!
   end
 
+  def stops_list
+    self.stops.active.map(&:line).map(&:last_four)
+  end
+
   def textable?
     return false if self.removed_at.present? || !self.is_active?
-    return false if self.opted_out_at.present?
     return true
   end
 
@@ -45,8 +48,9 @@ class Contact < ApplicationRecord
 
   def self.filter_by(params)
     params = params.with_indifferent_access
-    contacts_scope = self.includes(:organization, :tags)
+    contacts_scope = self.includes(:organization, :tags, :stops)
     contacts_scope = contacts_scope.not_removed
+    contacts_scope = contacts_scope.active unless params[:show_inactive] == 'include'
     contacts_scope = contacts_scope.where(internal_identifier: params[:internal_identifier]) if params[:internal_identifier].present?
     contacts_scope = contacts_scope.where(organization_id: params[:organization_id]) if params[:organization_id].present?
     contacts_scope = contacts_scope.where(id: params[:id]) if params[:id].present?
@@ -54,6 +58,10 @@ class Contact < ApplicationRecord
     contacts_scope = contacts_scope.where(title: params[:title]) if params[:title].present?
     contacts_scope = contacts_scope.tagged_with(params[:tags], any: true, wild: true) if params[:tags].present?
     contacts_scope = contacts_scope.where(contacts: { mobile_phone: params[:mobile_phone] }) if params[:mobile_phone].present?
+    if params[:line].present?
+      stops = Stop.where(line_id: params[:line]).pluck(:contact_id)
+      contacts_scope = contacts_scope.where.not(contacts: { id: stops })
+    end
     return contacts_scope
   end
 

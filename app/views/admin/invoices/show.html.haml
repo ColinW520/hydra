@@ -1,1 +1,142 @@
-%h1= @invoice.stripe_id
+.row.hidden-print
+  .col-12
+    %div.alert.alert-info
+      %h4 Heads Up!
+      %p.lead This is exactly the same thing clients see.
+  .col-12
+    %ol.breadcrumb
+      %li.breadcrumb-item= link_to @current_organization.name, organization_path(@current_organization)
+      %li.breadcrumb-item= link_to 'Invoices', invoices_path
+      %li.breadcrumb-item= "#" + @invoice.number.to_s
+  .col-12
+    .text-center
+      = link_to '#', class: "btn btn-md btn-warning", onclick: "window.print();return false;" do
+        %i.fa.fa-print
+        PRINT THIS
+%br
+%section#InvoiceBody.card.card-default
+  .card-block
+    %br
+    .row
+      .col-11.col-centered
+        .row
+          .col-12
+            %h1
+              %i.fa.fa-comments-o
+              TmT
+        .row
+          .col-6
+            %h3
+              - if @invoice.paid?
+                Invoice
+                %span.badge.badge-success{style: "font-size: 20px;"} PAID!
+              - else
+                Invoice
+                %span.badge.badge-danger{style: "font-size: 20px;"} PAST DUE!
+          .col-6
+            .pull-right
+              %h3= "#" + @invoice.number
+        %hr
+        .row
+          .col-6
+            %p.lead Bill To:
+            %hr
+            %p
+              %strong= @invoice.organization.name
+            %p= mail_to @invoice.organization.email_domain
+          .col-6
+            %p.lead Payment Method
+            %table.table
+              %tbody
+                %tr
+                  %td
+                    %strong Brand
+                  %td
+                    -case @card.brand
+                      -when 'Visa'
+                        %i.fa.fa-cc-visa.fa-2x
+                      -when 'American Express'
+                        %i.fa.fa-cc-amex.fa-2x
+                      -when 'MasterCard'
+                        %i.fa.fa-cc-mastercard.fa-2x
+                      -when 'Discover'
+                        %i.fa.fa-cc-discover.fa-2x
+                      -else
+                        %i.fa.fa-cc-alt.fa-2x
+                  %tr
+                    %td
+                      %strong Type
+                    %td= @card.funding.titleize
+                  %tr
+                    %td
+                      %strong Last4
+                    %td=@card.last4
+                  %tr
+                    %td
+                      %strong Expiration
+                    %td=@card.exp_month.to_s + ' / ' + @card.exp_year.to_s
+        %br
+        %br
+        .row
+          .col-12
+            %p.lead Items
+            %table.table.table-bordered
+              %thead
+                %tr
+                  %th Description
+                  %th Starts
+                  %th Ends
+                  %th Amount
+                %tbody
+                  - @stripe_invoice.lines.each do |line|
+                    %tr
+                      %td= line.plan.name
+                      %td= local_time Time.at(line.period.start), format: "%m/%d/%Y"
+                      %td= local_time Time.at(line.period.end), format: "%m/%d/%Y"
+                      %td= number_to_currency line.amount / 100
+                  - if @stripe_invoice.discount.present?
+                    %tr.table-success
+                      %td{colspan: 3}
+                        Discount Code:
+                        = @stripe_invoice.discount.coupon.id
+                      - if @stripe_invoice.discount.try(:coupon).try(:percent_off).present?
+                        %td= number_to_percentage @stripe_invoice.discount.coupon.try(:percent_off)
+                      - else
+                        %td= number_to_currency @stripe_invoice.discount.coupon.try(:amount_off) / 100 rescue ''
+                  %tr.table-info
+                    %td{colspan: 3}
+                      %strong Total
+                    %td
+                      %strong= number_to_currency @invoice.amount_due / 100
+
+        %hr
+        .row
+          .col-6
+            %h4 Notes
+            %p
+              The total due does not include your Twilio Usage charges.
+              Those are paid separately, directly to Twilio, per your Twilio account settings.
+          .col-6
+            %h4 Payment Instructions
+            %p Payment is automatically made at Period Start using the payment method you specified on your account settings profile. Any future changes to payment method used can be made there.
+
+:css
+  @media print {
+    *::first-letter {
+      position: relative !important;
+    }
+
+    body {
+      visibility: hidden;
+    }
+
+    #InvoiceBody, #InvoiceBody * {
+      visibility: visible;
+    }
+
+    #InvoiceBody {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }

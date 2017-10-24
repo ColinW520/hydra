@@ -1,56 +1,62 @@
 .row
   .col-sm-12
     .card.card-default
-      = smart_listing_controls_for(:contacts, { class: 'form-control' }) do
+      = smart_listing_controls_for(:contacts, { class: 'form-control', id: 'ContactFilterForm' }) do
         .row
-          .col-sm-12.col-md-3
+          .col-sm-12.col-md-2
             .form-group
               %label.control-label{for: 'inputQuery'}
                 %i.fa.fa-search
                 Name
                 %i.fa.fa-question-circle{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "You can enter either a first, or a last name here! We will look for anyone with a name that is similar to what you enter here."}
               = text_field_tag :name, params[:name], class: "search form-control"
-          .col-sm-12.col-md-3
+          .col-sm-12.col-md-4
             .form-group
               %label.control-label{for: 'inputTitle'}
                 %i.fa.fa-asterisk
                 Titles
                 %i.fa.fa-question-circle{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Start typing a title you want to search by, and we'll show you an option! You can even include multiple. The options are populated by the titles you assigned to your actual contacts. The search is additive -- we'll return any contact with a title in this box."}
               = select_tag :title, options_for_select(current_user.organization.contacts.not_removed.where.not(title: '').pluck(:title).uniq.sort, selected: params[:title]), { multiple: true, include_blank: true, class: 'search form-control select2', id: 'inputTitle' }
-          .col-sm-12.col-md-3
+          .col-sm-12.col-md-4
             .form-group
               %label.control-label{for: 'inputQuery'}
                 %i.fa.fa-tag
                 Tagged With
                 %i.fa.fa-question-circle{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Start typing a tag you want to search by, and we'll show you an option! You can even include multiple. The options are populated by your actual contacts' tags. The search is additive -- we'll return any contact with any of these tags."}
               = select_tag :tags, options_for_select(current_user.organization.contacts.not_removed.tag_counts.pluck(:name).sort, selected: params[:tags]), { multiple: true, include_blank: true, class: 'search form-control select2', id: 'inputTags' }
+          .col-sm-12.col-md-2
+            .form-group
+              %label.control-label{for: 'inputLine'}
+                %i.fa.fa-hashtag
+                Line
+                %i.fa.fa-question-circle{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Specify a line here to see only those contacts who have not submitted a STOP on messages from that line."}
+              = select_tag :line, options_for_select(current_user.organization.lines.collect { |line| ["#{line.name}-#{line.last_four}", line.id]}, selected: params[:line] ||= nil), {  include_blank: true, class: 'search form-control select2', id: 'inputLine' }
           .col-sm-12.col-md-3
             .form-group
-              %label.control-label{for: 'inputInternal'}
-                %i.fa.fa-hashtag
-                Internal Id
-                %i.fa.fa-question-circle{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "This will return any employee ID that is LIKE one entered."}
-              = text_field_tag :internal_identifier, params[:internal_identifier], class: "search form-control"
+              .form-check
+                %label.form-check-label
+                  %input.form-check-input{:checked => params[:show_inactive] == 'include', :name => "show_inactive", :type => "radio", :value => 'include'}
+                  Show Inactive
+              .form-check
+                %label.form-check-label
+                  %input.form-check-input{:checked => params[:show_inactive].present? ? params[:show_inactive] == 'exclude' : true, :name => "show_inactive", :type => "radio", :value => 'exclude'}
+                  Hide Inactive
+
         .row
           .col-sm-12.col-md-6
             %i.fa.fa-filter
-            = "Matches: #{smart_listing.count}"
+            Matches:
+            = smart_listing.count
             %i.fa.fa-question-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This is the number of people who match these filters above."}
           .col-sm-12.col-md-6.col-centered
             .pull-right
               - if @current_organization.valid_setup?
-                = link_to new_message_request_path(count: smart_listing.count, query: {name: params[:name],title: params[:title],tags: params[:tags], organization_id: current_user.organization_id}), id: 'NewMessageButton', remote: true, class: 'btn btn-success btn-sm', title: "Message all #{smart_listing.count} members matching these filters.", 'data-toggle' => 'tooltip', 'data-placement' => 'top' do
+                = link_to new_message_request_path(count: smart_listing.count, query: request.params), remote: true, id: 'NewMessageButton', class: 'btn btn-success btn-sm', title: "Message all contacts matching these filters." do
                   %i.fa.fa-send
                   Message ALL
-                  = "(#{smart_listing.count})"
-              = button_tag type: "submit", class: "btn btn-sm btn-info", title: "This will update your filter results. You can also just press your enter key.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+              = button_tag type: "submit", id: "Submitter", class: "btn btn-sm btn-info", title: "This will update your filter results. You can also just press your enter key." do
                 %i.fa.fa-filter
                 Update
-              = link_to contacts_path, class: 'btn btn-danger btn-sm', title: "This will remove any filters you've added and restart your search.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+              = link_to contacts_path, class: 'btn btn-outline-danger btn-sm', title: "This will remove any filters you've added and restart your search.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
                 %i.fa.fa-times
                 Clear
-
-:javascript
-  $('[data-toggle="tooltip"]').tooltip();
-  $('[data-toggle="popover"]').popover();
-  $('.select2').select2();

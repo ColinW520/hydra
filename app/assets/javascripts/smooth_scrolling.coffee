@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'turbolinks:load', (event) ->
   $('nav ul li a[href^=\'#\']').on 'click', (e) ->
     e.preventDefault()
     # store hash

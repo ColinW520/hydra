@@ -1,22 +1,22 @@
 .row
   .col-sm-12
-    .card.card-deafault
-      = smart_listing_controls_for(:messages, { class: 'form-control' }) do
+    .card.card-default
+      = smart_listing_controls_for(:messages, { class: 'form-control', id: 'MessagesFilterForm' }) do
         .row
           .col-sm-12.col-md-2
-            .form-group.has-feedback.filter.input-append
+            .form-group
               %label.control-label{for: 'inputDirection'} Direction
               = select_tag :direction, options_for_select([['Outbound', 'outbound'], ['Inbound', 'inbound']], selected: params[:direction]), { include_blank: true, class: 'search form-control', id: 'inputDirection' }
           .col-sm-12.col-md-2
-            .form-group.has-feedback.filter.input-append
+            .form-group
               %label.control-label{for: 'inputLine'} To Line
               = select_tag :line, options_for_select(current_user.organization.lines.collect { |line| [line.name, line.id]}), { include_blank: true, class: 'search form-control', id: 'inputLineId' }
           .col-sm-12.col-md-2
-            .form-group.has-feedback.filter.input-append
+            .form-group
               %label.control-label{for: 'inputName'} Received From?
               = text_field_tag :from_name, params[:name], class: "search form-control"
           .col-sm-12.col-md-6
-            .form-group.has-feedback.filter.input-append
+            .form-group
               %label.control-label{for: 'inputTerm'} Message Like ?
               = text_field_tag :term, params[:term], class: "search form-control"
         .row
@@ -26,5 +26,6 @@
             .pull-right
               = button_tag type: "submit", class: "btn btn-sm btn-info", title: "Update filter results.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
                 %i.fa.fa-filter
-              = link_to messages_path(format: :csv), class: 'btn btn-primary btn-sm', title: "Download THESE members to a CSV.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+
+              = link_to messages_path(format: :csv), class: 'btn btn-primary btn-sm', title: "Download these messages.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
                 %i.fa.fa-download

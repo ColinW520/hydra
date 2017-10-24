@@ -1,5 +1,4 @@
 class Twilio::Messages::StoringWorker < Twilio::BaseWorker
-
   def perform(twilio_sid, organization_id, line_id, contact_id, message_request_id = nil)
     @organization = Organization.find organization_id
     @line = Line.find line_id
@@ -42,12 +41,19 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
       end
     end
 
-    # this is where we would need to store any message links if needed
     @contact.touch(:last_messaged_at)
 
     # handle optouts
     if %w(STOP STOPALL UNSUBSCRIBE CANCEL END QUIT REMOVE).include? @message.body.squish
-      @contact.update_attributes(opted_out_at: Time.now, is_active: false)
+      Twilio::Messages::StopHandlingWorker.perform_async(@message.id)
+      # @contact.update_attributes(opted_out_at: Time.now, is_active: false)
+      return # hard return here, don't want to do anything else after this.
+    end
+
+    # handle starts
+    if %w(START).include? @message.body.squish
+      Twilio::Messages::StartHandlingWorker.perform_async(@message.id)
+      # @contact.update_attributes(opted_out_at: Time.now, is_active: false)
     end
 
     # handle alerts

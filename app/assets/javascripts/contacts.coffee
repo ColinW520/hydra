@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'turbolinks:load', (event) ->
   if $("#contacts_placeholder").length > 0
     $.get
       url: '/contacts?id=' + gon.contact_ids

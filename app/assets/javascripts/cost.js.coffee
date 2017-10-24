@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'turbolinks:load', (event) ->
   if $("#ThisMonth").length > 0
     $.get
       url: '/dashboard/usage?time_frame=this_month'

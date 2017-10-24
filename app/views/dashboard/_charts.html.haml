@@ -1,23 +1,23 @@
-#ThisMonth
-  %br
-  %br
-  %br
-  .text-center
-    %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
-    %h3 Loading Twilio Usage Report...
-%br
-.card.card-default
-  .card-header
-    %h4.card-title
-      %i.fa.fa-envelope
-      Messages
-  .card-block
-    = column_chart messages_dashboard_path, library: { legend: { position:  'bottom' } }
-%br
-.card.card-default
-  .card-header
-    %h4.card-title
-      %i.fa.fa-phone
-      Calls
-  .card-block
-    = column_chart calls_dashboard_path, library: { legend: { position:  'bottom' } }
+-# #ThisMonth
+-#   %br
+-#   %br
+-#   %br
+-#   .text-center
+-#     %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+-#     %h3 Loading Twilio Usage Report...
+-# %br
+-# .card.card-default
+-#   .card-header
+-#     %h4.card-title
+-#       %i.fa.fa-envelope
+-#       Messages
+-#   .card-block
+-#     = column_chart messages_dashboard_path, library: { legend: { position:  'bottom' } }
+-# %br
+-# .card.card-default
+-#   .card-header
+-#     %h4.card-title
+-#       %i.fa.fa-phone
+-#       Calls
+-#   .card-block
+-#     = column_chart calls_dashboard_path, library: { legend: { position:  'bottom' } }

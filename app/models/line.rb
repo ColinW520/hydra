@@ -19,6 +19,10 @@ class Line < ApplicationRecord
 
   scope :active, -> { where(released_at: nil) }
 
+  def last_four
+    self.number.last(4)
+  end
+
   def dropdown_name
     "#{self.name} - #{self.number}"
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018183849) do
+ActiveRecord::Schema.define(version: 20171020210740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -414,6 +414,18 @@ ActiveRecord::Schema.define(version: 20171018183849) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
   end
 
+  create_table "stops", force: :cascade do |t|
+    t.integer  "contact_id"
+    t.integer  "line_id"
+    t.integer  "message_id"
+    t.datetime "rescinded_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["contact_id"], name: "index_stops_on_contact_id", using: :btree
+    t.index ["line_id"], name: "index_stops_on_line_id", using: :btree
+    t.index ["message_id"], name: "index_stops_on_message_id", using: :btree
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "organization_id"
     t.string   "stripe_plan_id"
@@ -544,6 +556,9 @@ ActiveRecord::Schema.define(version: 20171018183849) do
   add_foreign_key "message_requests", "organizations"
   add_foreign_key "message_requests", "users"
   add_foreign_key "messages", "contacts"
+  add_foreign_key "stops", "contacts"
+  add_foreign_key "stops", "lines"
+  add_foreign_key "stops", "messages"
   add_foreign_key "subscriptions", "organizations"
   add_foreign_key "users", "organizations"
 end

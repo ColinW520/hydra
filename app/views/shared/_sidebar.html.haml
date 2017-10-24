@@ -16,14 +16,14 @@
             %i.fa.fa-address-book-o.fa-lg
             Directory
 
-        - if ['messages', 'message_requests'].include?(@subnav)
+        - if ['messages', 'message_requests', 'compose'].include?(@subnav)
           %li{"data-target" => "#messages", "data-toggle" => "collapse", "aria-expanded" => "true"}
             %a{href: "#"}
               %i.fa.fa-envelope.fa-lg
               Messages
               %span.arrow
           %ul#messages.sub-menu
-            %li
+            %li{class: @subnav == 'compose' ? 'active' : nil}
               %a{href: contacts_path(flash_instructions: true)}
                 %i.fa.fa-pencil
                 Compose

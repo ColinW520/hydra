@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
+$(document).on 'turbolinks:load', (event) ->
   if $('#contacts_show').length > 0
     $.get
       url: "/messages?contact_id=" + gon.contact_id

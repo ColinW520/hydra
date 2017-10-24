@@ -30,7 +30,7 @@
       .row
         .col-sm-12
           .form-group
-            = f.input :tag_list_for_form, hint: 'Separate multiple tags with a comma and a space. IE: Super, Awesome'
+            = f.input :tag_list_for_form, label: 'Tags', hint: 'Separate multiple tags with a comma and a space. IE: Super, Awesome'
           .form-group
             = f.input :is_active, as: :boolean, label: 'Active?', hint: 'Unchecking this box will prevent this contact from being texted.'
           .form-actions

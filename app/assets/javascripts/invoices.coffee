@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'turbolinks:load', (event) ->
   if $("#invoices_placeholder").length > 0
     $.get
       url: '/invoices'

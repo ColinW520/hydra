@@ -11,21 +11,18 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
+//= require onmount
 //= require turbolinks
 //= require turbolinks_helper
-//= require tether
-//= require bootstrap
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery-ui/sortable
-//= require jquery-ui/effect-highlight
+//= require tether
+//= require bootstrap
 //= require ahoy
 //= require local_time
 //= require smart_listing
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
 //= require moment
-//= require bootstrap-datetimepicker
 //= require chartkick
 //= require_tree .

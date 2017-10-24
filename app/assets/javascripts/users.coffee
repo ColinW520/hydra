@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'turbolinks:load', (event) ->
   if $("#users_placeholder").length > 0
     $.get
       url: '/users?organization_id=' + gon.organization_id

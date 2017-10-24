@@ -9,7 +9,9 @@ class ContactsController < ApplicationController
       format.html {
         smart_listing_create :contacts, contacts_scope, partial: 'contacts/listing', default_sort: { first_name: :asc }, page_sizes: [25, 50, 100, 150, 200, 300, 400, 500, 600]
       }
-      format.js { smart_listing_create :contacts, contacts_scope, partial: 'contacts/listing', default_sort: { first_name: :asc }, page_sizes: [25, 50, 100, 150, 200] }
+      format.js {
+        smart_listing_create :contacts, contacts_scope, partial: 'contacts/listing', default_sort: { first_name: :asc }, page_sizes: [25, 50, 100, 150, 200]
+      }
       format.csv { send_data contacts_scope.to_csv, filename: "contacts_as_of-#{Time.now}.csv" }
     end
   end

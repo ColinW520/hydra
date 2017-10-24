@@ -1,0 +1,10 @@
+- provide(:title, 'Composing')
+.row
+  .col-sm-12.col-md-8.col-centered
+    .card
+      .card-header
+        %h4.card-title
+          %i.fa.fa-pencil
+          Compose a Message
+      .card-block
+        = render 'form'

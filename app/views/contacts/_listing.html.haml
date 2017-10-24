@@ -13,19 +13,24 @@
                 %th.sortable= smart_listing.sortable 'Name', :first_name
                 %th.sortable= smart_listing.sortable 'Title', :title
                 %th.sortable= smart_listing.sortable 'Mobile', :mobile_phone
-                %th.sortable= smart_listing.sortable 'Messaged', :last_messaged_at
+                %th.sortable= smart_listing.sortable 'Last', :last_messaged_at
                 %th Tags
+                %th Stops
                 %th
               %tbody#contacts
-                - smart_listing.collection.each do |contact|
-                  = render contact
-                - if @current_organization.valid_setup?
-                  %tr{style: 'background-color: #f3f3f3'}
-                    %td{colspan: 8}
-                      = button_tag type: "submit", class: "btn btn-sm btn-success", id: 'targetingButton' do
-                        %i.fa.fa-check{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This will message only the contacts with the checkboxes selected."}
-                        Message Selected
-                        %em Only
+                - if smart_listing.count.zero?
+                  %tr.table-warning
+                    %td{colspan: 8} No contacts match your filters.
+                - else
+                  - smart_listing.collection.each do |contact|
+                    = render contact
+                  - if @current_organization.valid_setup? && smart_listing.count > 0
+                    %tr{style: 'background-color: #f3f3f3'}
+                      %td{colspan: 8}
+                        = button_tag type: "submit", class: "btn btn-sm btn-success", id: 'targetingButton' do
+                          %i.fa.fa-check{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This will message only the contacts with the checkboxes selected."}
+                          Message Selected
+                          %em Only
 %br
 .row
   .col-sm-12
@@ -35,13 +40,3 @@
   .col-sm-12
     .pull-right
       = smart_listing.pagination_per_page_links
-
-:coffeescript
-  $('#selectAll').click ->
-    if (this.checked)
-      $(':checkbox').each ->
-        $(this).prop('checked', true)
-
-    else
-      $(':checkbox').each ->
-        $(this).prop('checked', false)

@@ -20,12 +20,15 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-onmount'
+end
+
 # Font End Stuff
 gem 'bootstrap', '4.0.0.alpha6'
 gem 'tether-rails'
 gem 'font-awesome-rails', github: 'bokmann/font-awesome-rails'
 gem 'turbolinks', '~> 5'
-gem 'jquery-turbolinks'
 gem 'haml-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -41,7 +44,6 @@ gem 'wysiwyg-rails'
 gem 'unobtrusive_flash', '>=3'
 gem 'simple_form'
 gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'select2-rails'
 gem 'redcarpet', '~> 3.0.0'
 

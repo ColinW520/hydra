@@ -2,14 +2,14 @@ class DashboardController < ApplicationController
   before_action :set_range
 
   def show
-    @current_activities = FeedItem.interactions.where(created_at: @current_start..@current_end)
-    @previous_activities = FeedItem.interactions.where(created_at: @previous_start..@previous_end)
+    @current_activities = current_user.organization.feed_items.interactions.where(created_at: @current_start..@current_end)
+    @previous_activities = current_user.organization.feed_items.interactions.where(created_at: @previous_start..@previous_end)
 
 
     @activity_hash = [
-      { name: "Inbound Messages", data: Message.inbound.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count },
-      { name:"Outbound Messages", data: MessageRequest.sent.group_by_day(:processed_at, format: '%b %d', range: @current_start..@current_end).count },
-      { name: "Inbound Calls", data: CallLog.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count }
+      { name: "Inbound Messages", data: current_user.organization.messages.inbound.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count },
+      { name:"Outbound Messages", data: current_user.organization.message_requests.sent.group_by_day(:processed_at, format: '%b %d', range: @current_start..@current_end).count },
+      { name: "Inbound Calls", data: current_user.call_logs.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count }
     ]
 
     @twilio_client = Twilio::REST::Client.new(current_user.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])

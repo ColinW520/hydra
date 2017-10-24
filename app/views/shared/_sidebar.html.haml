@@ -7,8 +7,8 @@
     %i.fa.fa-bars.fa-2x.toggle-btn{"data-target" => "#menu-content", "data-toggle" => "collapse"}
     .menu-list
       %ul#menu-content.menu-content.collapse.out
-        %a{href: feed_items_path}
-          %li{class: @subnav == 'feed_items' ? 'active' : nil}
+        %a{href: dashboard_path}
+          %li{class: @subnav == 'dashboard' ? 'active' : nil}
             %i.fa.fa-dashboard.fa-lg
             Dashboard
         %a{href: contacts_path}

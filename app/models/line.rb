@@ -5,6 +5,7 @@ class Line < ApplicationRecord
   has_many :messages
   has_many :call_logs
   has_many :feed_items, as: :parent, dependent: :destroy
+  has_many :stops
 
   validates :name, presence: true
   validates :number, presence: true

@@ -27,7 +27,7 @@
         = message.line.name
   %td= message.body
   %td
-    - if message.num_media > 0
+    - if message.num_media.to_i > 0
       - message.media_links.each do |media_link|
         %a{href: media_link.link, target: '_blank', style: "text-decoration: none"}
           %img.img-fluid.img-thumbnail{src: media_link.link, style: 'max-height: 50px;'}

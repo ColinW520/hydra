@@ -1,6 +1,15 @@
-- smart_listing.collection.each do |feed_item|
-  = render feed_item
-  %br
-.pull-right
-  = smart_listing.paginate
-  = smart_listing.pagination_per_page_links
+.card.card-default
+  .card-header
+    %h4.card-title
+      %i.fa.fa-newspaper-o
+      Activity Feed
+  .card-block
+    - smart_listing.collection.each do |feed_item|
+      = render feed_item
+
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

@@ -37,9 +37,7 @@ Rails.application.routes.draw do
   resources :feed_items, path: 'activities'
   resource :dashboard, controller: 'dashboard' do
     collection do
-      get :list_growth
-      get :calls
-      get :messages
+      get :activity_chart
       get :usage
     end
   end

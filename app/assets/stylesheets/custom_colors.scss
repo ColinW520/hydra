@@ -1,2 +1,26 @@
 $twilio-blue: #0D122B;
 $twilio-red: #F22F46;
+
+.text-twilio-blue {
+  color: $twilio-blue
+}
+
+.text-twilio-red {
+  color: $twilio-red
+}
+
+.bg-twilio-blue {
+  background-color: $twilio-blue
+}
+
+.bg-twilio-red {
+  background-color: $twilio-red
+}
+
+.border-twilio-blue {
+  border-color: $twilio-blue
+}
+
+.border-twilio-red {
+  border-color: $twilio-red
+}

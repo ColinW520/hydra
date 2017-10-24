@@ -10,6 +10,7 @@ class Organization < ApplicationRecord
 
   # relationships
   has_many :users, dependent: :destroy
+  has_many :stops, through: :lines
   has_many :feed_items
   has_many :ahoy_events, through: :user
   has_many :contacts, dependent: :destroy

@@ -1,13 +1,5 @@
 - unless @xhr
-  - provide(:title, 'Activity Feed')
+  - provide(:title, 'Activities')
 .row
-  .col-sm-12.col-md-10
-    .card.card-default
-      .card-header
-        %h4.card-title
-          %i.fa.fa-newspaper-o
-          Activity Feed
-      .card-block
-        = smart_listing_render :feed_items
-  .col-sm-12.col-md-2
-    = render 'dashboard/charts'
+  .col-sm-12
+    = smart_listing_render :feed_items

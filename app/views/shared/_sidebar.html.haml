@@ -17,12 +17,12 @@
             Directory
 
         - if ['messages', 'message_requests', 'compose'].include?(@subnav)
-          %li{"data-target" => "#messages", "data-toggle" => "collapse", "aria-expanded" => "true"}
+          %li{"data-target" => "#messages_menu", "data-toggle" => "collapse", "aria-expanded" => "true"}
             %a{href: "#"}
               %i.fa.fa-envelope.fa-lg
               Messages
               %span.arrow
-          %ul#messages.sub-menu
+          %ul#messages_menu.sub-menu
             %li{class: @subnav == 'compose' ? 'active' : nil}
               %a{href: contacts_path(flash_instructions: true)}
                 %i.fa.fa-pencil
@@ -36,12 +36,12 @@
                 %i.fa.fa-reply
                 Received
         - else
-          %li.collapsed{"data-target" => "#messages", "data-toggle" => "collapse", "aria-expanded" => "false"}
+          %li.collapsed{"data-target" => "#messages_menu", "data-toggle" => "collapse", "aria-expanded" => "false"}
             %a{href: "#"}
               %i.fa.fa-envelope.fa-lg
               Messages
               %span.arrow
-          %ul#messages.sub-menu.collapse
+          %ul#messages_menu.sub-menu.collapse
             %li
               %a{href: contacts_path(flash_instructions: true)}
                 %i.fa.fa-pencil

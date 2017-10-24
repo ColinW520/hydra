@@ -11,8 +11,20 @@ class MessagesController < ApplicationController
     ]
 
     respond_to do |format|
-      format.html { smart_listing_create :messages, messages_scope, partial: 'messages/listing', default_sort: { created_at: 'DESC' }, page_sizes: [25, 50, 100, 150, 200] }
-      format.js { smart_listing_create :messages, current_user.organization.messages, partial: 'messages/listing', default_sort: { created_at: 'DESC' }, page_sizes: [25, 50, 100, 150, 200] }
+      format.html {
+        smart_listing_create :messages,
+        messages_scope,
+        partial: 'messages/listing',
+        default_sort: { created_at: 'DESC' },
+        page_sizes: [25, 50, 100, 150, 200]
+      }
+      format.js {
+        smart_listing_create :messages,
+        messages_scope,
+        partial: 'messages/listing',
+        default_sort: { created_at: 'DESC' },
+        page_sizes: [25, 50, 100, 150, 200]
+      }
       format.csv { send_data messages_scope.order(date: 'DESC').to_csv, filename: "messages_as_of-#{Time.now}.csv" }
     end
   end

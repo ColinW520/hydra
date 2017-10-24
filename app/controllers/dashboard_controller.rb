@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
     @activity_hash = [
       { name: "Inbound Messages", data: current_user.organization.messages.inbound.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count },
       { name:"Outbound Messages", data: current_user.organization.message_requests.sent.group_by_day(:processed_at, format: '%b %d', range: @current_start..@current_end).count },
-      { name: "Inbound Calls", data: current_user.call_logs.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count }
+      { name: "Inbound Calls", data: current_user.organization.call_logs.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count }
     ]
 
     @twilio_client = Twilio::REST::Client.new(current_user.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])

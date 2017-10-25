@@ -7,25 +7,25 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     @message = @twilio_client.messages.get twilio_sid
 
     # store it
-    @local_message = Message.where(twilio_sid: @message.sid).first_or_create(
-      sms_sid: @message.sid,
-      twilio_sid: @message.sid,
-      account_sid: @message.account_sid,
-      line_id: @line.id,
-      organization_id: @organization.id,
-      contact_id: @contact.id,
-      message_request_id: message_request_id,
-      status: @message.status,
-      direction: @message.direction == 'outbound-api' ? 'outbound' : 'inbound',
-      sent_at: Time.now,
-      to: @message.to,
-      from: @message.from,
-      body: @message.body,
-      error_message: @message.error_message,
-      price_in_cents: @message.price.to_f.abs,
-      num_media: @message.num_media,
-      num_segments: @message.num_segments
-    )
+    @local_message = Message.where(twilio_sid: @message.sid).first_or_initialize
+    @local_message.sms_sid = @message.sid
+    @local_message.twilio_sid = @message.sid
+    @local_message.account_sid = @message.account_sid
+    @local_message.line_id = @line.id
+    @local_message.organization_id = @organization.id
+    @local_message.contact_id = @contact.id
+    @local_message.message_request_id = message_request_id
+    @local_message.status = @message.status
+    @local_message.direction = @message.direction == 'outbound-api' ? 'outbound' : 'inbound'
+    @local_message.sent_at = Time.now
+    @local_message.to = @message.to
+    @local_message.from = @message.from
+    @local_message.body = @message.body
+    @local_message.error_message = @message.error_message
+    @local_message.price_in_cents = @message.price.to_f.abs
+    @local_message.num_media = @message.num_media
+    @local_message.num_segments = @message.num_segments
+    @local_message.save!
 
     # now store any media
     if @local_message.present? && @local_message.num_media > 0

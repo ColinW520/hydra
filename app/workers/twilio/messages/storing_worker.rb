@@ -50,7 +50,7 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     end
 
     # handle starts
-    if %w(START).include? @message.body.squish
+    if @local_message.body.squish == 'START'
       Twilio::Messages::StartHandlingWorker.perform_async(@local_message.id)
     end
 

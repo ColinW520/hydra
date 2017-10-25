@@ -5,7 +5,6 @@ class DashboardController < ApplicationController
     @current_activities = current_user.organization.feed_items.interactions.where(created_at: @current_start..@current_end)
     @previous_activities = current_user.organization.feed_items.interactions.where(created_at: @previous_start..@previous_end)
 
-
     @activity_hash = [
       { name: "Inbound Messages", data: current_user.organization.messages.inbound.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count },
       { name:"Outbound Messages", data: current_user.organization.message_requests.sent.group_by_day(:processed_at, format: '%b %d', range: @current_start..@current_end).count },

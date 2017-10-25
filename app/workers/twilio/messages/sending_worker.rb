@@ -30,5 +30,9 @@ class Twilio::Messages::SendingWorker < Twilio::BaseWorker
 
     # store it if it has an ID
     Twilio::Messages::StoringWorker.perform_async(@message.sid, @organization.id, @line.id, @contact.id, @message_request.id) if @message.sid.present?
+  # rescue Twilio::REST::RequestError => error
+  #   if error.message == 'The message From/To pair violates a blacklist rule.'
+  #
+  #   end
   end
 end

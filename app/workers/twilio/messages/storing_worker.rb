@@ -46,14 +46,12 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     # handle optouts
     if %w(STOP STOPALL UNSUBSCRIBE CANCEL END QUIT REMOVE).include? @local_message.body.squish
       Twilio::Messages::StopHandlingWorker.perform_async(@local_message.id)
-      # @contact.update_attributes(opted_out_at: Time.now, is_active: false)
       return # hard return here, don't want to do anything else after this.
     end
 
     # handle starts
     if %w(START).include? @message.body.squish
       Twilio::Messages::StartHandlingWorker.perform_async(@local_message.id)
-      # @contact.update_attributes(opted_out_at: Time.now, is_active: false)
     end
 
     # handle alerts

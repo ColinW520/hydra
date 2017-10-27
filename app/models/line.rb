@@ -1,4 +1,6 @@
 class Line < ApplicationRecord
+  acts_as_tagger
+
   belongs_to :organization
   belongs_to :user
   has_many :message_requests

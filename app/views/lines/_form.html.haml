@@ -2,11 +2,6 @@
   #error_holder
     %ul#errors
   = f.error_notification
-  .row
-    .col-sm-12
-      %h2
-        %i.fa.fa-hashtag
-        Buy a Line
   %legend Line Profile
   %p.text-info Use these settings to internally identify this phone number within your organization.
   .row
@@ -34,17 +29,17 @@
         = f.input :reject_voice_calls, label: 'Immediately Reject All Voice Calls?', as: :boolean, inline_label: true, class: 'text-danger'
         .help-block.text-danger Choosing this option overrides all other Voice settings, and rejects all inbound calls immediately. Choose this option to prevent this line from incurring any voice related charges.
   #voice_settings{style: "display: #{f.object.reject_voice_calls? ? 'none' : 'block'}"}
-    %legend Voice Handling
+    %p.lead Voice Handling
     %p.text-info
       Use these settings to customize what will happen when someone tries to call this line. These settings are not available if the line is set to immediately reject all voice calls.
       Any text you put in the Auto Response field will be read aloud to the caller, automatically. Use this in conjunction with a fowarding number if you would like an auto-greeting for your line! Or, you can use this to advise callers that this is a texting-only line. Keep this message short to minimize your Twilio usage costs.
     .row
-      .col-sm-12.col-md-6
-        .form-group
-          = f.input :voice_auto_response, label: 'Auto Response', as: :text
-      .col-sm-12.col-md-6
+      .col-sm-12
         .form-group
           = f.input :voice_forwarding_number, label: 'Forward To #:', as: :tel
+      .col-sm-12
+        .form-group
+          = f.input :voice_auto_response, label: 'Auto Response', as: :text
 
   %hr{style: "color: #333; border: 1px solid #333; width: 10%; margin-left: 0px; margin-top: 30px;"}
   %legend SMS Handling
@@ -54,6 +49,12 @@
     .col-sm-12.col-md-12
       .form-group
         = f.input :sms_auto_response_text, label: 'Text Auto Response'
+  %hr{style: "color: #333; border: 1px solid #333; width: 10%; margin-left: 0px; margin-top: 30px;"}
+  %legend Auto Tagging
+  %p.text-info You can automatically Tag contacts who text this line <b>with this line's name</b> by checking this box. This is useful for identifying how contacts joined your contact list by texting in, as opposed to being manually added or uploaded. If you change the name of your line, the tag will also change.
+  .row
+    .col-sm-12.col-md-12
+      = f.input :apply_tags, label: @line.persisted? ? "Auto Tag All Inbound Contacts with: <span class='badge badge-primary'>#{@line.name}</span>".html_safe : "Auto Tag All Inbound Contacts with this line's name.", as: :boolean, inline_label: true, class: 'text-danger'
 
   .form-actions
     = f.hidden_field :user_id, value: @current_user.id

@@ -1,14 +1,16 @@
 - provide(:title, "Edit #{@line.name} Line")
 .row
-  .col-sm-12
-    %h4
-      %i.fa.fa-hashtag
-      Lines
-.row
   .col-sm-12.col-md-6.col-centered
     .card.card-default
+      .card-header
+        .row
+          .col-sm-12.col-md-8
+            %h3.card-title
+              %i.fa.fa-hashtag
+              = "Editing the #{@line.name} Line"
+          .col-sm-12.col-md-4
+            .pull-right
+              = link_to line_path(@line), method: :delete, data: { confirm: "Are you sure? You will no longer be able to use this line for sending messages. Your messaging history will be preserved; but, you may never be able to get this number back." }, class: 'btn btn-sm btn-danger' do
+                %i.fa.fa-trash
       .card-block
         = render 'form'
-    .text-center
-      = link_to line_path(@line), method: :delete, data: { confirm: "Are you sure? You will no longer be able to use this line for sending messages. History will be preserved." }, class: 'text-center text-danger' do
-        Need to Remove this Line?

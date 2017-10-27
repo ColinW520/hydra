@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024211138) do
+ActiveRecord::Schema.define(version: 20171027195151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(version: 20171024211138) do
     t.string   "sms_auto_response_text"
     t.string   "voice_auto_response"
     t.boolean  "reject_voice_calls",      default: false
+    t.boolean  "apply_tags",              default: false
     t.index ["organization_id"], name: "index_lines_on_organization_id", using: :btree
     t.index ["user_id"], name: "index_lines_on_user_id", using: :btree
   end

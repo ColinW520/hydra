@@ -9,13 +9,9 @@
             %th= smart_listing.sortable 'Date', :created_at
             %th= smart_listing.sortable 'From', :from
             %th= smart_listing.sortable 'Forwarded?', :forwarded
-            %th Answered By
             %th
-              = smart_listing.sortable 'Duration', :duration_in_seconds
-              %i.fa.fa-info-circle{"data-placement" => "left", "data-toggle" => "tooltip", :title => "This is what Twilio reports."}
-            %th
-              = smart_listing.sortable 'Price', :price_in_cents
-              %i.fa.fa-info-circle{"data-placement" => "left", "data-toggle" => "tooltip", :title => "This is what Twilio reports."}
+              = smart_listing.sortable 'Seconds', :duration_in_seconds
+              %i.fa.fa-info-circle{"data-placement" => "top", "data-toggle" => "tooltip", :title => "This is what Twilio reports."}
           %tbody#call_logs
             - if smart_listing.count > 0
               - smart_listing.collection.each do |call_log|

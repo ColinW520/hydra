@@ -1,14 +1,13 @@
 %tr{id: "call_log_#{call_log.id}"}
   %td= local_time_ago call_log.created_at
-  %td= number_to_phone call_log.caller.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+  %td{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => number_to_phone(call_log.caller.phony_formatted(normalize: :US, format: :international, spaces: ' '))}
+    = link_to contact_path(call_log.contact) do
+      %i.fa.fa-user
+      = call_log.contact.full_name
   %td
     - if call_log.forwarded?
       %i.fa.fa-check.text-success
       = number_to_phone call_log.forwarded_to.phony_formatted(normalize: :US, format: :international, spaces: ' ')
     - else
       %i.fa.fa-times.text-danger
-  %td
-    - if call_log.answered_by.present?
-      = number_to_phone call_log.answered_by.phony_formatted(normalize: :US, format: :international, spaces: ' ')
   %td= number_with_delimiter call_log.duration_in_seconds
-  %td= number_to_currency call_log.price_in_cents, precision: 4

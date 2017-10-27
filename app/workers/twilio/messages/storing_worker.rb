@@ -27,7 +27,7 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     @local_message.num_segments = @message.num_segments
     @local_message.save!
 
-    # now store any media
+    # now store any attached media
     if @local_message.present? && @local_message.num_media > 0
       @message.media.list.each do |media_link|
         the_link = "https://api.twilio.com" + media_link.uri.remove('.json')

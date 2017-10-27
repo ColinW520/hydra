@@ -4,45 +4,53 @@
     %h4
       %i.fa.fa-free-code-camp
       ChangeLog
-.row
-  .col-sm-12.col-md-6
-    .card.my-2
-      .card-block.mb-0.pb-0
-        .pull-left
-          %h4 Commits
-          %p A commit is a collection of actual changes to the application itself. The message should describe what is being changed.
-      .card-block.px-0
-        %table.table.table-primary.table-condensed.mb-0.mt-0.pt-0
-          %thead
-            %tr
-              %th Time
-              %th Author
-              %th Note
-          %tbody
-            - @commits.each do |commit|
+
+- if @git_client.present?
+  .row
+    .col-sm-12.col-md-6
+      .card.my-2
+        .card-block.mb-0.pb-0
+          .pull-left
+            %h4 Commits
+            %p A commit is a collection of actual changes to the application itself. The message should describe what is being changed.
+        .card-block.px-0
+          %table.table.table-primary.table-condensed.mb-0.mt-0.pt-0
+            %thead
               %tr
-                %td= local_time_ago commit.author.date
-                %td= commit.author.name.titleize
-                %td= commit.message
-  .col-sm-12.col-md-6
-    .card.my-2
-      .card-block.mb-0.pb-0
-        .pull-left
-          %h4 Open Issues
-          %p An issue is something that needs to be worked on for the application. Once resolved, it should be referenced in the commit messages to the left.
-      .card-block.px-0
-        %table.table.table-primary.table-condensed.mb-0.mt-0.pt-0
-          %thead
-            %tr
-              %td ID
-              %th Title
-              %th Status
-              %th
-          %tbody
-            - @issues.each do |issue|
+                %th Time
+                %th Author
+                %th Note
+            %tbody
+              - @commits.each do |commit|
+                %tr
+                  %td= local_time_ago commit.author.date
+                  %td= commit.author.name.titleize
+                  %td= commit.message
+    .col-sm-12.col-md-6
+      .card.my-2
+        .card-block.mb-0.pb-0
+          .pull-left
+            %h4 Open Issues
+            %p An issue is something that needs to be worked on for the application. Once resolved, it should be referenced in the commit messages to the left.
+        .card-block.px-0
+          %table.table.table-primary.table-condensed.mb-0.mt-0.pt-0
+            %thead
               %tr
-                %td= '#' + issue.number.to_s
-                %td= render partial: "layouts/issue_modal", locals: {issue: issue}
-                %td
-                  - issue.labels.each do |l|
-                    %span.badge{style: "background-color: ##{l.color}; padding: 8px; margin: 1px;"}= l.name.upcase
+                %td ID
+                %th Title
+                %th Status
+                %th
+            %tbody
+              - @issues.each do |issue|
+                %tr
+                  %td= '#' + issue.number.to_s
+                  %td= render partial: "layouts/issue_modal", locals: {issue: issue}
+                  %td
+                    - issue.labels.each do |l|
+                      %span.badge{style: "background-color: ##{l.color}; padding: 8px; margin: 1px;"}= l.name.upcase
+- else
+  .row
+    .col-sm-12
+      %div.alert.alert-warning
+        %h1 Woah there!
+        %p Unable to pull down ChangeLog data from GitHub at this time. Please check back later!

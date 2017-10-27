@@ -16,13 +16,13 @@
         = num
 
   %td.actions
-    .btn-group
-      - if @organization_can_message
-        = link_to new_message_request_path(contact_ids: [contact.id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Contact", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+    .btn-group.pull-right
+      - if @current_organization.valid_setup?
+        = link_to new_message_request_path(contact_ids: [contact.id]), remote: true, class: 'btn btn-sm btn-outline-success', title: "Message this Contact", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
           %i.fa.fa-send-o
-      = link_to contact_path(contact), class: 'btn btn-sm btn-info', title: "See this members' Messaging History", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+      = link_to contact_path(contact), class: 'btn btn-sm btn-outline-info', title: "See this members' Messaging History", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-eye
-      = link_to edit_contact_path(contact), remote: true, class: 'btn btn-sm btn-warning', title: "Edit this Contact", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+      = link_to edit_contact_path(contact), remote: true, class: 'btn btn-sm btn-outline-warning', title: "Edit this Contact", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-pencil
-      = link_to contact_path(contact), remote: true, method: :delete, class: 'btn btn-sm btn-danger', title: "Remove this Contact", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+      = link_to contact_path(contact), remote: true, method: :delete, class: 'btn btn-sm btn-outline-danger', title: "Remove this Contact", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-trash

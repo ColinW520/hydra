@@ -30,10 +30,14 @@ class StaticPagesController < ApplicationController
 
   def changelog
     @subnav = 'changelog'
-    client = Octokit::Client.new(username: ENV['GITHUB_USERNAME'], password: ENV['GITHUB_PASSWORD'])
+    @git_client = Octokit::Client.new(username: ENV['GITHUB_USERNAME'], password: ENV['GITHUB_PASSWORD'])
 
-    @commits = client.commits('ColinW520/hydra', 'master', since: 1.month.ago ).map(&:commit)
-    @issues = client.issues('ColinW520/hydra', state: 'open')
+    begin
+      @commits = @git_client.commits('ColinW520/hydra', 'master', since: 1.month.ago ).map(&:commit)
+      @issues = @git_client.issues('ColinW520/hydra', state: 'open')
+    rescue
+      @git_client = nil
+    end
   end
 
   protected

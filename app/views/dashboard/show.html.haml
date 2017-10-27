@@ -9,51 +9,51 @@
               .col-sm-12.col-md-6.col-lg-12
                 %h3= "Welcome, #{current_user.first_name}"
                 %p= "#{current_user.organization.name} has experienced #{@current_activities.count} activities in the last #{params[:frame]}."
-                = line_chart @activity_hash, discrete: true, library: { pointSize: 0, legend: { position: 'bottom' }}
-    .row
-      .col-sm-12.col-md-12.col-lg-6{"data-placement" => "top", "data-toggle" => "tooltip", :title => "This is your Twilio cost so far this month."}
-        .card.bg-twilio-blue
-          .card-header.bg-twilio-blue
-            .text-center
-              %img.img-fluid{src: asset_url('twilio-mark-white.svg'), style: "max-height: 25px; padding-bottom: 10px"}
-              %p.text-white Current Usage
-          .card-block.text-center
-            %h1.text-white= number_to_currency @current_usage_total
-          .card-footer.text-center.text-white.bg-twilio-blue
-            %p
-              - if @last_usage_total > 0
-                - if @last_usage_total < @current_usage_total
-                  %i.fa.fa-arrow-up
-                  = number_to_percentage(((@current_usage_total - @last_usage_total) / @last_usage_total).abs * 100, precision: 0)
-                - else
-                  %i.fa.fa-arrow-down
-                  = number_to_percentage(((@current_usage_total - @last_usage_total) / @last_usage_total).abs * 100, precision: 0)
-                change from last month (
-                = number_to_currency @last_usage_total
-                )
-      .col-sm-12.col-md-12.col-lg-6{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Stops are instances where a contact has replied 'STOP', which precludes you from being able to message them again in the future."}
-        .card.card-danger
-          .card-header
-            .text-center
-              %i.fa.fa-ban.fa-lg.text-white{style: "padding-bottom: 10px"}
-              %p.text-white Stops
-          .card-block.text-center
-            %h1.text-white= number_with_delimiter @current_stops
-          .card-footer.text-center.text-white
-            %p
-              - if @last_stops > 0
-                - if @current_stops < @last_stops
-                  %i.fa.fa-arrow-down
-                  = number_to_percentage ((@current_stops - @last_stops) / @last_stops).abs * 100, precision: 0 rescue '0%'
-                - else
-                  %i.fa.fa-arrow-down
-                  = number_to_percentage ((@current_stops - @last_stops) / @last_stops).abs * 100, precision: 0 rescue '0%'
-                change from last month (
-                = number_with_delimiter @last_stops
-                )
+                = line_chart activity_chart_dashboard_path, discrete: true, library: { pointSize: 0, legend: { position: 'bottom' }}
+    -# .row
+    -#   .col-sm-12.col-md-12.col-lg-6{"data-placement" => "top", "data-toggle" => "tooltip", :title => "This is your Twilio cost so far this month."}
+    -#     .card.bg-twilio-blue
+    -#       .card-header.bg-twilio-blue
+    -#         .text-center
+    -#           %img.img-fluid{src: asset_url('twilio-mark-white.svg'), style: "max-height: 25px; padding-bottom: 10px"}
+    -#           %p.text-white Current Usage
+    -#       .card-block.text-center
+    -#         %h1.text-white= number_to_currency @current_usage_total
+    -#       .card-footer.text-center.text-white.bg-twilio-blue
+    -#         %p
+    -#           - if @last_usage_total > 0
+    -#             - if @last_usage_total < @current_usage_total
+    -#               %i.fa.fa-arrow-up
+    -#               = number_to_percentage(((@current_usage_total - @last_usage_total) / @last_usage_total).abs * 100, precision: 0)
+    -#             - else
+    -#               %i.fa.fa-arrow-down
+    -#               = number_to_percentage(((@current_usage_total - @last_usage_total) / @last_usage_total).abs * 100, precision: 0)
+    -#             change from last month (
+    -#             = number_to_currency @last_usage_total
+    -#             )
+    -#   .col-sm-12.col-md-12.col-lg-6{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Stops are instances where a contact has replied 'STOP', which precludes you from being able to message them again in the future."}
+    -#     .card.card-danger
+    -#       .card-header
+    -#         .text-center
+    -#           %i.fa.fa-ban.fa-lg.text-white{style: "padding-bottom: 10px"}
+    -#           %p.text-white Stops
+    -#       .card-block.text-center
+    -#         %h1.text-white= number_with_delimiter @current_stops
+    -#       .card-footer.text-center.text-white
+    -#         %p
+    -#           - if @last_stops > 0
+    -#             - if @current_stops < @last_stops
+    -#               %i.fa.fa-arrow-down
+    -#               = number_to_percentage ((@current_stops - @last_stops) / @last_stops).abs * 100, precision: 0 rescue '0%'
+    -#             - else
+    -#               %i.fa.fa-arrow-down
+    -#               = number_to_percentage ((@current_stops - @last_stops) / @last_stops).abs * 100, precision: 0 rescue '0%'
+    -#             change from last month (
+    -#             = number_with_delimiter @last_stops
+    -#             )
     .row
       .col-md-12.col-lg-12
-        .card.card-outline-sucess{style: 'background-color: #fff'}
+        .card.card-outline-primary{style: 'background-color: #fff'}
           .card-block
             %h5 Inbound Sources
             %p Here is a breakdown of your inbound activity by line.

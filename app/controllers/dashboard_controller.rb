@@ -5,16 +5,10 @@ class DashboardController < ApplicationController
     @current_activities = current_user.organization.feed_items.interactions.where(created_at: @current_start..@current_end)
     @previous_activities = current_user.organization.feed_items.interactions.where(created_at: @previous_start..@previous_end)
 
-    @activity_hash = [
-      { name: "Inbound Messages", data: current_user.organization.messages.inbound.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count },
-      { name:"Outbound Messages", data: current_user.organization.message_requests.sent.group_by_day(:processed_at, format: '%b %d', range: @current_start..@current_end).count },
-      { name: "Inbound Calls", data: current_user.organization.call_logs.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count }
-    ]
-
-    @twilio_client = Twilio::REST::Client.new(current_user.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
-
-    @current_usage_total = @twilio_client.usage.records.this_month.list.map(&:price).map(&:to_f).sum
-    @last_usage_total = @twilio_client.usage.records.last_month.list.map(&:price).map(&:to_f).sum
+    # @twilio_client = Twilio::REST::Client.new(current_user.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+    #
+    # @current_usage_total = @twilio_client.usage.records.this_month.list.map(&:price).map(&:to_f).sum
+    # @last_usage_total = @twilio_client.usage.records.last_month.list.map(&:price).map(&:to_f).sum
 
     @current_stops = current_user.organization.stops.where(created_at: 1.month.ago..Time.now).count
     @last_stops = current_user.organization.stops.where(created_at: 2.months.ago..1.month.ago).count
@@ -49,9 +43,9 @@ class DashboardController < ApplicationController
 
   def activity_chart
     render json: [
-      { name: "Inbound Messages", data: Message.inbound.group_by_day(:created_at, format: "%b", range: @current_start..@current_end).count },
-      { name:"Outbound Messages", data: MessageRequest.sent.group_by_day(:processed_at, format: "%b", range: @current_start..@current_end).count },
-      { name: "Inbound Calls", data: CallLog.group_by_day(:created_at, format: "%b", range: @current_start..@current_end).count }
+      { name: "Inbound Messages", data: current_user.organization.messages.inbound.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count },
+      { name:"Outbound Messages", data: current_user.organization.message_requests.sent.group_by_day(:processed_at, format: '%b %d', range: @current_start..@current_end).count },
+      { name: "Inbound Calls", data: current_user.organization.call_logs.group_by_day(:created_at, format: '%b %d', range: @current_start..@current_end).count }
     ].to_json
   end
 

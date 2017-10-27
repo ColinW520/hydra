@@ -48,15 +48,12 @@
             Matches:
             = smart_listing.count
             %i.fa.fa-question-circle{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This is the number of people who match these filters above."}
+            = link_to contacts_path, class: 'text-danger', style: "margin-left: 10px;", title: "This will remove any filters you've added and restart your search.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+              %i.fa.fa-times
+              Clear
           .col-sm-12.col-md-6.col-centered
             .pull-right
               - if @current_organization.valid_setup?
                 = link_to new_message_request_path(count: smart_listing.count, query: request.params), remote: true, id: 'NewMessageButton', class: 'btn btn-success btn-sm', title: "Message all contacts matching these filters." do
                   %i.fa.fa-send
                   Message ALL
-              = button_tag type: "submit", id: "Submitter", class: "btn btn-sm btn-info", title: "This will update your filter results. You can also just press your enter key." do
-                %i.fa.fa-filter
-                Update
-              = link_to contacts_path, class: 'btn btn-outline-danger btn-sm', title: "This will remove any filters you've added and restart your search.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
-                %i.fa.fa-times
-                Clear

@@ -27,10 +27,9 @@
                   - if @current_organization.valid_setup? && smart_listing.count > 0
                     %tr{style: 'background-color: #f3f3f3'}
                       %td{colspan: 8}
-                        = button_tag type: "submit", class: "btn btn-sm btn-success", id: 'targetingButton' do
+                        = button_tag type: "submit", class: "btn btn-sm btn-outline-success", id: 'targetingButton' do
                           %i.fa.fa-check{"data-placement" => "right", "data-toggle" => "tooltip", :title => "This will message only the contacts with the checkboxes selected."}
                           Message Selected
-                          %em Only
 %br
 .row
   .col-sm-12

@@ -2,9 +2,8 @@ class ImportsController < ApplicationController
   before_action :set_import, only: [:show, :edit, :update, :destroy]
 
   def index
-    @imports = Import.where(organization_id: current_user.organization_id).
-                      order('created_at DESC').
-                      limit(25)
+    imports_scope = current_user.organization.imports
+    smart_listing_create :imports, imports_scope, partial: 'imports/listing', default_sort: { created_at: :desc }, page_sizes: [50]
   end
 
   def show
@@ -21,14 +20,14 @@ class ImportsController < ApplicationController
       if @import.save
         format.html {
           flash[:success] = 'Import enqueued for processing. We will let you know when its done.'
-          redirect_to contacts_path
+          redirect_to imports_path
         }
         format.json { head :no_content }
         format.js
       else
         format.html {
           flash[:danger] = "There were some problems with your import: #{@import.errors.full_messages}"
-          redirect_to contacts_path
+          render :new
         }
         format.json { render json: @import.errors.full_messages, status: :unprocessable_entity }
       end

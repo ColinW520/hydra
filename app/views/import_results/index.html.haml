@@ -1,0 +1,11 @@
+- provide(:title, 'Results')
+.row
+  .col-sm-12
+    %h4
+      %i.fa.fa-upload
+      Results for Import
+      = @import.id
+%br
+.row
+  .col-sm-12
+    = smart_listing_render :import_results

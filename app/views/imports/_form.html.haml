@@ -14,4 +14,5 @@
         .text-center
           = f.hidden_field :type, value: 'contact'
           = f.hidden_field :organization_id, value: current_user.organization_id
+          = f.hidden_field :created_by, value: current_user.id
           = f.submit 'Import this File', class: 'btn btn-success btn-md', id: 'ImportSubmit'

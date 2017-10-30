@@ -1,6 +1,7 @@
+# manage when this is run here: https://scheduler.heroku.com/dashboard
 class Stripe::InvoiceSyncWorker
   include Sidekiq::Worker
-  # this runs every 5 minutes
+
   def perform
     Stripe::Invoice.list.each do |stripe_invoice|
       invoice = Invoice.where(stripe_id: stripe_invoice.id).first_or_initialize

@@ -1,0 +1,19 @@
+.card.card-default
+  .card-body
+    .table-condensed
+      %table.table.table-hover
+        %thead.thead-inverse
+          %tr
+            %th Updated
+            %th Status
+            %th Result
+            %th Message
+            %th Data
+            %th
+        %tbody#import_results
+          - if smart_listing.count > 0
+            - smart_listing.collection.each do |import_result|
+              = render import_result
+          - else
+            %tr
+              %td{colspan: 6} No results yet

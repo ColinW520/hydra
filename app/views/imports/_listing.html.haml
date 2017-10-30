@@ -1,0 +1,21 @@
+.card.card-default
+  .card-body
+    .table-condensed
+      %table.table.table-hover
+        %thead.thead-inverse
+          %tr
+            %th ID
+            %th Started
+            %th File
+            %th Status
+            %th Creator
+            %th Rows
+            %th Progress
+            %th
+        %tbody#imports
+          - if smart_listing.count > 0
+            - smart_listing.collection.each do |import|
+              = render import
+          - else
+            %tr
+              %td{colspan: 8} No imports yet

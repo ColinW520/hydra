@@ -1,3 +1,4 @@
+# manage when this is run here: https://scheduler.heroku.com/dashboard
 class Stripe::SubscriptionSyncWorker
   include Sidekiq::Worker
 

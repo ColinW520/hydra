@@ -1,0 +1,12 @@
+%tr{id: "import_result_#{import_result.id}"}
+  %td= local_time_ago import_result.updated_at
+  %td= import_result.status.upcase
+  %td= import_result.result.upcase
+  %td= import_result.message
+  %td
+    %ul
+      - import_result.row_data.each do |k, v|
+        %li
+          = k.titleize
+          = ':'
+          = v

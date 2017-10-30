@@ -2,41 +2,71 @@ class Imports::ImportContactRowWorker
   include Sidekiq::Worker
   sidekiq_options queue: :imports
 
-  def perform(row, import_id)
-    row = row.with_indifferent_access
-    @retry_count ||= 0
-    the_import = Import.find import_id
-    the_organization = Organization.find the_import.organization_id
+  def perform(result_id)
+    # set the required objects up
+    @the_result = ImportResult.find result_id
+    @the_import = @the_result.import
+    @the_row = @the_result.row_data.with_indifferent_access
 
-    # dont bother if there is no number.
-    return unless row[:phone].present?
+    # now start processing
+    @the_result.update_attribute(:status, 'processing')
+    @retry_count ||= 0
+
+    # first check for a phone number.
+    return @the_result.update_attributes(
+      result: 'failure',
+      status: 'complete',
+      message: 'The value for phone is not present.'
+    ) if !@the_row[:phone].present?
+
+    # now check and make sure that it is a valid phone number
+    return @the_result.update_attributes(
+      result: 'failure',
+      status: 'complete',
+      message: 'It appears this is not a valid US phone number.'
+    ) if @the_row[:phone].phony_formatted(normalize: 'US', strict: true).nil?
 
     # find or init the contact by the organization and the phone number, properly normalized
-    contact = Contact.where(organization_id: the_organization.id, mobile_phone: PhonyRails.normalize_number(row[:phone], country_code: 'US')).first_or_initialize
+    @the_contact = Contact.where(
+      organization_id: @the_import.organization_id,
+      mobile_phone: PhonyRails.normalize_number(@the_row[:phone],country_code: 'US')
+    ).first_or_initialize
 
-    contact.organization_id = the_import.organization_id
-    contact.first_name = row[:first_name]
-    contact.last_name = row[:last_name]
-    contact.mobile_phone = PhonyRails.normalize_number(row[:phone], country_code: 'US')
+    @the_contact.organization_id = @the_import.organization_id
+    @the_contact.first_name = @the_row[:first_name]
+    @the_contact.last_name = @the_row[:last_name]
+    @the_contact.mobile_phone = PhonyRails.normalize_number(@the_row[:phone], country_code: 'US')
+    @the_contact.title = @the_row[:title] if @the_row[:title].present?
+    @the_contact.address_city = @the_row[:city] if @the_row[:city].present?
+    @the_contact.address_state = @the_row[:state] if @the_row[:state].present?
+    @the_contact.address_zip = @the_row[:zip] if @the_row[:zip].present?
+    @the_contact.is_active = @the_row[:is_active] ||= true
+    @the_contact.internal_identifier = @the_row[:internal_identifier] if @the_row[:internal_identifier].present?
 
-    contact.title = row[:title] if row[:title].present?
-    contact.address_city = row[:city] if row[:city].present?
-    contact.address_state = row[:state] if row[:state].present?
-    contact.address_zip = row[:zip] if row[:zip].present?
-    contact.is_active = row[:is_active] ||= true
-    contact.internal_identifier = row[:internal_identifier] if row[:internal_identifier].present?
+    @the_contact.tag_list = @the_row[:tags].split('|').compact.reject(&:blank?).uniq.join(', ') if @the_row[:tags].present?
 
-    contact.tag_list = row[:tags].split('|').compact.reject(&:blank?).uniq.join(', ') if row[:tags].present?
+    @the_contact.removed_at = nil
+    @the_contact.removed_by = nil
 
-    contact.removed_at = nil
-    contact.removed_by = nil
+    if @the_contact.persisted?
+      @the_result.message = 'The contact was updated with the given values.'
+    else
+      @the_result.message = 'A contact was created with the given values.'
+    end
 
-    contact.save!
-  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
+    # save the contact (persists the record)
+    @the_contact.save!
+
+    # finalize the result
+    @the_result.status = 'complete'
+    @the_result.result = 'success'
+    @the_result.save!
+
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => error
     if (@retry_count += 1) <= 2
       retry
     else
-      raise
+      @the_result.update_attributes(status: 'complete',result: 'failure',message: error.message)
     end
   end
 end

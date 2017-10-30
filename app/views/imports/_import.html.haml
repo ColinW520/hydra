@@ -1,11 +1,16 @@
 %tr{id: "import_#{import.id}"}
-  %td= import.datafile_file_name
-  %td= import.type
-  %td fix me
-  %td= import.status
-  %td= local_time_ago import.created_at rescue ''
-  %td= local_time_ago import.completed_at rescue ''
-  %td= import.message
+  %td= import.id
+  %td= local_time_ago import.created_at
   %td
-    = link_to import.datafile.url, target: '_blank', class: 'btn btn-info btn-sm' do
+    = link_to import.datafile.url, target: '_blank' do
       %i.fa.fa-file-excel-o
+      = import.datafile_file_name
+  - if import.message
+    %td{"data-placement" => "left", "data-toggle" => "tooltip", :title => import.message}= import.status
+  - else
+    %td= import.status
+  %td= import.creator.try :first_name
+  %td= number_with_delimiter import.import_results_count
+  %td= import.try(:progress)
+  %td
+    = link_to 'Results', import_import_results_path(import)

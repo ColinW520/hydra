@@ -3,7 +3,7 @@
     %p Use this form to upload your pre-existing contact list. CSV uploads can be tricky, so, be sure and read these instructions closely to ensure a smooth experience.
     %p
       %strong.text-danger
-        First Row Headers
+        Required First Row Headers
       %small (these can be in any order)
 .row
   .col-sm-12.col-md-6
@@ -14,9 +14,12 @@
       %li last_name
       %ul
         %li Example: Smith
-      %li phone
+      %li phone*
       %ul
-        %li This is the lookup value. If we find an existing contact with this phone number, we will update that contact with the information you specify.
+        %li.text-danger
+          %em This is the only required field.
+        %li
+          %strong This is the lookup value. If we find an existing contact with this phone number, we will update that contact with the information you specify.
         %li Please make sure it is a Mobile number
         %li Example: 3162588774
       %li tags

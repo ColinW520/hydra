@@ -15,7 +15,11 @@
           %li{class: @subnav == 'contacts' ? 'active' : nil}
             %i.fa.fa-address-book-o.fa-lg
             Directory
-
+        - if current_user.admin_role? && @current_plan.can_upload_contacts?
+          %a{href: imports_path}
+            %li{class: @subnav == 'imports' ? 'active' : nil}
+              %i.fa.fa-upload.fa-lg
+              Imports
         - if ['messages', 'message_requests', 'compose'].include?(@subnav)
           %li{"data-target" => "#messages_menu", "data-toggle" => "collapse", "aria-expanded" => "true"}
             %a{href: "#"}

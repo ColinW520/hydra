@@ -5,10 +5,10 @@ class DashboardController < ApplicationController
     @current_activities = current_user.organization.feed_items.interactions.where(created_at: @current_start..@current_end)
     @previous_activities = current_user.organization.feed_items.interactions.where(created_at: @previous_start..@previous_end)
 
-    # @twilio_client = Twilio::REST::Client.new(current_user.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
-    #
-    # @current_usage_total = @twilio_client.usage.records.this_month.list.map(&:price).map(&:to_f).sum
-    # @last_usage_total = @twilio_client.usage.records.last_month.list.map(&:price).map(&:to_f).sum
+    @twilio_client = Twilio::REST::Client.new(current_user.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+
+    @current_usage_total = @twilio_client.usage.records.this_month.list.map(&:price).map(&:to_f).sum
+    @last_usage_total = @twilio_client.usage.records.last_month.list.map(&:price).map(&:to_f).sum
 
     @current_stops = current_user.organization.stops.where(created_at: 1.month.ago..Time.now).count
     @last_stops = current_user.organization.stops.where(created_at: 2.months.ago..1.month.ago).count

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  import: one
+  status: MyString
+  result: MyString
+  message: MyString
+
+two:
+  import: two
+  status: MyString
+  result: MyString
+  message: MyString

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027195151) do
+ActiveRecord::Schema.define(version: 20171028201145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -203,6 +203,17 @@ ActiveRecord::Schema.define(version: 20171027195151) do
     t.index ["user_id"], name: "index_feed_items_on_user_id", using: :btree
   end
 
+  create_table "import_results", force: :cascade do |t|
+    t.integer  "import_id"
+    t.text     "row_data"
+    t.string   "status"
+    t.string   "result"
+    t.string   "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["import_id"], name: "index_import_results_on_import_id", using: :btree
+  end
+
   create_table "imports", force: :cascade do |t|
     t.integer  "organization_id"
     t.string   "type"
@@ -211,12 +222,15 @@ ActiveRecord::Schema.define(version: 20171027195151) do
     t.integer  "created_by"
     t.datetime "completed_at"
     t.boolean  "is_enqueued"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "datafile_file_name"
     t.string   "datafile_content_type"
     t.integer  "datafile_file_size"
     t.datetime "datafile_updated_at"
+    t.integer  "rows_count",            default: 0
+    t.integer  "import_results_count",  default: 0
+    t.datetime "notified_at"
     t.index ["organization_id"], name: "index_imports_on_organization_id", using: :btree
   end
 
@@ -546,6 +560,7 @@ ActiveRecord::Schema.define(version: 20171027195151) do
   add_foreign_key "contacts", "organizations"
   add_foreign_key "feed_items", "organizations"
   add_foreign_key "feed_items", "users"
+  add_foreign_key "import_results", "imports"
   add_foreign_key "imports", "organizations"
   add_foreign_key "keywords", "lines"
   add_foreign_key "keywords", "organizations"

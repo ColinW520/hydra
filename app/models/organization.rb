@@ -27,6 +27,12 @@ class Organization < ApplicationRecord
 
   validates :name, presence: true
 
+  has_attached_file :logo,
+    dependent: :destroy
+  validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
+  validates_attachment :logo, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
+
+
   def valid_setup?
     return false unless self.twilio_auth_id
     return false unless self.subscription.present?

@@ -1,0 +1,9 @@
+.flashing-check {
+  font-size: 100px;
+  animation: blink 3s ease-in 1;
+}
+
+@keyframes blink {
+  from, to { opacity: 1 }
+  50% { opacity: 0 }
+}

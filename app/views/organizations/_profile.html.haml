@@ -1,14 +1,14 @@
 .table-responsive.card.table-card
   %table.table
     %thead.thead-inverse
-      %th{colspan: 2}
+      %th
         %h6.text-white Profile
       %th
         .pull-right
-        - if current_user.admin_role?
-          = link_to edit_organization_path, remote: true, class: 'btn btn-sm btn-warning' do
-            %i.fa.fa-edit
-            Edit
+          - if current_user.admin_role?
+            = link_to edit_organization_path, remote: true, class: 'btn btn-sm btn-warning' do
+              %i.fa.fa-edit
+              Edit
     %tbody
       %tr
         %td
@@ -39,3 +39,13 @@
               -#       %i.fa.fa-ban{"data-placement" => "left", "data-toggle" => "tooltip", :title => "Use this to completely disconnect your Twilio account. This will render TmT unusable until a new account is connected."}
           - else
             = link_to 'Connect Your Account', "https://www.twilio.com/authorize/#{ENV['TWILIO_HYDRA_SID']}?state=#{@organization.id}"
+      %tr
+        %td
+          %strong Logo
+        %td
+          %img.img-fluid{src: @organization.logo.url}
+      %tr
+        %td
+          %strong Welcome Message
+        %td
+          %em= @organization.signup_text

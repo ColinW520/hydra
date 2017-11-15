@@ -1,4 +1,4 @@
-= simple_form_for [@organization], authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
+= simple_form_for [@organization], authenticity_token: true, multipart: true, html: { id: 'OrganizationsForm' } do |f|
   .row
     .col-sm-12
       #error_holder
@@ -20,7 +20,14 @@
     .col-sm-12.col-md-6
       .form-group
         = f.input :preferred_area_code, label: 'Area Code', as: :integer, required: true, hint: 'Use the same area code as your business, ideally. This affects the area codes available to you when you add a line.', max: 999, required: true
-
+  .row
+    .col-sm-12
+      .form-group
+        = f.input :signup_text, label: "Sign Up Page Message", as: :text, required: false, hint: "Use this Message on your Organiation's signup page."
+    .col-sm-12
+      .form-group
+        %label Add A Picture
+        = f.input :logo, label: false, class: 'form-control', hint: 'PNG, JPEG, and GIF are presently supported.'
   .row
     .col-sm-12
       .form-actions

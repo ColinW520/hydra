@@ -1,0 +1,42 @@
+- provide(:title, 'Add A Contact')
+.row
+  .col-sm-12
+    .text-center
+      %img.img-fluid{src: @organization.logo.url, style: 'max-height: 100px;'}
+      %br
+      %p.lead= @organization.signup_text
+  .col-sm-12
+    .card
+      .card-block
+        = simple_form_for @contact, url: organization_signup_path(@organization), action: 'signup', authenticity_token: true, html: { id: 'OrganizationContactForm' } do |f|
+          .row
+            .col-sm-12
+              #error_holder
+                %ul#errors
+              = f.error_notification
+          .row
+            .col-sm-12.col-md-6
+              .form-group
+                = f.input :first_name, autofocus: true, required: true
+            .col-sm-12.col-md-6
+              .form-group
+                = f.input :last_name
+          .row
+            .col-sm-12.col-md-12
+              .form-group
+                = f.input :mobile_phone, label: 'MOBILE Phone', required: true, placeholder: '(316) 258-8774'
+          .row
+            .col-sm-12.col-md-8
+              .form-group
+                = f.input :address_city, label: 'City'
+            .col-sm-12.col-md-4
+              .form-group
+                = f.input :address_state, label: 'State (Abbr)'
+          .row
+            .col-sm-12
+              .form-group
+                = f.input :is_active, as: :boolean, label: 'Receive Text Messages?', hint: 'Uncheck this box to opt out.', input_html: { checked: true }
+              .form-actions
+                .text-center
+                  = f.hidden_field :organization_id, value: @contact.organization_id
+                  = f.button :submit, 'Submit', class: 'btn btn-md btn-success'

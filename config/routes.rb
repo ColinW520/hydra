@@ -54,6 +54,9 @@ Rails.application.routes.draw do
     resources :billing_methods
     resources :subscriptions
     resources :users
+    match '/signup' => 'organizations/contacts#new', via: [:get]
+    match '/success' => 'organizations/contacts#success', as: 'success', via: [:get]
+    post '/signup', to: 'organizations/contacts#signup', via: [:post]
     member do
       get :connect
     end
@@ -69,11 +72,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
-
-  # Twilio Endpoints
-  # match '/twilio/authorize' => 'twilio/authorizations#authorize', via: [:get]
-  # match '/twilio/deauthorize' => 'twilio/authorizations#deauthorize', via: [:get]
-  # match '/twilio/callbacks/status' => 'twilio/callbacks#status', via: [:post]
 
   namespace :twilio do
     resources :messages

@@ -13,8 +13,16 @@ class Organizations::ContactsController < ApplicationController
   end
 
   def signup
-    @contact = Contact.new(contact_params)
-    @contact.mobile_phone = PhonyRails.normalize_number(contact_params[:mobile_phone], country_code: 'US')
+    @contact = Contact.where(
+      organization_id: @organization.id,
+      mobile_phone: PhonyRails.normalize_number(contact_params[:mobile_phone], country_code: 'US')
+    ).first_or_initialize
+
+    @contact.first_name = contact_params[:first_name]
+    @contact.last_name = contact_params[:last_name]
+    @contact.address_city = contact_params[:address_city]
+    @contact.address_state = contact_params[:address_state]
+    @contact.is_active = contact_params[:is_active]
 
     respond_to do |format|
       if @contact.save

@@ -5,8 +5,7 @@ class Contact < ApplicationRecord
   has_many :messages
   has_many :stops
 
-  validates :organization,
-            presence: true
+  validates :organization, presence: true
 
   phony_normalize :mobile_phone, default_country_code: 'US'
   validates :mobile_phone,

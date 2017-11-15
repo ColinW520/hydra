@@ -49,3 +49,8 @@
           %strong Welcome Message
         %td
           %em= @organization.signup_text
+      %tr
+        %td
+          %strong Signup Link
+        %td
+          = link_to 'Signup Link!', organization_signup_path(@organization), target: '_blank'

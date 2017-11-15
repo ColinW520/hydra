@@ -3,8 +3,10 @@
   .col-sm-12
     .text-center
       %img.img-fluid{src: @organization.logo.url, style: 'max-height: 100px;'}
+      %hr
       %br
-      %p.lead= @organization.signup_text
+      %p= @organization.signup_text
+      %br
   .col-sm-12
     .card
       .card-block

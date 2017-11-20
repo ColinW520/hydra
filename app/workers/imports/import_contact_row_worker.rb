@@ -40,7 +40,8 @@ class Imports::ImportContactRowWorker
     @the_contact.address_city = @the_row[:city] if @the_row[:city].present?
     @the_contact.address_state = @the_row[:state] if @the_row[:state].present?
     @the_contact.address_zip = @the_row[:zip] if @the_row[:zip].present?
-    @the_contact.is_active = @the_row[:is_active] ||= true
+    # is this an existing contact that is
+    # @the_contact.is_active = @the_row[:is_active] ||= false
     @the_contact.internal_identifier = @the_row[:internal_identifier] if @the_row[:internal_identifier].present?
 
     @the_contact.tag_list = @the_row[:tags].split('|').compact.reject(&:blank?).uniq.join(', ') if @the_row[:tags].present?

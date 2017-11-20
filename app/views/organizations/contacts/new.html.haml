@@ -38,7 +38,7 @@
           .row
             .col-sm-12
               .form-group
-                = f.input :is_active, as: :boolean, label: 'Receive Text Messages?', hint: 'Uncheck this box to opt out.', input_html: { checked: true }
+                = f.input :is_active, as: :boolean, label: "Receive text messages from #{@organization.name}", hint: 'Uncheck this box to opt out.', input_html: { checked: true }
           %br
           .row
             .col-sm-12

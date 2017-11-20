@@ -18,8 +18,18 @@ class User < ApplicationRecord
   scope :subscribed_to_instant_alerts, -> { where(notify_instantly: true) }
   scope :subscribed_to_daily_summary, -> { where(summarize_daily: true) }
   scope :subscribed_to_weekly_summary, -> { where(summarize_weekly: true) }
+  scope :subscribed_to_signup_alerts, -> { where(send_signup_notifications: true) }
   scope :super_admins, -> { where(is_super_user: true) }
   scope :active, -> { where(deleted_at: nil) }
+
+
+  before_create :validate_mobile_phone
+  def validate_mobile_phone
+    @client = Twilio::REST::LookupsClient.new(self.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+    number = @client.phone_numbers.get(self.mobile_phone, type: "carrier")
+
+    self.mobile_phone_validated = true if number.carrier['type'] == 'mobile'
+  end
 
   def full_name
     "#{self.first_name} #{self.last_name}"

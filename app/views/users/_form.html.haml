@@ -16,9 +16,10 @@
   %br
   %p.lead Notification Settings
   .form-group
-    = f.input :notify_instantly, hint: "Send this user an email every time an inbound message is received."
-    = f.input :summarize_daily, hint: "Send this user an email every day summarizing inbound and outbound messaging activity."
-    = f.input :summarize_weekly, hint: "Send this user an email every Monday summarizing the previous week's messaging activity."
+    = f.input :notify_instantly, hint: "Send an email every time an inbound message is received."
+    = f.input :summarize_daily, hint: "Send an email every day summarizing inbound and outbound messaging activity."
+    = f.input :summarize_weekly, hint: "Send an email every Monday summarizing the previous week's messaging activity."
+    = f.input :send_signup_notifications, hint: "Send an email every time a Contact signs up via your organization's signup page."
   %br
   .form-actions.col-centered
     = f.button :submit, class: 'btn btn-md btn-success'

@@ -26,6 +26,7 @@ class Organizations::ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
+        SignupsMailer.new(@contact.id).deliver_later
         format.html {
           redirect_to organization_success_path
         }

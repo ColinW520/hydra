@@ -19,10 +19,10 @@
           .row
             .col-sm-12.col-md-6
               .form-group
-                = f.input :first_name, autofocus: true, required: true
+                = f.input :first_name, label: 'First Name', autofocus: true, required: true
             .col-sm-12.col-md-6
               .form-group
-                = f.input :last_name
+                = f.input :last_name, label: 'Last Name', required: true
           .row
             .col-sm-12.col-md-12
               .form-group
@@ -30,14 +30,18 @@
           .row
             .col-sm-12.col-md-8
               .form-group
-                = f.input :address_city, label: 'City'
+                = f.input :address_city, label: 'City', required: true
             .col-sm-12.col-md-4
               .form-group
-                = f.input :address_state, label: 'State (Abbr)'
+                = f.input :address_state, as: :select, label: 'State', collection: us_states
+          %br
           .row
             .col-sm-12
               .form-group
                 = f.input :is_active, as: :boolean, label: 'Receive Text Messages?', hint: 'Uncheck this box to opt out.', input_html: { checked: true }
+          %br
+          .row
+            .col-sm-12
               .form-actions
                 .text-center
                   = f.hidden_field :organization_id, value: @contact.organization_id

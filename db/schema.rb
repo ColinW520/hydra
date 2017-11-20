@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113204733) do
+ActiveRecord::Schema.define(version: 20171120032436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -492,19 +492,19 @@ ActiveRecord::Schema.define(version: 20171113204733) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",                           null: false
-    t.string   "encrypted_password",     default: ""
+    t.string   "email",                     default: "",                           null: false
+    t.string   "encrypted_password",        default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,                            null: false
+    t.integer  "sign_in_count",             default: 0,                            null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
-    t.boolean  "admin_role",             default: false
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+    t.boolean  "admin_role",                default: false
     t.integer  "organization_id"
     t.string   "first_name"
     t.string   "last_name"
@@ -513,17 +513,18 @@ ActiveRecord::Schema.define(version: 20171113204733) do
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
-    t.integer  "invitations_count",      default: 0
+    t.integer  "invitations_count",         default: 0
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.datetime "deleted_at"
     t.string   "mobile_phone"
-    t.string   "timezone",               default: "Pacific Time (US & Canada)"
+    t.string   "timezone",                  default: "Pacific Time (US & Canada)"
     t.boolean  "mobile_phone_validated"
-    t.boolean  "is_super_user",          default: false
-    t.boolean  "notify_instantly",       default: false
-    t.boolean  "summarize_daily",        default: false
-    t.boolean  "summarize_weekly",       default: false
+    t.boolean  "is_super_user",             default: false
+    t.boolean  "notify_instantly",          default: false
+    t.boolean  "summarize_daily",           default: false
+    t.boolean  "summarize_weekly",          default: false
+    t.boolean  "send_signup_notifications", default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
     t.index ["organization_id"], name: "index_users_on_organization_id", using: :btree

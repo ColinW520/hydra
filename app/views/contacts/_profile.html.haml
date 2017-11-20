@@ -47,6 +47,14 @@
         %td
           %strong Updated
         %td= local_time_ago @contact.updated_at
+      %tr
+        %td
+          %strong Active?
+        %td
+          - if @contact.is_active?
+            %i.fa.fa-check.text-success
+          - else
+            %i.fa.fa-times.text-danger
       - if @contact.opted_out_at.present?
         %tr.table-danger
           %td

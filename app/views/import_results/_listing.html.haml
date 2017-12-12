@@ -17,3 +17,13 @@
           - else
             %tr
               %td{colspan: 6} No results yet
+
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.pagination_per_page_links

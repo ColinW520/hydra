@@ -3,14 +3,13 @@ class ImportResultsController < ApplicationController
 
   def index
     results_scope = ImportResult.all
-    smart_listing_create :import_results, results_scope, partial: "import_results/listing", default_sort: { created_at: "desc" }
 
     respond_to do |format|
       format.html {
-        smart_listing_create :import_results, results_scope, partial: "import_results/listing", default_sort: { created_at: "desc" }
+        smart_listing_create :import_results, results_scope, partial: "import_results/listing", default_sort: { created_at: "desc" }, page_sizes: [100, 250, 500]
       }
       format.js {
-        smart_listing_create :import_results, results_scope, partial: "import_results/listing", default_sort: { created_at: "desc" }
+        smart_listing_create :import_results, results_scope, partial: "import_results/listing", default_sort: { created_at: "desc" }, page_sizes: [100, 250, 500]
       }
       format.csv { send_data results_scope.to_csv, filename: "results_for_import_#{@import.id}.csv" }
     end

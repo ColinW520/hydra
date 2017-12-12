@@ -22,8 +22,18 @@ class Imports::ImportStartingWorker
     @the_import.update_attributes(is_enqueued: true, status: 'processing')
 
 
-    open(@the_import.datafile.url) do |file|   # don't forget to specify the UTF-8 encoding!!
-      @the_import.rows_count = file.readlines.count
+    open(@the_import.datafile.url, "r:utf-8") do |file|
+      SmarterCSV.process(file, default_options).each do |chunk|
+        chunk.each do |row|
+          puts row
+          # result = ImportResult.create(import_id: @the_import.id, row_data: row.with_indifferent_access, status: 'enqueued')
+          # Imports::ImportContactRowWorker.perform_async(result.id) if Rails.env.production?
+          # Imports::ImportContactRowWorker.new.perform(result.id) if Rails.env.development?
+        end
+      end
+    end
+
+    open(@the_import.datafile.url, "r:utf-8") do |file|
       SmarterCSV.process(file, default_options).each do |chunk|
         chunk.each do |row|
           result = ImportResult.create(import_id: @the_import.id, row_data: row.with_indifferent_access, status: 'enqueued')
@@ -33,6 +43,7 @@ class Imports::ImportStartingWorker
       end
     end
 
+    @the_import.rows_count = file.readlines.count
     @the_import.is_enqueued = false
     @the_import.status = 'succeeded'
     @the_import.save!

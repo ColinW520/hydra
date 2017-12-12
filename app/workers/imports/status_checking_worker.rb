@@ -1,5 +1,5 @@
 # manage when this is run here: https://scheduler.heroku.com/dashboard
-class Imports::ImportContactRowWorker
+class Imports::StatusCheckingWorker
   include Sidekiq::Worker
 
   def perform

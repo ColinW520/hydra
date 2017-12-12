@@ -3,6 +3,10 @@ class Imports::ImportStartingWorker
   sidekiq_options queue: :imports
 
   def perform(import_id)
+    @the_import = Import.find import_id
+    return if @the_import.is_enqueued?
+    @the_import.update_attributes(is_enqueued: true, status: 'processing')
+
     default_options = {
       force_utf8: true,
       invalid_byte_sequence: '',
@@ -16,23 +20,7 @@ class Imports::ImportStartingWorker
       force_simple_split: true,
       strip_chars_from_headers: /[\-"]/
     }
-
-    @the_import = Import.find import_id
-    return if @the_import.is_enqueued?
-    @the_import.update_attributes(is_enqueued: true, status: 'processing')
-
-
-    open(@the_import.datafile.url, "r:utf-8") do |file|
-      SmarterCSV.process(file, default_options).each do |chunk|
-        chunk.each do |row|
-          puts row
-          # result = ImportResult.create(import_id: @the_import.id, row_data: row.with_indifferent_access, status: 'enqueued')
-          # Imports::ImportContactRowWorker.perform_async(result.id) if Rails.env.production?
-          # Imports::ImportContactRowWorker.new.perform(result.id) if Rails.env.development?
-        end
-      end
-    end
-
+  
     open(@the_import.datafile.url, "r:utf-8") do |file|
       SmarterCSV.process(file, default_options).each do |chunk|
         chunk.each do |row|

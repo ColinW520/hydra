@@ -6,6 +6,9 @@
         = f.error_notification
   .row
     .col-sm-12
+      = f.input :is_available, as: :boolean
+      %hr
+      %p.lead Permissions
       = f.input :can_add_users, as: :boolean
       = f.input :can_send_mms, as: :boolean
       = f.input :can_schedule_messages, as: :boolean

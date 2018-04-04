@@ -18,8 +18,6 @@
     padding-bottom: 5%
   }
 
-
-
   a.question {
     text-decoration: none;
     cursor: help;
@@ -27,17 +25,17 @@
   }
 
   #LandingContainer {
-	  background: url('https://static.pexels.com/photos/17663/pexels-photo.jpg') no-repeat center center fixed;
-	  -webkit-background-size: cover;
-	  -moz-background-size: cover;
-	  -o-background-size: cover;
-	  background-size: cover;
-		height: 100vh;
+    background-color: #fff;
 	}
 
-  .jumbotron {
-    margin: 65% 5% 5% 0%;
-    background-color: rgba(34, 0, 0, 0.6)
+  #Benefits {
+    background-color: #fff;
+  }
+
+  #WhyTwilio {
+    background-color: #fff;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
   }
 
   #Pricing {
@@ -65,9 +63,9 @@
       // }
 
       &:hover {
-        transform: scale(1.05);
-        -webkit-box-shadow: 0 22px 40px 0 rgba(92, 184, 92, .50);
-        box-shadow: 0 22px 40px 0 rgba(92, 184, 92, .50);
+        transform: scale(1.01);
+        -webkit-box-shadow: 0 11px 11px 0 rgba(92, 184, 92, .50);
+        box-shadow: 0 11px 11px 0 rgba(92, 184, 92, .50);
 
         &:after {
           width: 100%;
@@ -75,7 +73,7 @@
 
       }
       & .card-header {
-        background-color: white;
+        background-color: #E1FFFF;
         padding-left: 2rem;
         border-bottom: 0px;
       }

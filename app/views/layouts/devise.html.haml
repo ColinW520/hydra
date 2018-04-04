@@ -19,8 +19,6 @@
     .container
       .row{style: "margin-top: 10%"}
         .col-sm-12.col-md-6.col-lg-5.col-centered
-          %h1.text-center
-            %i.fa.fa-comments-o
-            TextMy.Team
+          %img.img-fluid{src: asset_url('tmt_dark.png'), style: "max-height: 100px; padding-bottom: 25px; margin-left: auto; margin-right: auto;"}
           .unobtrusive-flash-container
           = yield

@@ -2,7 +2,7 @@ class Admin::PlansController < Admin::BaseController
   before_action :find_plan, except: [:index, :new, :create]
 
   def index
-    plans_scope = Plan.all
+    plans_scope = Plan.not_removed
 
     smart_listing_create :plans,
                         plans_scope,
@@ -30,6 +30,19 @@ class Admin::PlansController < Admin::BaseController
       else
         format.json { render json: @plan.errors.full_messages, status: :unprocessable_entity }
       end
+    end
+  end
+
+
+  def destroy
+    if @plan.soft_delete(current_user.id)
+      respond_to do |format|
+        format.js { flash[:success] = 'Plan removed.' }
+        format.html { redirect_to admin_plans_path, notice: 'Plan removed.' }
+        format.json { head :no_content }
+      end
+    else
+      format.json { render json: @plan.errors.full_messages, status: :unprocessable_entity }
     end
   end
 

@@ -4,20 +4,20 @@
     .section-title
       .row
         .col-sm-12.col-md-12.col-lg-12
-          %h1.text-center Contact
+          %h2.text-center Contact
           %p.text-center Questions? Get in touch with us.
   .section-content
     .row
       .col-xs-10.col-sm-10.col-md-8.col-lg-6.col-centered
-        .card.card-outline-success
+        .card.card-default
           .card-block
             = form_tag form_contact_path, method: 'post', remote: true, id: 'ContactMailingForm' do
               .row
-                .col-sm-12.col-md-12
+                .col-sm-12.col-md-12.col-lg-6
                   .form-group
                     %label.control-label Name*
                     = text_field_tag :name, @name, placeholder: "Enter your name...", class: "form-control", required: true
-                .col-sm-12.col-md-12
+                .col-sm-12.col-md-12.col-lg-6
                   .form-group
                     %label.control-label Email*
                     = text_field_tag :email, @email, placeholder: "Enter your email...", class: "form-control", required: true

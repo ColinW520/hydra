@@ -6,6 +6,7 @@
           %thead.thead-inverse
             %th.sortable= smart_listing.sortable 'Name', :name
             %th.sortable= smart_listing.sortable 'Available', :is_available
+            %th.sortable= smart_listing.sortable 'Subscriptions', :subscribers_count
             %th.sortable= smart_listing.sortable 'Stripe ID', :stripe_id
             %th.sortable= smart_listing.sortable 'Price', :price
             %th.text-center Users +
@@ -23,7 +24,6 @@
             %th.text-center
               %i.fa.fa-plus
               Lines
-            %th.sortable= smart_listing.sortable 'Created', :created_at
             %th
           %tbody#plans
             - smart_listing.collection.each do |plan|

@@ -2,6 +2,15 @@ body {
   background-color: #f3f3f3;
 }
 
+
+#twilio-background {
+  background: url(https://www.twilio.com/marketing/bundles/company-brand/img/photo-twilio-laptop-hi-res.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 @media print {
   background-color: #fff;
 }
@@ -70,9 +79,6 @@ strong {
     cursor: pointer;
   }
 }
-
-
-
 
 #main {
   min-height: 100vh;

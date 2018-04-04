@@ -1,75 +1,147 @@
-- provide(:title, "Messaging Solution")
+- provide(:title, "Phone Solutions for Communication Teams")
 %section#LandingContainer
   .container
     .row
-      .col-sm-12.col-md-8.col-lg-4
-        .jumbotron
-          %h1.text-white{style: 'font-weight: 900;'}
-            %b
-              Texting Is
-            %br
-            %b{style: 'font-size: 2em;'}
-              %em NOW
+      .col-sm-12.col-md-12.col-lg-6
+        #headline
+          %h1{style: 'font-weight: 900;'}
+            %b Connect your team to the power of Twilio™ for SMS, MMS, and Voice solutions
           %br
-          %p.text-white What do people always have in their hand? Their phone. Let's be honest: if you want your message read in a timely manner, you send a text. We make that easy.
+          %p.lead Without writing a single line of code, your team can start leveraging the power of Twilio™ today for:
+          .row
+            .col-sm-12.col-md-4
+              %p
+                %i.fa.fa-check.text-success
+                %strong Mass SMS & MMS
+              %p
+                %i.fa.fa-check.text-success
+                %strong Inbound Call Handling
+              %p
+                %i.fa.fa-check.text-success
+                %strong Promotional Numbers
+            .col-sm-12.col-md-4
+              %p
+                %i.fa.fa-check.text-success
+                %strong Two-way Texting
+              %p
+                %i.fa.fa-check.text-success
+                %strong Auto-Responders
+              %p
+                %i.fa.fa-check.text-success
+                %strong Call Source Tracking
+            .col-sm-12.col-md-4
+              %p
+                %i.fa.fa-check.text-success
+                %strong Sign Up Tools
+              %p
+                %i.fa.fa-check.text-success
+                %strong Unlimited Contacts
           %br
-          %a.btn.btn-success.btn-lg.btn-block.nav-link{href: '#Features'} See How
+          %a.btn.btn-primary.btn-md{href: '#Features', style: "margin-right: 10px;"}
+            See How
+            %i.fa.fa-eye.fa-blink
+          %a.btn.btn-success.btn-md{href: new_user_registration_path, style: "font-weight: 800"}
+            Start Now
+            %i.fa.fa-bolt.fa-bounce
+          .text-small{style: "padding-top: 10px;"}
+            30 Days Free. Cancel Anytime. BYO Twilio™ Account.
+      .col-sm-12.col-md-12.col-lg-6
+        %img.img-fluid{src: "https://aptexx.com/wp-content/uploads/2016/06/texting_example.gif", style: "margin-top: 30%; margin-left: auto; margin-right: auto; display: block;"}
 
-%section#Features
+%section#WhyTwilio
+  .container-fluid{style: "margin: 0; padding: 0"}
+    .row.row-equal
+      .col-xs-12.col-sm-12.col-md-12.col-lg-6#twilio-background
+        %img.img-fluid.hidden-md-up{src: asset_url('https://www.twilio.com/marketing/bundles/company-brand/img/photo-twilio-laptop-hi-res.jpg')}
+      .col-xs-12.col-sm-12.col-md-12.col-lg-6.bg-info
+        .text-white.lead{style: "padding: 5%"}
+          %h2.text-white
+            BYO
+            %img.img-fluid{src: asset_url('twilio-mark-white.svg')}
+          %br
+          %p
+            Twilio™ is a cloud communications platform as a service company that allows software developers to programmatically make and receive phone calls and send and receive text messages using its web service APIs.
+            TextMy.team uses the Twilio Connect™ platform to help you leverage Twilio's amazing capabilities, as well as its cost effective pay-as-you-go pricing,
+            %em
+              %strong.text-info without having to write any code yourself.
+          %p
+            What makes TextMy.team different from most text messaging service providers is that because you connect your own Twilio account, you pay
+            %em cost
+            for whatever your usage is. Instead of paying a ridiculous per-message surcharge, you simply pay a low monthly fee to make it easy for your team to send & receive messages, configure lines, and manage your contacts.
+%section#How
   .section-header
     .section-title
       .row
         .col-sm-12.col-md-8.col-lg-6.col-centered
           .text-center
             %hr
-            %h1 How It Works
+            %h2 How It Works
   .section-content
     .container
-      .row.mt-5.pt-5.mb-5.pb-5
+      .row.mt-1.pt-1.mb-5.pb-5
+        .col-sm-12.col-md-12.col-lg-4
+          .step.text-center
+            %i.fa.fa-edit.fa-4x
+            %br
+            %br
+            %p.lead Create your account with us. All we will need is your name, email, and a password.
+        .col-sm-12.col-md-12.col-lg-4
+          .step.text-center
+            %a{href: "https://www.twilio.com"}
+              %img.img-fluid{src: asset_url('twilio-seal-white.svg'), style: "max-width: 230px"}
+            %br
+            %br
+            %p.lead Connect your Twilio™ account. If you don't have one, that's totally fine! We'll guide you through creating one.
+        .col-sm-12.col-md-12.col-lg-4
+          .step.text-center
+            %i.fa.fa-credit-card.fa-4x
+            %br
+            %br
+            %p.lead Confirm your plan and securely enter your billing info. Don't worry, the first 30 days are on us.
+      .row
+        .col-sm-12
+          .text-center
+            %p.text-primary.lead Ready to get started?
+            %a.btn.btn-success.btn-md{href: new_user_registration_path, style: "font-weight: 800"}
+              Register Now
+              %i.fa.fa-bolt.fa-bounce
+
+%section#Benefits
+  .section-header
+    .section-title
+      .row
+        .col-sm-12.col-md-8.col-lg-6.col-centered
+          .text-center
+            %hr
+            %h2 Benefits
+  .section-content
+    .container
+      .row.mt-1.pt-1.mb-5.pb-5
+        .col-sm-6
+          %h4.lead Save Money
+          %p We it easy to reserve local, dedicated phones number for your organization to send and receive messages. You can configure auto-responses, call-forwarding, call-tracking, greeting prompts and much more for each line.
         .col-sm-6
           %img.img-fluid.rounded{src: 'https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'}
-        .col-sm-6
-          %h2 Configure Your Lines
-          %p Textmy.team makes it easy to reserve local, dedicated phones number for your organization to send and receive messages. You can configure auto-responses, call-forwarding, call-tracking, greeting prompts and much more for each line.
       .row.mt-5.pt-5.mb-5.pb-5
         .col-sm-6
-          %h2 Upload your Contacts
+          %h4.lead Simplify Your Contacts
           %p One single list to manage. Quickly upload your contacts, easily filter using tags, and sort by any attribute. Keep your contacts up to date with quickforms.
         .col-sm-6
           %img.img-fluid.rounded{src: asset_url('srubbed-contacts.jpg')}
       .row.mt-5.pt-5.mb-5.pb-5
         .col-sm-6
-          %img.img-fluid.rounded{src: 'http://g.recordit.co/1bGCLppnS1.gif'}
-        .col-sm-6
-          %h2 Send Messages
+          %h4.lead Send Messages
           %p Send text messages to any of your contacts from your dedicated lines. The message interface makes it easy to input your message and includes character count and a message cost calculator!  Perfect for one-way blast messages or advertising.
           %p It's not just a one-way conversation either! Your phone lines can also receive text messages and support call forwarding to enhance team and customer communication.
+        .col-sm-6
+          %img.img-fluid.rounded{src: 'http://g.recordit.co/1bGCLppnS1.gif'}
       .row.mt-5.pt-5.mb-5.pb-5
         .col-sm-6
-          %h2 Follow the Action
+          %h4.lead Follow the Action
           %p All message activity is smartly displayed on your dashboard. Quickly view sent and received text messages as well as voice call activity.
           %p You can also configure email notifications of incoming messages so no one on your team goes unheard.
-
         .col-sm-6
           %img.img-fluid.rounded{src: asset_url('https://static.pexels.com/photos/541522/pexels-photo-541522.jpeg')}
-      .row.mt-5.pt-5.mb-5.pb-5
-        .col-sm-6
-          %h2
-            BYO
-            %img.img-fluid{src: asset_url('twilio-logo-red.svg')}
-          %p
-            Twilio is a cloud communications platform as a service company that allows software developers to programmatically make and receive phone calls and send and receive text messages using its web service APIs.
-            TextMy.team uses the Twilio Connect™ platform to help you leverage Twilio's amazing capabilities, as well as its cost effective pay-as-you-go pricing,
-            %em
-              %strong.text-info without having to write any code yourself.
-          %p
-            What makes TextMy.team different from most text messaging service providers is that because you connect
-            %strong your own Twilio account,
-            you pay
-            %em cost
-            for whatever your usage is. Instead of paying us a ridiculous per-message upcharge, you simply pay a low monthly fee to make it easy to send & receive messages, configure your line settings, and manage your contacts.
-        .col-sm-6
-          %img.img-fluid.rounded{src: 'https://www.twilio.com/marketing/bundles/company-brand/img/photo-twilio-whiteboard-hi-res.jpg'}
 
 %section#Pricing
   .section-header
@@ -78,7 +150,7 @@
         .col-sm-12.col-md-8.col-lg-6.col-centered
           .text-center
             %hr
-            %h1 Pricing
+            %h2 Pricing
             %p.lead Choose the plan that makes the most sense for you.
             %span.text-muted
               Change plans any time. TextMy.team monthly pricing
@@ -96,7 +168,7 @@
         .row
           .col-sm-12.col-md-8.col-lg-6.col-centered
             .text-center
-              %h1 FAQs
+              %h2 FAQs
               %p You got questions, we got answers.
     .section-content
       = render "static_pages/questions"

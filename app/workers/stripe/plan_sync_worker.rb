@@ -10,6 +10,7 @@ class Stripe::PlanSyncWorker
       local_plan.trial_period_days = stripe_plan.trial_period_days
       local_plan.statement_descriptor = stripe_plan.statement_descriptor
       local_plan.is_available = stripe_plan.metadata[:available] == 'true' ? true : false
+      local_plan.subscribers_count = Stripe::Subscription.list(plan: stripe_plan.id).count
       local_plan.save!
     end
 

@@ -5,6 +5,7 @@
       %i.fa.fa-check.text-success
     - else
       %i.fa.fa-check.text-danger
+  %td= plan.subscribers_count
   %td= plan.stripe_id
   %td= number_to_currency plan.amount_in_cents / 100
   %td.text-center
@@ -32,10 +33,12 @@
       %i.fa.fa-check.text-success
     - else
       %i.fa.fa-check.text-danger
-  %td= local_time plan.created_at
 
   %td.actions
     .btn-group
+      - if plan.subscribers_count.to_i < 1
+        = link_to admin_plan_path(plan), method: :delete, remote: true, class: 'btn btn-sm btn-danger', title: "Remove this Plan", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+          %i.fa.fa-trash
       = link_to edit_admin_plan_path(plan), remote: true, class: 'btn btn-sm btn-warning', title: "Edit this Plan's Permissions", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
         %i.fa.fa-pencil
       = link_to admin_plan_path(plan), class: 'btn btn-sm btn-info', title: "See this plans subscribers", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do

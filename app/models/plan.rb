@@ -2,7 +2,8 @@ class Plan < ApplicationRecord
   validates :stripe_id, uniqueness: true
 
   scope :not_removed, -> { where(removed_at: nil, removed_by: nil) }
-
+  scope :available, -> { where(is_available: true) }
+  
   def soft_delete(user_id)
     self.removed_by = user_id
     self.removed_at = Time.now

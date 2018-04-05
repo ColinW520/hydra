@@ -17,7 +17,7 @@ class Organization < ApplicationRecord
   has_many :billing_methods, dependent: :destroy
   has_many :imports, dependent: :destroy
   has_one :primary_billing_method, ->(organization) { where(stripe_token_id: organization.stripe_token_id) }, class_name: 'BillingMethod'
-  has_one :subscription
+  has_many :subscriptions
   has_one :plan, through: :subscription
   has_many :invoices, primary_key: :stripe_customer_id, foreign_key: :customer_id
   has_many :messages, dependent: :destroy
@@ -38,6 +38,11 @@ class Organization < ApplicationRecord
     return false unless self.subscription.present?
     return false if self.subscription.current_status == 'canceled' || self.subscription.current_status == 'unpaid'
     return true
+  end
+
+  # TODO: need to improve how we handle changes in subscriptions...
+  def subscription
+    self.subscriptions.last
   end
 
   def twilio_account

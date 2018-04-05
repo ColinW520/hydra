@@ -44,6 +44,7 @@ class OrganizationsController < ApplicationController
 
   def update
     respond_to do |format|
+      # TODO: update on stripe as well, for sanity's sake.
       if @organization.update(organization_params)
         format.html {
           flash[:success] = 'Organization has been updated!'

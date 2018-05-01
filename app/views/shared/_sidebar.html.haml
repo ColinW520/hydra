@@ -90,11 +90,6 @@
             %i.fa.fa-user-secret.fa-lg
             My Profile
 
-        %a{href: changelog_path}
-          %li{class: @subnav == 'changelog' ? 'active' : nil}
-            %i.fa.fa-free-code-camp
-            ChangeLog
-
         %a{href: destroy_user_session_url, method: :delete}
           %li
             %i.fa.fa-sign-out.fa-lg

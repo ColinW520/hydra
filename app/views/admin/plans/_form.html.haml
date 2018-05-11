@@ -6,10 +6,13 @@
         = f.error_notification
   .row
     .col-sm-12
-      - if @plan.is_available
-        %i.fa.fa-check.text-success Available for New Subscriptions
-      - else
-        %i.fa.fa-check.text-danger Not Available for new Subscriptions
+      %p.lead
+        - if @plan.is_available
+          %i.fa.fa-check.text-success
+          Available for New Subscriptions
+        - else
+          %i.fa.fa-check.text-danger
+          Not Available for new Subscriptions
       %small.text-info Plan Availability is controlled by MetaData settings in stripe.
       %hr
       %p.lead Permissions

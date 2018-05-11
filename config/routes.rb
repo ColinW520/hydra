@@ -73,6 +73,10 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
+  # Twilio Auth Endpoints - Needs to match: https://www.twilio.com/console/runtime/connect-apps/CN29760c1484efcafb62cf661a40e70338
+  match '/twilio/authorize' => 'twilio/authorizations#authorize', via: [:get]
+  match '/twilio/deauthorize' => 'twilio/authorizations#deauthorize', via: [:get]
+
   namespace :twilio do
     resources :messages
     resources :voice_calls
@@ -81,6 +85,5 @@ Rails.application.routes.draw do
         post :status
       end
     end
-    resources :authorizations
   end
 end

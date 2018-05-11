@@ -6,7 +6,11 @@
         = f.error_notification
   .row
     .col-sm-12
-      = f.input :is_available, as: :boolean
+      - if @plan.is_available
+        %i.fa.fa-check.text-success Available for New Subscriptions
+      - else
+        %i.fa.fa-check.text-danger Not Available for new Subscriptions
+      %small.text-info Plan Availability is controlled by MetaData settings in stripe.
       %hr
       %p.lead Permissions
       = f.input :can_add_users, as: :boolean

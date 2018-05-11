@@ -25,9 +25,13 @@ class User < ApplicationRecord
 
   before_create :validate_mobile_phone
   def validate_mobile_phone
-    @client = Twilio::REST::LookupsClient.new(self.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
-    number = @client.phone_numbers.get(self.mobile_phone, type: "carrier")
-
+    if self.organization.present?
+      @client = Twilio::REST::LookupsClient.new(self.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
+      number = @client.phone_numbers.get(self.mobile_phone, type: "carrier")
+    else
+      @client = Twilio::REST::LookupsClient.new(ENV['DEFAULT_AUTH_ID'], ENV['TWILIO_COLIN_AUTH_TOKEN'])
+      number = @client.phone_numbers.get(self.mobile_phone, type: "carrier")
+    end
     self.mobile_phone_validated = true if number.carrier['type'] == 'mobile'
   end
 

@@ -9,7 +9,7 @@
       .pull-right
         = link_to new_contact_path(organization_id: params[:organization_id]), remote: true, class: 'btn btn-sm btn-success' do
           %i.fa.fa-plus{"data-placement" => "left", "data-toggle" => "tooltip", :title => "Add a single contact"}
-        - if current_user.admin_role? && @current_plan.can_upload_contacts?
+        - if current_user.admin_role? && @current_plan.try :can_upload_contacts?
           = link_to new_import_path, class: 'btn btn-sm btn-primary', title: "Upload Contacts via CSV", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
             %i.fa.fa-upload
         = link_to contacts_path(format: :csv), class: 'btn btn-outline-warning btn-sm', title: "Download all members to a CSV.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do

@@ -1,3 +1,7 @@
 %div.alert.alert-danger
   %h4 Whoa there partner!
   %p You need to add a billing method before you can do anything else.
+  .text-center
+    = link_to new_organization_billing_method_path(@organization), remote: true, class: 'pull-right btn btn-warning btn-sm' do
+      %i.fa.fa-card
+      Change

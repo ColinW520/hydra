@@ -27,5 +27,9 @@ class MessagesController < ApplicationController
       }
       format.csv { send_data messages_scope.order(date: 'DESC').to_csv, filename: "messages_as_of-#{Time.now}.csv" }
     end
+
+    def show
+      @message = Message.find params[:id]
+    end
   end
 end

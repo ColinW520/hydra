@@ -50,6 +50,7 @@
                       = f.input :notify_instantly, label: "Send me an email every time an inbound message is received."
                       = f.input :summarize_daily, label: "Send me an email every day summarizing inbound and outbound messaging activity."
                       = f.input :summarize_weekly, label: "Send me an email every Monday summarizing the previous week's messaging activity."
+                      = f.input :send_signup_notifications, hint: "Send an email every time a Contact signs up via your organization's signup page."
               .form-actions
                 = f.button :submit, "Update", class: 'btn btn-block btn-success'
   - if current_user.safe_to_cancel?

@@ -1,0 +1,34 @@
+.row
+  .col-sm-12.col-md-6.col-lg-4
+    .row
+      .col-sm-8.col-md-8
+        %h2 Details
+    .table-responsive.card.card-outline-default.table-card
+      %table.table
+        %thead.thead-inverse
+        %tbody
+          %tr
+            %td
+              %strong ID
+            %td= @message.id
+          %tr
+            %td
+              %strong Created
+            %td= local_time_ago @message_request.created_at
+          %tr
+            %td
+              %strong Recipient
+            %td
+              = link_to contacts_path(id: @message.contact_id) do
+                = @message.contact.name
+          %tr
+            %td
+              %strong Message
+            %td= @message.body
+          - if @message.message_request.media_item.present?
+            %tr
+              %td
+                %strong Media
+              %td
+                %a{href: @message_request.media_item.url, target: '_blank', style: "text-decoration: none"}
+                  %img.img-fluid.img-thumbnail.m-2{src: @message_request.media_item.url, style: 'max-height: 150px;'}

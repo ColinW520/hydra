@@ -30,7 +30,7 @@ class BillingMethodsController < ApplicationController
           if @billing_method.organization.subscription.present?
             redirect_to organization_path(current_user.organization)
           else
-            redirect_to new_organization_subscription_path(@billing_method.organization)
+            redirect_to new_organization_subscription_path(@billing_method.organization, hide_steps: true)
           end
         }
       else

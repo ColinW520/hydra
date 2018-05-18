@@ -1,37 +1,49 @@
-%tr{id: "message_#{message.id}"}
-  %td= local_time_ago message.created_at
-  %td
-    - if message.direction == 'outbound'
-      %i.fa.fa-arrow-up.text-success
-      Out
-    - else
-      %i.fa.fa-arrow-down.text-primary
-      In
-  %td
-    - if message.direction == 'outbound'
-      = link_to contact_path(message.contact) do
-        %i.fa.fa-user
-        = message.contact.full_name
-    - else
-      = link_to line_path(message.line) do
-        %i.fa.fa-hashtag
-        = message.line.name
-  %td
-    - if message.direction == 'inbound'
-      = link_to contact_path(message.contact) do
-        %i.fa.fa-user
-        = message.contact.full_name
-    - else
-      = link_to line_path(message.line) do
-        %i.fa.fa-hashtag
-        = message.line.name
-  %td= message.body
-  %td
-    - if message.num_media.to_i > 0
-      - message.media_links.each do |media_link|
-        %a{href: media_link.link, target: '_blank', style: "text-decoration: none"}
-          %img.img-fluid.img-thumbnail{src: media_link.link, style: 'max-height: 50px;'}
-  %td
-    .btn-group
-      = link_to new_message_request_path(contact_ids: [message.contact_id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
-        %i.fa.fa-reply
+- if message.status == 'failed'
+  %tr{id: "message_#{message.id}"}
+    %td= local_time_ago message.created_at
+    %td{colspan: 4}
+      %i.fa.fa-exclamation-circle.text-danger
+      = "Twilio could not send this message: #{message.body.truncate(8)}."
+      = "Here's what Twilio told us: #{message.error_message}"
+    %td
+      = link_to message_path, class: 'btn btn-sm text-success', title: "More message details.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+        %i.fa.fa-info-circle
+        Details
+- else
+  %tr{id: "message_#{message.id}"}
+    %td= local_time_ago message.created_at
+    %td
+      - if message.direction == 'outbound'
+        %i.fa.fa-arrow-up.text-success
+        Out
+      - else
+        %i.fa.fa-arrow-down.text-primary
+        In
+    %td
+      - if message.direction == 'outbound'
+        = link_to contact_path(message.contact) do
+          %i.fa.fa-user
+          = message.contact.full_name
+      - else
+        = link_to line_path(message.line) do
+          %i.fa.fa-hashtag
+          = message.line.name
+    %td
+      - if message.direction == 'inbound'
+        = link_to contact_path(message.contact) do
+          %i.fa.fa-user
+          = message.contact.full_name
+      - else
+        = link_to line_path(message.line) do
+          %i.fa.fa-hashtag
+          = message.line.name
+    %td= message.body
+    %td
+      - if message.num_media.to_i > 0
+        - message.media_links.each do |media_link|
+          %a{href: media_link.link, target: '_blank', style: "text-decoration: none"}
+            %img.img-fluid.img-thumbnail{src: media_link.link, style: 'max-height: 50px;'}
+    %td
+      .btn-group
+        = link_to new_message_request_path(contact_ids: [message.contact_id]), remote: true, class: 'btn btn-sm text-success', title: "Message this Member", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+          %i.fa.fa-reply

@@ -1,6 +1,7 @@
 - provide(:title, 'Subscription')
 .card
   .card-block
+    - unless params[:hide_setup]
     .row
       .col-sm-12
         .progress

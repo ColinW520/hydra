@@ -14,7 +14,7 @@ class Twilio::Messages::StoringWorker < Twilio::BaseWorker
     @local_message.line_id = @line.id
     @local_message.organization_id = @organization.id
     @local_message.contact_id = @contact.id
-    @local_message.message_request_id = message_request_id
+    @local_message.message_request_id = message_request_id if message_request_id.present?
     @local_message.status = @message.status
     @local_message.direction = @message.direction == 'outbound-api' ? 'outbound' : 'inbound'
     @local_message.sent_at = Time.now

@@ -25,10 +25,3 @@
             %td
               %strong Message
             %td= @message.body
-          - if @message.message_request.media_item.present?
-            %tr
-              %td
-                %strong Media
-              %td
-                %a{href: @message_request.media_item.url, target: '_blank', style: "text-decoration: none"}
-                  %img.img-fluid.img-thumbnail.m-2{src: @message_request.media_item.url, style: 'max-height: 150px;'}

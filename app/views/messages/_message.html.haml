@@ -5,10 +5,10 @@
       %i.fa.fa-exclamation-circle.text-danger
       = "Twilio could not send this message: #{message.body.truncate(8)}."
       = "Here's what Twilio told us: #{message.error_message}"
-    %td
-      = link_to message_path, class: 'btn btn-sm text-success', title: "More message details.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
-        %i.fa.fa-info-circle
-        Details
+    -# %td
+    -#   = link_to message_path, class: 'btn btn-sm text-success', title: "More message details.", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+    -#     %i.fa.fa-info-circle
+    -#     Details
 - else
   %tr{id: "message_#{message.id}"}
     %td= local_time_ago message.created_at

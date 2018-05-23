@@ -5,7 +5,7 @@
       %i.fa.fa-check.text-success
     - else
       %i.fa.fa-check.text-danger
-  %td= plan.subscribers_count
+  %td.text-center= plan.subscribers_count
   %td= plan.stripe_id
   %td= number_to_currency plan.amount_in_cents / 100
   %td.text-center
@@ -30,6 +30,11 @@
       %i.fa.fa-check.text-danger
   %td.text-center
     - if plan.can_add_lines?
+      %i.fa.fa-check.text-success
+    - else
+      %i.fa.fa-check.text-danger
+  %td.text-center
+    - if plan.can_add_integration_partners?
       %i.fa.fa-check.text-success
     - else
       %i.fa.fa-check.text-danger

@@ -1,0 +1,15 @@
+- provide(:title, 'Contacts')
+.row
+  .col-sm-12
+    %h4
+      %i.fa.fa-magic
+      Integration Partners
+      - if current_user.admin_role? && @current_plan.try(:can_add_integration_partners?)
+        .pull-right
+          = link_to new_integration_partner_path, remote: true, class: 'btn btn-sm btn-success' do
+            %i.fa.fa-plus{"data-placement" => "left", "data-toggle" => "tooltip", :title => "Add a single integration partner"}
+
+.row
+  .col-sm-12
+    = smart_listing_render :integration_partners
+= render "integration_partners/dialog"

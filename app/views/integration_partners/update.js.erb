@@ -1,0 +1,3 @@
+$('#integration_partner_dialog').modal('toggle');
+$('#integration_partner_<%= @integration_partner.id %>').replaceWith('<%= j render (@integration_partner) %>');
+$("#integration_partners").smart_listing().fadeLoaded();

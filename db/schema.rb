@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403171300) do
+ActiveRecord::Schema.define(version: 20180523045850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,6 +177,8 @@ ActiveRecord::Schema.define(version: 20180403171300) do
     t.datetime "removed_at"
     t.string   "removed_by"
     t.datetime "opted_out_at"
+    t.integer  "integration_partner_id"
+    t.index ["integration_partner_id"], name: "index_contacts_on_integration_partner_id", using: :btree
     t.index ["internal_identifier"], name: "index_contacts_on_internal_identifier", using: :btree
     t.index ["organization_id"], name: "index_contacts_on_organization_id", using: :btree
   end
@@ -232,6 +234,22 @@ ActiveRecord::Schema.define(version: 20180403171300) do
     t.integer  "import_results_count",  default: 0
     t.datetime "notified_at"
     t.index ["organization_id"], name: "index_imports_on_organization_id", using: :btree
+  end
+
+  create_table "integration_partners", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.boolean  "is_active",            default: true
+    t.string   "name"
+    t.string   "auth_key"
+    t.string   "auth_username"
+    t.string   "auth_password"
+    t.string   "subdomain_scope"
+    t.boolean  "sync_users",           default: true
+    t.boolean  "sync_contacts",        default: true
+    t.datetime "last_synchronized_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["organization_id"], name: "index_integration_partners_on_organization_id", using: :btree
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -412,12 +430,13 @@ ActiveRecord::Schema.define(version: 20180403171300) do
     t.boolean  "can_schedule_messages"
     t.boolean  "can_upload_contacts"
     t.boolean  "can_add_lines"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.boolean  "is_available",          default: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.boolean  "is_available",                 default: false
     t.integer  "removed_by"
     t.datetime "removed_at"
     t.integer  "subscribers_count"
+    t.boolean  "can_add_integration_partners", default: false
   end
 
   create_table "questions", force: :cascade do |t|
@@ -528,7 +547,9 @@ ActiveRecord::Schema.define(version: 20180403171300) do
     t.boolean  "summarize_daily",           default: false
     t.boolean  "summarize_weekly",          default: false
     t.boolean  "send_signup_notifications", default: false
+    t.integer  "integration_partner_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["integration_partner_id"], name: "index_users_on_integration_partner_id", using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
     t.index ["organization_id"], name: "index_users_on_organization_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -566,11 +587,13 @@ ActiveRecord::Schema.define(version: 20180403171300) do
   end
 
   add_foreign_key "billing_methods", "organizations"
+  add_foreign_key "contacts", "integration_partners"
   add_foreign_key "contacts", "organizations"
   add_foreign_key "feed_items", "organizations"
   add_foreign_key "feed_items", "users"
   add_foreign_key "import_results", "imports"
   add_foreign_key "imports", "organizations"
+  add_foreign_key "integration_partners", "organizations"
   add_foreign_key "keywords", "lines"
   add_foreign_key "keywords", "organizations"
   add_foreign_key "lines", "organizations"
@@ -585,5 +608,6 @@ ActiveRecord::Schema.define(version: 20180403171300) do
   add_foreign_key "stops", "lines"
   add_foreign_key "stops", "messages"
   add_foreign_key "subscriptions", "organizations"
+  add_foreign_key "users", "integration_partners"
   add_foreign_key "users", "organizations"
 end

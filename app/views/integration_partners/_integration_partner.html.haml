@@ -1,0 +1,20 @@
+%tr{id: "integration_partner_#{integration_partner.id}", class: integration_partner.is_active? ? '' : 'table-warning' }
+  %td
+    = link_to integration_partner_path(integration_partner) do
+      = integration_partner.name
+  %td= local_time_ago integration_partner.last_synchronized_at rescue "Not Sync'd Yet"
+  %td
+    - if integration_partner.sync_users?
+      %i.fa.fa-check.text-success
+    - else
+      %i.fa.fa-check.text-danger
+  %td
+    - if integration_partner.sync_contacts?
+      %i.fa.fa-check.text-success
+    - else
+      %i.fa.fa-check.text-danger
+  %td= local_time_ago integration_partner.created_at, format: "%m/%d/%Y"
+  %td.actions
+    .btn-group.pull-right
+      = link_to edit_integration_partner_path(integration_partner), remote: true, class: 'btn btn-sm btn-outline-warning', title: "Edit this Integration Partner's Settings", 'data-toggle' => 'tooltip', 'data-placement' => 'left' do
+        %i.fa.fa-pencil

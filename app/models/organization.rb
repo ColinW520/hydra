@@ -24,6 +24,7 @@ class Organization < ApplicationRecord
   has_many :message_requests, dependent: :destroy
   has_many :lines
   has_many :call_logs, dependent: :destroy
+  has_many :integration_partners, dependent: :destroy
 
   validates :name, presence: true
 

@@ -84,6 +84,11 @@
             %li{class: @subnav == 'organizations' ? 'active' : nil}
               %i.fa.fa-gears.fa-lg
               Settings
+        - if current_user.admin_role?
+          %a{href: integration_partners_path}
+            %li{class: @subnav == 'integration_partners' ? 'active' : nil}
+              %i.fa.fa-magic.fa-lg
+              Integrations
 
         %a{href: edit_user_registration_path}
           %li{class: @subnav == 'devise' ? 'active' : nil}

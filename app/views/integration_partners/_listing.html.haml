@@ -1,0 +1,21 @@
+.row
+  .col-sm-12
+    .card.card-default
+      .card-body
+        .table-responsive.table-condensed
+          = form_tag new_integration_partner_path, remote: true, method: :get do
+            %table.table.table-hover
+              %thead.thead-inverse
+                %th Name
+                %th Last Sync
+                %th Syncs Users
+                %th Syncs Contacts
+                %th Created
+                %th
+              %tbody#contacts
+                - if smart_listing.count.zero?
+                  %tr.table-warning
+                    %td{colspan: 5} No integration partners configured.
+                - else
+                  - smart_listing.collection.each do |integration_partner|
+                    = render integration_partner

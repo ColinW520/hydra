@@ -1,0 +1,24 @@
+.row
+  .col-sm-12
+    = simple_form_for [@integration_partner], remote: true, authenticity_token: true, html: { id: 'contactForm' } do |f|
+      #error_holder
+        %ul#errors
+      = f.error_notification
+      .row
+        .col-sm-12.col-md-12
+          .form-group
+            = f.input :name, as: :select, label: 'Select your Integration Partner', collection: IntegrationPartner::SUPPORTED_PROVIDERS, include_blank: false
+          .form-group
+            = f.input :auth_key, as: :password, hint: "Provided by your Integration Partner"
+          .form-group
+            = f.input :subdomain_scope, hint: "Provided by your Integration Partner"
+          .form-group
+            = f.input :sync_users, as: :boolean, label: 'Sync Users?', hint: 'Unchecking this box will prevent TmT synchronization from synchronizing users from this integration partner.'
+          .form-group
+            = f.input :sync_contacts, as: :boolean, label: 'Sync Contacts?', hint: 'Unchecking this box will prevent TmT synchronization from synchronizing contacts from this integration partner.'
+          .form-group
+            = f.input :is_active, as: :boolean, label: 'Active?', hint: 'Unchecking this box will prevent synchronization with this integration partner.'
+          .form-actions
+            .text-center
+              = f.hidden_field :organization_id, value: @current_organization.id
+              = f.button :submit, class: 'btn btn-md btn-success'

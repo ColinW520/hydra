@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  name: MyString
+  auth_key: MyString
+  auth_username: MyString
+  auth_password: MyString
+  sync_users: false
+  sync_contacts: false
+
+two:
+  organization: two
+  name: MyString
+  auth_key: MyString
+  auth_username: MyString
+  auth_password: MyString
+  sync_users: false
+  sync_contacts: false

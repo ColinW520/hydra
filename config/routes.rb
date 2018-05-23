@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     end
   end
   resources :lines
+  resources :integration_partners, except: [:destroy]
   resources :messages, only: [:index, :show]
   resources :call_logs
   resources :message_requests

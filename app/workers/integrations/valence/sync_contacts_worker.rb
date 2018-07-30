@@ -17,7 +17,7 @@ class Integrations::Valence::SyncContactsWorker
             title: "Resident",
             internal_identifier: resident.fetch("id"),
             address_city: lease.fetch("unit", {}).fetch("address", {}).fetch("city"),
-            address_state: lease.fetch("unit", {}).fetch("address", {}).fetch("state")
+            address_state: lease.fetch("unit", {}).fetch("address", {}).fetch("state"),
             integration_partner_id: @integration.id
           )
 

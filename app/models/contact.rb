@@ -19,12 +19,13 @@ class Contact < ApplicationRecord
   scope :title_like, ->(term) { where('title ILIKE ?', "%#{term}%") }
 
   validate :phone_can_receive_messages
-
   def phone_can_receive_messages
+    return true if Rails.env.development?
     @client = Twilio::REST::LookupsClient.new(self.organization.twilio_auth_id, ENV['TWILIO_COLIN_AUTH_TOKEN'])
     number = @client.phone_numbers.get(self.mobile_phone, type: "carrier")
-
-    errors.add(:mobile_phone, "This doesn't appear to be a valid mobile phone number capable of receiving text messages.") unless number.carrier['type'] == 'mobile'
+    unless number.carrier['type'] == 'mobile'
+      errors.add(:mobile_phone, "This doesn't appear to be a valid mobile phone number capable of receiving text messages.")
+    end
   end
 
   def remove(user_id)

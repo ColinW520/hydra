@@ -5,8 +5,10 @@
   - imports
   - default
   - mailers
+  - integrations
 :limits:
   mailers: 2
   twilio: 4
   imports: 4
+  integrations: 2
   default: 2
